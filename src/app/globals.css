@@ -1,115 +1,49 @@
 @import "tailwindcss";
 
-:root {
-  --background: #080a0f; /* Deep Space Carbon */
-  --foreground: #f8fafc; /* Crisp Off-White */
-  --accent: #00f2fe; /* Cyber Cyan */
-  --accent-rgb: 0, 242, 254;
-  --accent-secondary: #7f00ff; /* Deep Electric Purple */
-  --accent-secondary-rgb: 127, 0, 255;
-  --card-bg: rgba(15, 20, 30, 0.7); /* Translucent Glass */
-  --card-border: rgba(255, 255, 255, 0.08); /* Inner Glass Edge */
-  --text-muted: #94a3b8; /* Slate Muted */
-  --grid-line: rgba(255, 255, 255, 0.05);
-  --grid-dot: rgba(255, 255, 255, 0.08);
-  --selection-bg: rgba(0, 242, 254, 0.2);
-}
-
-body.theme-light {
-  --background: #fbf9f6; /* Warm Alabaster Sand */
-  --foreground: #0f172a; /* Deep Slate Charcoal */
-  --accent: #1e293b; /* Dark Slate Carbon */
-  --accent-rgb: 30, 41, 59;
-  --accent-secondary: #0f172a;
-  --accent-secondary-rgb: 15, 23, 42;
-  --card-bg: rgba(255, 255, 255, 0.8);
-  --card-border: rgba(15, 23, 42, 0.08);
-  --text-muted: #64748b;
-  --grid-line: rgba(15, 23, 42, 0.02);
-  --grid-dot: rgba(15, 23, 42, 0.05);
-  --selection-bg: rgba(30, 41, 59, 0.08);
-}
-
 @theme {
-  --color-app-bg: var(--background);
-  --color-app-fg: var(--foreground);
-  --color-app-accent: var(--accent);
-  --color-app-accent-rgb: var(--accent-rgb);
-  --color-app-accent-sec: var(--accent-secondary);
-  --color-app-accent-sec-rgb: var(--accent-secondary-rgb);
-  --color-app-card: var(--card-bg);
-  --color-app-border: var(--card-border);
-  --color-app-muted: var(--text-muted);
-  --color-app-grid: var(--grid-line);
-  --color-app-dot: var(--grid-dot);
-  
-  --font-sans: var(--font-inter), sans-serif;
-  --font-heading: var(--font-space-grotesk), sans-serif;
-  --font-body: var(--font-inter), sans-serif;
+  --font-sans: var(--font-sora), sans-serif;
+  --font-display: var(--font-big-shoulders), sans-serif;
   --font-mono: var(--font-jetbrains-mono), monospace;
+  
+  --animate-marquee: marquee 22s linear infinite;
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
 }
 
 ::selection {
-  background-color: var(--selection-bg);
+  background-color: rgba(245, 179, 1, 0.3);
+  color: #ffffff;
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
+  background-color: #030303;
+  color: #ffffff;
   font-family: var(--font-sans);
-  transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-              color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   overflow-x: hidden;
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar to match brutalist editorial */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #030303;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(150, 150, 150, 0.3);
-  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(150, 150, 150, 0.6);
+  background: #F5B301;
 }
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(150, 150, 150, 0.3) transparent;
-}
-
-
-
-/* Glassmorphism utility */
-.glass-panel {
-  background-color: var(--card-bg);
-  border: 1px solid var(--card-border);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
-}
-
-/* Custom premium hover glowing shadow for dark theme */
-.shadow-neon-hover:hover {
-  box-shadow: 0 0 25px rgba(var(--accent-rgb), 0.15);
-  border-color: rgba(var(--accent-rgb), 0.3);
-}
-
-/* Ambient glow blobs in background */
-.ambient-glow {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.15;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.theme-light .ambient-glow {
-  opacity: 0.05;
-  filter: blur(120px);
+  scrollbar-color: rgba(255, 255, 255, 0.1) #030303;
 }
