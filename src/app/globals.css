@@ -43,6 +43,7 @@ body.theme-light {
   --color-app-grid: var(--grid-line);
   --color-app-dot: var(--grid-dot);
   
+  --font-sans: var(--font-inter), sans-serif;
   --font-heading: var(--font-space-grotesk), sans-serif;
   --font-body: var(--font-inter), sans-serif;
   --font-mono: var(--font-jetbrains-mono), monospace;
@@ -55,18 +56,34 @@ body.theme-light {
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans);
   transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
               color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
               border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   overflow-x: hidden;
 }
 
-/* Refined tech dot pattern */
-.tech-dots {
-  background-size: 24px 24px;
-  background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(150, 150, 150, 0.3);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(150, 150, 150, 0.6);
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(150, 150, 150, 0.3) transparent;
+}
+
+
 
 /* Glassmorphism utility */
 .glass-panel {

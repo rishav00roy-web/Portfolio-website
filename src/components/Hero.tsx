@@ -64,12 +64,14 @@ export default function Hero() {
   return (
     <section 
       id="hero" 
-      className="relative min-h-[600px] md:min-h-[700px] flex flex-col justify-center items-center px-6 py-20 text-center overflow-hidden tech-dots"
+      className="relative min-h-[600px] md:min-h-[700px] flex flex-col justify-center items-center px-6 py-20 text-center"
     >
+
+
       {/* Background Ambient Glows - Animated in Parallax Zoom */}
       <div 
         id="hero-bg-glows"
-        className="absolute inset-0 pointer-events-none w-full h-full flex justify-center items-center select-none"
+        className="absolute inset-0 pointer-events-none w-full h-full flex justify-center items-center select-none z-0"
         style={{ willChange: "transform" }}
       >
         <div className="absolute w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-app-accent rounded-full filter blur-[100px] sm:blur-[130px] opacity-[0.07] sm:opacity-[0.11] pointer-events-none" />

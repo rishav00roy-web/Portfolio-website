@@ -65,7 +65,7 @@ export default function Contact() {
         </div>
 
         {/* Footer copyright and diagnostics */}
-        <div className="pt-16 border-t border-app-border/40 text-[10px] font-mono text-app-muted flex flex-col sm:flex-row justify-between gap-4">
+        <div className="pt-16 border-t border-app-border/40 text-[10px] font-mono text-app-fg/70 flex flex-col sm:flex-row justify-between gap-4">
           <span>&copy; {new Date().getFullYear()} Rishav Roy. All rights reserved.</span>
           <span>SYS_STATUS: PRODUCTION // PORTFOLIO_V1.0</span>
         </div>

@@ -9,13 +9,14 @@ export default function SmokeBackground() {
   
   // High-performance animation references (no React re-renders)
   const isIntersectingRef = useRef<boolean>(true);
-  const scrollYRef = useRef<number>(0);
+  const scrollImpulseRef = useRef<number>(0);
   const lastScrollYRef = useRef<number>(0);
+  const pointerRef = useRef<{x: number, y: number}>({ x: -1000, y: -1000 });
   const scheduledScrollFrameRef = useRef<boolean>(false);
-  const tickCountRef = useRef<number>(0);
+  const scheduledPointerFrameRef = useRef<boolean>(false);
   
-  // Sprite cache
-  const preprocessedSpritesRef = useRef<HTMLCanvasElement[]>([]);
+  // Sprite cache: 2D array [layerIndex][spriteIndex]
+  const preprocessedSpritesRef = useRef<HTMLCanvasElement[][]>([[], [], []]);
   const spritesLoadedRef = useRef<boolean>(false);
 
   // Particle structure
@@ -25,11 +26,15 @@ export default function SmokeBackground() {
     scale: number;
     rotation: number;
     rotationSpeed: number;
+    baseRotationSpeed: number;
     opacity: number;
     baseOpacity: number;
     vx: number;
     vy: number;
     spriteIndex: number;
+    layer: number; // 0=far, 1=mid, 2=near
+    scrollMultiplier: number;
+    cursorMultiplier: number;
   }
 
   const particlesRef = useRef<Particle[]>([]);
@@ -38,64 +43,69 @@ export default function SmokeBackground() {
   const preprocessSprites = (): Promise<void> => {
     return new Promise((resolve) => {
       const spriteUrls = [
-        "/assets/smoke/smoke1.png",
-        "/assets/smoke/smoke2.png",
-        "/assets/smoke/smoke3.png"
+        "/assets/smoke/smoke1.jpg",
+        "/assets/smoke/smoke2.jpg",
+        "/assets/smoke/smoke3.jpg"
       ];
       
-      let loadedCount = 0;
-      const tempCanvases: HTMLCanvasElement[] = [];
+      const layerTints = [
+        { r: 15, g: 15, b: 18 },   // Far
+        { r: 30, g: 30, b: 34 },   // Mid
+        { r: 45, g: 45, b: 50 },   // Near
+      ];
 
-      spriteUrls.forEach((url, index) => {
+      let loadedCount = 0;
+      const tempCanvases: HTMLCanvasElement[][] = [[], [], []];
+
+      spriteUrls.forEach((url, spriteIndex) => {
         const img = new Image();
         img.src = url;
         img.onload = () => {
-          const offscreenCanvas = document.createElement("canvas");
           const size = 512;
-          offscreenCanvas.width = size;
-          offscreenCanvas.height = size;
-          const ctx = offscreenCanvas.getContext("2d");
           
-          if (ctx) {
-            ctx.drawImage(img, 0, 0, size, size);
-            const imgData = ctx.getImageData(0, 0, size, size);
-            const data = imgData.data;
+          layerTints.forEach((tint, layerIndex) => {
+            const offscreenCanvas = document.createElement("canvas");
+            offscreenCanvas.width = size;
+            offscreenCanvas.height = size;
+            const ctx = offscreenCanvas.getContext("2d", { willReadFrequently: true });
+            
+            if (ctx) {
+              ctx.drawImage(img, 0, 0, size, size);
+              const imgData = ctx.getImageData(0, 0, size, size);
+              const data = imgData.data;
 
-            // Convert brightness to alpha transparency and tint smoke to dark charcoal-gray
-            for (let i = 0; i < data.length; i += 4) {
-              const r = data[i];
-              const g = data[i + 1];
-              const b = data[i + 2];
-              
-              // Extract brightness (average of color channels)
-              const brightness = (r + g + b) / 3;
-              
-              // Set to charcoal gray color range
-              data[i] = 65;      // R
-              data[i + 1] = 65;  // G
-              data[i + 2] = 70;  // B
-              
-              // Map brightness to alpha, scale down opacity so it is subtle
-              data[i + 3] = Math.min(255, brightness * 0.5);
+              // Convert brightness to alpha transparency and tint smoke
+              for (let i = 0; i < data.length; i += 4) {
+                const r = data[i];
+                const g = data[i + 1];
+                const b = data[i + 2];
+                
+                // Extract brightness (average of color channels)
+                const brightness = (r + g + b) / 3;
+                
+                data[i] = tint.r;      // R
+                data[i + 1] = tint.g;  // G
+                data[i + 2] = tint.b;  // B
+                
+                // Map brightness to alpha, scale down opacity so it is subtle
+                data[i + 3] = Math.min(255, brightness * 0.8);
+              }
+              ctx.putImageData(imgData, 0, 0);
+              tempCanvases[layerIndex][spriteIndex] = offscreenCanvas;
             }
-            ctx.putImageData(imgData, 0, 0);
-            tempCanvases[index] = offscreenCanvas;
-          }
+          });
 
           loadedCount++;
           if (loadedCount === spriteUrls.length) {
-            preprocessedSpritesRef.current = tempCanvases.filter(Boolean);
+            preprocessedSpritesRef.current = tempCanvases;
             spritesLoadedRef.current = true;
             resolve();
           }
         };
 
-        // Fallback in case of asset load failures (draw synthetic smoke circles)
         img.onerror = () => {
           loadedCount++;
-          if (loadedCount === spriteUrls.length) {
-            resolve();
-          }
+          if (loadedCount === spriteUrls.length) resolve();
         };
       });
     });
@@ -134,75 +144,114 @@ export default function SmokeBackground() {
 
     // Initialize particles
     const initParticles = (mobileMode: boolean) => {
-      const count = mobileMode ? 6 : 14; // Reduced count on mobile
-      const tempParticles: Particle[] = [];
+      const particles: Particle[] = [];
+      const counts = mobileMode ? [3, 3, 3] : [6, 6, 6]; // 0=far, 1=mid, 2=near
 
-      for (let i = 0; i < count; i++) {
-        // Distribute y coordinates across screen height initially
-        const scale = 0.8 + Math.random() * 1.2;
-        const opacityMultiplier = mobileMode ? 0.35 : 0.45; // softer on mobile
-        
-        tempParticles.push({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          scale: scale,
-          rotation: Math.random() * Math.PI * 2,
-          rotationSpeed: (Math.random() - 0.5) * 0.002,
-          baseOpacity: 0.12 + Math.random() * 0.18,
-          opacity: 0, // fade in initially
-          vx: (Math.random() - 0.5) * 0.15, // slow drift sideways
-          vy: -0.08 - Math.random() * 0.12, // slow drift upwards
-          spriteIndex: Math.floor(Math.random() * 3)
-        });
-      }
-      particlesRef.current = tempParticles;
+      counts.forEach((count, layer) => {
+        for (let i = 0; i < count; i++) {
+          let scale = 1;
+          let baseOpacity = 0.5;
+          let scrollMultiplier = 1;
+          let cursorMultiplier = 1;
+
+          if (layer === 0) { // Far
+            scale = 0.8 + Math.random() * 0.4;
+            baseOpacity = 0.15 + Math.random() * 0.15;
+            scrollMultiplier = 0.15;
+            cursorMultiplier = 0.05;
+          } else if (layer === 1) { // Mid
+            scale = 1.2 + Math.random() * 0.5;
+            baseOpacity = 0.3 + Math.random() * 0.2;
+            scrollMultiplier = 0.4;
+            cursorMultiplier = 0.3;
+          } else if (layer === 2) { // Near
+            scale = 1.6 + Math.random() * 0.8;
+            baseOpacity = 0.4 + Math.random() * 0.3;
+            scrollMultiplier = 1.0;
+            cursorMultiplier = 1.0;
+          }
+
+          if (mobileMode) {
+            baseOpacity *= 0.7; // softer overall on mobile
+          }
+          
+          const rotSpeed = (Math.random() - 0.5) * 0.002;
+          
+          particles.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            scale: scale,
+            rotation: Math.random() * Math.PI * 2,
+            rotationSpeed: rotSpeed,
+            baseRotationSpeed: rotSpeed,
+            baseOpacity: baseOpacity,
+            opacity: 0, // fade in initially
+            vx: (Math.random() - 0.5) * 0.2 * (layer + 1), 
+            vy: -0.1 - Math.random() * 0.2 * (layer + 1), 
+            spriteIndex: Math.floor(Math.random() * 3),
+            layer,
+            scrollMultiplier,
+            cursorMultiplier
+          });
+        }
+      });
+      
+      // Sort so far renders first, near renders last
+      particles.sort((a, b) => a.layer - b.layer);
+      particlesRef.current = particles;
     };
 
-    // Setup viewport resize listener
     window.addEventListener("resize", handleResize, { passive: true });
-    
-    // Initialize sizing
     handleResize();
 
-    // Setup passive scroll listener
-    scrollYRef.current = window.scrollY;
+    // Setup scroll listener for impulse
     lastScrollYRef.current = window.scrollY;
-
     const onScroll = () => {
-      scrollYRef.current = window.scrollY;
+      const currentScrollY = window.scrollY;
+      const delta = currentScrollY - lastScrollYRef.current;
+      scrollImpulseRef.current += delta * 0.5; // accumulate impulse
+      lastScrollYRef.current = currentScrollY;
+      
       if (scheduledScrollFrameRef.current) return;
       scheduledScrollFrameRef.current = true;
-      
       requestAnimationFrame(() => {
         scheduledScrollFrameRef.current = false;
       });
     };
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    // Setup IntersectionObserver to pause loop when canvas container scrolls out of view
+    // Setup pointer listener for cursor reactivity (desktop only)
+    const onPointerMove = (e: PointerEvent) => {
+      if (isMobile) return;
+      pointerRef.current = { x: e.clientX, y: e.clientY };
+      
+      if (scheduledPointerFrameRef.current) return;
+      scheduledPointerFrameRef.current = true;
+      requestAnimationFrame(() => {
+        scheduledPointerFrameRef.current = false;
+      });
+    };
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+
+    // Setup IntersectionObserver to pause loop when out of view
     const container = containerRef.current;
     let observer: IntersectionObserver | null = null;
     if (container) {
       observer = new IntersectionObserver(
         ([entry]) => {
           isIntersectingRef.current = entry.isIntersecting;
-          // Reactivate loop if scrolled back into view
           if (entry.isIntersecting && !animationFrameIdRef.current && spritesLoadedRef.current) {
-            lastTickTime = performance.now();
             animationFrameIdRef.current = requestAnimationFrame(loop);
           }
         },
-        { threshold: 0, rootMargin: "100px" } // trigger slightly before scrolling out
+        { threshold: 0, rootMargin: "100px" }
       );
       observer.observe(container);
     }
 
-    // Animation Loop Variables
-    let lastTickTime = performance.now();
     const size = 512;
 
     const loop = (timestamp: number) => {
-      // Exit loop if out of view
       if (!isIntersectingRef.current) {
         animationFrameIdRef.current = null;
         return;
@@ -214,50 +263,64 @@ export default function SmokeBackground() {
         return;
       }
 
-      // Performance Safeguard: check update rate decimation on mobile
-      tickCountRef.current++;
-      const isMobileFrameSkip = isMobile && tickCountRef.current % 2 !== 0;
+      // Decay scroll impulse
+      scrollImpulseRef.current *= 0.92;
+      const impulse = scrollImpulseRef.current;
 
-      // Calculate scroll difference
-      const scrollDelta = scrollYRef.current - lastScrollYRef.current;
-      
-      // Only update lastScrollY when we are actually applying the physics this frame
-      // so that scroll delta accumulates correctly across skipped frames on mobile.
-      if (!prefersReduced && !isMobileFrameSkip) {
-        lastScrollYRef.current = scrollYRef.current;
-      }
-
-      // Clear Canvas
       ctx.clearRect(0, 0, width, height);
+      ctx.globalCompositeOperation = "source-over"; // normal alpha blending
 
-      // Draw all active particles
       const particles = particlesRef.current;
       const sprites = preprocessedSpritesRef.current;
+      const pointer = pointerRef.current;
 
       particles.forEach((p) => {
-        // 1. Particle Physics Updates (only run if animation is enabled and not skipped)
-        if (!prefersReduced && !isMobileFrameSkip) {
-          // Normal upward and sideways drift
+        if (!prefersReduced) {
           p.x += p.vx;
           p.y += p.vy;
           p.rotation += p.rotationSpeed;
+          
+          // Gradually return rotation speed to normal if disturbed by cursor
+          p.rotationSpeed += (p.baseRotationSpeed - p.rotationSpeed) * 0.05;
 
-          // Scroll Influence: apply displacement based on scroll speed
-          // Scrolling down (scrollDelta > 0) accelerates the smoke upwards relative to the screen
-          p.y -= scrollDelta * 0.45; // Increased from 0.18 for more obvious parallax
+          // Apply scroll impulse
+          p.y -= impulse * p.scrollMultiplier;
+
+          // Apply cursor repulsion and swirl
+          if (p.cursorMultiplier > 0 && pointer.x > -1000) {
+            const dx = p.x - pointer.x;
+            const dy = p.y - pointer.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            const maxDist = 350;
+
+            if (dist < maxDist) {
+              const force = Math.pow((maxDist - dist) / maxDist, 2); // easing
+              
+              // Radial outward force
+              p.x += (dx / dist) * force * 3 * p.cursorMultiplier;
+              p.y += (dy / dist) * force * 3 * p.cursorMultiplier;
+              
+              // Tangential curl (swirl) force
+              p.x += (-dy / dist) * force * 2 * p.cursorMultiplier;
+              p.y += (dx / dist) * force * 2 * p.cursorMultiplier;
+              
+              // Add some spin
+              p.rotationSpeed += (dx > 0 ? 1 : -1) * force * 0.001 * p.cursorMultiplier;
+            }
+          }
 
           // Slow fade-in upon spawn
           if (p.opacity < p.baseOpacity) {
-            p.opacity += 0.003;
+            p.opacity += 0.005;
           }
 
-          // Screen wrapping / recycle bounds
+          // Screen wrapping
           const padding = size * p.scale * 0.5;
           
           if (p.y < -padding) {
             p.y = height + padding;
             p.x = Math.random() * width;
-            p.opacity = 0; // reset fade-in
+            p.opacity = 0;
           } else if (p.y > height + padding) {
             p.y = -padding;
             p.x = Math.random() * width;
@@ -271,7 +334,6 @@ export default function SmokeBackground() {
           }
         }
 
-        // 2. Rendering
         ctx.save();
         ctx.translate(p.x, p.y);
         ctx.rotate(p.rotation);
@@ -279,20 +341,11 @@ export default function SmokeBackground() {
         const drawSize = size * p.scale;
         ctx.globalAlpha = p.opacity;
 
-        // If sprites are successfully pre-processed, draw them, otherwise fallback to soft circles
-        if (sprites.length > 0) {
-          const spriteCanvas = sprites[p.spriteIndex % sprites.length];
-          ctx.drawImage(spriteCanvas, -drawSize / 2, -drawSize / 2, drawSize, drawSize);
-        } else {
-          // Synthetic fallback if assets are not loaded
-          const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, drawSize / 2);
-          gradient.addColorStop(0, "rgba(75, 75, 80, 0.15)");
-          gradient.addColorStop(0.5, "rgba(65, 65, 70, 0.05)");
-          gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
-          ctx.fillStyle = gradient;
-          ctx.beginPath();
-          ctx.arc(0, 0, drawSize / 2, 0, Math.PI * 2);
-          ctx.fill();
+        if (sprites[p.layer] && sprites[p.layer].length > 0) {
+          const spriteCanvas = sprites[p.layer][p.spriteIndex % sprites[p.layer].length];
+          if (spriteCanvas) {
+            ctx.drawImage(spriteCanvas, -drawSize / 2, -drawSize / 2, drawSize, drawSize);
+          }
         }
         ctx.restore();
       });
@@ -300,15 +353,14 @@ export default function SmokeBackground() {
       animationFrameIdRef.current = requestAnimationFrame(loop);
     };
 
-    // Preprocess sprites first, then launch loop
     preprocessSprites().then(() => {
-      lastTickTime = performance.now();
       animationFrameIdRef.current = requestAnimationFrame(loop);
     });
 
     return () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("pointermove", onPointerMove);
       if (observer) observer.disconnect();
       if (animationFrameIdRef.current) cancelAnimationFrame(animationFrameIdRef.current);
     };
@@ -321,7 +373,7 @@ export default function SmokeBackground() {
     >
       <canvas 
         ref={canvasRef} 
-        className="fixed top-0 left-0 w-full h-full pointer-events-none z-0 mix-blend-screen opacity-90"
+        className="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-100"
       />
     </div>
   );

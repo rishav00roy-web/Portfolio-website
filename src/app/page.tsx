@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
-import { AnimatePresence, motion } from "framer-motion";
 import ThemeInitializer from "@/components/ThemeInitializer";
 import SmokeBackground from "@/components/SmokeBackground";
 import LogoLoader from "@/components/LogoLoader";
@@ -11,6 +10,7 @@ import FeaturedProjects from "@/components/FeaturedProjects";
 import Skills from "@/components/Skills";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
+import Navbar from "@/components/Navbar";
 
 // Dynamically import the F1TrackMap with no SSR
 const F1TrackMap = dynamic(() => import("@/components/F1TrackMap"), {
@@ -24,6 +24,7 @@ const F1TrackMap = dynamic(() => import("@/components/F1TrackMap"), {
 
 export default function Home() {
   const [showLoader, setShowLoader] = useState(true);
+  const [renderLoader, setRenderLoader] = useState(true);
   const [f1Visible, setF1Visible] = useState(false);
   const f1ContainerRef = useRef<HTMLDivElement>(null);
 
@@ -33,8 +34,12 @@ export default function Home() {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
+      const timer = setTimeout(() => setRenderLoader(false), 1000);
+      return () => clearTimeout(timer);
     }
-    
+  }, [showLoader]);
+
+  useEffect(() => {
     // High-performance lazy loading of F1 module via IntersectionObserver
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -56,27 +61,33 @@ export default function Home() {
     return () => {
       observer.disconnect();
     };
-  }, [showLoader]);
+  }, []);
 
   return (
     <>
       {/* Handles loading dark/light themes via URL params during selection phase */}
       <ThemeInitializer />
 
-      <AnimatePresence mode="wait">
-        {showLoader && (
+      {renderLoader && (
+        <div 
+          className={`fixed inset-0 z-[100] transition-opacity duration-1000 ease-out ${
+            showLoader ? "opacity-100" : "opacity-0"
+          }`}
+        >
           <LogoLoader onComplete={() => setShowLoader(false)} />
-        )}
-      </AnimatePresence>
+        </div>
+      )}
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: showLoader ? 0 : 1 }}
-        transition={{ duration: 1, ease: "easeOut", delay: showLoader ? 0 : 0.2 }}
-        className={showLoader ? "pointer-events-none" : ""}
+      <div
+        className={`transition-opacity duration-1000 ease-out delay-200 ${
+          showLoader ? "opacity-0 pointer-events-none" : "opacity-100"
+        }`}
       >
         {/* Ambient charcoal drifting smoke background */}
         <SmokeBackground />
+        
+        {/* Main Navigation */}
+        <Navbar />
 
         <main className="flex-1 w-full flex flex-col relative z-10">
           {/* Hero Section */}
@@ -112,7 +123,7 @@ export default function Home() {
           {/* Contact Footer Section */}
           <Contact />
         </main>
-      </motion.div>
+      </div>
     </>
   );
 }
