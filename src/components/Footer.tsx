@@ -31,7 +31,8 @@ export default function Footer() {
         </div>
 
         <p className="mt-24 font-mono text-xs text-white/30 tracking-widest">
-          © {new Date().getFullYear()} RISHAV ROY — DESIGNED & DEVELOPED FROM ASSAM.
+          © {new Date().getFullYear()} RISHAV ROY — DESIGNED & DEVELOPED FROM
+          ASSAM.
         </p>
       </div>
     </footer>
