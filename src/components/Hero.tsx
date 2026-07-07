@@ -42,7 +42,7 @@ export default function Hero() {
     <section className="relative flex flex-col bg-[#030303] text-white overflow-hidden">
       <div className="flex items-center justify-between px-6 sm:px-12 xl:px-24 py-6 font-mono text-xs uppercase tracking-widest text-white/40">
         <span>Rishav Roy</span>
-        <span className="hidden sm:block">Jorhat, Assam — India</span>
+        <span className="hidden sm:block">Kolkata, India</span>
       </div>
 
       <div className="flex-1 flex flex-col justify-center px-6 sm:px-12 xl:px-24 py-16 sm:py-24">
@@ -66,7 +66,7 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="mt-10 max-w-xl text-lg sm:text-2xl text-white/60 font-medium leading-snug"
         >
-          Full-stack developer & automation builder — shipping production web apps and AI-driven tools from the tea gardens of Assam.
+          Agentic Full-Stack Developer — Building commercial software that solves real business problems.
         </motion.p>
 
         <motion.div
@@ -84,10 +84,10 @@ export default function Hero() {
           </div>
           <div>
             <p className="text-white/30 uppercase tracking-widest mb-2">
-              Remote from
+              Based in
             </p>
-            <p className="text-white/80">Jorhat, Assam</p>
-            <p className="text-white/50">26.7509°N 94.2037°E</p>
+            <p className="text-white/80">Kolkata, India</p>
+            <p className="text-white/50">Originally Jorhat, Assam</p>
           </div>
           <div>
             <p className="text-white/30 uppercase tracking-widest mb-2">
