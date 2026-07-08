@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="antialiased">
-      <body className="flex flex-col bg-[#030303] text-white selection:bg-[#F5B301]/30 selection:text-white">
+      <body className="flex flex-col bg-[#030303] text-white selection:bg-white/20 selection:text-white">
         {children}
       </body>
     </html>

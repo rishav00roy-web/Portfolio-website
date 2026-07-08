@@ -29,7 +29,7 @@ export default function About() {
     {
       role: "FOIA Specialist",
       company: "SSB Media Pvt. Ltd.",
-      period: "2025 — Present",
+      period: "2025 to Present",
       bullets: [
         "Submitted and tracked 1,500+ FOIA requests to U.S. police departments.",
         "Managed and processed large volumes of bodycam footage.",
@@ -39,7 +39,7 @@ export default function About() {
     {
       role: "HR, Administration & Purchase",
       company: "3RM Management Limited",
-      period: "2023 — 2024",
+      period: "2023 to 2024",
       bullets: [
         "Owned employee onboarding, records management, daily administration, and procurement processes.",
         "Coordinated procurement across departments with a proactive, professional approach.",
@@ -48,7 +48,7 @@ export default function About() {
     {
       role: "Assistant Manager",
       company: "Yogesh Commercial Pvt. Ltd. (YCPL)",
-      period: "2021 — 2023",
+      period: "2021 to 2023",
       bullets: [
         "Oversaw documentation and compliance across infrastructure projects worth approximately ₹1.2 crore.",
         "Managed daily team operations and supported performance monitoring.",
@@ -57,7 +57,7 @@ export default function About() {
     {
       role: "Chief of Operations Officer",
       company: "Shangrila Interprise",
-      period: "2020 — 2021",
+      period: "2020 to 2021",
       bullets: [
         "Led workforce allocation for up to 40 employees, optimizing labour costs while maintaining compliance.",
         "Supervised logistics, supply chain, procurement, and delivery.",
@@ -67,9 +67,9 @@ export default function About() {
 
   const education = [
     {
-      degree: "Bachelor of Computer Applications (BCA) — Semester II",
+      degree: "Bachelor of Computer Applications (BCA), Semester II",
       school: "Manipal University, Jaipur",
-      period: "2025 — In Progress",
+      period: "2025, In Progress",
     },
     {
       degree: "Senior Secondary (Arts)",
@@ -100,13 +100,13 @@ export default function About() {
           {/* Bio / Story */}
           <div className="space-y-6">
             <p className="text-xl sm:text-2xl text-white/80 leading-relaxed font-sans font-medium">
-              I started out building educational websites because I wanted to solve problems, not just learn syntax. Today I build commercial software for paying clients.
+              I got into this by building educational websites, mostly because I wanted to solve problems, not just learn syntax. Now I build commercial software for paying clients.
             </p>
             <p className="text-base sm:text-lg text-white/60 leading-relaxed font-sans">
-              I use AI as a productivity multiplier — not a replacement for engineering. I architect systems, design software, verify outputs, debug, optimize, and deliver production applications. AI accelerates the work; the judgment, ownership, and accountability are mine.
+              I treat AI as a productivity multiplier, not a stand-in for engineering. It speeds up the work: architecture, debugging, testing, the parts that used to eat hours. But I still design the systems, verify what it produces, and own every decision that ships. If something breaks in production, that&apos;s on me, not the tool.
             </p>
             <p className="text-base sm:text-lg text-white/60 leading-relaxed font-sans">
-              Before writing code professionally, I spent 6+ years in operations management, HR, procurement, and business administration — leading teams, managing budgets, and keeping complex operations compliant and running. That background is why I don't just build features; I build software that serves a business outcome. I bridge engineering and business.
+              Before I wrote code professionally, I spent 6+ years running operations. HR, procurement, business administration, leading teams, managing budgets, keeping things compliant. That&apos;s the part most developers skip, and it&apos;s exactly why I don&apos;t just build features for their own sake. I build software that&apos;s meant to serve a business outcome, because I&apos;ve sat on the business side and know what actually matters there.
             </p>
           </div>
 
@@ -122,7 +122,7 @@ export default function About() {
                     <h4 className="text-xl font-bold text-white uppercase tracking-tight">{exp.role}</h4>
                     <span className="font-mono text-xs text-white/40">{exp.period}</span>
                   </div>
-                  <p className="text-[#F5B301] font-mono text-xs uppercase tracking-wider">{exp.company}</p>
+                  <p className="text-white/70 font-mono text-xs uppercase tracking-wider">{exp.company}</p>
                   <ul className="list-disc pl-4 text-white/60 text-sm space-y-2 mt-2 leading-relaxed">
                     {exp.bullets.map((bullet, idx) => (
                       <li key={idx}>{bullet}</li>
@@ -146,7 +146,7 @@ export default function About() {
                     {group.items.map((skill) => (
                       <span
                         key={skill}
-                        className="px-3 py-1 border border-white/10 rounded-full font-mono text-[10px] sm:text-xs text-white/70 hover:border-[#F5B301] hover:text-[#F5B301] transition-colors"
+                        className="px-3 py-1 border border-white/10 rounded-full font-mono text-[10px] sm:text-xs text-white/70 hover:border-white/40 hover:text-white transition-colors"
                       >
                         {skill}
                       </span>

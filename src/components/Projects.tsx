@@ -1,191 +1,146 @@
 "use client";
 
-import { useState, useRef } from "react";
-import Image from "next/image";
-import {
-  motion,
-  AnimatePresence,
-  useMotionValue,
-  useSpring,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
-type Project = {
-  id: string;
-  index: string;
-  title: string;
-  years: string;
-  tags: string[];
-  image: string;
-  href?: string;
-};
-
-const projects: Project[] = [
+const projects = [
   {
-    id: "tea-country",
-    index: "01",
+    id: 1,
     title: "Tea Country Holidays",
-    years: "2025 — 2026",
-    tags: ["Next.js", "Supabase", "Tailwind CSS", "Travel-Tech"],
-    image: "/assets/TEA COUNTRY SITE/Screenshot 2026-07-07 232203.png",
+    description: "Custom CMS module for 90+ travel packages and CRM migration via Python scraper.",
+    tags: ["Next.js", "Supabase", "Tailwind CSS"],
+    image: "/assets/projects/tea1.jpg",
   },
   {
-    id: "clashvault",
-    index: "02",
+    id: 2,
+    title: "Gym CRM",
+    description: "Offline-first localStorage CRM with OCR for rapid customer onboarding.",
+    tags: ["HTML", "JavaScript", "OCR"],
+    image: "/assets/projects/gym1.png",
+  },
+  {
+    id: 3,
     title: "ClashVault",
-    years: "2026",
-    tags: ["Next.js", "Supabase", "Razorpay", "Escrow Systems"],
-    image: "/assets/CLASHVERSE/Screenshot 2026-07-07 231838.png",
-  },
-  {
-    id: "gym-crm",
-    index: "03",
-    title: "IQ Iron Fitness — Gym CRM",
-    years: "2026",
-    tags: ["JavaScript", "LocalStorage", "OCR", "WhatsApp API"],
-    image: "/assets/IQ IRON FITNESS GYM CRM/Screenshot 2026-07-07 232423.png",
+    description: "Escrow-style order management system with Razorpay integration and events engine.",
+    tags: ["Next.js", "Supabase", "Razorpay"],
+    image: "/assets/projects/tea2.png",
   },
 ];
 
+type Project = {
+  id: number;
+  title: string;
+  description: string;
+  tags: string[];
+  image: string;
+};
 
-function Row({ project }: { project: Project }) {
-  const [hovered, setHovered] = useState(false);
-  const y = useMotionValue(0);
-  const springY = useSpring(y, { stiffness: 300, damping: 30, mass: 0.5 });
+function Card({
+  project,
+  index,
+  scrollYProgress,
+}: {
+  project: Project;
+  index: number;
+  scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
+}) {
+  const count = projects.length;
+  const step = 1 / count;
+  const start = index * step;
+  const end = start + step;
 
-  return (
-    <motion.a
-      href={project.href ?? "#"}
-      onMouseEnter={(e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        y.set(e.clientY - rect.top - 95); // Centers vertically (190px / 2 = 95px)
-        setHovered(true);
-      }}
-      onMouseLeave={() => setHovered(false)}
-      onMouseMove={(e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        y.set(e.clientY - rect.top - 95);
-      }}
-      className={`group relative flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 py-8 sm:py-10 px-1 ${hovered ? "z-30" : "z-0"}`}
-    >
-      <div className="flex items-baseline gap-4 sm:gap-8">
-        <span className="font-mono text-xs sm:text-sm text-white/30 tabular-nums">
-          {project.index}
-        </span>
-        <h3 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl uppercase tracking-tight text-white transition-colors duration-300 group-hover:text-[#F5B301]">
-          {project.title}
-        </h3>
-      </div>
-
-      <div className="flex items-center gap-6 pl-9 sm:pl-0">
-        <div className="hidden md:flex flex-wrap gap-2 max-w-xs justify-end">
-          {project.tags.map((tag) => (
-            <span
-              key={tag}
-              className="font-mono text-[10px] uppercase tracking-widest text-white/40"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-        <span className="font-mono text-xs text-white/40">
-          {project.years}
-        </span>
-        <ArrowUpRight className="w-5 h-5 text-white/40 transition-transform duration-300 group-hover:rotate-45 group-hover:text-[#F5B301]" />
-      </div>
-
-      <AnimatePresence>
-        {hovered && (
-          <motion.div
-            style={{ top: springY }}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="pointer-events-none absolute right-4 sm:right-24 z-20 hidden lg:block w-[280px] h-[190px] rounded-xl overflow-hidden shadow-2xl"
-          >
-            <Image
-              src={project.image}
-              alt={project.title}
-              width={280}
-              height={190}
-              className="w-full h-full object-cover"
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.a>
+  // Each card gets a subtle "reveal" zoom as it slides into the center of
+  // the viewport — same idea as the Hero's scroll-zoom, just per-card.
+  const imageScale = useTransform(
+    scrollYProgress,
+    [start, start + step * 0.5, end],
+    [1.15, 1, 1.15]
   );
-}
-
-function ProjectImageReveal({ image, alt }: { image: string; alt: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 80,
-    damping: 20,
-    mass: 0.5,
-  });
-
-  const scale = useTransform(smoothProgress, [0, 0.5, 1], [1.15, 1, 1.15]);
-  const opacity = useTransform(smoothProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
   return (
-    <div ref={ref} className="relative w-full h-[50vh] sm:h-[70vh] overflow-hidden rounded-xl my-8">
-      <motion.img
-        src={image}
-        alt={alt}
-        style={{ scale, opacity }}
-        className="w-full h-full object-cover"
-      />
+    <div className="relative w-screen h-full flex items-center justify-center px-6 sm:px-12 shrink-0">
+      <div className="w-full max-w-7xl relative h-[70vh] sm:h-[80vh] rounded-[2rem] sm:rounded-[3rem] overflow-hidden shadow-2xl bg-[#0a0a0a]">
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
+          <motion.img
+            style={{ scale: imageScale }}
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover opacity-60"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+        </div>
+
+        <div className="absolute inset-0 flex flex-col justify-end p-8 sm:p-16">
+          <div className="flex justify-between items-end">
+            <div>
+              <p className="font-mono text-xs sm:text-sm text-gray-400 mb-4 tracking-[0.2em] uppercase">
+                Project 0{index + 1}
+              </p>
+              <h2 className="text-4xl sm:text-6xl font-black text-white tracking-tighter mb-4 drop-shadow-md">
+                {project.title}
+              </h2>
+              <p className="text-lg sm:text-xl text-gray-300 max-w-xl leading-relaxed mb-8 drop-shadow-md">
+                {project.description}
+              </p>
+
+              <div className="flex flex-wrap gap-2">
+                {project.tags.map((tag: string) => (
+                  <span
+                    key={tag}
+                    className="px-4 py-2 rounded-full border border-white/20 bg-black/50 backdrop-blur-md text-white text-sm font-medium"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="hidden sm:flex w-20 h-20 rounded-full bg-white text-black items-center justify-center hover:scale-105 transition-transform cursor-pointer shadow-lg">
+              <ArrowUpRight className="w-8 h-8" />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
 
 export default function Projects() {
+  const outerRef = useRef<HTMLDivElement>(null);
+  const count = projects.length;
+
+  const { scrollYProgress } = useScroll({
+    target: outerRef,
+    offset: ["start start", "end end"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 45,
+    damping: 24,
+    mass: 0.7,
+    restDelta: 0.0005,
+  });
+
+  // Track slides left by (count - 1) * 100vw total, driven by vertical scroll.
+  const trackX = useTransform(smoothProgress, [0, 1], ["0%", `-${(count - 1) * 100}%`]);
+
   return (
-    <section className="relative bg-[#030303] px-6 sm:px-12 xl:px-24 py-24 sm:py-32">
-      <div className="flex items-end justify-between mb-12">
-        <h2 className="font-display font-extrabold text-5xl sm:text-7xl uppercase tracking-tight text-white">
-          Selected Work
+    <section className="relative w-full bg-[#030303]">
+      <div className="px-6 sm:px-12 xl:px-24 pt-24 pb-12">
+        <h2 className="text-5xl sm:text-7xl font-black tracking-tighter text-white">
+          Selected Works
         </h2>
-        <span className="font-mono text-xs text-white/30 hidden sm:block">
-          ( 03 Projects )
-        </span>
       </div>
 
-      <div>
-        {projects.map((project) => {
-          let heroImage = "";
-          if (project.id === "tea-country") heroImage = "/assets/projects/tea-country-hero.jpg";
-          else if (project.id === "clashvault") heroImage = "/assets/projects/clashvault-hero.jpg";
-          else if (project.id === "gym-crm") heroImage = "/assets/projects/gym-crm-hero.jpg";
-
-          return (
-            <div key={project.id}>
-              <Row project={project} />
-              {heroImage && (
-                <ProjectImageReveal image={heroImage} alt={`${project.title} Hero`} />
-              )}
-            </div>
-          );
-        })}
-      </div>
-
-      <div className="mt-24">
-        <h3 className="font-mono text-xs uppercase tracking-[0.3em] text-white/40 mb-6">
-          Additional Work
-        </h3>
-        <div className="flex flex-col">
-          <p className="text-white/40 text-base sm:text-lg font-mono">
-            More projects coming soon — including an F1 telemetry visualization.
-          </p>
+      {/* Extra scroll room: one viewport height per project drives the horizontal track */}
+      <div ref={outerRef} className="relative" style={{ height: `${count * 100}vh` }}>
+        <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center">
+          <motion.div style={{ x: trackX }} className="flex h-full">
+            {projects.map((project, i) => (
+              <Card key={project.id} project={project} index={i} scrollYProgress={scrollYProgress} />
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>

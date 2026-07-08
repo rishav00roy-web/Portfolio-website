@@ -39,9 +39,10 @@ export default function Hero() {
   // Single spring smooths every derived transform below — one spring update
   // per frame, not one per layer, so this stays cheap on integrated graphics.
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 80,
-    damping: 20,
-    mass: 0.5,
+    stiffness: 45,
+    damping: 24,
+    mass: 0.7,
+    restDelta: 0.0005,
   });
 
   // --- Layer 1: background image — slow, "far away" ---
@@ -106,7 +107,7 @@ export default function Hero() {
               transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
               className="max-w-xl text-lg sm:text-2xl text-white/60 font-medium leading-snug"
             >
-              Agentic Full-Stack Developer — Building commercial software that solves real business problems.
+              Agentic Full-Stack Developer building commercial software that solves real business problems.
             </motion.p>
 
             <motion.div
