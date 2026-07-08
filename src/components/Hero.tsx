@@ -39,25 +39,25 @@ export default function Hero() {
   // Single spring smooths every derived transform below — one spring update
   // per frame, not one per layer, so this stays cheap on integrated graphics.
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 45,
-    damping: 24,
-    mass: 0.7,
+    stiffness: 30,
+    damping: 20,
+    mass: 0.8,
     restDelta: 0.0005,
   });
 
   // --- Layer 1: background image — slow, "far away" ---
   const bgScale = useTransform(smoothProgress, [0, 1], [1, 1.25]);
-  const bgBlur = useTransform(smoothProgress, [0.4, 1], ["blur(0px)", "blur(10px)"]);
-  const bgOpacity = useTransform(smoothProgress, [0, 0.7, 1], [0.7, 0.55, 0.3]);
+  const bgBlur = useTransform(smoothProgress, [0.5, 1], ["blur(0px)", "blur(10px)"]);
+  const bgOpacity = useTransform(smoothProgress, [0, 0.8, 1], [0.7, 0.55, 0.3]);
 
   // --- Layer 2: giant title — fast, flies at/through the viewer ---
-  const titleScale = useTransform(smoothProgress, [0, 0.55], [1, 9]);
-  const titleBlur = useTransform(smoothProgress, [0.15, 0.55], ["blur(0px)", "blur(24px)"]);
-  const titleOpacity = useTransform(smoothProgress, [0, 0.3, 0.55], [1, 1, 0]);
+  const titleScale = useTransform(smoothProgress, [0, 0.7], [1, 9.5]);
+  const titleBlur = useTransform(smoothProgress, [0.2, 0.7], ["blur(0px)", "blur(20px)"]);
+  const titleOpacity = useTransform(smoothProgress, [0, 0.4, 0.7], [1, 1, 0]);
 
   // --- Layer 3: foreground chrome — clears the frame first ---
-  const chromeOpacity = useTransform(smoothProgress, [0, 0.22], [1, 0]);
-  const chromeY = useTransform(smoothProgress, [0, 0.22], [0, -40]);
+  const chromeOpacity = useTransform(smoothProgress, [0, 0.3], [1, 0]);
+  const chromeY = useTransform(smoothProgress, [0, 0.3], [0, -35]);
 
   // Ambient Parallax Orbs
   const orb1Y = useTransform(smoothProgress, [0, 1], [0, 120]);

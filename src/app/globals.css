@@ -190,3 +190,77 @@ body {
   font-size: 13px;
   line-height: 1.4;
 }
+
+/* Ambient Background Grid Pattern with Shifting Radial Light Sweep */
+.alive-grid {
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 80%),
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+  background-size: 100% 100%, 55px 55px, 55px 55px;
+  background-position: center;
+  animation: grid-light-glow 20s infinite alternate ease-in-out;
+}
+
+@keyframes grid-light-glow {
+  0% {
+    background-image: 
+      radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.06) 0%, transparent 65%),
+      linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+  }
+  50% {
+    background-image: 
+      radial-gradient(circle at 85% 75%, rgba(255, 255, 255, 0.08) 0%, transparent 65%),
+      linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+  }
+  100% {
+    background-image: 
+      radial-gradient(circle at 45% 15%, rgba(255, 255, 255, 0.06) 0%, transparent 65%),
+      linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+  }
+}
+
+/* GPU Accelerated Ambient Light Floating Orbs */
+@keyframes float-glow-1 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translate3d(120px, 80px, 0) scale(1.15);
+    opacity: 0.25;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.15;
+  }
+}
+
+@keyframes float-glow-2 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1.1);
+    opacity: 0.1;
+  }
+  50% {
+    transform: translate3d(-100px, -120px, 0) scale(0.9);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.1);
+    opacity: 0.1;
+  }
+}
+
+.glow-orb-1 {
+  will-change: transform, opacity;
+  animation: float-glow-1 22s infinite ease-in-out;
+}
+
+.glow-orb-2 {
+  will-change: transform, opacity;
+  animation: float-glow-2 28s infinite ease-in-out;
+}
+

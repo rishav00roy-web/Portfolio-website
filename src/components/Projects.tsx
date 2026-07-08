@@ -66,25 +66,21 @@ function Card({
   const start = index * step;
   const end = start + step;
 
-  // Staggered parallax translations for the 3-image collage
-  // Left image slides up, right image slides down, center zooms
+  // 3D parallax shifts (X, Y, and rotation) for the screenshot collage layers
   const centerScale = useTransform(
     scrollYProgress,
     [start, start + step * 0.5, end],
-    [1.08, 1, 1.08]
+    [0.96, 1.06, 0.96]
   );
   
-  const leftY = useTransform(
-    scrollYProgress,
-    [start, end],
-    [-25, 25]
-  );
+  const leftY = useTransform(scrollYProgress, [start, end], [-90, 90]);
+  const rightY = useTransform(scrollYProgress, [start, end], [90, -90]);
 
-  const rightY = useTransform(
-    scrollYProgress,
-    [start, end],
-    [25, -25]
-  );
+  const leftX = useTransform(scrollYProgress, [start, end], [-45, 15]);
+  const rightX = useTransform(scrollYProgress, [start, end], [45, -15]);
+
+  const leftRotate = useTransform(scrollYProgress, [start, end], [-12, 3]);
+  const rightRotate = useTransform(scrollYProgress, [start, end], [12, -3]);
 
   return (
     <div className="relative w-screen h-full flex items-center justify-center px-4 sm:px-12 xl:px-24 shrink-0">
@@ -92,8 +88,8 @@ function Card({
         {/* Subtle grid background inside the card for Stitch-inspired vibe design */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:30px_30px] opacity-60 pointer-events-none z-0" />
         
-        {/* Left Side: Text Details */}
-        <div className="flex-1 flex flex-col justify-center z-10">
+        {/* Left Side: Text Details (w-[38%]) */}
+        <div className="w-full lg:w-[38%] flex flex-col justify-center z-10">
           <p className="font-coffekan text-lg sm:text-2xl text-white/50 mb-3 tracking-wide">
             Project 0{index + 1}
           </p>
@@ -126,14 +122,14 @@ function Card({
           </div>
         </div>
 
-        {/* Right Side: Beautiful 3D Parallax 3-Image Collage */}
-        <div className="flex-1 w-full h-[40vh] lg:h-full relative flex items-center justify-center z-10 overflow-hidden lg:overflow-visible">
-          <div className="relative w-[85%] h-[85%] flex items-center justify-center">
+        {/* Right Side: Beautiful 3D Parallax 3-Image Collage (w-[62%], enlarged and dynamic) */}
+        <div className="w-full lg:w-[62%] h-[40vh] lg:h-full relative flex items-center justify-center z-10 overflow-hidden lg:overflow-visible">
+          <div className="relative w-[90%] h-[90%] flex items-center justify-center">
             
-            {/* Image 2 (Left Overlap, Staggered) */}
+            {/* Image 2 (Left Overlap, Staggered 3D Parallax) */}
             <motion.div
-              style={{ y: leftY }}
-              className="absolute left-[-5%] w-[48%] aspect-[4/3] rounded-2xl overflow-hidden shadow-lg border border-white/10 z-0 scale-95 opacity-80"
+              style={{ y: leftY, x: leftX, rotate: leftRotate }}
+              className="absolute left-[-10%] w-[56%] aspect-[16/10] rounded-2xl overflow-hidden shadow-lg border border-white/10 z-0 scale-95 opacity-80"
             >
               <img
                 src={project.images[1]}
@@ -143,10 +139,10 @@ function Card({
               <div className="absolute inset-0 bg-black/20" />
             </motion.div>
 
-            {/* Image 1 (Center Main, Zooming) */}
+            {/* Image 1 (Center Main, Zooming and responsive on hover) */}
             <motion.div
               style={{ scale: centerScale }}
-              className="relative w-[60%] aspect-[4/3] rounded-2.5rem overflow-hidden shadow-2xl border border-white/15 z-10"
+              className="relative w-[72%] aspect-[16/10] rounded-2.5rem overflow-hidden shadow-2xl border border-white/15 z-10 transition-shadow duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.08)]"
             >
               <img
                 src={project.images[0]}
@@ -155,10 +151,10 @@ function Card({
               />
             </motion.div>
 
-            {/* Image 3 (Right Overlap, Staggered) */}
+            {/* Image 3 (Right Overlap, Staggered 3D Parallax) */}
             <motion.div
-              style={{ y: rightY }}
-              className="absolute right-[-5%] w-[48%] aspect-[4/3] rounded-2xl overflow-hidden shadow-lg border border-white/10 z-0 scale-95 opacity-80"
+              style={{ y: rightY, x: rightX, rotate: rightRotate }}
+              className="absolute right-[-10%] w-[56%] aspect-[16/10] rounded-2xl overflow-hidden shadow-lg border border-white/10 z-0 scale-95 opacity-80"
             >
               <img
                 src={project.images[2]}
@@ -195,14 +191,16 @@ export default function Projects() {
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 45,
-    damping: 24,
-    mass: 0.7,
+    stiffness: 30,
+    damping: 20,
+    mass: 0.8,
     restDelta: 0.0005,
   });
 
   // Track slides left by (count - 1) * 100vw total, driven by vertical scroll.
-  const trackX = useTransform(smoothProgress, [0, 1], ["0%", `-${(count - 1) * 100}%`]);
+  // Fixed unit calculation: changed from percentage strings to viewport width (vw)
+  // to prevent early cards scroll-offs and completely blank screens.
+  const trackX = useTransform(smoothProgress, [0, 1], ["0vw", `-${(count - 1) * 100}vw`]);
 
   return (
     <section className="relative w-full bg-[#030303]">
@@ -212,8 +210,8 @@ export default function Projects() {
         </h2>
       </div>
 
-      {/* Taller scroll container (height: count * 180vh) slows scroll speed, making slide easier to watch */}
-      <div ref={outerRef} className="relative" style={{ height: `${count * 180}vh` }}>
+      {/* Scroll container height exactly matched to remove dead scroll and blank space */}
+      <div ref={outerRef} className="relative" style={{ height: `${(count - 1) * 120 + 100}vh` }}>
         <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center">
           <motion.div style={{ x: trackX }} className="flex h-full">
             {projects.map((project, i) => (
