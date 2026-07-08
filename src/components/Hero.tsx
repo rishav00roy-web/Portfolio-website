@@ -42,7 +42,6 @@ export default function Hero() {
     : "";
 
   const outerRef = useRef<HTMLDivElement>(null);
-  const sectionRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
     target: outerRef,
@@ -56,7 +55,7 @@ export default function Hero() {
 
   return (
     <div ref={outerRef} className="relative h-[200vh] bg-[#030303]">
-      <section ref={sectionRef} className="sticky top-0 h-screen overflow-hidden flex flex-col text-white">
+      <section className="sticky top-0 h-screen overflow-hidden flex flex-col text-white">
         <motion.div
           style={{ scale: bgScale, opacity: bgOpacity }}
           className="absolute inset-0 z-0"

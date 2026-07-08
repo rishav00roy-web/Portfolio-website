@@ -47,7 +47,6 @@ const projects: Project[] = [
   },
 ];
 
-const additionalWork: { title: string; href: string }[] = [];
 
 function Row({ project }: { project: Project }) {
   const [hovered, setHovered] = useState(false);
