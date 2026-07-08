@@ -59,6 +59,10 @@ export default function Hero() {
   const chromeOpacity = useTransform(smoothProgress, [0, 0.22], [1, 0]);
   const chromeY = useTransform(smoothProgress, [0, 0.22], [0, -40]);
 
+  // Ambient Parallax Orbs
+  const orb1Y = useTransform(smoothProgress, [0, 1], [0, 120]);
+  const orb2Y = useTransform(smoothProgress, [0, 1], [0, -120]);
+
   return (
     <div ref={outerRef} className="relative h-[280vh] bg-[#030303]">
       <section className="sticky top-0 h-screen w-full overflow-hidden text-white">
@@ -75,16 +79,26 @@ export default function Hero() {
           <div className="absolute inset-0 bg-black/50" />
         </motion.div>
 
+        {/* Ambient Parallax Orbs for whole-site designer feel */}
+        <motion.div
+          style={{ y: orb1Y }}
+          className="absolute right-[-10%] top-[15%] w-[450px] h-[450px] rounded-full bg-white/5 blur-[120px] pointer-events-none z-0"
+        />
+        <motion.div
+          style={{ y: orb2Y }}
+          className="absolute left-[-10%] bottom-[15%] w-[550px] h-[550px] rounded-full bg-white/5 blur-[150px] pointer-events-none z-0"
+        />
+
         {/* Layer 2: giant flying title — the centerpiece */}
         <motion.div
           style={{ scale: titleScale, opacity: titleOpacity, filter: titleBlur }}
           className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none"
         >
-          <h1 className="font-sans leading-[0.82] uppercase tracking-tight text-center">
-            <span className="block text-[4rem] sm:text-[7rem] lg:text-[11rem] font-extrabold text-white">
+          <h1 className="font-display leading-[0.82] uppercase tracking-tight text-center">
+            <span className="block text-[4.5rem] sm:text-[8.5rem] lg:text-[12.5rem] font-extrabold text-white">
               Rishav
             </span>
-            <span className="block text-[4rem] sm:text-[7rem] lg:text-[11rem] font-extrabold text-transparent [-webkit-text-stroke:2px_rgba(255,255,255,0.4)]">
+            <span className="block text-[4.5rem] sm:text-[8.5rem] lg:text-[12.5rem] font-extrabold text-transparent [-webkit-text-stroke:2px_rgba(255,255,255,0.4)]">
               Roy
             </span>
           </h1>
@@ -105,7 +119,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="max-w-xl text-lg sm:text-2xl text-white/60 font-medium leading-snug"
+              className="max-w-xl text-lg sm:text-2xl text-white/60 font-medium leading-snug font-sans"
             >
               Agentic Full-Stack Developer building commercial software that solves real business problems.
             </motion.p>

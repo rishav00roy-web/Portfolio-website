@@ -21,12 +21,12 @@ test.describe('Portfolio Website - Tier 1: Feature Coverage', () => {
     });
     expect(bodyFont).toMatch(/Sora/i);
 
-    // R1: "Sora" for headlines and names
+    // R1: "Kenoky" for headlines and names
     const headingFont = await page.evaluate(() => {
       const h1 = document.querySelector('h1');
       return h1 ? window.getComputedStyle(h1).fontFamily : '';
     });
-    expect(headingFont).toMatch(/Sora/i);
+    expect(headingFont).toMatch(/Kenoky/i);
 
     // R1: "JetBrains Mono" for all small uppercase tags, labels, and timestamps
     const monoFont = await page.evaluate(() => {
@@ -185,12 +185,12 @@ test.describe('Portfolio Website - Tier 4: Real-world User Scenario', () => {
     await footer.scrollIntoViewIfNeeded();
 
     // Email check
-    const emailLink = footer.locator('a[href^="mailto:"]');
+    const emailLink = footer.locator('a[href^="mailto:"]').first();
     await expect(emailLink).toHaveAttribute('href', 'mailto:rishav2000roy@gmail.com');
     await expect(emailLink).toHaveText('rishav2000roy@gmail.com');
 
     // Phone check
-    const phoneLink = footer.locator('a[href^="tel:"]');
+    const phoneLink = footer.locator('a[href^="tel:"]').first();
     await expect(phoneLink).toHaveAttribute('href', 'tel:+916001914771');
     await expect(phoneLink).toContainText('+91 60019 14771');
 

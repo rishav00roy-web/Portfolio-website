@@ -1,9 +1,26 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Kenoky';
+  src: url('/fonts/KenokyLight.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Coffekan';
+  src: url('/fonts/CoffekanRegular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --font-sans: "Sora", sans-serif;
-  --font-display: "Sora", sans-serif;
+  --font-display: "Kenoky", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
+  --font-coffekan: "Coffekan", sans-serif;
 }
 
 ::selection {
