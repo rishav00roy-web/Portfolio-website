@@ -100,13 +100,13 @@ export default function About() {
           {/* Bio / Story */}
           <div className="space-y-6">
             <p className="text-xl sm:text-2xl text-white/80 leading-relaxed font-sans font-medium">
-              I got into this by building educational websites, mostly because I wanted to solve problems, not just learn syntax. Now I build commercial software for paying clients.
+              I got into software development by building commercial websites for real clients. From the beginning, I was drawn to solving real business problems rather than simply learning programming languages. Today, I design and build production software that focuses on reliability, maintainability, and measurable business value.
             </p>
             <p className="text-base sm:text-lg text-white/60 leading-relaxed font-sans">
-              I treat AI as a productivity multiplier, not a stand-in for engineering. It speeds up the work: architecture, debugging, testing, the parts that used to eat hours. But I still design the systems, verify what it produces, and own every decision that ships. If something breaks in production, that&apos;s on me, not the tool.
+              I treat AI as a productivity multiplier, not a replacement for engineering. It helps me move faster through architecture, debugging, testing, and repetitive tasks, but every technical decision is mine. I design the systems, review every line that matters, validate the results, and take full responsibility for what reaches production. If something breaks, I own it.
             </p>
             <p className="text-base sm:text-lg text-white/60 leading-relaxed font-sans">
-              Before I wrote code professionally, I spent 6+ years running operations. HR, procurement, business administration, leading teams, managing budgets, keeping things compliant. That&apos;s the part most developers skip, and it&apos;s exactly why I don&apos;t just build features for their own sake. I build software that&apos;s meant to serve a business outcome, because I&apos;ve sat on the business side and know what actually matters there.
+              Before becoming a full-time developer, I spent more than six years in operations, working across HR, procurement, business administration, compliance, and team leadership. That experience fundamentally changed how I approach software. I understand the constraints businesses operate under because I&apos;ve worked on the other side of the table. I don&apos;t build features for the sake of shipping code. I build software that solves problems, improves workflows, and creates measurable value.
             </p>
           </div>
 

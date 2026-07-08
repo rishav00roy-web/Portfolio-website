@@ -10,21 +10,21 @@ const projects = [
     title: "Tea Country Holidays",
     description: "Custom CMS module for 90+ travel packages and CRM migration via Python scraper.",
     tags: ["Next.js", "Supabase", "Tailwind CSS"],
-    image: "/assets/projects/tea1.jpg",
+    image: "/assets/projects/tea-country-hero.jpg",
   },
   {
     id: 2,
     title: "Gym CRM",
     description: "Offline-first localStorage CRM with OCR for rapid customer onboarding.",
     tags: ["HTML", "JavaScript", "OCR"],
-    image: "/assets/projects/gym1.png",
+    image: "/assets/projects/gym-crm-hero.jpg",
   },
   {
     id: 3,
     title: "ClashVault",
     description: "Escrow-style order management system with Razorpay integration and events engine.",
     tags: ["Next.js", "Supabase", "Razorpay"],
-    image: "/assets/projects/tea2.png",
+    image: "/assets/projects/clashvault-hero.jpg",
   },
 ];
 
@@ -66,9 +66,9 @@ function Card({
             style={{ scale: imageScale }}
             src={project.image}
             alt={project.title}
-            className="w-full h-full object-cover opacity-60"
+            className="w-full h-full object-cover opacity-90"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
         </div>
 
         <div className="absolute inset-0 flex flex-col justify-end p-8 sm:p-16">
@@ -77,7 +77,7 @@ function Card({
               <p className="font-mono text-xs sm:text-sm text-gray-400 mb-4 tracking-[0.2em] uppercase">
                 Project 0{index + 1}
               </p>
-              <h2 className="text-4xl sm:text-6xl font-black text-white tracking-tighter mb-4 drop-shadow-md">
+              <h2 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tighter mb-4 drop-shadow-md">
                 {project.title}
               </h2>
               <p className="text-lg sm:text-xl text-gray-300 max-w-xl leading-relaxed mb-8 drop-shadow-md">
@@ -128,7 +128,7 @@ export default function Projects() {
   return (
     <section className="relative w-full bg-[#030303]">
       <div className="px-6 sm:px-12 xl:px-24 pt-24 pb-12">
-        <h2 className="text-5xl sm:text-7xl font-black tracking-tighter text-white">
+        <h2 className="text-5xl sm:text-7xl font-extrabold tracking-tighter text-white">
           Selected Works
         </h2>
       </div>
