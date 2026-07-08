@@ -24,7 +24,7 @@ export default function Background() {
   const shouldReduceMotion = useReducedMotion();
   const isAnimated = !shouldReduceMotion && isTabVisible;
 
-  // Parallax on scroll for the glow layers
+  // Subtle scroll-driven parallax for the glow layer (compositor-only)
   const { scrollY } = useScroll();
   const glowY = useTransform(scrollY, [0, 5000], [0, -350]);
 
@@ -53,52 +53,62 @@ export default function Background() {
       {/* Drifting Glow Blobs Container with subtle scroll parallax */}
       <motion.div style={{ y: glowY }} className="absolute inset-0 w-full h-full pointer-events-none">
         
-        {/* Blob 1: Indigo/Blue Glow (Upper Right) */}
+        {/* Blob 1: Indigo Glow (Upper Right)
+            Uses a radial gradient background directly instead of heavy CSS blur filters for 60fps scroll. */}
         <motion.div
           animate={isAnimated ? {
-            x: ["0px", "60px", "-40px", "0px"],
-            y: ["0px", "-60px", "40px", "0px"],
-            scale: [1, 1.12, 0.92, 1],
-            opacity: [0.32, 0.45, 0.28, 0.32],
+            x: ["0px", "80px", "-50px", "0px"],
+            y: ["0px", "-70px", "50px", "0px"],
+            scale: [1, 1.15, 0.9, 1],
+            opacity: [0.8, 1.0, 0.7, 0.8],
           } : {}}
           transition={{
             duration: 25,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute right-[5%] top-[15%] w-[55vw] h-[55vw] max-w-[750px] rounded-full bg-indigo-900/8 filter blur-[110px] sm:blur-[140px] pointer-events-none"
+          style={{
+            background: "radial-gradient(circle, rgba(99, 102, 241, 0.16) 0%, rgba(99, 102, 241, 0) 70%)"
+          }}
+          className="absolute right-[-5%] top-[10%] w-[65vw] h-[65vw] max-w-[850px] rounded-full pointer-events-none"
         />
 
-        {/* Blob 2: Blue/Violet Glow (Lower Left) */}
+        {/* Blob 2: Blue Glow (Lower Left) */}
         <motion.div
           animate={isAnimated ? {
-            x: ["0px", "-50px", "50px", "0px"],
-            y: ["0px", "70px", "-50px", "0px"],
-            scale: [1, 0.9, 1.1, 1],
-            opacity: [0.24, 0.38, 0.2, 0.24],
+            x: ["0px", "-60px", "60px", "0px"],
+            y: ["0px", "80px", "-60px", "0px"],
+            scale: [1, 0.92, 1.12, 1],
+            opacity: [0.7, 0.9, 0.6, 0.7],
           } : {}}
           transition={{
             duration: 32,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute left-[-5%] bottom-[12%] w-[50vw] h-[50vw] max-w-[650px] rounded-full bg-blue-900/8 filter blur-[100px] sm:blur-[130px] pointer-events-none"
+          style={{
+            background: "radial-gradient(circle, rgba(59, 130, 246, 0.14) 0%, rgba(59, 130, 246, 0) 70%)"
+          }}
+          className="absolute left-[-10%] bottom-[8%] w-[60vw] h-[60vw] max-w-[750px] rounded-full pointer-events-none"
         />
 
-        {/* Blob 3: Violet/Purple Glow (Center Right) */}
+        {/* Blob 3: Violet Glow (Center Right) */}
         <motion.div
           animate={isAnimated ? {
-            x: ["0px", "40px", "-30px", "0px"],
-            y: ["0px", "50px", "-60px", "0px"],
-            scale: [0.95, 1.08, 0.95, 0.95],
-            opacity: [0.18, 0.32, 0.15, 0.18],
+            x: ["0px", "50px", "-40px", "0px"],
+            y: ["0px", "60px", "-70px", "0px"],
+            scale: [0.95, 1.1, 0.95, 0.95],
+            opacity: [0.6, 0.85, 0.5, 0.6],
           } : {}}
           transition={{
             duration: 28,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute left-[35%] top-[40%] w-[45vw] h-[45vw] max-w-[600px] rounded-full bg-violet-950/6 filter blur-[120px] sm:blur-[150px] pointer-events-none"
+          style={{
+            background: "radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, rgba(139, 92, 246, 0) 70%)"
+          }}
+          className="absolute left-[30%] top-[35%] w-[55vw] h-[55vw] max-w-[700px] rounded-full pointer-events-none"
         />
 
       </motion.div>
