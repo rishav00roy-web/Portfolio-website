@@ -9,7 +9,7 @@ const projects = [
     id: 1,
     title: "Tea Country Holidays",
     description: "Custom CMS module for 90+ travel packages and CRM migration via Python scraper.",
-    tags: ["Next.js", "Supabase", "Tailwind CSS"],
+    tags: ["Next.js", "Supabase", "Tailwind CSS", "Claude Code"],
     link: "https://tea-country-holidays.vercel.app",
     images: [
       "/assets/projects/tea-1.jpg",
@@ -21,8 +21,8 @@ const projects = [
     id: 2,
     title: "Gym CRM",
     description: "Offline-first localStorage CRM with OCR for rapid customer onboarding.",
-    tags: ["HTML", "JavaScript", "OCR"],
-    link: "https://github.com/rishav00roy-web",
+    tags: ["HTML", "JavaScript", "OCR", "Codex"],
+    link: "https://github.com/rishav00roy-web/Gym-CRM",
     images: [
       "/assets/projects/gym-1.jpg",
       "/assets/projects/gym-2.jpg",
@@ -33,8 +33,8 @@ const projects = [
     id: 3,
     title: "ClashVault",
     description: "Escrow-style order management system with Razorpay integration and events engine.",
-    tags: ["Next.js", "Supabase", "Razorpay"],
-    link: "https://github.com/rishav00roy-web",
+    tags: ["Next.js", "Supabase", "Razorpay", "Antigravity"],
+    link: "https://github.com/rishav00roy-web/ClashVault",
     images: [
       "/assets/projects/clash-1.jpg",
       "/assets/projects/clash-2.jpg",

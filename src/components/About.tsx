@@ -11,12 +11,14 @@ export default function About() {
       items: ["Supabase", "PostgreSQL", "REST APIs", "Authentication"],
     },
     {
-      category: "AI & Search Optimization",
+      category: "AI Tools & Orchestration",
       items: [
+        "Antigravity",
+        "Codex",
+        "Claude Code",
+        "Kimi K2",
         "AI-Assisted Workflows",
-        "Technical SEO",
-        "AEO (AI Engine Optimization)",
-        "GEO (Generative Engine Optimization)",
+        "AEO / GEO Optimization",
       ],
     },
     {

@@ -191,16 +191,4 @@ body {
   line-height: 1.4;
 }
 
-/* High-Performance Ambient Background Grid & Static Glow Gradients */
-.alive-grid {
-  background-color: #030303;
-  background-image: 
-    radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.04) 0%, transparent 65%),
-    radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.035) 0%, transparent 55%),
-    radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.035) 0%, transparent 55%),
-    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 100% 100%, 55px 55px, 55px 55px;
-  background-position: center;
-}
 
