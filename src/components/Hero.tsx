@@ -80,7 +80,7 @@ export default function Hero() {
           style={{ scale: titleScale, opacity: titleOpacity, filter: titleBlur }}
           className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none"
         >
-          <h1 className="font-display leading-[0.82] uppercase tracking-tight text-center">
+          <h1 className="font-sans leading-[0.82] uppercase tracking-tight text-center">
             <span className="block text-[4rem] sm:text-[7rem] lg:text-[11rem] font-extrabold text-white">
               Rishav
             </span>
