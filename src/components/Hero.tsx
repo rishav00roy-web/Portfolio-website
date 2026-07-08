@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import Marquee from "./Marquee";
 
 function useClock() {
   const [now, setNow] = useState(new Date());
@@ -136,10 +135,6 @@ export default function Hero() {
             </motion.div>
           </div>
         </motion.div>
-
-        <div className="relative z-20">
-          <Marquee />
-        </div>
       </section>
     </div>
   );

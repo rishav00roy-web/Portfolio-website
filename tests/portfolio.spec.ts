@@ -63,9 +63,6 @@ test.describe('Portfolio Website - Tier 1: Feature Coverage', () => {
     // Hero Section
     await expect(page.locator('section').filter({ hasText: 'Rishav' })).toBeVisible();
 
-    // Marquee Component
-    await expect(page.locator('.animate-marquee, [class*="marquee"]')).toBeVisible();
-
     // Projects Section
     await expect(page.locator('section').filter({ hasText: 'Selected Work' })).toBeVisible();
 
@@ -73,20 +70,6 @@ test.describe('Portfolio Website - Tier 1: Feature Coverage', () => {
     await expect(page.locator('footer')).toBeVisible();
 
     // Note: Dedicated About Section is expected to be verified in Tier 4
-  });
-
-  test('Marquee looping banner contains dot and correct structure', async ({ page }) => {
-    const marquee = page.locator('.animate-marquee, [class*="marquee"]').first();
-    await expect(marquee).toBeVisible();
-
-    // The marquee dot should be present and styled with amber color
-    // We filter for a span whose text content is exactly "●" to target the inner span
-    const dot = marquee.locator('span').filter({ hasText: /^●$/ }).first();
-    await expect(dot).toBeVisible();
-
-    const dotColor = await dot.evaluate(el => window.getComputedStyle(el).color);
-    // Allow slight browser color space conversion differences (e.g., green channel being 179-182, blue channel being 0-10)
-    expect(dotColor).toMatch(/rgb\(245,\s*(179|180|181|182),\s*\d+\)/);
   });
 });
 

@@ -4,17 +4,6 @@
   --font-sans: "Sora", sans-serif;
   --font-display: "Sora", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
-  
-  --animate-marquee: marquee 22s linear infinite;
-
-  @keyframes marquee {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-25%);
-    }
-  }
 }
 
 ::selection {
