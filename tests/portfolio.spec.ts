@@ -225,16 +225,9 @@ test.describe('Portfolio Website - Tier 4: Real-world User Scenario', () => {
     await expect(aboutSection).toContainText(/BCA/i);
     await expect(aboutSection).toContainText(/Sem/i);
 
-    // 4. Verify additional works secondary list
-    const additionalWorks = [
-      'LLM Council',
-      'Meghalaya',
-      'Travel Locations'
-    ];
-    for (const workName of additionalWorks) {
-      const workItem = projectsSection.locator('a').filter({ hasText: new RegExp(workName, 'i') });
-      await expect(workItem).toBeVisible();
-    }
+    // 4. Verify additional works secondary list has been replaced by coming soon text
+    const comingSoonText = projectsSection.locator('p').filter({ hasText: /More projects coming soon/i });
+    await expect(comingSoonText).toBeVisible();
 
     // 5. Match all footer contacts exactly
     const footer = page.locator('footer');

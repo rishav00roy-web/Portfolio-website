@@ -47,14 +47,7 @@ const projects: Project[] = [
   },
 ];
 
-const additionalWork = [
-  { title: "LLM Council — Multi-Model AI Deliberation Engine", href: "#" },
-  { title: "Meghalaya Group Tour — Itinerary PDF Generator", href: "#" },
-  {
-    title: "800-Row Travel Locations Dataset (Fuzzy Autocomplete)",
-    href: "#",
-  },
-];
+const additionalWork: { title: string; href: string }[] = [];
 
 function Row({ project }: { project: Project }) {
   const [hovered, setHovered] = useState(false);
@@ -149,16 +142,9 @@ export default function Projects() {
           Additional Work
         </h3>
         <div className="flex flex-col">
-          {additionalWork.map((item) => (
-            <a
-              key={item.title}
-              href={item.href}
-              className="group flex items-center justify-between border-b border-white/10 py-5 text-lg sm:text-xl text-white/70 hover:text-[#F5B301] transition-colors"
-            >
-              {item.title}
-              <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-[#F5B301] transition-colors" />
-            </a>
-          ))}
+          <p className="text-white/40 text-base sm:text-lg font-mono">
+            More projects coming soon — including an F1 telemetry visualization.
+          </p>
         </div>
       </div>
     </section>
