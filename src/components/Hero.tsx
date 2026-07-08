@@ -48,13 +48,13 @@ export default function Hero() {
     offset: ["start start", "end end"],
   });
 
-  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.4]);
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.8, 1], [0.6, 0.3, 0]);
-  const textY = useTransform(scrollYProgress, [0, 1], [0, -120]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.6]);
+  const bgOpacity = useTransform(scrollYProgress, [0, 0.6, 1], [0.7, 0.4, 0]);
+  const textY = useTransform(scrollYProgress, [0, 0.8], [0, -150]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
   return (
-    <div ref={outerRef} className="relative h-[200vh] bg-[#030303]">
+    <div ref={outerRef} className="relative h-[250vh] bg-[#030303]">
       <section className="sticky top-0 h-screen overflow-hidden flex flex-col text-white">
         <motion.div
           style={{ scale: bgScale, opacity: bgOpacity }}
@@ -84,10 +84,10 @@ export default function Hero() {
               transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
               className="font-display leading-[0.82] uppercase tracking-tight"
             >
-              <span className="block text-[4rem] sm:text-[7rem] lg:text-[11rem] font-black text-white">
+              <span className="block text-[4rem] sm:text-[7rem] lg:text-[11rem] font-extrabold text-white">
                 Rishav
               </span>
-              <span className="block text-[4rem] sm:text-[7rem] lg:text-[11rem] font-black text-transparent [-webkit-text-stroke:2px_rgba(255,255,255,0.4)]">
+              <span className="block text-[4rem] sm:text-[7rem] lg:text-[11rem] font-extrabold text-transparent [-webkit-text-stroke:2px_rgba(255,255,255,0.4)]">
                 Roy
               </span>
             </motion.h1>

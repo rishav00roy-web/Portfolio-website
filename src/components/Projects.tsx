@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import {
   motion,
   AnimatePresence,
   useMotionValue,
   useSpring,
+  useScroll,
+  useTransform,
 } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
@@ -72,7 +74,7 @@ function Row({ project }: { project: Project }) {
         <span className="font-mono text-xs sm:text-sm text-white/30 tabular-nums">
           {project.index}
         </span>
-        <h3 className="font-display font-black text-3xl sm:text-5xl lg:text-6xl uppercase tracking-tight text-white transition-colors duration-300 group-hover:text-[#F5B301]">
+        <h3 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl uppercase tracking-tight text-white transition-colors duration-300 group-hover:text-[#F5B301]">
           {project.title}
         </h3>
       </div>
@@ -118,11 +120,33 @@ function Row({ project }: { project: Project }) {
   );
 }
 
+function ProjectImageReveal({ image, alt }: { image: string; alt: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.15, 1, 1.15]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+
+  return (
+    <div ref={ref} className="relative w-full h-[50vh] sm:h-[70vh] overflow-hidden rounded-xl my-8">
+      <motion.img
+        src={image}
+        alt={alt}
+        style={{ scale, opacity }}
+        className="w-full h-full object-cover"
+      />
+    </div>
+  );
+}
+
 export default function Projects() {
   return (
     <section className="relative bg-[#030303] px-6 sm:px-12 xl:px-24 py-24 sm:py-32">
       <div className="flex items-end justify-between mb-12">
-        <h2 className="font-display font-black text-5xl sm:text-7xl uppercase tracking-tight text-white">
+        <h2 className="font-display font-extrabold text-5xl sm:text-7xl uppercase tracking-tight text-white">
           Selected Work
         </h2>
         <span className="font-mono text-xs text-white/30 hidden sm:block">
@@ -131,9 +155,21 @@ export default function Projects() {
       </div>
 
       <div>
-        {projects.map((project) => (
-          <Row key={project.id} project={project} />
-        ))}
+        {projects.map((project) => {
+          let heroImage = "";
+          if (project.id === "tea-country") heroImage = "/assets/projects/tea-country-hero.jpg";
+          else if (project.id === "clashvault") heroImage = "/assets/projects/clashvault-hero.jpg";
+          else if (project.id === "gym-crm") heroImage = "/assets/projects/gym-crm-hero.jpg";
+
+          return (
+            <div key={project.id}>
+              <Row project={project} />
+              {heroImage && (
+                <ProjectImageReveal image={heroImage} alt={`${project.title} Hero`} />
+              )}
+            </div>
+          );
+        })}
       </div>
 
       <div className="mt-24">

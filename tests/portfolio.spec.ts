@@ -21,12 +21,12 @@ test.describe('Portfolio Website - Tier 1: Feature Coverage', () => {
     });
     expect(bodyFont).toMatch(/Sora/i);
 
-    // R1: "Big Shoulders Display" for headlines and names
+    // R1: "Sora" for headlines and names
     const headingFont = await page.evaluate(() => {
       const h1 = document.querySelector('h1');
       return h1 ? window.getComputedStyle(h1).fontFamily : '';
     });
-    expect(headingFont).toMatch(/Big Shoulders Display/i);
+    expect(headingFont).toMatch(/Sora/i);
 
     // R1: "JetBrains Mono" for all small uppercase tags, labels, and timestamps
     const monoFont = await page.evaluate(() => {

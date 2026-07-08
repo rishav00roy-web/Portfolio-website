@@ -90,7 +90,7 @@ export default function About() {
       <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
         {/* Title */}
         <div className="lg:w-1/3">
-          <h2 className="font-display font-black text-5xl sm:text-7xl uppercase tracking-tight text-white sticky top-12">
+          <h2 className="font-display font-extrabold text-5xl sm:text-7xl uppercase tracking-tight text-white sticky top-12">
             About
           </h2>
         </div>
