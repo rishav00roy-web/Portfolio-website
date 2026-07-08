@@ -2,7 +2,7 @@
 
 @theme {
   --font-sans: "Sora", sans-serif;
-  --font-display: "Big Shoulders Display", sans-serif;
+  --font-display: "Sora", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
   
   --animate-marquee: marquee 22s linear infinite;
@@ -48,20 +48,140 @@ body {
   scrollbar-color: rgba(255, 255, 255, 0.1) #030303;
 }
 
-/* Lenis Custom Smooth Scrolling Configuration */
-html.lenis, html.lenis body {
-  height: auto !important;
+.tooltip-container {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 17px;
+  border-radius: 10px;
 }
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
+.tooltip {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  border-radius: 15px;
+  box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2),
+    inset -5px -5px 15px rgba(255, 255, 255, 0.1),
+    5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1);
+  z-index: 50;
 }
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
+.profile {
+  background: #2a2b2f;
+  border-radius: 10px 15px;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  width: 220px;
 }
-
-.lenis.lenis-stopped {
-  overflow: hidden !important;
+.tooltip-container:hover .tooltip {
+  top: -150px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.icon {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  position: relative;
+}
+.layer {
+  width: 55px;
+  height: 55px;
+  transition: transform 0.3s;
+}
+.icon:hover .layer {
+  transform: rotate(-35deg) skew(20deg);
+}
+.layer span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+.icon:hover .layer span {
+  border-color: var(--accent);
+}
+.icon .text {
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  opacity: 0;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  transform: translateX(-50%);
+  transition: bottom 0.3s ease, opacity 0.3s ease, color 0.3s ease;
+  white-space: nowrap;
+}
+.icon:hover .text {
+  bottom: -35px;
+  opacity: 1;
+  color: var(--accent);
+}
+.icon:hover .layer span:nth-child(1) { opacity: 0.2; }
+.icon:hover .layer span:nth-child(2) { opacity: 0.4; transform: translate(5px, -5px); }
+.icon:hover .layer span:nth-child(3) { opacity: 0.6; transform: translate(10px, -10px); }
+.icon:hover .layer span:nth-child(4) { opacity: 0.8; transform: translate(15px, -15px); }
+.layer span.fab {
+  font-size: 26px;
+  line-height: 55px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.3s;
+}
+.icon:hover .layer span.fab {
+  color: var(--accent);
+}
+.user {
+  display: flex;
+  gap: 10px;
+}
+.img {
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  font-weight: 700;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: #111;
+  flex-shrink: 0;
+}
+.name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.username {
+  font-size: 12px;
+  color: #999;
+}
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: #fff;
+}
+.about {
+  color: #ccc;
+  padding-top: 8px;
+  font-size: 13px;
+  line-height: 1.4;
 }
 
