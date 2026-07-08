@@ -91,7 +91,7 @@ const PhoneIcon = () => (
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#030303] text-white px-6 sm:px-12 xl:px-24 py-24 sm:py-32 border-t border-white/10">
+    <footer className="relative bg-transparent text-white px-6 sm:px-12 xl:px-24 py-24 sm:py-32 border-t border-white/10">
       <div className="flex flex-col items-start">
         <h2 className="font-display font-extrabold text-5xl sm:text-8xl uppercase tracking-tight leading-[0.9] mb-10">
           Let&apos;s Build <br /> Something

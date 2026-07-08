@@ -86,7 +86,7 @@ export default function About() {
   ];
 
   return (
-    <section className="relative bg-[#030303] px-6 sm:px-12 xl:px-24 py-24 sm:py-32 border-t border-white/10">
+    <section className="relative bg-transparent px-6 sm:px-12 xl:px-24 py-24 sm:py-32 border-t border-white/10">
       <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
         {/* Title */}
         <div className="lg:w-1/3">

@@ -203,7 +203,7 @@ export default function Projects() {
   const trackX = useTransform(smoothProgress, [0, 1], ["0vw", `-${(count - 1) * 100}vw`]);
 
   return (
-    <section className="relative w-full bg-[#030303]">
+    <section className="relative w-full bg-transparent">
       <div className="px-6 sm:px-12 xl:px-24 pt-32 pb-12">
         <h2 className="text-5xl sm:text-7xl xl:text-8xl font-display uppercase tracking-tight text-white leading-none">
           Selected Works

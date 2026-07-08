@@ -64,7 +64,7 @@ export default function Hero() {
   const orb2Y = useTransform(smoothProgress, [0, 1], [0, -120]);
 
   return (
-    <div ref={outerRef} className="relative h-[280vh] bg-[#030303]">
+    <div ref={outerRef} className="relative h-[280vh] bg-transparent">
       <section className="sticky top-0 h-screen w-full overflow-hidden text-white">
         {/* Layer 1: background */}
         <motion.div
@@ -78,16 +78,6 @@ export default function Hero() {
           />
           <div className="absolute inset-0 bg-black/50" />
         </motion.div>
-
-        {/* Ambient Parallax Orbs for whole-site designer feel */}
-        <motion.div
-          style={{ y: orb1Y }}
-          className="absolute right-[-10%] top-[15%] w-[450px] h-[450px] rounded-full bg-white/5 blur-[120px] pointer-events-none z-0"
-        />
-        <motion.div
-          style={{ y: orb2Y }}
-          className="absolute left-[-10%] bottom-[15%] w-[550px] h-[550px] rounded-full bg-white/5 blur-[150px] pointer-events-none z-0"
-        />
 
         {/* Layer 2: giant flying title — the centerpiece */}
         <motion.div
