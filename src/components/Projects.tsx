@@ -127,8 +127,14 @@ function ProjectImageReveal({ image, alt }: { image: string; alt: string }) {
     offset: ["start end", "end start"],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.15, 1, 1.15]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 80,
+    damping: 20,
+    mass: 0.5,
+  });
+
+  const scale = useTransform(smoothProgress, [0, 0.5, 1], [1.15, 1, 1.15]);
+  const opacity = useTransform(smoothProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
   return (
     <div ref={ref} className="relative w-full h-[50vh] sm:h-[70vh] overflow-hidden rounded-xl my-8">
