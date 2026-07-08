@@ -9,7 +9,7 @@ const items = [
 ];
 
 export default function Marquee() {
-  const track = [...items, ...items];
+  const track = [...items, ...items, ...items, ...items];
 
   return (
     <div className="relative w-full overflow-hidden border-y border-white/10 bg-[#030303] py-4">
@@ -17,10 +17,10 @@ export default function Marquee() {
         {track.map((item, i) => (
           <span
             key={i}
-            className="mx-6 font-mono text-xs sm:text-sm uppercase tracking-[0.25em] text-white/50"
+            className="flex items-center px-6 font-mono text-xs sm:text-sm uppercase tracking-[0.25em] text-white/50"
           >
             {item}
-            <span className="text-[#F5B301] mx-6">●</span>
+            <span className="text-[#F5B301] ml-12">●</span>
           </span>
         ))}
       </div>

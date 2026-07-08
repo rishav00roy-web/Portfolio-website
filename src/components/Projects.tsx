@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import {
   motion,
   AnimatePresence,
@@ -63,13 +64,17 @@ function Row({ project }: { project: Project }) {
   return (
     <motion.a
       href={project.href ?? "#"}
-      onMouseEnter={() => setHovered(true)}
+      onMouseEnter={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        y.set(e.clientY - rect.top - 95); // Centers vertically (190px / 2 = 95px)
+        setHovered(true);
+      }}
       onMouseLeave={() => setHovered(false)}
       onMouseMove={(e) => {
         const rect = e.currentTarget.getBoundingClientRect();
-        y.set(e.clientY - rect.top - 110);
+        y.set(e.clientY - rect.top - 95);
       }}
-      className="group relative flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 py-8 sm:py-10 px-1"
+      className={`group relative flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 py-8 sm:py-10 px-1 ${hovered ? "z-30" : "z-0"}`}
     >
       <div className="flex items-baseline gap-4 sm:gap-8">
         <span className="font-mono text-xs sm:text-sm text-white/30 tabular-nums">
@@ -105,11 +110,13 @@ function Row({ project }: { project: Project }) {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="pointer-events-none absolute right-4 sm:right-24 z-20 hidden sm:block w-[280px] h-[190px] rounded-xl overflow-hidden shadow-2xl"
+            className="pointer-events-none absolute right-4 sm:right-24 z-20 hidden lg:block w-[280px] h-[190px] rounded-xl overflow-hidden shadow-2xl"
           >
-            <img
+            <Image
               src={project.image}
               alt={project.title}
+              width={280}
+              height={190}
               className="w-full h-full object-cover"
             />
           </motion.div>
@@ -146,7 +153,7 @@ export default function Projects() {
             <a
               key={item.title}
               href={item.href}
-              className="group flex items-center justify-between border-b border-white/10 py-5 text-lg sm:text-xl text-white/70 hover:text-white transition-colors"
+              className="group flex items-center justify-between border-b border-white/10 py-5 text-lg sm:text-xl text-white/70 hover:text-[#F5B301] transition-colors"
             >
               {item.title}
               <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-[#F5B301] transition-colors" />

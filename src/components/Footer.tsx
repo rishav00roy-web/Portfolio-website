@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="relative bg-[#030303] text-white px-6 sm:px-12 xl:px-24 py-24 sm:py-32 border-t border-white/10">
       <div className="flex flex-col items-start">
         <h2 className="font-display font-black text-5xl sm:text-8xl uppercase tracking-tight leading-[0.9] mb-10">
-          Let's Build <br /> Something
+          Let&apos;s Build <br /> Something
         </h2>
 
         <div className="flex flex-col gap-2">

@@ -19,7 +19,10 @@ export default function Hero() {
   // Use client-only rendering for date/time to avoid hydration mismatch
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
-    setMounted(true);
+    const timer = setTimeout(() => {
+      setMounted(true);
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   const date = mounted 
