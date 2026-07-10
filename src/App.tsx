@@ -39,7 +39,7 @@ export default function App() {
     <ReactLenis
       root
       options={{
-        lerp: 0.08,
+        lerp: 0.12,
         smoothWheel: true,
         touchMultiplier: 0,
       }}

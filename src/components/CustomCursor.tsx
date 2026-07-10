@@ -15,6 +15,7 @@ export default function CustomCursor() {
   // Determined client-side only, after mount — avoids hydration mismatch
   // (server always renders null since window is undefined there).
   const [shouldRender, setShouldRender] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const isTouch = window.matchMedia("(pointer: coarse)").matches;
@@ -57,11 +58,12 @@ export default function CustomCursor() {
     const onMouseMove = (e: MouseEvent) => {
       target.current.x = e.clientX;
       target.current.y = e.clientY;
+      setIsVisible(true);
     };
 
     const onMouseOver = (e: MouseEvent) => {
       const el = e.target as HTMLElement;
-      const isInteractive = el.closest("a, button, [role='button'], input, textarea, select, [data-cursor-hover]");
+      const isInteractive = el.closest("a, button, [role='button'], [tabindex='0'], input, textarea, select, [data-cursor-hover]");
       if (isInteractive) {
         isHovering.current = true;
         ringRef.current?.classList.add("cursor-ring--hover");
@@ -70,7 +72,7 @@ export default function CustomCursor() {
 
     const onMouseOut = (e: MouseEvent) => {
       const el = e.target as HTMLElement;
-      const isInteractive = el.closest("a, button, [role='button'], input, textarea, select, [data-cursor-hover]");
+      const isInteractive = el.closest("a, button, [role='button'], [tabindex='0'], input, textarea, select, [data-cursor-hover]");
       if (isInteractive) {
         isHovering.current = false;
         ringRef.current?.classList.remove("cursor-ring--hover");
@@ -105,11 +107,19 @@ export default function CustomCursor() {
         ref={dotRef}
         className="cursor-dot"
         aria-hidden="true"
+        style={{
+          opacity: isVisible ? 1 : 0,
+          transition: "opacity 0.15s ease",
+        }}
       />
       <div
         ref={ringRef}
         className="cursor-ring"
         aria-hidden="true"
+        style={{
+          opacity: isVisible ? 1 : 0,
+          transition: "width 0.25s ease, height 0.25s ease, border-color 0.25s ease, opacity 0.15s ease",
+        }}
       />
     </>
   );
