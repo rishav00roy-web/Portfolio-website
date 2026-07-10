@@ -177,12 +177,13 @@ html.custom-cursor-active *::after {
   align-items: center;
   justify-content: center;
   color: rgba(255, 255, 255, 0.7);
-  transition: color 0.3s, transform 0.3s;
+  transition: color 0.3s, transform 0.3s, filter 0.3s;
 }
 
 .social-icon-wrapper .icon:hover .layer span.fab {
-  color: var(--accent);
+  color: #ffffff;
   transform: translate(15px, -15px);
+  filter: drop-shadow(0 0 4px var(--accent));
 }
 
 
