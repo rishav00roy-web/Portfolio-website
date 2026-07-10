@@ -122,5 +122,69 @@ html.custom-cursor-active *::after {
   border-color: rgba(255, 255, 255, 0.8);
 }
 
+/* ---- SocialIcon layered deck animation ---- */
+.social-icon-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.social-icon-wrapper .icon {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  position: relative;
+  width: 55px;
+  height: 55px;
+}
+
+.social-icon-wrapper .layer {
+  width: 55px;
+  height: 55px;
+  transition: transform 0.3s;
+}
+
+.social-icon-wrapper .icon:hover .layer {
+  transform: rotate(-35deg) skew(20deg);
+}
+
+.social-icon-wrapper .layer span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.social-icon-wrapper .icon:hover .layer span {
+  border-color: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.social-icon-wrapper .icon:hover .layer span:nth-child(1) { opacity: 0.2; }
+.social-icon-wrapper .icon:hover .layer span:nth-child(2) { opacity: 0.4; transform: translate(5px, -5px); }
+.social-icon-wrapper .icon:hover .layer span:nth-child(3) { opacity: 0.6; transform: translate(10px, -10px); }
+.social-icon-wrapper .icon:hover .layer span:nth-child(4) { opacity: 0.8; transform: translate(15px, -15px); }
+
+.social-icon-wrapper .layer span.fab {
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.3s, transform 0.3s;
+}
+
+.social-icon-wrapper .icon:hover .layer span.fab {
+  color: var(--accent);
+  transform: translate(15px, -15px);
+}
+
+
 
 

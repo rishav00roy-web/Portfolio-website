@@ -29,7 +29,8 @@ export default function SocialIcon({
 
   return (
     <div
-      className="relative flex flex-col items-center"
+      className="social-icon-wrapper"
+      style={{ ["--accent" as string]: accentColor }}
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}
     >
@@ -39,8 +40,8 @@ export default function SocialIcon({
         style={{
           opacity: showTooltip ? 1 : 0,
           transform: showTooltip
-            ? "translateY(0) scale(1)"
-            : "translateY(6px) scale(0.96)",
+            ? "translateY(-6px) scale(1)"
+            : "translateY(0px) scale(0.96)",
           pointerEvents: showTooltip ? "auto" : "none",
         }}
         aria-hidden={!showTooltip}
@@ -81,12 +82,20 @@ export default function SocialIcon({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="group relative flex items-center justify-center w-12 h-12 rounded-full border border-white/10 bg-white/[0.03] text-white/60 hover:text-white hover:border-white/25 hover:bg-white/[0.07] transition-all duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30"
+        className="icon focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 rounded"
         aria-label={label}
         onFocus={() => setShowTooltip(true)}
         onBlur={() => setShowTooltip(false)}
       >
-        <span className="w-5 h-5 flex items-center justify-center">{icon}</span>
+        <div className="layer">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span className="fab">
+            <span className="w-5 h-5 flex items-center justify-center">{icon}</span>
+          </span>
+        </div>
       </a>
 
       {/* Label below icon (visible on touch) */}
