@@ -6,7 +6,7 @@ import Hero from "./components/Hero";
 import Projects from "./components/Projects";
 import About from "./components/About";
 import Footer from "./components/Footer";
-import CustomCursor from "./components/CustomCursor";
+import Background from "./components/Background";
 
 export default function App() {
   // The original version always wrapped the page in ReactLenis, so anyone
@@ -16,8 +16,8 @@ export default function App() {
 
   const content = (
     <>
-      <CustomCursor />
       <main className="min-h-screen text-white selection:bg-white/20 selection:text-white relative">
+        <Background />
         <Hero />
         <Projects />
         <About />
