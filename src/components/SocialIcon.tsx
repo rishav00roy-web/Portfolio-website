@@ -30,8 +30,8 @@ export default function SocialIcon({
   return (
     <div
       className="relative flex flex-col items-center"
-      onMouseEnter={() => !isTouch && setShowTooltip(true)}
-      onMouseLeave={() => !isTouch && setShowTooltip(false)}
+      onMouseEnter={() => setShowTooltip(true)}
+      onMouseLeave={() => setShowTooltip(false)}
     >
       {/* Tooltip */}
       <div
@@ -83,7 +83,7 @@ export default function SocialIcon({
         rel="noopener noreferrer"
         className="group relative flex items-center justify-center w-12 h-12 rounded-full border border-white/10 bg-white/[0.03] text-white/60 hover:text-white hover:border-white/25 hover:bg-white/[0.07] transition-all duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30"
         aria-label={label}
-        onFocus={() => !isTouch && setShowTooltip(true)}
+        onFocus={() => setShowTooltip(true)}
         onBlur={() => setShowTooltip(false)}
       >
         <span className="w-5 h-5 flex items-center justify-center">{icon}</span>
