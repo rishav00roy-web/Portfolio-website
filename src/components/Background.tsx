@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 function cn(...inputs: any[]) {
   return inputs.filter(Boolean).join(" ");
@@ -9,35 +9,51 @@ function cn(...inputs: any[]) {
 interface InteractiveGridPatternProps extends React.SVGProps<SVGSVGElement> {
   width?: number;
   height?: number;
-  squares?: [number, number]; // [horizontal, vertical]
-  className?: string;
   squaresClassName?: string;
 }
 
 export function InteractiveGridPattern({
   width = 40,
   height = 40,
-  squares = [60, 60],
   className,
   squaresClassName,
   ...props
 }: InteractiveGridPatternProps) {
-  const [horizontal, vertical] = squares;
+  const containerRef = useRef<SVGSVGElement>(null);
+  const [dimensions, setDimensions] = useState({ columns: 0, rows: 0 });
   const [hoveredSquare, setHoveredSquare] = useState<number | null>(null);
+
+  useEffect(() => {
+    const updateSize = () => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        const columns = Math.ceil(rect.width / width);
+        const rows = Math.ceil(rect.height / height);
+        setDimensions({ columns, rows });
+      }
+    };
+
+    updateSize();
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, [width, height]);
+
+  const { columns, rows } = dimensions;
 
   return (
     <svg
-      width={width * horizontal}
-      height={height * vertical}
+      ref={containerRef}
+      width="100%"
+      height="100%"
       className={cn(
         "absolute inset-0 h-full w-full border border-gray-400/5",
         className
       )}
       {...props}
     >
-      {Array.from({ length: horizontal * vertical }).map((_, index) => {
-        const x = (index % horizontal) * width;
-        const y = Math.floor(index / horizontal) * height;
+      {columns > 0 && rows > 0 && Array.from({ length: columns * rows }).map((_, index) => {
+        const x = (index % columns) * width;
+        const y = Math.floor(index / columns) * height;
         return (
           <rect
             key={index}

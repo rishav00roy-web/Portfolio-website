@@ -17,11 +17,13 @@ export default function App() {
   const content = (
     <>
       <main className="min-h-screen text-white selection:bg-white/20 selection:text-white relative">
-        <Background />
         <Hero />
-        <Projects />
-        <About />
-        <Footer />
+        <div className="relative">
+          <Background />
+          <Projects />
+          <About />
+          <Footer />
+        </div>
       </main>
     </>
   );
