@@ -55,6 +55,101 @@ type Project = {
   images: string[];
 };
 
+function BrowserMockup({
+  image,
+  url,
+  reducedMotion,
+}: {
+  image: string;
+  url: string;
+  reducedMotion: boolean | null;
+}) {
+  return (
+    <div className="main-container relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+      <svg id="browser" className="loader w-full h-full" viewBox="0 0 800 500" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="traceGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#00ccff" stopOpacity="0" />
+            <stop offset="50%" stopColor="#00ccff" stopOpacity="1" />
+            <stop offset="100%" stopColor="#00ccff" stopOpacity="0" />
+          </linearGradient>
+          <linearGradient id="traceGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#ff007f" stopOpacity="0" />
+            <stop offset="50%" stopColor="#ff007f" stopOpacity="1" />
+            <stop offset="100%" stopColor="#ff007f" stopOpacity="0" />
+          </linearGradient>
+          <linearGradient id="traceGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#39ff14" stopOpacity="0" />
+            <stop offset="50%" stopColor="#39ff14" stopOpacity="1" />
+            <stop offset="100%" stopColor="#39ff14" stopOpacity="0" />
+          </linearGradient>
+          <linearGradient id="traceGradient4" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#ffb300" stopOpacity="0" />
+            <stop offset="50%" stopColor="#ffb300" stopOpacity="1" />
+            <stop offset="100%" stopColor="#ffb300" stopOpacity="0" />
+          </linearGradient>
+          <clipPath id="browserContentClip">
+            <rect x="0" y="40" width="800" height="460" rx="0" ry="0" />
+          </clipPath>
+        </defs>
+
+        {/* Browser Frame Background */}
+        <rect className="browser-frame" width="800" height="500" rx="12" ry="12" />
+
+        {/* Grid lines (background) */}
+        <g className="opacity-25">
+          <line className="grid-line" x1="100" y1="40" x2="100" y2="500" />
+          <line className="grid-line" x1="200" y1="40" x2="200" y2="500" />
+          <line className="grid-line" x1="300" y1="40" x2="300" y2="500" />
+          <line className="grid-line" x1="400" y1="40" x2="400" y2="500" />
+          <line className="grid-line" x1="500" y1="40" x2="500" y2="500" />
+          <line className="grid-line" x1="600" y1="40" x2="600" y2="500" />
+          <line className="grid-line" x1="700" y1="40" x2="700" y2="500" />
+          <line className="grid-line" x1="0" y1="100" x2="800" y2="100" />
+          <line className="grid-line" x1="0" y1="200" x2="800" y2="200" />
+          <line className="grid-line" x1="0" y1="300" x2="800" y2="300" />
+          <line className="grid-line" x1="0" y1="400" x2="800" y2="400" />
+        </g>
+
+        {/* Embedded Project Image */}
+        <image
+          href={image}
+          x="0"
+          y="40"
+          width="800"
+          height="460"
+          preserveAspectRatio="xMidYMidSlice"
+          clipPath="url(#browserContentClip)"
+        />
+
+        {/* Glowing Trace Flows (flowing over the image) */}
+        {!reducedMotion && (
+          <g>
+            <path className="trace-flow" d="M 0,100 L 800,100" />
+            <path className="trace-flow" d="M 200,40 L 200,500" />
+            <path className="trace-flow" d="M 0,300 L 800,300" />
+            <path className="trace-flow" d="M 600,40 L 600,500" />
+          </g>
+        )}
+
+        {/* Browser Top Bar */}
+        <rect className="browser-top" width="800" height="40" />
+
+        {/* Window controls */}
+        <circle cx="20" cy="20" r="5" fill="#ff5f56" />
+        <circle cx="36" cy="20" r="5" fill="#ffbd2e" />
+        <circle cx="52" cy="20" r="5" fill="#27c93f" />
+
+        {/* URL bar */}
+        <rect x="80" y="8" width="640" height="24" rx="4" ry="4" fill="#2d2d2d" stroke="#444" strokeWidth="0.5" />
+        <text x="90" y="24" fill="#e4e4e4" fontSize="10" fontFamily="sans-serif" opacity="0.8">
+          {url}
+        </text>
+      </svg>
+    </div>
+  );
+}
+
 function Card({
   project,
   index,
@@ -132,24 +227,14 @@ function Card({
             {/* Left card */}
             {reducedMotion ? (
               <div className="absolute left-[-10%] w-[56%] aspect-[16/10] rounded-2xl overflow-hidden shadow-lg border border-white/10 z-0 scale-95 opacity-80">
-                <img
-                  src={project.images[1]}
-                  alt=""
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/20" />
+                <BrowserMockup image={project.images[1]} url={project.link} reducedMotion={reducedMotion} />
               </div>
             ) : (
               <motion.div
                 style={{ y: leftY, x: leftX, rotate: leftRotate }}
                 className="absolute left-[-10%] w-[56%] aspect-[16/10] rounded-2xl overflow-hidden shadow-lg border border-white/10 z-0 scale-95 opacity-80"
               >
-                <img
-                  src={project.images[1]}
-                  alt=""
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/20" />
+                <BrowserMockup image={project.images[1]} url={project.link} reducedMotion={reducedMotion} />
               </motion.div>
             )}
 
@@ -158,34 +243,20 @@ function Card({
               style={reducedMotion ? {} : { scale: centerScale }}
               className="relative w-[72%] aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl border border-white/15 z-10 hover:shadow-[0_0_30px_rgba(255,255,255,0.08)] transition-shadow duration-300"
             >
-              <img
-                src={project.images[0]}
-                alt={project.title}
-                className="w-full h-full object-cover"
-              />
+              <BrowserMockup image={project.images[0]} url={project.link} reducedMotion={reducedMotion} />
             </motion.div>
 
             {/* Right card */}
             {reducedMotion ? (
               <div className="absolute right-[-10%] w-[56%] aspect-[16/10] rounded-2xl overflow-hidden shadow-lg border border-white/10 z-0 scale-95 opacity-80">
-                <img
-                  src={project.images[2]}
-                  alt=""
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/20" />
+                <BrowserMockup image={project.images[2]} url={project.link} reducedMotion={reducedMotion} />
               </div>
             ) : (
               <motion.div
                 style={{ y: rightY, x: rightX, rotate: rightRotate }}
                 className="absolute right-[-10%] w-[56%] aspect-[16/10] rounded-2xl overflow-hidden shadow-lg border border-white/10 z-0 scale-95 opacity-80"
               >
-                <img
-                  src={project.images[2]}
-                  alt=""
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/20" />
+                <BrowserMockup image={project.images[2]} url={project.link} reducedMotion={reducedMotion} />
               </motion.div>
             )}
           </div>

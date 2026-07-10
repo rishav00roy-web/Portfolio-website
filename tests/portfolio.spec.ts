@@ -61,7 +61,7 @@ test.describe('Portfolio Website - Tier 1: Feature Coverage', () => {
 
   test('Presence of layout components', async ({ page }) => {
     // Hero Section
-    await expect(page.locator('section').filter({ hasText: 'Rishav' })).toBeVisible();
+    await expect(page.locator('section').filter({ hasText: 'Rishav' }).first()).toBeVisible();
 
     // Projects Section
     await expect(page.locator('section').filter({ hasText: 'Selected Work' })).toBeVisible();
@@ -142,7 +142,7 @@ test.describe('Portfolio Website - Tier 3: Cross-Feature Combinations', () => {
     expect(count).toBeGreaterThanOrEqual(3);
 
     // Each card should have an image
-    const images = projectsSection.locator('img');
+    const images = projectsSection.locator('img, image');
     const imgCount = await images.count();
     expect(imgCount).toBeGreaterThanOrEqual(3);
   });
