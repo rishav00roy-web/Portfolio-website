@@ -1,6 +1,8 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
+import { motion, useReducedMotion, MotionConfig } from "framer-motion";
+import { useLenis } from "lenis/react";
+import { ArrowUpRight, ArrowUp } from "lucide-react";
 import SocialIcon from "./SocialIcon";
 
 const GithubIcon = () => (
@@ -90,14 +92,63 @@ const PhoneIcon = () => (
 );
 
 export default function Footer() {
-  return (
-    <footer className="relative bg-transparent text-white px-6 sm:px-12 xl:px-24 py-24 sm:py-32 border-t border-white/10">
-      <div className="flex flex-col items-start">
-        <h2 className="font-display font-extrabold text-5xl sm:text-8xl uppercase tracking-tight leading-[0.9] mb-10">
-          Let&apos;s Build <br /> Something
-        </h2>
+  const shouldReduceMotion = useReducedMotion();
+  const lenis = useLenis();
 
-        <div className="flex flex-col gap-2">
+  const scrollToTop = () => {
+    // Once Lenis is mounted (see App.tsx / Prompt 1) it intercepts scroll,
+    // so calling native window.scrollTo({ behavior: "smooth" }) fights it
+    // and produces a janky double-smoothed scroll. Route through Lenis's
+    // own API when it's available, and fall back to native scroll if the
+    // app is ever run without Lenis.
+    if (lenis) {
+      lenis.scrollTo(0, { duration: shouldReduceMotion ? 0 : 1.2 });
+      return;
+    }
+    if (typeof window === "undefined") return;
+    window.scrollTo({ top: 0, behavior: shouldReduceMotion ? "auto" : "smooth" });
+  };
+
+  return (
+    // reducedMotion="user" makes every motion.* below automatically skip
+    // transform-based entrance animation for OS-level reduced-motion users
+    // (content still appears, just without the clip-path/slide-up motion).
+    <MotionConfig reducedMotion="user">
+    <footer className="relative bg-transparent text-white px-6 sm:px-12 xl:px-24 py-24 sm:py-32 border-t border-white/10">
+      {/* Faint background watermark */}
+      <div className="absolute bottom-24 right-6 sm:right-12 xl:right-24 font-display text-[10rem] sm:text-[16rem] xl:text-[20rem] leading-none text-white/[0.015] pointer-events-none select-none">
+        05
+      </div>
+
+      <div className="relative z-10 flex flex-col items-start">
+        {/* Headline with clip-path reveal */}
+        <motion.h2
+          initial={{ clipPath: "inset(0 100% 0 0)" }}
+          whileInView={{ clipPath: "inset(0 0% 0 0)" }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] as const }}
+          className="font-display font-extrabold text-5xl sm:text-8xl uppercase tracking-tight leading-[0.9] mb-10"
+        >
+          Let&apos;s Build <br /> Something
+        </motion.h2>
+
+        {/* Thin rule */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] as const }}
+          className="w-full max-w-xl h-[1px] bg-white/10 origin-left mb-10"
+        />
+
+        {/* Contact links */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="flex flex-col gap-2"
+        >
           <a
             href="mailto:rishav2000roy@gmail.com"
             className="group inline-flex items-center gap-3 font-mono text-lg sm:text-2xl text-white/70 hover:text-white transition-colors"
@@ -112,9 +163,16 @@ export default function Footer() {
             +91 60019 14771
             <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-transform duration-300" />
           </a>
-        </div>
+        </motion.div>
 
-        <div className="flex flex-wrap gap-6 mt-16">
+        {/* Social icons row */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="flex flex-wrap gap-6 mt-16"
+        >
           <SocialIcon
             href="https://github.com/rishav00roy-web"
             label="GitHub"
@@ -160,13 +218,32 @@ export default function Footer() {
             accentColor="#34A853"
             initials="PH"
           />
-        </div>
+        </motion.div>
 
-        <p className="mt-24 font-mono text-xs text-white/30 tracking-widest">
-          © {new Date().getFullYear()} RISHAV ROY — DESIGNED & DEVELOPED FROM
-          KOLKATA.
-        </p>
+        {/* Bottom bar: copyright + back to top */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="mt-24 flex items-center justify-between w-full"
+        >
+          <p className="font-mono text-[10px] sm:text-xs text-white/30 uppercase tracking-[0.25em]">
+            &copy; {new Date().getFullYear()} Rishav Roy — Designed &amp;
+            Developed from Kolkata
+          </p>
+
+          <button
+            onClick={scrollToTop}
+            className="group flex items-center gap-2 font-mono text-[10px] sm:text-xs text-white/30 uppercase tracking-[0.25em] hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 rounded px-2 py-1"
+            aria-label="Back to top"
+          >
+            <ArrowUp className="w-3 h-3 group-hover:-translate-y-0.5 transition-transform" />
+            <span className="hidden sm:inline">Top</span>
+          </button>
+        </motion.div>
       </div>
     </footer>
+    </MotionConfig>
   );
 }

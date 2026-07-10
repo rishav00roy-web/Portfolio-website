@@ -10,7 +10,7 @@ export default function Background() {
   useEffect(() => {
     setMounted(true);
     if (typeof document === "undefined") return;
-    
+
     const handleVisibilityChange = () => {
       setIsTabVisible(document.visibilityState === "visible");
     };
@@ -24,23 +24,41 @@ export default function Background() {
   const shouldReduceMotion = useReducedMotion();
   const isAnimated = !shouldReduceMotion && isTabVisible;
 
-  // Subtle scroll-driven parallax for the glow layer (compositor-only)
   const { scrollY } = useScroll();
   const glowY = useTransform(scrollY, [0, 5000], [0, -350]);
 
+  // Static SSR/first-paint fallback — zero animation, identical layout
   if (!mounted) {
     return (
       <div className="fixed inset-0 bg-[#030303] overflow-hidden z-[-1] pointer-events-none">
-        {/* Static Grid Layer */}
-        <div 
-          className="absolute inset-0 pointer-events-none opacity-40" 
+        {/* Grid with intersection dots */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-40"
           style={{
             backgroundImage: `
               linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px)
+              linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+              radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px)
             `,
-            backgroundSize: "55px 55px",
-            backgroundPosition: "center",
+            backgroundSize: "55px 55px, 55px 55px, 55px 55px",
+            backgroundPosition: "center, center, center",
+          }}
+        />
+        {/* Static monochrome glow blob */}
+        <div
+          style={{
+            background:
+              "radial-gradient(circle, rgba(100, 120, 200, 0.10) 0%, rgba(100, 120, 200, 0) 70%)",
+          }}
+          className="absolute right-[-5%] top-[10%] w-[65vw] h-[65vw] max-w-[850px] rounded-full pointer-events-none"
+        />
+        {/* Subtle grain overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+            backgroundRepeat: "repeat",
+            backgroundSize: "256px 256px",
           }}
         />
       </div>
@@ -49,83 +67,84 @@ export default function Background() {
 
   return (
     <div className="fixed inset-0 bg-[#030303] overflow-hidden z-[-1] pointer-events-none">
-      
-      {/* Drifting Glow Blobs Container with subtle scroll parallax */}
-      <motion.div style={{ y: glowY }} className="absolute inset-0 w-full h-full pointer-events-none">
-        
-        {/* Blob 1: Indigo Glow (Upper Right)
-            Uses a radial gradient background directly instead of heavy CSS blur filters for 60fps scroll. */}
+      {/* Glow layer with scroll-linked parallax */}
+      <motion.div
+        style={{ y: glowY }}
+        className="absolute inset-0 w-full h-full pointer-events-none"
+      >
+        {/* Primary glow — restrained blue-white, slower */}
         <motion.div
-          animate={isAnimated ? {
-            x: ["0px", "80px", "-50px", "0px"],
-            y: ["0px", "-70px", "50px", "0px"],
-            scale: [1, 1.15, 0.9, 1],
-            opacity: [0.8, 1.0, 0.7, 0.8],
-          } : {}}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          animate={
+            isAnimated
+              ? {
+                  x: ["0px", "70px", "-40px", "0px"],
+                  y: ["0px", "-60px", "40px", "0px"],
+                  scale: [1, 1.1, 0.95, 1],
+                  opacity: [0.7, 0.9, 0.65, 0.7],
+                }
+              : {}
+          }
+          transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
           style={{
-            background: "radial-gradient(circle, rgba(99, 102, 241, 0.16) 0%, rgba(99, 102, 241, 0) 70%)"
+            background:
+              "radial-gradient(circle, rgba(100, 120, 200, 0.14) 0%, rgba(100, 120, 200, 0) 70%)",
           }}
           className="absolute right-[-5%] top-[10%] w-[65vw] h-[65vw] max-w-[850px] rounded-full pointer-events-none"
         />
 
-        {/* Blob 2: Blue Glow (Lower Left) */}
+        {/* Secondary glow — cooler, smaller, opposite corner */}
         <motion.div
-          animate={isAnimated ? {
-            x: ["0px", "-60px", "60px", "0px"],
-            y: ["0px", "80px", "-60px", "0px"],
-            scale: [1, 0.92, 1.12, 1],
-            opacity: [0.7, 0.9, 0.6, 0.7],
-          } : {}}
-          transition={{
-            duration: 32,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          animate={
+            isAnimated
+              ? {
+                  x: ["0px", "-50px", "55px", "0px"],
+                  y: ["0px", "65px", "-50px", "0px"],
+                  scale: [1, 0.95, 1.08, 1],
+                  opacity: [0.55, 0.75, 0.5, 0.55],
+                }
+              : {}
+          }
+          transition={{ duration: 38, repeat: Infinity, ease: "easeInOut" }}
           style={{
-            background: "radial-gradient(circle, rgba(59, 130, 246, 0.14) 0%, rgba(59, 130, 246, 0) 70%)"
+            background:
+              "radial-gradient(circle, rgba(80, 100, 160, 0.11) 0%, rgba(80, 100, 160, 0) 70%)",
           }}
-          className="absolute left-[-10%] bottom-[8%] w-[60vw] h-[60vw] max-w-[750px] rounded-full pointer-events-none"
+          className="absolute left-[-8%] bottom-[12%] w-[55vw] h-[55vw] max-w-[700px] rounded-full pointer-events-none"
         />
-
-        {/* Blob 3: Violet Glow (Center Right) */}
-        <motion.div
-          animate={isAnimated ? {
-            x: ["0px", "50px", "-40px", "0px"],
-            y: ["0px", "60px", "-70px", "0px"],
-            scale: [0.95, 1.1, 0.95, 0.95],
-            opacity: [0.6, 0.85, 0.5, 0.6],
-          } : {}}
-          transition={{
-            duration: 28,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          style={{
-            background: "radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, rgba(139, 92, 246, 0) 70%)"
-          }}
-          className="absolute left-[30%] top-[35%] w-[55vw] h-[55vw] max-w-[700px] rounded-full pointer-events-none"
-        />
-
       </motion.div>
 
-      {/* Static Grid Layer (Layered on top of glows so grid lines are crisp) */}
-      <div 
-        className="absolute inset-0 pointer-events-none opacity-40" 
+      {/* Grid with faint intersection dots */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-40"
         style={{
           backgroundImage: `
             linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px)
+            linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+            radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px)
           `,
-          backgroundSize: "55px 55px",
-          backgroundPosition: "center",
+          backgroundSize: "55px 55px, 55px 55px, 55px 55px",
+          backgroundPosition: "center, center, center",
         }}
       />
 
+      {/* Thin diagonal accent lines — subtle structural feel */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.02]"
+        style={{
+          backgroundImage: `linear-gradient(45deg, transparent 48%, rgba(255,255,255,0.3) 49%, rgba(255,255,255,0.3) 51%, transparent 52%)`,
+          backgroundSize: "120px 120px",
+        }}
+      />
+
+      {/* Subtle grain texture overlay (static, zero animation cost) */}
+      <div
+        className="absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          backgroundRepeat: "repeat",
+          backgroundSize: "256px 256px",
+        }}
+      />
     </div>
   );
 }
