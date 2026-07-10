@@ -183,7 +183,7 @@ html.custom-cursor-active *::after {
 .social-icon-wrapper .icon:hover .layer span.fab {
   color: #ffffff;
   transform: translate(15px, -15px);
-  filter: drop-shadow(0 0 4px var(--accent));
+  filter: drop-shadow(0 0 2px var(--accent)) drop-shadow(0 0 8px var(--accent));
 }
 
 
