@@ -239,7 +239,7 @@ html.custom-cursor-active *::after {
   }
 }
 .trace-flow {
-  stroke-width: 1;
+  stroke-width: 4;
   fill: none;
   stroke-dasharray: 120 600;
   stroke-dashoffset: 720;

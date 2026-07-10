@@ -55,11 +55,14 @@ export default function Hero() {
   const rule2X = useTransform(smoothProgress, [0, 1], ["0%", "15%"]);
 
   // ---- Layer 3: Title (foreground) — staged easing with hang-time ----
-  const titleScale = useTransform(
-    smoothProgress,
-    [0, 0.25, 0.45, 0.7],
-    [1, 1.4, 3.5, 9.5]
-  );
+  const rishavScale = useTransform(smoothProgress, [0, 0.45, 0.75], [1, 2.2, 5.5]);
+  const rishavLetterSpacing = useTransform(smoothProgress, [0, 0.75], ["0.02em", "0.22em"]);
+  const rishavRotate = useTransform(smoothProgress, [0, 0.75], [0, -5]);
+
+  const royScale = useTransform(smoothProgress, [0, 0.45, 0.75], [1, 3.8, 12.0]);
+  const royLetterSpacing = useTransform(smoothProgress, [0, 0.75], ["0.02em", "0.42em"]);
+  const royRotate = useTransform(smoothProgress, [0, 0.75], [0, 7]);
+
   const titleOpacity = useTransform(smoothProgress, [0, 0.5, 0.75], [1, 1, 0]);
 
   // ---- Chrome (meta UI) ----
@@ -140,20 +143,11 @@ export default function Hero() {
           />
         </motion.div>
 
-        {/* ---- Layer 2: Mid-ground rules + drifting meta ---- */}
+        {/* ---- Layer 2: Mid-ground drifting meta ---- */}
         <motion.div
           style={{ opacity: midOpacity, y: midY }}
           className="absolute inset-0 z-[5] pointer-events-none overflow-hidden"
         >
-          {/* Drifting horizontal rules */}
-          <motion.div
-            style={{ x: rule1X }}
-            className="absolute top-[25%] left-[-10%] right-[-10%] h-[1px] bg-white/[0.04]"
-          />
-          <motion.div
-            style={{ x: rule2X }}
-            className="absolute top-[55%] left-[-10%] right-[-10%] h-[1px] bg-white/[0.04]"
-          />
           <div className="absolute top-[38%] left-[8%] font-mono text-[10px] uppercase tracking-[0.35em] text-white/[0.06]">
             Scroll
           </div>
@@ -171,23 +165,36 @@ export default function Hero() {
           />
         </motion.div>
 
-        {/* ---- Layer 3: Title (foreground, mouse parallax) ---- */}
+        {/* ---- Layer 3: Title (foreground, mouse parallax, independent 3D zooms) ---- */}
         <motion.div
           style={{
-            scale: titleScale,
             opacity: titleOpacity,
             rotateX: shouldReduceMotion ? 0 : tilt.rotateX,
             rotateY: shouldReduceMotion ? 0 : tilt.rotateY,
           }}
           className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none"
         >
-          <h1 className="font-display leading-[0.82] uppercase tracking-tight text-center">
-            <span className="block text-[4.5rem] sm:text-[8.5rem] lg:text-[12.5rem] font-extrabold text-white">
+          <h1 className="font-display leading-[0.82] uppercase tracking-tight text-center flex flex-col items-center">
+            <motion.span
+              style={{
+                scale: rishavScale,
+                letterSpacing: rishavLetterSpacing,
+                rotate: rishavRotate,
+              }}
+              className="block text-[4.5rem] sm:text-[8.5rem] lg:text-[12.5rem] font-extrabold text-white origin-center"
+            >
               Rishav
-            </span>
-            <span className="block text-[4.5rem] sm:text-[8.5rem] lg:text-[12.5rem] font-extrabold text-transparent [-webkit-text-stroke:2px_rgba(255,255,255,0.4)]">
+            </motion.span>
+            <motion.span
+              style={{
+                scale: royScale,
+                letterSpacing: royLetterSpacing,
+                rotate: royRotate,
+              }}
+              className="block text-[4.5rem] sm:text-[8.5rem] lg:text-[12.5rem] font-extrabold text-transparent [-webkit-text-stroke:2px_rgba(255,255,255,0.4)] origin-center mt-2"
+            >
               Roy
-            </span>
+            </motion.span>
           </h1>
         </motion.div>
 

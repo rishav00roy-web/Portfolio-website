@@ -122,13 +122,13 @@ function BrowserMockup({
           clipPath="url(#browserContentClip)"
         />
 
-        {/* Glowing Trace Flows (flowing over the image) */}
+        {/* Glowing Trace Flows (flowing over the image in PCB circuit paths) */}
         {!reducedMotion && (
           <g>
-            <path className="trace-flow" d="M 0,100 L 800,100" />
-            <path className="trace-flow" d="M 200,40 L 200,500" />
-            <path className="trace-flow" d="M 0,300 L 800,300" />
-            <path className="trace-flow" d="M 600,40 L 600,500" />
+            <path className="trace-flow" d="M 50,40 L 50,220 L 350,220 L 350,500" />
+            <path className="trace-flow" d="M 400,40 L 400,120 L 750,120 L 750,380 L 450,380" />
+            <path className="trace-flow" d="M 120,500 L 120,320 L 650,320 L 650,40" />
+            <path className="trace-flow" d="M 780,450 L 520,450 L 520,270 L 280,270 L 280,40" />
           </g>
         )}
 
@@ -180,6 +180,8 @@ function Card({
   const rightX = useTransform(scrollYProgress, [start, end], [45, -15]);
   const leftRotate = useTransform(scrollYProgress, [start, end], [-12, 3]);
   const rightRotate = useTransform(scrollYProgress, [start, end], [12, -3]);
+  const leftRotateY = useTransform(scrollYProgress, [start, end], [-25, 5]);
+  const rightRotateY = useTransform(scrollYProgress, [start, end], [5, -25]);
 
   return (
     <div className="relative w-screen h-full flex items-center justify-center px-4 sm:px-12 xl:px-24 shrink-0">
@@ -222,7 +224,7 @@ function Card({
         </div>
 
         {/* Image collage */}
-        <div className="w-full lg:w-[62%] h-[40vh] lg:h-full relative flex items-center justify-center z-10 overflow-hidden lg:overflow-visible">
+        <div className="w-full lg:w-[62%] h-[40vh] lg:h-full relative flex items-center justify-center z-10 overflow-hidden lg:overflow-visible" style={{ perspective: "1000px" }}>
           <div className="relative w-[90%] h-[90%] flex items-center justify-center">
             {/* Left card */}
             {reducedMotion ? (
@@ -231,7 +233,7 @@ function Card({
               </div>
             ) : (
               <motion.div
-                style={{ y: leftY, x: leftX, rotate: leftRotate }}
+                style={{ y: leftY, x: leftX, rotate: leftRotate, rotateY: leftRotateY }}
                 className="absolute left-[-10%] w-[56%] aspect-[16/10] rounded-2xl overflow-hidden shadow-lg border border-white/10 z-0 scale-95 opacity-80"
               >
                 <BrowserMockup image={project.images[1]} url={project.link} reducedMotion={reducedMotion} />
@@ -253,7 +255,7 @@ function Card({
               </div>
             ) : (
               <motion.div
-                style={{ y: rightY, x: rightX, rotate: rightRotate }}
+                style={{ y: rightY, x: rightX, rotate: rightRotate, rotateY: rightRotateY }}
                 className="absolute right-[-10%] w-[56%] aspect-[16/10] rounded-2xl overflow-hidden shadow-lg border border-white/10 z-0 scale-95 opacity-80"
               >
                 <BrowserMockup image={project.images[2]} url={project.link} reducedMotion={reducedMotion} />

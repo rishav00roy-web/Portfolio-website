@@ -6,7 +6,6 @@ import Hero from "./components/Hero";
 import Projects from "./components/Projects";
 import About from "./components/About";
 import Footer from "./components/Footer";
-import Background from "./components/Background";
 import CustomCursor from "./components/CustomCursor";
 
 export default function App() {
@@ -19,7 +18,6 @@ export default function App() {
     <>
       <CustomCursor />
       <main className="min-h-screen text-white selection:bg-white/20 selection:text-white relative">
-        <Background />
         <Hero />
         <Projects />
         <About />

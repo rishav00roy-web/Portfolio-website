@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, MotionConfig } from "framer-motion";
+import { useRef } from "react";
+import { motion, MotionConfig, useScroll, useTransform } from "framer-motion";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 18 },
@@ -105,13 +106,24 @@ export default function About() {
     { name: "Bangla", level: "Basic" },
   ];
 
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const titleY = useTransform(scrollYProgress, [0, 1], [-60, 60]);
+  const bioY = useTransform(scrollYProgress, [0, 1], [30, -30]);
+  const expY = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  const cardsY = useTransform(scrollYProgress, [0, 1], [25, -25]);
+
   return (
     // This whole section had zero reduced-motion handling in the original
     // output — reducedMotion="user" makes all the whileInView stagger
     // reveals below skip their transform animation for OS-level
     // reduced-motion users, content still appears, just without motion.
     <MotionConfig reducedMotion="user">
-    <section className="relative bg-transparent px-6 sm:px-12 xl:px-24 py-24 sm:py-32 border-t border-white/10">
+    <section ref={sectionRef} className="relative bg-transparent px-6 sm:px-12 xl:px-24 py-24 sm:py-32 border-t border-white/10">
       {/* Faint background watermark */}
       <div className="absolute top-16 right-6 sm:right-12 xl:right-24 font-display text-[12rem] sm:text-[18rem] xl:text-[24rem] leading-none text-white/[0.015] pointer-events-none select-none">
         02
@@ -119,11 +131,11 @@ export default function About() {
 
       <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
         {/* Sticky title */}
-        <div className="lg:w-1/3">
+        <motion.div style={{ y: titleY }} className="lg:w-1/3">
           <h2 className="font-display font-extrabold text-5xl sm:text-7xl uppercase tracking-tight text-white sticky top-12">
             About
           </h2>
-        </div>
+        </motion.div>
 
         {/* Content */}
         <motion.div
@@ -134,7 +146,7 @@ export default function About() {
           variants={staggerContainer}
         >
           {/* Bio paragraphs */}
-          <motion.div className="space-y-6" variants={staggerContainer}>
+          <motion.div style={{ y: bioY }} className="space-y-6" variants={staggerContainer}>
             <motion.p
               variants={fadeUp}
               className="text-xl sm:text-2xl text-white/80 leading-relaxed font-sans font-medium"
@@ -174,6 +186,7 @@ export default function About() {
 
           {/* Work Experience */}
           <motion.div
+            style={{ y: expY }}
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
@@ -218,6 +231,7 @@ export default function About() {
 
           {/* Skills */}
           <motion.div
+            style={{ y: cardsY }}
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
@@ -255,6 +269,7 @@ export default function About() {
 
           {/* Education */}
           <motion.div
+            style={{ y: cardsY }}
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
@@ -294,6 +309,7 @@ export default function About() {
 
           {/* Languages */}
           <motion.div
+            style={{ y: cardsY }}
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
