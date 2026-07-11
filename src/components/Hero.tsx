@@ -225,6 +225,16 @@ export default function Hero() {
             </motion.div>
           </div>
         </motion.div>
+
+        {/* ---- Mouse scroll indicator ---- */}
+        <motion.div
+          style={{ opacity: chromeOpacity }}
+          className="absolute bottom-8 right-6 sm:right-12 xl:right-24 z-20 pointer-events-none"
+        >
+          <div className="mouse-btn">
+            <span className="mouse-scroll" />
+          </div>
+        </motion.div>
       </section>
     </div>
   );

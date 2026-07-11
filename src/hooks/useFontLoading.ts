@@ -6,8 +6,8 @@ export function useFontLoading() {
 
   useEffect(() => {
     if (typeof window === "undefined" || !("fonts" in document)) {
-      setFontsLoaded(true);
-      return;
+      const timer = setTimeout(() => setFontsLoaded(true), 0);
+      return () => clearTimeout(timer);
     }
 
     const startTime = performance.now();

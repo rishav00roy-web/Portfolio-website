@@ -443,8 +443,8 @@ export class FontCapabilityDetector {
    */
   private getConnectionType(): FontCapabilities['connectionType'] {
     if ('connection' in navigator) {
-      const connection = (navigator as any).connection;
-      return connection.effectiveType || 'unknown';
+      const connection = (navigator as unknown as { connection?: { effectiveType?: FontCapabilities['connectionType'] } }).connection;
+      return connection?.effectiveType || 'unknown';
     }
     return 'unknown';
   }

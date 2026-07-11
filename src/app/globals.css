@@ -55,6 +55,29 @@ body {
   scrollbar-color: rgba(255, 255, 255, 0.1) #030303;
 }
 
+/* Mouse scroll indicator (from Uiverse.io by mrhyddenn, recolored) */
+.mouse-btn {
+  width: 26px;
+  height: 42px;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 14px;
+  display: flex;
+}
+.mouse-scroll {
+  display: block;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  margin: 6px auto auto;
+  animation: scrolling13 1.4s ease-in-out infinite;
+}
+@keyframes scrolling13 {
+  0% { opacity: 0; transform: translateY(0); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(16px); }
+}
+
 /* Lenis smooth scroll */
 html.lenis,
 html.lenis body {
