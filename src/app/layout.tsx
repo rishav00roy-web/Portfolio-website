@@ -7,6 +7,7 @@ import "@fontsource/sora/800.css";
 import "@fontsource/jetbrains-mono/400.css";
 import "@fontsource/jetbrains-mono/500.css";
 import "./globals.css";
+import FontPreloader from "@/components/FontPreloader";
 
 export const metadata: Metadata = {
   title: "Rishav Roy — Full-Stack Developer",
@@ -31,7 +32,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="antialiased" suppressHydrationWarning>
+      <head>
+        <FontPreloader />
+      </head>
       <body className="flex flex-col bg-[#030303] text-white selection:bg-white/20 selection:text-white">
+        <noscript>
+          <style>{`main { opacity: 1 !important; }`}</style>
+        </noscript>
         {children}
       </body>
     </html>

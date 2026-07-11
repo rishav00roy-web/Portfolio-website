@@ -2,15 +2,19 @@
 
 @font-face {
   font-family: 'Kenoky';
-  src: url('/fonts/KenokyLight.ttf') format('truetype');
+  src: url('/fonts/KenokyLight.woff2') format('woff2'),
+       url('/fonts/KenokyLight.ttf') format('truetype');
   font-style: normal;
+  font-weight: 300;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Coffekan';
-  src: url('/fonts/CoffekanRegular.ttf') format('truetype');
+  src: url('/fonts/CoffekanRegular.woff2') format('woff2'),
+       url('/fonts/CoffekanRegular.ttf') format('truetype');
   font-style: normal;
+  font-weight: 400;
   font-display: swap;
 }
 
