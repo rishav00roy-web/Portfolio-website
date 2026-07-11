@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import Background from "./components/Background";
 
 export default function App() {
+  // Trigger rebuild to deploy yesterday's version
   // The original version always wrapped the page in ReactLenis, so anyone
   // with prefers-reduced-motion on still got smoothed/eased scrolling —
   // that's exactly the kind of motion that setting should turn off.
