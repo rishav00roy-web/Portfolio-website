@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="antialiased">
+    <html lang="en" className="antialiased" suppressHydrationWarning>
       <body className="flex flex-col bg-[#030303] text-white selection:bg-white/20 selection:text-white">
         {children}
       </body>

@@ -47,6 +47,7 @@ export default function Hero() {
   // ---- Layer 1: Background image (deepest) ----
   const bgScale = useTransform(smoothProgress, [0, 1], [1, 1.3]);
   const bgOpacity = useTransform(smoothProgress, [0, 0.6, 1], [0.65, 0.4, 0.2]);
+  const darkOverlayOpacity = useTransform(smoothProgress, [0, 1], [0.3, 0.85]);
 
   // ---- Layer 2: Mid-ground rules + meta text ----
   const midOpacity = useTransform(smoothProgress, [0, 0.15, 0.5], [1, 0.6, 0]);
@@ -135,7 +136,7 @@ export default function Hero() {
           />
           {/* Darkening overlay driven by scroll */}
           <motion.div
-            style={{ opacity: useTransform(smoothProgress, [0, 1], [0.3, 0.85]) }}
+            style={{ opacity: darkOverlayOpacity }}
             className="absolute inset-0 bg-[#030303]"
           />
         </motion.div>

@@ -33,7 +33,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Custom Scrollbar to match brutalist editorial */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -52,12 +51,7 @@ body {
   scrollbar-color: rgba(255, 255, 255, 0.1) #030303;
 }
 
-/* ============================================
-   PROMPT 1 ADDITIONS — Custom Cursor + Lenis
-   Append this block to the end of globals.css
-   ============================================ */
-
-/* ---- Lenis smooth scroll ---- */
+/* Lenis smooth scroll */
 html.lenis,
 html.lenis body {
   height: auto;
@@ -75,54 +69,7 @@ html.lenis body {
   overflow: hidden;
 }
 
-/* ---- Custom cursor: hide default only when our cursor is actually
-   rendering. CustomCursor.tsx adds/removes .custom-cursor-active on
-   <html> once it knows it's a fine-pointer, motion-OK device — this
-   used to be a blanket `@media (pointer: fine)` rule, which meant
-   reduced-motion users (CustomCursor returns null for them) ended up
-   with NO visible cursor at all, since the native one was still hidden. ---- */
-html.custom-cursor-active,
-html.custom-cursor-active *,
-html.custom-cursor-active *::before,
-html.custom-cursor-active *::after {
-  cursor: none !important;
-}
-
-/* ---- Custom cursor elements ---- */
-.cursor-dot {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 6px;
-  height: 6px;
-  background-color: #ffffff;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  will-change: transform;
-}
-
-.cursor-ring {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 32px;
-  height: 32px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  will-change: transform;
-  transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease;
-}
-
-.cursor-ring--hover {
-  width: 48px;
-  height: 48px;
-  border-color: rgba(255, 255, 255, 0.8);
-}
-
-/* ---- SocialIcon layered deck animation ---- */
+/* SocialIcon layered deck animation */
 .social-icon-wrapper {
   position: relative;
   display: flex;
@@ -185,92 +132,3 @@ html.custom-cursor-active *::after {
   transform: translate(15px, -15px);
   filter: drop-shadow(0 0 2px var(--accent)) drop-shadow(0 0 8px var(--accent));
 }
-
-/* ---- Project browser box mockup styles ---- */
-.main-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-}
-.loader {
-  width: 100%;
-  height: 100%;
-}
-#browser {
-  overflow: hidden;
-}
-.grid-line {
-  stroke: #222;
-  stroke-width: 0.5;
-}
-.browser-frame {
-  fill: #111;
-  stroke: #666;
-  stroke-width: 1;
-  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.9));
-}
-.browser-top {
-  fill: #1a1a1a;
-}
-.loading-text {
-  font-family: Haettenschweiler, sans-serif;
-  font-size: 14px;
-  fill: #e4e4e4;
-}
-.skeleton {
-  fill: #2d2d2d;
-  rx: 4;
-  ry: 4;
-  animation: pulse 1.8s ease-in-out infinite;
-  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.02));
-}
-@keyframes pulse {
-  0% {
-    fill: #2d2d2d;
-  }
-  50% {
-    fill: #505050;
-  }
-  100% {
-    fill: #2d2d2d;
-  }
-}
-.trace-flow {
-  stroke-width: 1;
-  fill: none;
-  stroke-dasharray: 120 600;
-  stroke-dashoffset: 720;
-  animation: flow 5s linear infinite;
-  opacity: 0.95;
-  stroke-linejoin: round;
-  filter: drop-shadow(0 0 8px currentColor) blur(0.5px);
-  color: #00ccff;
-}
-.trace-flow:nth-child(1) {
-  stroke: url(#traceGradient1);
-}
-.trace-flow:nth-child(2) {
-  stroke: url(#traceGradient2);
-}
-.trace-flow:nth-child(3) {
-  stroke: url(#traceGradient3);
-}
-.trace-flow:nth-child(4) {
-  stroke: url(#traceGradient4);
-}
-@keyframes flow {
-  from {
-    stroke-dashoffset: 720;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-
-
-
-
