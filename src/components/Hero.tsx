@@ -64,7 +64,6 @@ export default function Hero() {
 
 
   // ---- Mouse parallax (desktop only) ----
-  const mouseRef = useRef({ x: 0, y: 0 });
   const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 });
 
   useEffect(() => {
@@ -73,25 +72,14 @@ export default function Hero() {
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
     const handleMouseMove = (e: MouseEvent) => {
-      mouseRef.current.x = (e.clientY / window.innerHeight - 0.5) * 2;
-      mouseRef.current.y = (e.clientX / window.innerWidth - 0.5) * 2;
-    };
-
-    let rafId: number;
-    const updateTilt = () => {
-      setTilt({
-        rotateX: -mouseRef.current.x * 2.5,
-        rotateY: mouseRef.current.y * 2.5,
-      });
-      rafId = requestAnimationFrame(updateTilt);
+      const rx = -(e.clientY / window.innerHeight - 0.5) * 5;
+      const ry = (e.clientX / window.innerWidth - 0.5) * 5;
+      setTilt({ rotateX: rx, rotateY: ry });
     };
 
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
-    rafId = requestAnimationFrame(updateTilt);
-
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      cancelAnimationFrame(rafId);
     };
   }, [shouldReduceMotion]);
 
@@ -229,7 +217,7 @@ export default function Hero() {
         {/* ---- Mouse scroll indicator ---- */}
         <motion.div
           style={{ opacity: chromeOpacity }}
-          className="absolute bottom-8 right-6 sm:right-12 xl:right-24 z-20 pointer-events-none"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 pointer-events-none"
         >
           <div className="mouse-btn">
             <span className="mouse-scroll" />
