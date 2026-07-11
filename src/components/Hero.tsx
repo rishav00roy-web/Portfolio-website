@@ -109,7 +109,7 @@ export default function Hero() {
         style={{ perspective: "1200px" }}
       >
         {/* ---- Scroll progress indicator ---- */}
-        <div className="absolute top-0 left-0 right-0 h-[1px] bg-white/5 z-50">
+        <div className="absolute top-0 left-0 right-0 h-[1px] bg-white/[0.02] mix-blend-overlay z-50">
           <motion.div
             style={{ width: progressWidth }}
             className="h-full bg-white/60"
@@ -149,11 +149,11 @@ export default function Hero() {
           {/* Drifting horizontal rules */}
           <motion.div
             style={{ x: rule1X }}
-            className="absolute top-[25%] left-[-10%] right-[-10%] h-[1px] bg-white/[0.04]"
+            className="absolute top-[25%] left-[-10%] right-[-10%] h-[1px] bg-white/[0.15] mix-blend-overlay"
           />
           <motion.div
             style={{ x: rule2X }}
-            className="absolute top-[55%] left-[-10%] right-[-10%] h-[1px] bg-white/[0.04]"
+            className="absolute top-[55%] left-[-10%] right-[-10%] h-[1px] bg-white/[0.15] mix-blend-overlay"
           />
           <div className="absolute top-[38%] left-[8%] font-mono text-[10px] uppercase tracking-[0.35em] text-white/[0.06]">
             Scroll
