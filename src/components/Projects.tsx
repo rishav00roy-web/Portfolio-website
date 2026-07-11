@@ -104,7 +104,7 @@ function Card({
 
         {/* Text content */}
         <div className="w-full lg:w-[38%] flex flex-col justify-center z-10">
-          <p className="font-coffekan text-lg sm:text-2xl text-white/50 mb-3 tracking-wide">
+          <p className="font-coffekan text-3xl sm:text-5xl text-white/50 mb-4 tracking-wider">
             Project 0{index + 1}
           </p>
 

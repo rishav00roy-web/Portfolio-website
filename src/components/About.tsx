@@ -22,26 +22,37 @@ export default function About() {
   const skills = [
     {
       category: "Languages & Frameworks",
-      items: ["JavaScript", "React", "Next.js", "Python", "Tailwind CSS"],
+      items: ["JavaScript", "Next.js", "React", "HTML5", "CSS3", "Tailwind CSS", "Python"],
     },
     {
-      category: "Backend & Database",
-      items: ["Supabase", "PostgreSQL", "REST APIs", "Authentication"],
+      category: "Backend & Data",
+      items: ["Supabase", "PostgreSQL", "REST APIs", "Database Design", "Authentication (PKCE OAuth)"],
     },
     {
-      category: "AI Tools & Orchestration",
+      category: "AI-Orchestrated Development",
       items: [
-        "Antigravity",
-        "Codex",
         "Claude Code",
+        "Codex",
+        "Gemini",
         "Kimi K2",
-        "AI-Assisted Workflows",
-        "AEO / GEO Optimization",
+        "Multi-Agent AI Workflows",
+        "Prompt Engineering",
+        "AI Code Review",
       ],
     },
     {
-      category: "Tools & Infrastructure",
-      items: ["Git", "GitHub", "Vercel"],
+      category: "SEO & Performance",
+      items: [
+        "Technical SEO",
+        "Answer Engine Optimization (AEO)",
+        "Generative Engine Optimization (GEO)",
+        "Schema.org Structured Data",
+        "Core Web Vitals",
+      ],
+    },
+    {
+      category: "Tools & Platforms",
+      items: ["Git", "GitHub", "Vercel", "OCR (Tesseract)", "Razorpay", "PayPal", "ReportLab"],
     },
   ];
 
@@ -49,38 +60,44 @@ export default function About() {
     {
       role: "FOIA Specialist",
       company: "SSB Media Pvt. Ltd.",
-      period: "2025 to Present",
+      period: "Jan 2025 – Jul 2026",
       bullets: [
-        "Submitted and tracked 1,500+ FOIA requests to U.S. police departments.",
-        "Managed and processed large volumes of bodycam footage.",
-        "Built and maintained a nationwide contact database of police department PIO/FOIA officers.",
+        "Submitted 1,500+ public records requests to U.S. law enforcement agencies, sustaining 300–400 emails weekly across 60–70 distinct PIO/FOIA contacts.",
+        "Established and maintained a nationwide contact database of 100+ police department PIO/FOIA officers.",
+        "Processed 60+ bodycam footage files monthly, with a peak volume of 110+ files in a single month.",
+        "Adapted verification workflows to address a rise in AI-generated content within submitted footage, until the role concluded following the company's acquisition.",
       ],
     },
     {
       role: "HR, Administration & Purchase",
       company: "3RM Management Limited",
-      period: "2023 to 2024",
+      period: "Jan 2023 – Jan 2024",
       bullets: [
-        "Owned employee onboarding, records management, daily administration, and procurement processes.",
-        "Coordinated procurement across departments with a proactive, professional approach.",
+        "Directed HR operations for 30–40 field employees and 8–10 office staff.",
+        "Managed INR 4–5 lakh in biweekly operational funds covering procurement and administrative expenses across departments.",
+        "Prepared quotations of up to INR 5,10,000 for rural energy infrastructure projects.",
       ],
     },
     {
       role: "Assistant Manager",
       company: "Yogesh Commercial Pvt. Ltd. (YCPL)",
-      period: "2021 to 2023",
+      period: "Jan 2021 – Jan 2023",
       bullets: [
-        "Oversaw documentation and compliance across infrastructure projects worth approximately ₹1.2 crore.",
-        "Managed daily team operations and supported performance monitoring.",
+        "Oversaw daily operations for a team of 30–40 laborers and 8–10 office staff.",
+        "Recruited and hired 15 sales representatives within a 2–3 week window.",
+        "Allocated INR 8–10 lakh in monthly funds toward sourcing and logistics for active rural energy infrastructure projects.",
+        "Modernized decades of paper account records using OCR and Claude AI, replacing manual physical archives — an early hands-on introduction to AI-orchestrated workflows.",
       ],
     },
     {
-      role: "Chief of Operations Officer",
-      company: "Shangrila Interprise",
-      period: "2020 to 2021",
+      role: "Founder & COO",
+      company: "Shangrila Enterprise",
+      period: "Jan 2020 – Jan 2021",
       bullets: [
-        "Led workforce allocation for up to 40 employees, optimizing labour costs while maintaining compliance.",
-        "Supervised logistics, supply chain, procurement, and delivery.",
+        "Founded and ran an independent commodity trading venture, hiring laborers on an as-needed basis (5–6 at a time).",
+        "Grew the venture to INR 3.5 Cr in cumulative turnover, with individual transactions as large as INR 1.4 Cr.",
+        "Owned compliance, procurement, and logistics end-to-end across 95+ locations in India.",
+        "Sustained relationships with international buyers across Japan, China, and Russia.",
       ],
     },
   ];
@@ -89,7 +106,7 @@ export default function About() {
     {
       degree: "Bachelor of Computer Applications (BCA), Semester II",
       school: "Manipal University, Jaipur",
-      period: "2025, In Progress",
+      period: "Currently Pursuing",
     },
     {
       degree: "Senior Secondary (Arts)",
@@ -106,224 +123,223 @@ export default function About() {
   ];
 
   return (
-    // This whole section had zero reduced-motion handling in the original
-    // output — reducedMotion="user" makes all the whileInView stagger
-    // reveals below skip their transform animation for OS-level
-    // reduced-motion users, content still appears, just without motion.
     <MotionConfig reducedMotion="user">
-    <section className="relative bg-transparent px-6 sm:px-12 xl:px-24 py-24 sm:py-32 border-t border-white/10">
-      {/* Faint background watermark */}
-      <div className="absolute top-16 right-6 sm:right-12 xl:right-24 font-display text-[12rem] sm:text-[18rem] xl:text-[24rem] leading-none text-white/[0.015] pointer-events-none select-none">
-        02
-      </div>
+      <section className="relative bg-transparent px-6 sm:px-12 xl:px-24 py-24 sm:py-32 border-t border-white/10">
+        {/* Scrim layer — sits above the global grid, below the content */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/95 to-black/0 pointer-events-none" />
 
-      <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
-        {/* Sticky title */}
-        <div className="lg:w-1/3">
-          <h2 className="font-display font-extrabold text-5xl sm:text-7xl uppercase tracking-tight text-white sticky top-12">
-            About
-          </h2>
+        {/* Faint background watermark */}
+        <div className="absolute top-16 right-6 sm:right-12 xl:right-24 font-display text-[12rem] sm:text-[18rem] xl:text-[24rem] leading-none text-white/[0.015] pointer-events-none select-none">
+          02
         </div>
 
-        {/* Content */}
-        <motion.div
-          className="lg:w-2/3 flex flex-col gap-16"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          variants={staggerContainer}
-        >
-          {/* Bio paragraphs */}
-          <motion.div className="space-y-6" variants={staggerContainer}>
-            <motion.p
-              variants={fadeUp}
-              className="text-xl sm:text-2xl text-white/80 leading-relaxed font-sans font-medium"
-            >
-              I got into software development by building commercial websites for
-              real clients. From the beginning, I was drawn to solving real
-              business problems rather than simply learning programming
-              languages. Today, I design and build production software that
-              focuses on reliability, maintainability, and measurable business
-              value.
-            </motion.p>
-            <motion.p
-              variants={fadeUp}
-              className="text-base sm:text-lg text-white/60 leading-relaxed font-sans"
-            >
-              I treat AI as a productivity multiplier, not a replacement for
-              engineering. It helps me move faster through architecture,
-              debugging, testing, and repetitive tasks, but every technical
-              decision is mine. I design the systems, review every line that
-              matters, validate the results, and take full responsibility for
-              what reaches production. If something breaks, I own it.
-            </motion.p>
-            <motion.p
-              variants={fadeUp}
-              className="text-base sm:text-lg text-white/60 leading-relaxed font-sans"
-            >
-              Before becoming a full-time developer, I spent more than six years
-              in operations, working across HR, procurement, business
-              administration, compliance, and team leadership. That experience
-              fundamentally changed how I approach software. I understand the
-              constraints businesses operate under because I&apos;ve worked on
-              the other side of the table. I don&apos;t build features for the
-              sake of shipping code. I build software that solves problems,
-              improves workflows, and creates measurable value.
-            </motion.p>
-          </motion.div>
+        <div className="relative z-10 flex flex-col lg:flex-row gap-16 lg:gap-24">
+          {/* Sticky title */}
+          <div className="lg:w-1/3">
+            <h2 className="font-display font-extrabold text-5xl sm:text-7xl uppercase tracking-tight text-white sticky top-12">
+              About
+            </h2>
+          </div>
 
-          {/* Work Experience */}
+          {/* Content */}
           <motion.div
-            variants={fadeUp}
+            className="lg:w-2/3 flex flex-col gap-16"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
+            viewport={{ once: true, margin: "-80px" }}
+            variants={staggerContainer}
           >
-            <h3 className="font-mono text-xs uppercase tracking-[0.3em] text-white/40 mb-6 border-b border-white/10 pb-2">
-              Work Experience
-            </h3>
-            <motion.div
-              className="flex flex-col gap-10"
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-40px" }}
-            >
-              {experience.map((exp, i) => (
-                <motion.div
-                  key={i}
-                  variants={fadeUp}
-                  className="flex flex-col gap-3"
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-                    <h4 className="text-xl font-bold text-white uppercase tracking-tight">
-                      {exp.role}
-                    </h4>
-                    <span className="font-mono text-xs text-white/40">
-                      {exp.period}
-                    </span>
-                  </div>
-                  <p className="text-white/70 font-mono text-xs uppercase tracking-wider">
-                    {exp.company}
-                  </p>
-                  <ul className="list-disc pl-4 text-white/60 text-sm space-y-2 mt-2 leading-relaxed">
-                    {exp.bullets.map((bullet, idx) => (
-                      <li key={idx}>{bullet}</li>
-                    ))}
-                  </ul>
-                </motion.div>
-              ))}
+            {/* Bio paragraphs */}
+            <motion.div className="space-y-8" variants={staggerContainer}>
+              <motion.p
+                variants={fadeUp}
+                className="text-2xl sm:text-3xl text-white/95 leading-relaxed font-sans font-medium"
+              >
+                I got into software development by building commercial websites for
+                real clients. From the beginning, I was drawn to solving real
+                business problems rather than simply learning programming
+                languages. Today, I design and build production software that
+                focuses on reliability, maintainability, and measurable business
+                value.
+              </motion.p>
+              <motion.p
+                variants={fadeUp}
+                className="text-lg sm:text-xl text-white/80 leading-relaxed font-sans"
+              >
+                I treat AI as a productivity multiplier, not a replacement for
+                engineering. It helps me move faster through architecture,
+                debugging, testing, and repetitive tasks, but every technical
+                decision is mine. I design the systems, review every line that
+                matters, validate the results, and take full responsibility for
+                what reaches production. If something breaks, I own it.
+              </motion.p>
+              <motion.p
+                variants={fadeUp}
+                className="text-lg sm:text-xl text-white/80 leading-relaxed font-sans"
+              >
+                Before becoming a full-time developer, I spent more than six years
+                in operations, working across HR, procurement, business
+                administration, compliance, and team leadership. That experience
+                fundamentally changed how I approach software. I understand the
+                constraints businesses operate under because I&apos;ve worked on
+                the other side of the table. I don&apos;t build features for the
+                sake of shipping code. I build software that solves problems,
+                improves workflows, and creates measurable value.
+              </motion.p>
             </motion.div>
-          </motion.div>
 
-          {/* Skills */}
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-          >
-            <h3 className="font-mono text-xs uppercase tracking-[0.3em] text-white/40 mb-6 border-b border-white/10 pb-2">
-              Skills
-            </h3>
+            {/* Work Experience */}
             <motion.div
-              className="flex flex-col gap-6"
-              variants={staggerContainer}
+              variants={fadeUp}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-40px" }}
+              viewport={{ once: true, margin: "-60px" }}
             >
-              {skills.map((group, idx) => (
-                <motion.div key={idx} variants={fadeUp} className="space-y-2">
-                  <h4 className="text-white/40 font-mono text-[10px] uppercase tracking-widest">
-                    {group.category}
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {group.items.map((skill) => (
-                      <span
-                        key={skill}
-                        className="px-3 py-1 border border-white/10 rounded-full font-mono text-[10px] sm:text-xs text-white/70 hover:border-white/40 hover:text-white transition-colors"
-                      >
-                        {skill}
+              <h3 className="font-mono text-xs uppercase tracking-[0.3em] text-white/60 mb-6 border-b border-white/10 pb-2">
+                Work Experience
+              </h3>
+              <motion.div
+                className="flex flex-col gap-10"
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-40px" }}
+              >
+                {experience.map((exp, i) => (
+                  <motion.div
+                    key={i}
+                    variants={fadeUp}
+                    className="flex flex-col gap-3"
+                  >
+                    <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+                      <h4 className="text-xl sm:text-2xl font-bold text-white uppercase tracking-tight">
+                        {exp.role}
+                      </h4>
+                      <span className="font-mono text-xs sm:text-sm text-white/60">
+                        {exp.period}
                       </span>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
-
-          {/* Education */}
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-          >
-            <h3 className="font-mono text-xs uppercase tracking-[0.3em] text-white/40 mb-6 border-b border-white/10 pb-2">
-              Education
-            </h3>
-            <motion.div
-              className="flex flex-col gap-6"
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-40px" }}
-            >
-              {education.map((edu, i) => (
-                <motion.div
-                  key={i}
-                  variants={fadeUp}
-                  className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2"
-                >
-                  <div>
-                    <h4 className="text-base font-bold text-white">
-                      {edu.degree}
-                    </h4>
-                    <p className="text-white/60 text-sm font-mono mt-1">
-                      {edu.school}
+                    </div>
+                    <p className="text-white/85 font-mono text-xs sm:text-sm uppercase tracking-wider">
+                      {exp.company}
                     </p>
-                  </div>
-                  <span className="font-mono text-xs text-white/40">
-                    {edu.period}
-                  </span>
-                </motion.div>
-              ))}
+                    <ul className="list-disc pl-4 text-white/85 text-sm sm:text-base space-y-2 mt-2 leading-relaxed font-sans">
+                      {exp.bullets.map((bullet, idx) => (
+                        <li key={idx}>{bullet}</li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                ))}
+              </motion.div>
             </motion.div>
-          </motion.div>
 
-          {/* Languages */}
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-          >
-            <h3 className="font-mono text-xs uppercase tracking-[0.3em] text-white/40 mb-6 border-b border-white/10 pb-2">
-              Languages
-            </h3>
+            {/* Skills */}
             <motion.div
-              className="grid grid-cols-2 sm:grid-cols-4 gap-4"
-              variants={staggerContainer}
+              variants={fadeUp}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-40px" }}
+              viewport={{ once: true, margin: "-60px" }}
             >
-              {languages.map((lang, i) => (
-                <motion.div key={i} variants={fadeUp}>
-                  <p className="text-white/80 text-sm font-medium">
-                    {lang.name}
-                  </p>
-                  <p className="text-white/40 font-mono text-[10px] uppercase tracking-wider mt-1">
-                    {lang.level}
-                  </p>
-                </motion.div>
-              ))}
+              <h3 className="font-mono text-xs uppercase tracking-[0.3em] text-white/60 mb-6 border-b border-white/10 pb-2">
+                Skills
+              </h3>
+              <motion.div
+                className="flex flex-col gap-6"
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-40px" }}
+              >
+                {skills.map((group, idx) => (
+                  <motion.div key={idx} variants={fadeUp} className="space-y-2">
+                    <h4 className="text-white/60 font-mono text-[10px] sm:text-xs uppercase tracking-widest">
+                      {group.category}
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {group.items.map((skill) => (
+                        <span
+                          key={skill}
+                          className="px-3 py-1 border border-white/10 rounded-full font-mono text-[10px] sm:text-xs text-white/85 hover:border-white/40 hover:text-white transition-colors"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.div>
+
+            {/* Education */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-60px" }}
+            >
+              <h3 className="font-mono text-xs uppercase tracking-[0.3em] text-white/60 mb-6 border-b border-white/10 pb-2">
+                Education
+              </h3>
+              <motion.div
+                className="flex flex-col gap-6"
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-40px" }}
+              >
+                {education.map((edu, i) => (
+                  <motion.div
+                    key={i}
+                    variants={fadeUp}
+                    className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2"
+                  >
+                    <div>
+                      <h4 className="text-base sm:text-lg font-bold text-white">
+                        {edu.degree}
+                      </h4>
+                      <p className="text-white/80 text-sm font-mono mt-1">
+                        {edu.school}
+                      </p>
+                    </div>
+                    <span className="font-mono text-xs sm:text-sm text-white/60">
+                      {edu.period}
+                    </span>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.div>
+
+            {/* Languages */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-60px" }}
+            >
+              <h3 className="font-mono text-xs uppercase tracking-[0.3em] text-white/60 mb-6 border-b border-white/10 pb-2">
+                Languages
+              </h3>
+              <motion.div
+                className="grid grid-cols-2 sm:grid-cols-4 gap-4"
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-40px" }}
+              >
+                {languages.map((lang, i) => (
+                  <motion.div key={i} variants={fadeUp}>
+                    <p className="text-white/90 text-sm sm:text-base font-medium">
+                      {lang.name}
+                    </p>
+                    <p className="text-white/60 font-mono text-[10px] uppercase tracking-wider mt-1">
+                      {lang.level}
+                    </p>
+                  </motion.div>
+                ))}
+              </motion.div>
             </motion.div>
           </motion.div>
-        </motion.div>
-      </div>
-    </section>
+        </div>
+      </section>
     </MotionConfig>
   );
 }

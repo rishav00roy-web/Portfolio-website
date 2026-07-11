@@ -115,6 +115,9 @@ export default function Footer() {
     // (content still appears, just without the clip-path/slide-up motion).
     <MotionConfig reducedMotion="user">
     <footer className="relative bg-transparent text-white px-6 sm:px-12 xl:px-24 py-24 sm:py-32 border-t border-white/10">
+      {/* Scrim layer — sits above the global grid, below the content */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent pointer-events-none" />
+
       {/* Faint background watermark */}
       <div className="absolute bottom-24 right-6 sm:right-12 xl:right-24 font-display text-[10rem] sm:text-[16rem] xl:text-[20rem] leading-none text-white/[0.015] pointer-events-none select-none">
         05
@@ -230,7 +233,7 @@ export default function Footer() {
         >
           <p className="font-mono text-[10px] sm:text-xs text-white/30 uppercase tracking-[0.25em]">
             &copy; {new Date().getFullYear()} Rishav Roy — Designed &amp;
-            Developed from Kolkata
+            Developed by Me
           </p>
 
           <button
