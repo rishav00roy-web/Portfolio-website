@@ -64,7 +64,7 @@ test.describe('Portfolio Website - Tier 1: Feature Coverage', () => {
     await expect(page.locator('section').filter({ hasText: 'Rishav' }).first()).toBeVisible();
 
     // Projects Section
-    await expect(page.locator('section').filter({ hasText: 'Selected Work' })).toBeVisible();
+    await expect(page.locator('section').filter({ hasText: 'Paid Projects' })).toBeVisible();
 
     // Footer Component
     await expect(page.locator('footer')).toBeVisible();
@@ -114,7 +114,7 @@ test.describe('Portfolio Website - Tier 2: Boundary & Corner Cases', () => {
 
   test('Hover styles: project titles visible in card layout', async ({ page }) => {
     await gotoResilient(page);
-    const projectsSection = page.locator('section').filter({ hasText: 'Selected Work' });
+    const projectsSection = page.locator('section').filter({ hasText: 'Paid Projects' });
     await expect(projectsSection).toBeVisible();
 
     // New design: project cards are divs with h2 headings, not anchor rows
@@ -133,7 +133,7 @@ test.describe('Portfolio Website - Tier 3: Cross-Feature Combinations', () => {
     await page.setViewportSize({ width: 1200, height: 800 });
     await gotoResilient(page);
 
-    const projectsSection = page.locator('section').filter({ hasText: 'Selected Work' });
+    const projectsSection = page.locator('section').filter({ hasText: 'Paid Projects' });
     await expect(projectsSection).toBeVisible();
 
     // All 3 cards should be in the DOM (horizontal scroll, sticky)
@@ -164,7 +164,7 @@ test.describe('Portfolio Website - Tier 4: Real-world User Scenario', () => {
       'ClashVault'
     ];
 
-    const projectsSection = page.locator('section').filter({ hasText: 'Selected Work' });
+    const projectsSection = page.locator('section').filter({ hasText: 'Paid Projects' });
 
     for (const title of projectTitles) {
       await expect(projectsSection).toContainText(title);

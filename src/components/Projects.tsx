@@ -9,8 +9,8 @@ const projects = [
     id: 1,
     title: "Tea Country Holidays",
     description:
-      "Custom CMS module for 90+ travel packages and CRM migration via Python scraper.",
-    tags: ["Next.js", "Supabase", "Tailwind CSS", "Claude Code"],
+      "Commercial travel booking platform built for a travel agency client. Architected a custom CMS independently managing 94+ packages across 24 destinations, and automated client-ready PDF itinerary generation.",
+    tags: ["Next.js 14", "React 19", "Supabase", "PostgreSQL", "Tailwind CSS", "Python (ReportLab)", "PKCE OAuth"],
     link: "https://tea-country-holidays.vercel.app",
     images: [
       "/assets/projects/tea-1.jpg",
@@ -20,10 +20,10 @@ const projects = [
   },
   {
     id: 2,
-    title: "Gym CRM",
+    title: "Gym CRM (IQ Iron Fitness)",
     description:
-      "Offline-first localStorage CRM with OCR for rapid customer onboarding.",
-    tags: ["HTML", "JavaScript", "OCR", "Codex"],
+      "Commercial CRM solution designed, built, and sold to a local gym owner. Manages 500+ members with WhatsApp broadcast messaging, OCR-powered document scanning onboarding, and a companion billing generator.",
+    tags: ["HTML", "JavaScript", "OCR (Tesseract)", "WhatsApp API", "Billing Engine"],
     link: "https://github.com/rishav00roy-web/Gym-CRM",
     images: [
       "/assets/projects/gym-1.jpg",
@@ -35,8 +35,8 @@ const projects = [
     id: 3,
     title: "ClashVault",
     description:
-      "Escrow-style order management system with Razorpay integration and events engine.",
-    tags: ["Next.js", "Supabase", "Razorpay", "Antigravity"],
+      "Escrow-enabled gaming marketplace built for a Clash of Clans YouTube creator's community. Features native order management, integrating Razorpay and PayPal to support secure cross-border transactions.",
+    tags: ["Next.js", "Supabase", "Razorpay", "PayPal", "Escrow Engine"],
     link: "https://github.com/rishav00roy-web/ClashVault",
     images: [
       "/assets/projects/clash-1.jpg",
@@ -219,7 +219,7 @@ export default function Projects() {
       {/* Section header */}
       <div className="px-6 sm:px-12 xl:px-24 pt-32 pb-12">
         <h2 className="text-5xl sm:text-7xl xl:text-8xl font-display uppercase tracking-tight text-white leading-none">
-          Selected Works
+          Paid Projects
         </h2>
       </div>
 
