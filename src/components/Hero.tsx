@@ -49,11 +49,6 @@ export default function Hero() {
   const bgOpacity = useTransform(smoothProgress, [0, 0.6, 1], [0.65, 0.4, 0.2]);
   const darkOverlayOpacity = useTransform(smoothProgress, [0, 1], [0.3, 0.85]);
 
-  // ---- Layer 2: Mid-ground rules + meta text ----
-  const midOpacity = useTransform(smoothProgress, [0, 0.15, 0.5], [1, 0.6, 0]);
-  const midY = useTransform(smoothProgress, [0, 1], [0, -180]);
-  const rule1X = useTransform(smoothProgress, [0, 1], ["0%", "-20%"]);
-  const rule2X = useTransform(smoothProgress, [0, 1], ["0%", "15%"]);
 
   // ---- Layer 3: Title (foreground) — staged easing with hang-time ----
   const titleScale = useTransform(
@@ -67,8 +62,6 @@ export default function Hero() {
   const chromeOpacity = useTransform(smoothProgress, [0, 0.25], [1, 0]);
   const chromeY = useTransform(smoothProgress, [0, 0.25], [0, -40]);
 
-  // ---- Scroll progress bar ----
-  const progressWidth = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
 
   // ---- Mouse parallax (desktop only) ----
   const mouseRef = useRef({ x: 0, y: 0 });
@@ -108,13 +101,6 @@ export default function Hero() {
         className="sticky top-0 h-screen w-full overflow-hidden text-white"
         style={{ perspective: "1200px" }}
       >
-        {/* ---- Scroll progress indicator ---- */}
-        <div className="absolute top-0 left-0 right-0 h-[1px] bg-white/[0.02] mix-blend-overlay z-50">
-          <motion.div
-            style={{ width: progressWidth }}
-            className="h-full bg-white/60"
-          />
-        </div>
 
         {/* ---- Layer 1: Background image (deepest) ---- */}
         <motion.div
@@ -141,36 +127,15 @@ export default function Hero() {
           />
         </motion.div>
 
-        {/* ---- Layer 2: Mid-ground rules + drifting meta ---- */}
-        <motion.div
-          style={{ opacity: midOpacity, y: midY }}
-          className="absolute inset-0 z-[5] pointer-events-none overflow-hidden"
-        >
-          {/* Drifting horizontal rules */}
-          <motion.div
-            style={{ x: rule1X }}
-            className="absolute top-[25%] left-[-10%] right-[-10%] h-[1px] bg-white/[0.15] mix-blend-overlay"
-          />
-          <motion.div
-            style={{ x: rule2X }}
-            className="absolute top-[55%] left-[-10%] right-[-10%] h-[1px] bg-white/[0.15] mix-blend-overlay"
-          />
-          <div className="absolute top-[38%] left-[8%] font-mono text-[10px] uppercase tracking-[0.35em] text-white/[0.06]">
-            Scroll
-          </div>
-          <div className="absolute top-[68%] right-[12%] font-mono text-[10px] uppercase tracking-[0.35em] text-white/[0.06]">
-            Kolkata / India
-          </div>
-          {/* Subtle grain texture overlay (CSS-only, no animation cost) */}
-          <div
-            className="absolute inset-0 opacity-[0.025]"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-              backgroundRepeat: "repeat",
-              backgroundSize: "256px 256px",
-            }}
-          />
-        </motion.div>
+        {/* ---- Grain texture overlay ---- */}
+        <div
+          className="absolute inset-0 z-[5] pointer-events-none opacity-[0.025]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+            backgroundRepeat: "repeat",
+            backgroundSize: "256px 256px",
+          }}
+        />
 
         {/* ---- Layer 3: Title (foreground, mouse parallax) ---- */}
         <motion.div
