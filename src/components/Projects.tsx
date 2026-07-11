@@ -1,48 +1,37 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 
 const projects = [
   {
     id: 1,
     title: "Tea Country Holidays",
-    description:
-      "Custom CMS module for 90+ travel packages and CRM migration via Python scraper.",
-    tags: ["Next.js", "Supabase", "Tailwind CSS", "Claude Code"],
-    link: "https://tea-country-holidays.vercel.app",
-    images: [
-      "/assets/projects/tea-1.jpg",
-      "/assets/projects/tea-2.jpg",
-      "/assets/projects/tea-3.jpg",
-    ],
+    description: "Custom CMS module for 90+ travel packages and CRM migration via Python scraper.",
+    tags: ["Next.js", "Supabase", "Tailwind CSS"],
+    image: "/assets/TEA COUNTRY SITE/Screenshot 2026-07-07 232203.png",
+    href: "https://tea-country-holidays.vercel.app",
+    accent: "border-amber-400/40 text-amber-100",
   },
   {
     id: 2,
     title: "Gym CRM",
-    description:
-      "Offline-first localStorage CRM with OCR for rapid customer onboarding.",
-    tags: ["HTML", "JavaScript", "OCR", "Codex"],
-    link: "https://github.com/rishav00roy-web/Gym-CRM",
-    images: [
-      "/assets/projects/gym-1.jpg",
-      "/assets/projects/gym-2.jpg",
-      "/assets/projects/gym-3.jpg",
-    ],
+    description: "Offline-first localStorage CRM with OCR for rapid customer onboarding.",
+    tags: ["HTML", "JavaScript", "OCR"],
+    image: "/assets/IQ IRON FITNESS GYM CRM/Screenshot 2026-07-07 232423.png",
+    href: "https://github.com/rishav00roy-web/Gym-CRM",
+    accent: "border-emerald-400/40 text-emerald-100",
   },
   {
     id: 3,
     title: "ClashVault",
-    description:
-      "Escrow-style order management system with Razorpay integration and events engine.",
-    tags: ["Next.js", "Supabase", "Razorpay", "Antigravity"],
-    link: "https://github.com/rishav00roy-web/ClashVault",
-    images: [
-      "/assets/projects/clash-1.jpg",
-      "/assets/projects/clash-2.jpg",
-      "/assets/projects/clash-3.jpg",
-    ],
+    description: "Escrow-style order management system with Razorpay integration and events engine.",
+    tags: ["Next.js", "Supabase", "Razorpay"],
+    image: "/assets/CLASHVAULT/Screenshot 2026-07-07 231838.png",
+    href: "https://github.com/rishav00roy-web/ClashVault",
+    accent: "border-violet-400/40 text-violet-100",
   },
 ];
 
@@ -51,198 +40,113 @@ type Project = {
   title: string;
   description: string;
   tags: string[];
-  link: string;
-  images: string[];
+  image: string;
+  href: string;
+  accent: string;
 };
 
-function ProjectImage({ src, alt }: { src: string; alt: string }) {
-  return (
-    <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-      <img
-        src={src}
-        alt={alt}
-        className="w-full h-full object-cover"
-      />
-    </div>
-  );
-}
+function Card({ project, index, targetScale }: { project: Project, index: number, targetScale: number }) {
+  const containerRef = useRef<HTMLDivElement>(null);
 
-function Card({
-  project,
-  index,
-  scrollYProgress,
-  reducedMotion,
-}: {
-  project: Project;
-  index: number;
-  scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
-  reducedMotion: boolean | null;
-}) {
-  const count = projects.length;
-  const step = 1 / count;
-  const start = index * step;
-  const end = start + step;
+  // Track scroll relative to this specific card's sticky container
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
 
-  // Center card scale — staged steps for more deliberate feel
-  const centerScale = useTransform(
-    scrollYProgress,
-    [start, start + step * 0.4, start + step * 0.6, end],
-    [0.94, 1.08, 1.08, 0.94]
-  );
+  // Calculate the scale-down effect as the next card stacks on top
+  const scale = useTransform(scrollYProgress, [0, 1], [1, targetScale]);
 
-  // Side card transforms — skip entirely if reduced motion
-  const leftY = useTransform(scrollYProgress, [start, end], [-90, 90]);
-  const rightY = useTransform(scrollYProgress, [start, end], [90, -90]);
-  const leftX = useTransform(scrollYProgress, [start, end], [-45, 15]);
-  const rightX = useTransform(scrollYProgress, [start, end], [45, -15]);
-  const leftRotate = useTransform(scrollYProgress, [start, end], [-12, 3]);
-  const rightRotate = useTransform(scrollYProgress, [start, end], [12, -3]);
+  // Subtle internal parallax for the background image
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
 
   return (
-    <div className="relative w-screen h-full flex items-center justify-center px-4 sm:px-12 xl:px-24 shrink-0">
-      <div className="w-full max-w-7xl relative h-[75vh] sm:h-[80vh] rounded-[2.5rem] overflow-hidden shadow-2xl bg-[#0a0a0a]/90 border border-white/5 flex flex-col lg:flex-row items-center p-8 sm:p-12 xl:p-16 gap-8 lg:gap-12">
-
-        {/* Text content */}
-        <div className="w-full lg:w-[38%] flex flex-col justify-center z-10">
-          <p className="font-coffekan text-lg sm:text-2xl text-white/50 mb-3 tracking-wide">
-            Project 0{index + 1}
-          </p>
-
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group/title inline-flex items-center gap-3"
-          >
-            <h2 className="text-4xl sm:text-5xl xl:text-6xl font-display uppercase tracking-tight text-white group-hover/title:text-white/80 transition-colors leading-[1.0] mb-4">
-              {project.title}
-            </h2>
-            <ArrowUpRight className="w-8 h-8 opacity-0 group-hover/title:opacity-100 group-hover/title:translate-x-1 group-hover/title:-translate-y-1 transition-all duration-300 text-white/80" />
-          </a>
-
-          <p className="text-base sm:text-lg text-white/60 max-w-xl leading-relaxed mb-6 font-sans">
-            {project.description}
-          </p>
-
-          <div className="flex flex-wrap gap-2">
-            {project.tags.map((tag: string) => (
-              <span
-                key={tag}
-                className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-white/80 text-xs sm:text-sm font-sans"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+    <div ref={containerRef} className="h-screen flex items-center justify-center sticky top-0 px-6 sm:px-12 py-12">
+      <motion.div
+        style={{ scale, top: `calc(10vh + ${index * 40}px)` }}
+        className="w-full max-w-7xl relative h-[70vh] sm:h-[80vh] rounded-[2rem] sm:rounded-[3rem] overflow-hidden shadow-2xl bg-[#0a0a0a]"
+      >
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
+          <motion.div style={{ scale: imageScale }} className="relative w-full h-full">
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 1400px"
+              priority={index === 0}
+              className="object-cover"
+            />
+          </motion.div>
+          {/* Gradient carries the contrast work now instead of a flat opacity dim,
+              so the top of each screenshot stays crisp and readable. */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/10" />
         </div>
 
-        {/* Image collage */}
-        <div className="w-full lg:w-[62%] h-[40vh] lg:h-full relative flex items-center justify-center z-10 overflow-hidden lg:overflow-visible">
-          <div className="relative w-[90%] h-[90%] flex items-center justify-center">
-            {/* Left card */}
-            {reducedMotion ? (
-              <div className="absolute left-[-10%] w-[56%] aspect-[16/10] rounded-2xl overflow-hidden shadow-lg border border-white/10 z-0 scale-95 opacity-80">
-                <ProjectImage src={project.images[1]} alt={`${project.title} screenshot 2`} />
-              </div>
-            ) : (
-              <motion.div
-                style={{ y: leftY, x: leftX, rotate: leftRotate }}
-                className="absolute left-[-10%] w-[56%] aspect-[16/10] rounded-2xl overflow-hidden shadow-lg border border-white/10 z-0 scale-95 opacity-80"
-              >
-                <ProjectImage src={project.images[1]} alt={`${project.title} screenshot 2`} />
-              </motion.div>
-            )}
+        <div className="absolute inset-0 flex flex-col justify-end p-8 sm:p-16">
+           <div className="flex justify-between items-end">
+              <div>
+                <p className="font-mono text-xs sm:text-sm text-gray-400 mb-4 tracking-[0.2em] uppercase">
+                  Project 0{index + 1}
+                </p>
+                <h2 className="text-4xl sm:text-6xl font-black text-white tracking-tighter mb-4 drop-shadow-md">
+                  {project.title}
+                </h2>
+                <p className="text-lg sm:text-xl text-gray-300 max-w-xl leading-relaxed mb-8 drop-shadow-md">
+                  {project.description}
+                </p>
 
-            {/* Center card */}
-            <motion.div
-              style={reducedMotion ? {} : { scale: centerScale }}
-              className="relative w-[72%] aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl border border-white/15 z-10 hover:shadow-[0_0_30px_rgba(255,255,255,0.08)] transition-shadow duration-300"
-            >
-              <ProjectImage src={project.images[0]} alt={`${project.title} screenshot 1`} />
-            </motion.div>
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag: string) => (
+                    <span
+                      key={tag}
+                      className={`px-4 py-2 rounded-full border bg-black/50 backdrop-blur-md text-sm font-medium ${project.accent}`}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
 
-            {/* Right card */}
-            {reducedMotion ? (
-              <div className="absolute right-[-10%] w-[56%] aspect-[16/10] rounded-2xl overflow-hidden shadow-lg border border-white/10 z-0 scale-95 opacity-80">
-                <ProjectImage src={project.images[2]} alt={`${project.title} screenshot 3`} />
+                {/* Mobile CTA — the round arrow button below is hidden on small screens,
+                    so mobile visitors still get a tappable link */}
+                <a
+                  href={project.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="sm:hidden mt-6 inline-flex items-center gap-1 text-white text-sm font-medium underline underline-offset-4"
+                >
+                  View project <ArrowUpRight className="w-4 h-4" />
+                </a>
               </div>
-            ) : (
-              <motion.div
-                style={{ y: rightY, x: rightX, rotate: rightRotate }}
-                className="absolute right-[-10%] w-[56%] aspect-[16/10] rounded-2xl overflow-hidden shadow-lg border border-white/10 z-0 scale-95 opacity-80"
+
+              <a
+                href={project.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`View ${project.title}`}
+                className="hidden sm:flex w-20 h-20 rounded-full bg-white text-black items-center justify-center hover:scale-105 transition-transform cursor-pointer shadow-lg"
               >
-                <ProjectImage src={project.images[2]} alt={`${project.title} screenshot 3`} />
-              </motion.div>
-            )}
-          </div>
+                <ArrowUpRight className="w-8 h-8" />
+              </a>
+           </div>
         </div>
-
-        {/* Floating action button */}
-        <a
-          href={project.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="absolute bottom-6 right-6 sm:bottom-10 sm:right-10 flex w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white text-black items-center justify-center hover:scale-105 transition-transform shadow-lg z-20 group"
-        >
-          <ArrowUpRight className="w-6 h-6 sm:w-8 sm:h-8 group-hover:rotate-45 transition-transform duration-300" />
-        </a>
-      </div>
+      </motion.div>
     </div>
   );
 }
 
 export default function Projects() {
-  const outerRef = useRef<HTMLDivElement>(null);
-  const count = projects.length;
-  const reducedMotion = useReducedMotion();
-
-  const { scrollYProgress } = useScroll({
-    target: outerRef,
-    offset: ["start start", "end end"],
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 30,
-    damping: 20,
-    mass: 0.8,
-    restDelta: 0.0005,
-  });
-
-  const trackX = useTransform(
-    smoothProgress,
-    [0, 1],
-    ["0vw", `-${(count - 1) * 100}vw`]
-  );
-
   return (
-    <section className="relative w-full bg-transparent">
-      {/* Section header */}
-      <div className="px-6 sm:px-12 xl:px-24 pt-32 pb-12">
-        <h2 className="text-5xl sm:text-7xl xl:text-8xl font-display uppercase tracking-tight text-white leading-none">
-          Selected Works
-        </h2>
-      </div>
+    <section className="relative w-full bg-[#030303] pb-24">
+       <div className="px-6 sm:px-12 xl:px-24 pt-24 pb-12">
+          <h2 className="text-5xl sm:text-7xl font-black tracking-tighter text-white">
+            Selected Works
+          </h2>
+       </div>
 
-      {/* Horizontal scroll track */}
-      <div
-        ref={outerRef}
-        className="relative"
-        style={{ height: `${(count - 1) * 120 + 100}vh` }}
-      >
-        <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center">
-          <motion.div style={{ x: trackX }} className="flex h-full">
-            {projects.map((project, i) => (
-              <Card
-                key={project.id}
-                project={project}
-                index={i}
-                scrollYProgress={scrollYProgress}
-                reducedMotion={reducedMotion}
-              />
-            ))}
-          </motion.div>
-        </div>
-      </div>
-    </section>
+       {projects.map((project, i) => {
+         const targetScale = 1 - ( (projects.length - i) * 0.05 );
+         return <Card key={project.id} project={project} index={i} targetScale={targetScale} />
+       })}
+     </section>
   );
 }
