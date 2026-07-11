@@ -86,7 +86,7 @@ export default function Hero() {
   return (
     <div ref={outerRef} className="relative h-[280vh] bg-transparent">
       <section
-        className="sticky top-0 h-screen w-full overflow-hidden text-white"
+        className="sticky top-0 h-screen w-full overflow-hidden text-white z-10"
         style={{ perspective: "1200px" }}
       >
 

@@ -3,6 +3,7 @@
 import { useReducedMotion } from "framer-motion";
 import { ReactLenis } from "lenis/react";
 import Hero from "./components/Hero";
+import KineticGrid from "./components/KineticGrid";
 import Projects from "./components/Projects";
 import About from "./components/About";
 import Footer from "./components/Footer";
@@ -21,7 +22,8 @@ export default function App() {
     <>
       <main className={`min-h-screen text-white selection:bg-white/20 selection:text-white relative transition-opacity duration-300 ${fontsLoaded ? "opacity-100" : "opacity-0"}`}>
         <Hero />
-        <div className="relative">
+        <KineticGrid />
+        <div className="relative z-10">
           <Projects />
           <About />
           <Footer />
