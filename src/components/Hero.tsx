@@ -1,33 +1,50 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, useReducedMotion, AnimatePresence } from "framer-motion";
 
-function useClock() {
-  const [now, setNow] = useState(new Date());
-  useEffect(() => {
-    const id = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(id);
-  }, []);
-  return now;
-}
+const currentlyItems = [
+  "Tea Country Holidays",
+  "Gym CRM (Offline Web App)",
+  "ClashVault (In Progress)"
+];
 
 export default function Hero() {
-  const now = useClock();
   const shouldReduceMotion = useReducedMotion();
 
-  const [mounted, setMounted] = useState(false);
+
+  const [currentlyIndex, setCurrentlyIndex] = useState(0);
+
   useEffect(() => {
-    const timer = setTimeout(() => setMounted(true), 0);
-    return () => clearTimeout(timer);
+    const interval = setInterval(() => {
+      setCurrentlyIndex((prev) => (prev + 1) % currentlyItems.length);
+    }, 3000);
+    return () => clearInterval(interval);
   }, []);
 
-  const date = mounted
-    ? now.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })
-    : "";
-  const time = mounted
-    ? now.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit", second: "2-digit" })
-    : "";
+  const [commitCount, setCommitCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch("https://api.github.com/repos/rishav00roy-web/Portfolio-website/commits?per_page=1")
+      .then((res) => {
+        const linkHeader = res.headers.get("Link");
+        if (linkHeader) {
+          const match = linkHeader.match(/page=(\d+)>; rel="last"/);
+          if (match && match[1]) {
+            setCommitCount(parseInt(match[1], 10));
+          }
+        } else {
+          res.json().then((data) => {
+            if (Array.isArray(data)) {
+              setCommitCount(data.length);
+            }
+          });
+        }
+      })
+      .catch(() => {
+        setCommitCount(84); // Fallback to a static commit count
+      });
+  }, []);
 
   const outerRef = useRef<HTMLDivElement>(null);
 
@@ -188,27 +205,51 @@ export default function Hero() {
                 <p className="text-white/30 uppercase tracking-widest mb-2">
                   Currently
                 </p>
-                <p className="text-white/80">BCA Sem II</p>
-                <p className="text-white/50">Building Tea Country Holidays</p>
+                <div className="relative h-[2.5em] overflow-hidden">
+                  <AnimatePresence mode="wait">
+                    <motion.p
+                      key={currentlyIndex}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -8 }}
+                      transition={{ duration: 0.25, ease: "easeInOut" }}
+                      className="text-white/80 absolute left-0 right-0 truncate sm:whitespace-nowrap text-[10px] sm:text-[11px] md:text-xs tracking-tight font-mono"
+                    >
+                      {currentlyItems[currentlyIndex]}
+                    </motion.p>
+                  </AnimatePresence>
+                </div>
               </div>
               <div>
                 <p className="text-white/30 uppercase tracking-widest mb-2">
                   Based in
                 </p>
                 <p className="text-white/80">Kolkata, India</p>
-                <p className="text-white/50">Originally Jorhat, Assam</p>
+                <p className="text-white/50 text-[10px]">Originally Jorhat, Assam</p>
               </div>
               <div>
                 <p className="text-white/30 uppercase tracking-widest mb-2">
-                  Date
+                  Resume
                 </p>
-                <p className="text-white/80">{date}</p>
+                <a
+                  href="/Rishav-Roy-Resume.pdf"
+                  download="Rishav-Roy-Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/80 hover:text-amber-400 transition-colors underline decoration-white/20 hover:decoration-amber-400/40"
+                >
+                  Download PDF
+                </a>
+                <p className="text-white/50 text-[10px] mt-1">July 2026</p>
               </div>
               <div>
                 <p className="text-white/30 uppercase tracking-widest mb-2">
-                  Time
+                  Commits
                 </p>
-                <p className="text-white/80 tabular-nums">{time} IST</p>
+                <p className="text-white/80">
+                  {commitCount !== null ? `${commitCount} Commits` : "84 Commits"}
+                </p>
+                <p className="text-white/50 text-[10px] mt-1">on GitHub</p>
               </div>
             </motion.div>
           </div>

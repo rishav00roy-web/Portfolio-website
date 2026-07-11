@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion, MotionConfig } from "framer-motion";
 import { useLenis } from "lenis/react";
-import { ArrowUpRight, ArrowUp } from "lucide-react";
+import { ArrowUpRight, ArrowUp, FileText } from "lucide-react";
 import SocialIcon from "./SocialIcon";
 
 const GithubIcon = () => (
@@ -177,6 +177,16 @@ export default function Footer() {
           className="flex flex-wrap gap-6 mt-16"
         >
           <SocialIcon
+            href="/Rishav-Roy-Resume.pdf"
+            download="Rishav-Roy-Resume.pdf"
+            label="Resume"
+            username="Download PDF"
+            bio="PDF resume — updated July 2026."
+            icon={<FileText className="w-5 h-5" />}
+            accentColor="#F5B301"
+            initials="CV"
+          />
+          <SocialIcon
             href="https://github.com/rishav00roy-web"
             label="GitHub"
             username="@rishav00roy-web"
@@ -232,8 +242,7 @@ export default function Footer() {
           className="mt-24 flex items-center justify-between w-full"
         >
           <p className="font-mono text-[10px] sm:text-xs text-white/30 uppercase tracking-[0.25em]">
-            &copy; {new Date().getFullYear()} Rishav Roy — Designed &amp;
-            Developed by Me
+            &copy; Designed &amp; Developed by Me
           </p>
 
           <button

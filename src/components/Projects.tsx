@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
@@ -55,6 +55,34 @@ type Project = {
   images: string[];
 };
 
+interface ProjectStatus {
+  text: string;
+  isLive?: boolean;
+  isRepo?: boolean;
+}
+
+const projectAccents: Record<number, { text: string; dot: string; border: string; bg: string }> = {
+  1: {
+    text: "text-amber-400/90",
+    dot: "bg-amber-400",
+    border: "border-amber-500/20",
+    bg: "bg-amber-500/5",
+  },
+  2: {
+    text: "text-emerald-400/90",
+    dot: "bg-emerald-400",
+    border: "border-emerald-500/20",
+    bg: "bg-emerald-500/5",
+  },
+  3: {
+    text: "text-violet-400/90",
+    dot: "bg-violet-400",
+    border: "border-violet-500/20",
+    bg: "bg-violet-500/5",
+  },
+};
+
+
 function ProjectImage({ src, alt }: { src: string; alt: string }) {
   return (
     <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
@@ -79,6 +107,25 @@ function Card({
   reducedMotion: boolean | null;
 }) {
   const count = projects.length;
+  const [status, setStatus] = useState<ProjectStatus | null>(
+    project.id === 2
+      ? { text: "Offline Web App", isRepo: true }
+      : project.id === 3
+      ? { text: "In Progress", isRepo: true }
+      : null
+  );
+
+  useEffect(() => {
+    if (project.id === 1) {
+      fetch("https://tea-country-holidays.vercel.app", { method: "HEAD", mode: "no-cors" })
+        .then(() => {
+          setStatus({ text: "Live", isLive: true });
+        })
+        .catch(() => {
+          setStatus({ text: "Unreachable", isLive: false });
+        });
+    }
+  }, [project.id]);
   const step = 1 / count;
   const start = index * step;
   const end = start + step;
@@ -124,15 +171,24 @@ function Card({
             {project.description}
           </p>
 
-          <div className="flex flex-wrap gap-2">
-            {project.tags.map((tag: string) => (
-              <span
-                key={tag}
-                className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-white/80 text-xs sm:text-sm font-sans"
-              >
-                {tag}
-              </span>
-            ))}
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-wrap gap-2">
+              {project.tags.map((tag: string) => (
+                <span
+                  key={tag}
+                  className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-white/80 text-xs sm:text-sm font-sans"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            {status && (
+              <div className={`flex items-center gap-1.5 px-3 py-1 rounded-full border ${projectAccents[project.id].border} ${projectAccents[project.id].bg} ${projectAccents[project.id].text} text-xs font-mono backdrop-blur-md`}>
+                <span className={`w-1.5 h-1.5 rounded-full ${status.isLive ? "bg-emerald-500 animate-pulse" : status.isRepo ? projectAccents[project.id].dot : "bg-gray-500"}`} />
+                <span>{status.text}</span>
+              </div>
+            )}
           </div>
         </div>
 

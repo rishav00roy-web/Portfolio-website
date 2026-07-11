@@ -10,6 +10,7 @@ interface SocialIconProps {
   icon: React.ReactNode;
   accentColor: string;
   initials: string;
+  download?: string;
 }
 
 export default function SocialIcon({
@@ -20,6 +21,7 @@ export default function SocialIcon({
   icon,
   accentColor,
   initials,
+  download,
 }: SocialIconProps) {
   const [showTooltip, setShowTooltip] = useState(false);
 
@@ -34,9 +36,8 @@ export default function SocialIcon({
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}
     >
-      {/* Tooltip */}
       <div
-        className="absolute bottom-full mb-3 w-56 sm:w-64 rounded border border-white/10 bg-[#0f0f0f] p-3 shadow-xl transition-all duration-200 origin-bottom"
+        className="absolute bottom-full mb-3 w-56 sm:w-64 rounded border border-white/10 bg-[#0f0f0f] p-3 shadow-xl transition-all duration-200 origin-bottom z-50"
         style={{
           opacity: showTooltip ? 1 : 0,
           transform: showTooltip
@@ -82,6 +83,7 @@ export default function SocialIcon({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
+        download={download}
         className="icon focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 rounded"
         aria-label={label}
         onFocus={() => setShowTooltip(true)}
