@@ -47,7 +47,7 @@ export default function Certificates() {
               transition={{ duration: 0.6, delay: index * 0.2 }}
               className="relative"
             >
-              <div className="relative h-[300px] sm:h-[400px] lg:h-[450px] rounded-xl overflow-hidden border border-white/10 bg-white/[0.02] flex flex-col">
+              <div className="relative h-[200px] sm:h-[400px] lg:h-[450px] rounded-xl overflow-hidden border border-white/10 bg-white/[0.02] flex flex-col">
                 <div className="h-10 bg-black/40 border-b border-white/10 flex items-center px-4 font-mono text-xs text-white/50 tracking-wider uppercase">
                   {cert.title} {index + 1}
                 </div>

@@ -168,7 +168,7 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="flex flex-wrap gap-6 mt-16"
+            className="flex flex-wrap gap-4 sm:gap-6 mt-16"
           >
             <SocialIcon
               href="/Rishav-Roy-Resume.pdf"

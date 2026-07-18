@@ -155,7 +155,7 @@ function Card({
       <div className="w-full max-w-7xl relative h-[75vh] sm:h-[80vh] rounded-[2.5rem] overflow-hidden shadow-2xl bg-[#0a0a0a]/90 border border-white/5 flex flex-col lg:flex-row items-center p-8 sm:p-12 xl:p-16 gap-8 lg:gap-12">
 
         {/* Text content */}
-        <div className="w-full lg:w-[38%] flex flex-col justify-center z-10">
+        <div className="w-full lg:w-[38%] flex flex-col justify-center z-10 pb-20 lg:pb-0">
           <p className="font-coffekan text-3xl sm:text-5xl text-white/50 mb-4 tracking-wider">
             Project 0{index + 1}
           </p>

@@ -133,14 +133,26 @@ html.lenis body {
   color: #fff;
   display: block;
   position: relative;
-  width: 55px;
-  height: 55px;
+  width: 44px;
+  height: 44px;
+}
+@media (min-width: 640px) {
+  .social-icon-wrapper .icon {
+    width: 55px;
+    height: 55px;
+  }
 }
 
 .social-icon-wrapper .layer {
-  width: 55px;
-  height: 55px;
+  width: 44px;
+  height: 44px;
   transition: transform 0.3s;
+}
+@media (min-width: 640px) {
+  .social-icon-wrapper .layer {
+    width: 55px;
+    height: 55px;
+  }
 }
 
 .social-icon-wrapper .icon:hover .layer {
