@@ -155,7 +155,7 @@ export default function Hero() {
             rotateX: shouldReduceMotion ? 0 : tilt.rotateX,
             rotateY: shouldReduceMotion ? 0 : tilt.rotateY,
           }}
-          className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none"
+          className="absolute inset-0 z-10 flex items-start pt-[18vh] sm:pt-0 sm:items-center justify-center pointer-events-none"
         >
           <h1 className="font-display leading-[0.82] uppercase tracking-tight text-center">
             <span className="block text-[15vw] sm:text-[8.5rem] lg:text-[12.5rem] font-extrabold text-white">
@@ -183,7 +183,7 @@ export default function Hero() {
           </div>
 
           {/* Bottom content area */}
-          <div className="flex-1 flex flex-col justify-end px-6 sm:px-12 xl:px-24 py-16 sm:py-24">
+          <div className="flex-1 flex flex-col justify-end px-6 sm:px-12 xl:px-24 pb-32 sm:pb-24 pt-16 sm:pt-24">
             {/* Tagline */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
