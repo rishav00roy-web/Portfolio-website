@@ -1,5 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
+
+import Image from "next/image";
 
 import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
@@ -87,11 +88,12 @@ const projectAccents: Record<number, { text: string; dot: string; border: string
 function ProjectImage({ src, alt }: { src: string; alt: string }) {
   return (
     <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-      <img
+      <Image
         src={src}
         alt={alt}
-        className="w-full h-full object-cover"
-        loading="lazy"
+        fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        className="object-cover"
       />
     </div>
   );

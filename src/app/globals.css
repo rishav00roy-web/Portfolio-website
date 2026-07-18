@@ -37,9 +37,9 @@
 }
 
 @theme {
-  --font-sans: "Sora", sans-serif;
+  --font-sans: var(--font-sans), sans-serif;
   --font-display: "Kenoky", sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
+  --font-mono: var(--font-mono), monospace;
   --font-coffekan: "Coffekan", sans-serif;
 
   --color-background: var(--background);

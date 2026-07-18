@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
-import "@fontsource/sora/400.css";
-import "@fontsource/sora/500.css";
-import "@fontsource/sora/600.css";
-import "@fontsource/sora/700.css";
-import "@fontsource/sora/800.css";
-import "@fontsource/jetbrains-mono/400.css";
-import "@fontsource/jetbrains-mono/500.css";
+import { Sora, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import FontPreloader from "@/components/FontPreloader";
+
+const sora = Sora({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  weight: ["400", "500"],
+});
 
 export const metadata: Metadata = {
   title: "Rishav Roy — Full-Stack Developer",
@@ -33,9 +39,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="antialiased" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://api.github.com" />
         <FontPreloader />
       </head>
-      <body className="flex flex-col bg-background text-foreground selection:bg-accent selection:text-background">
+      <body className={`${sora.variable} ${jetbrainsMono.variable} flex flex-col bg-background text-foreground selection:bg-accent selection:text-background`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

@@ -1,5 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
+
+import Image from "next/image";
 
 import { useEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform, useSpring, useReducedMotion, AnimatePresence } from "framer-motion";
@@ -114,10 +115,12 @@ export default function Hero() {
           style={{ scale: bgScale, opacity: bgOpacity }}
           className="absolute inset-0 z-0"
         >
-          <img
+          <Image
             src="/assets/hero-bg.jpg"
             alt=""
-            className="w-full h-full object-cover"
+            fill
+            priority
+            className="object-cover"
           />
           {/* Vignette overlay replaces blur — pure GPU opacity */}
           <div
