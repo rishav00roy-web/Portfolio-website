@@ -61,11 +61,13 @@ export default function About() {
       role: "FOIA Specialist",
       company: "SSB Media Pvt. Ltd.",
       period: "Jan 2025 – Jul 2026",
+      isRemote: true,
       bullets: [
-        "Submitted 1,500+ public records requests to U.S. law enforcement agencies, sustaining 300–400 emails weekly across 60–70 distinct PIO/FOIA contacts.",
-        "Established and maintained a nationwide contact database of 100+ police department PIO/FOIA officers.",
-        "Processed 60+ bodycam footage files monthly, with a peak volume of 110+ files in a single month.",
-        "Adapted verification workflows to address a rise in AI-generated content within submitted footage, until the role concluded following the company's acquisition.",
+        "Managed high-volume Freedom of Information Act (FOIA) requests (1,500+ total requests submitted) in a fully remote environment.",
+        "Coordinated with U.S. police departments and public agencies to obtain body-worn camera footage (processed 60+ files monthly) and public records.",
+        "Maintained accurate documentation, tracked deadlines, and ensured compliance across multiple jurisdictions, maintaining a database of 100+ agencies.",
+        "Communicated professionally through email and phone while managing multiple concurrent cases (sustaining 300–400 weekly emails).",
+        "Demonstrated strong time management, written communication, and independent problem-solving in an asynchronous remote workflow.",
       ],
     },
     {
@@ -124,7 +126,7 @@ export default function About() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <section className="relative bg-transparent px-6 sm:px-12 xl:px-24 py-24 sm:py-32 border-t border-white/10">
+      <section id="about" className="relative bg-transparent px-6 sm:px-12 xl:px-24 py-24 sm:py-32 border-t border-white/10">
         {/* Scrim layer — sits above the global grid, below the content */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/95 to-black/0 pointer-events-none" />
 
@@ -212,9 +214,16 @@ export default function About() {
                     className="flex flex-col gap-3"
                   >
                     <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-                      <h4 className="text-xl sm:text-2xl font-bold text-white uppercase tracking-tight">
-                        {exp.role}
-                      </h4>
+                      <div className="flex items-center flex-wrap gap-3">
+                        <h4 className="text-xl sm:text-2xl font-bold text-white uppercase tracking-tight">
+                          {exp.role}
+                        </h4>
+                        {"isRemote" in exp && exp.isRemote && (
+                          <span className="px-2.5 py-1 rounded border border-emerald-500/20 bg-emerald-500/5 text-emerald-400 font-mono text-xs uppercase tracking-widest font-bold">
+                            Remote
+                          </span>
+                        )}
+                      </div>
                       <span className="font-mono text-xs sm:text-sm text-white/60">
                         {exp.period}
                       </span>
@@ -255,10 +264,10 @@ export default function About() {
                       {group.category}
                     </h4>
                     <div className="flex flex-wrap gap-2">
-                      {group.items.map((skill) => (
+                      {group.items.map((skill, i) => (
                         <span
-                          key={skill}
-                          className="px-3 py-1 border border-white/10 rounded-full font-mono text-[10px] sm:text-xs text-white/85 hover:border-white/40 hover:text-white transition-colors"
+                          key={i}
+                          className="px-3 py-1.5 border border-white/10 rounded-full font-mono text-[10px] sm:text-xs text-white/85 bg-white/[0.03] hover:bg-white/[0.08] backdrop-blur-md hover:border-white/30 hover:text-white transition-all shadow-sm"
                         >
                           {skill}
                         </span>

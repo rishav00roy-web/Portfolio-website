@@ -1,7 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform, useSpring, useReducedMotion, AnimatePresence } from "framer-motion";
+import { Award } from "lucide-react";
 
 const currentlyItems = [
   "Tea Country Holidays",
@@ -168,8 +170,12 @@ export default function Hero() {
           className="relative z-20 flex flex-col h-full"
         >
           {/* Top nav bar */}
-          <div className="flex items-center justify-between px-6 sm:px-12 xl:px-24 py-6 font-mono text-xs uppercase tracking-widest text-white/40">
+          <div className="flex items-center justify-between px-6 sm:px-12 xl:px-24 py-6 font-mono text-[10px] sm:text-xs uppercase tracking-widest text-white/40 z-30">
             <span>Rishav Roy</span>
+            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/5 text-emerald-400 text-[9px] sm:text-[10px] font-bold">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Available for Hire</span>
+            </div>
             <span className="hidden sm:block">Kolkata, India</span>
           </div>
 
@@ -184,11 +190,41 @@ export default function Hero() {
                   ? { duration: 0 }
                   : { duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] as const }
               }
-              className="max-w-xl text-lg sm:text-2xl text-white/60 font-medium leading-snug font-sans"
+              className="max-w-2xl text-lg sm:text-2xl text-white/70 font-medium leading-snug font-sans"
             >
-              Agentic Full-Stack Developer building commercial software that
-              solves real business problems.
+              I build high-performance commercial web applications and rate-management systems that solve real business problems.
             </motion.p>
+
+            {/* Above-the-fold CTA buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={
+                shouldReduceMotion
+                  ? { duration: 0 }
+                  : { duration: 1, delay: 0.45, ease: [0.16, 1, 0.3, 1] as const }
+              }
+              className="mt-6 flex flex-wrap gap-4 z-30 pointer-events-auto"
+            >
+              <button
+                onClick={() => {
+                  const el = document.getElementById("projects");
+                  el?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="px-6 py-3.5 rounded-full bg-white text-black font-semibold text-xs sm:text-sm hover:bg-white/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
+              >
+                View Commercial Projects
+              </button>
+              <button
+                onClick={() => {
+                  const el = document.querySelector("footer");
+                  el?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="px-6 py-3.5 rounded-full border border-white/20 text-white hover:bg-white/5 transition-colors font-semibold text-xs sm:text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
+              >
+                Get in Touch
+              </button>
+            </motion.div>
 
             {/* Info grid */}
             <motion.div
@@ -199,7 +235,7 @@ export default function Hero() {
                   ? { duration: 0 }
                   : { duration: 1, delay: 0.6 }
               }
-              className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-8 max-w-3xl font-mono text-xs sm:text-sm"
+              className="mt-14 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 max-w-4xl font-mono text-xs sm:text-sm"
             >
               <div>
                 <p className="text-white/30 uppercase tracking-widest mb-2">
@@ -250,6 +286,24 @@ export default function Hero() {
                   {commitCount !== null ? `${commitCount} Commits` : "84 Commits"}
                 </p>
                 <p className="text-white/50 text-[10px] mt-1">on GitHub</p>
+              </div>
+              <div>
+                <p className="text-white/30 uppercase tracking-widest mb-2">
+                  Credentials
+                </p>
+                <a 
+                  href="#certificates"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById("certificates")?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className="flex items-center gap-2 group cursor-pointer mt-1"
+                >
+                  <div className="bg-white/10 p-1.5 rounded-md group-hover:bg-white/20 transition-colors">
+                    <Award className="w-4 h-4 text-white/80 group-hover:text-amber-400 transition-colors" />
+                  </div>
+                  <span className="text-white/80 group-hover:text-amber-400 transition-colors">Coursera</span>
+                </a>
               </div>
             </motion.div>
           </div>

@@ -13,6 +13,6 @@ test('has title and intro text', async ({ page }) => {
   await expect(heading).toContainText('Roy');
 
   // Expect the intro paragraph to contain the developer description
-  const intro = page.locator('p').filter({ hasText: 'Agentic Full-Stack Developer' }).first();
+  const intro = page.locator('p').filter({ hasText: 'high-performance commercial' }).first();
   await expect(intro).toBeVisible();
 });

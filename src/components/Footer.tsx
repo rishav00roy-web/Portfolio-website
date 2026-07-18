@@ -2,8 +2,10 @@
 
 import { motion, useReducedMotion, MotionConfig } from "framer-motion";
 import { useLenis } from "lenis/react";
-import { ArrowUpRight, ArrowUp, FileText } from "lucide-react";
+import { ArrowUp, FileText } from "lucide-react";
 import SocialIcon from "./SocialIcon";
+import ContactForm from "./ContactForm";
+import PerformanceMetrics from "./PerformanceMetrics";
 
 const GithubIcon = () => (
   <svg
@@ -114,7 +116,7 @@ export default function Footer() {
     // transform-based entrance animation for OS-level reduced-motion users
     // (content still appears, just without the clip-path/slide-up motion).
     <MotionConfig reducedMotion="user">
-    <footer className="relative bg-transparent text-white px-6 sm:px-12 xl:px-24 py-24 sm:py-32 border-t border-white/10">
+    <footer id="contact" className="relative bg-transparent text-white px-6 sm:px-12 xl:px-24 py-24 sm:py-32 border-t border-white/10">
       {/* Scrim layer — sits above the global grid, below the content */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent pointer-events-none" />
 
@@ -123,137 +125,130 @@ export default function Footer() {
         05
       </div>
 
-      <div className="relative z-10 flex flex-col items-start">
-        {/* Headline with clip-path reveal */}
-        <motion.h2
-          initial={{ clipPath: "inset(0 100% 0 0)" }}
-          whileInView={{ clipPath: "inset(0 0% 0 0)" }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] as const }}
-          className="font-display font-extrabold text-5xl sm:text-8xl uppercase tracking-tight leading-[0.9] mb-10"
-        >
-          Let&apos;s Build <br /> Something
-        </motion.h2>
-
-        {/* Thin rule */}
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] as const }}
-          className="w-full max-w-xl h-[1px] bg-white/10 origin-left mb-10"
-        />
-
-        {/* Contact links */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="flex flex-col gap-2"
-        >
-          <a
-            href="mailto:rishav2000roy@gmail.com"
-            className="group inline-flex items-center gap-3 font-mono text-lg sm:text-2xl text-white/70 hover:text-white transition-colors"
+      <div className="relative z-10 w-full flex flex-col lg:flex-row gap-16 justify-between items-start">
+        {/* Left Column: Headline, links, and socials */}
+        <div className="w-full lg:w-1/2 flex flex-col items-start">
+          {/* Headline with clip-path reveal */}
+          <motion.h2
+            initial={{ clipPath: "inset(0 100% 0 0)" }}
+            whileInView={{ clipPath: "inset(0 0% 0 0)" }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] as const }}
+            className="font-display font-extrabold text-5xl sm:text-8xl uppercase tracking-tight leading-[0.9] mb-10 text-white"
           >
-            rishav2000roy@gmail.com
-            <ArrowUpRight className="w-6 h-6 group-hover:rotate-45 transition-transform duration-300" />
-          </a>
-          <a
-            href="tel:+916001914771"
-            className="group inline-flex items-center gap-3 font-mono text-sm sm:text-lg text-white/50 hover:text-white transition-colors"
+            Let&apos;s Build <br /> Something
+          </motion.h2>
+
+          {/* Thin rule */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] as const }}
+            className="w-full max-w-xl h-[1px] bg-white/10 origin-left mb-10"
+          />
+
+          {/* Contact links & Spotify */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="flex flex-col gap-4"
           >
-            +91 60019 14771
-            <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-transform duration-300" />
-          </a>
-        </motion.div>
+            {/* Site Performance Widget */}
+            <div className="mt-4">
+              <PerformanceMetrics />
+            </div>
+          </motion.div>
 
-        {/* Social icons row */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="flex flex-wrap gap-6 mt-16"
-        >
-          <SocialIcon
-            href="/Rishav-Roy-Resume.pdf"
-            download="Rishav-Roy-Resume.pdf"
-            label="Resume"
-            username="Download PDF"
-            bio="PDF resume — updated July 2026."
-            icon={<FileText className="w-5 h-5" />}
-            accentColor="#F5B301"
-            initials="CV"
-          />
-          <SocialIcon
-            href="https://github.com/rishav00roy-web"
-            label="GitHub"
-            username="@rishav00roy-web"
-            bio="Full-stack projects, AI-orchestrated builds, and experiments."
-            icon={<GithubIcon />}
-            accentColor="#2EA44F"
-            initials="GH"
-          />
-          <SocialIcon
-            href="https://www.linkedin.com/in/rishav-roy-858b0b365/"
-            label="LinkedIn"
-            username="Rishav Roy"
-            bio="Full-stack developer. Open to opportunities."
-            icon={<LinkedinIcon />}
-            accentColor="#0A66C2"
-            initials="in"
-          />
-          <SocialIcon
-            href="https://instagram.com/justbeingpsunk_"
-            label="Instagram"
-            username="@justbeingpsunk_"
-            bio="Life outside the code."
-            icon={<InstagramIcon />}
-            accentColor="#E1306C"
-            initials="IG"
-          />
-          <SocialIcon
-            href="mailto:rishav2000roy@gmail.com"
-            label="Gmail"
-            username="rishav2000roy@gmail.com"
-            bio="Direct professional email contact. Available for commercial builds."
-            icon={<MailIcon />}
-            accentColor="#EA4335"
-            initials="GM"
-          />
-          <SocialIcon
-            href="tel:+916001914771"
-            label="Phone"
-            username="+91 60019 14771"
-            bio="Voice or WhatsApp communication. Available for inquiries."
-            icon={<PhoneIcon />}
-            accentColor="#34A853"
-            initials="PH"
-          />
-        </motion.div>
-
-        {/* Bottom bar: copyright + back to top */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="mt-24 flex items-center justify-between w-full"
-        >
-          <p className="font-mono text-[10px] sm:text-xs text-white/30 uppercase tracking-[0.25em]">
-            &copy; Designed &amp; Developed by Me
-          </p>
-
-          <button
-            onClick={scrollToTop}
-            className="group flex items-center gap-2 font-mono text-[10px] sm:text-xs text-white/30 uppercase tracking-[0.25em] hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 rounded px-2 py-1"
-            aria-label="Back to top"
+          {/* Social icons row */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="flex flex-wrap gap-6 mt-16"
           >
-            <ArrowUp className="w-3 h-3 group-hover:-translate-y-0.5 transition-transform" />
-            <span className="hidden sm:inline">Top</span>
-          </button>
-        </motion.div>
+            <SocialIcon
+              href="/Rishav-Roy-Resume.pdf"
+              download="Rishav-Roy-Resume.pdf"
+              label="Resume"
+              username="Download PDF"
+              bio="PDF resume — updated July 2026."
+              icon={<FileText className="w-5 h-5" />}
+              accentColor="#F5B301"
+              initials="CV"
+            />
+
+            <SocialIcon
+              href="https://github.com/rishav00roy-web"
+              label="GitHub"
+              username="@rishav00roy-web"
+              bio="Full-stack projects, AI-orchestrated builds, and experiments."
+              icon={<GithubIcon />}
+              accentColor="#2EA44F"
+              initials="GH"
+            />
+            <SocialIcon
+              href="https://www.linkedin.com/in/rishav-roy-858b0b365/"
+              label="LinkedIn"
+              username="Rishav Roy"
+              bio="Full-stack developer. Open to opportunities."
+              icon={<LinkedinIcon />}
+              accentColor="#0A66C2"
+              initials="in"
+            />
+            <SocialIcon
+              href="https://instagram.com/justbeingpsunk_"
+              label="Instagram"
+              username="@justbeingpsunk_"
+              bio="Life outside the code."
+              icon={<InstagramIcon />}
+              accentColor="#E1306C"
+              initials="IG"
+            />
+            <SocialIcon
+              href="mailto:rishav2000roy@gmail.com"
+              label="Gmail"
+              username="rishav2000roy@gmail.com"
+              bio="Direct professional email contact. Available for commercial builds."
+              icon={<MailIcon />}
+              accentColor="#EA4335"
+              initials="GM"
+            />
+            <SocialIcon
+              href="tel:+916001914771"
+              label="Phone"
+              username="+91 60019 14771"
+              bio="Voice or WhatsApp communication. Available for inquiries."
+              icon={<PhoneIcon />}
+              accentColor="#34A853"
+              initials="PH"
+            />
+          </motion.div>
+        </div>
+
+        {/* Right Column: Contact Form */}
+        <div className="w-full lg:w-1/2 flex justify-end lg:pt-12">
+          <ContactForm />
+        </div>
+      </div>
+
+      {/* Bottom bar: copyright + back to top */}
+      <div className="relative z-10 mt-24 flex items-center justify-between w-full border-t border-white/5 pt-8">
+        <p className="font-mono text-[10px] sm:text-xs text-white/30 uppercase tracking-[0.25em]">
+          &copy; Designed &amp; Developed by Me
+        </p>
+
+        <button
+          onClick={scrollToTop}
+          className="group flex items-center gap-2 font-mono text-[10px] sm:text-xs text-white/30 uppercase tracking-[0.25em] hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 rounded px-2 py-1 cursor-pointer"
+          aria-label="Back to top"
+        >
+          <ArrowUp className="w-3 h-3 group-hover:-translate-y-0.5 transition-transform" />
+          <span className="hidden sm:inline">Top</span>
+        </button>
       </div>
     </footer>
     </MotionConfig>

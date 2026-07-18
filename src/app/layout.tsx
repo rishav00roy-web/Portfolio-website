@@ -35,7 +35,33 @@ export default function RootLayout({
       <head>
         <FontPreloader />
       </head>
-      <body className="flex flex-col bg-[#030303] text-white selection:bg-white/20 selection:text-white">
+      <body className="flex flex-col bg-background text-foreground selection:bg-accent selection:text-background">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Rishav Roy",
+              "jobTitle": "Full-Stack Developer",
+              "url": "https://rishavroy.dev",
+              "description": "Building and shipping high-performance production web apps through AI-augmented development.",
+              "sameAs": [
+                "https://github.com/rishav00roy-web",
+                "https://www.linkedin.com/in/rishav-roy-858b0b365/"
+              ],
+              "knowsAbout": [
+                "Next.js",
+                "React",
+                "Supabase",
+                "PostgreSQL",
+                "Python",
+                "Technical SEO",
+                "OCR Onboarding"
+              ]
+            })
+          }}
+        />
         <noscript>
           <style>{`main { opacity: 1 !important; }`}</style>
         </noscript>

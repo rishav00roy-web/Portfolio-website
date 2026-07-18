@@ -18,23 +18,47 @@
   font-display: swap;
 }
 
+:root {
+  --background: #030303;
+  --foreground: #ffffff;
+  --muted: rgba(255, 255, 255, 0.6);
+  --border: rgba(255, 255, 255, 0.1);
+  --accent: #F5B301;
+  --accent-rgb: 245, 179, 1;
+}
+
+[data-theme="light"] {
+  --background: #fafafa;
+  --foreground: #0a0a0a;
+  --muted: rgba(10, 10, 10, 0.6);
+  --border: rgba(0, 0, 0, 0.1);
+  --accent: #d97706;
+  --accent-rgb: 217, 119, 6;
+}
+
 @theme {
   --font-sans: "Sora", sans-serif;
   --font-display: "Kenoky", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
   --font-coffekan: "Coffekan", sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-border-muted: var(--border);
+  --color-accent: var(--accent);
 }
 
 ::selection {
-  background-color: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  background-color: var(--accent);
+  color: #030303;
 }
 
 body {
-  background-color: #030303;
-  color: #ffffff;
+  background-color: var(--background);
+  color: var(--foreground);
   font-family: var(--font-sans);
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 ::-webkit-scrollbar {

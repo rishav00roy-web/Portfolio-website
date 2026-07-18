@@ -189,10 +189,7 @@ test.describe('Portfolio Website - Tier 4: Real-world User Scenario', () => {
     await expect(emailLink).toHaveAttribute('href', 'mailto:rishav2000roy@gmail.com');
     await expect(emailLink).toHaveText('rishav2000roy@gmail.com');
 
-    // Phone check
-    const phoneLink = footer.locator('a[href^="tel:"]').first();
-    await expect(phoneLink).toHaveAttribute('href', 'tel:+916001914771');
-    await expect(phoneLink).toContainText('+91 60019 14771');
+
 
     // LinkedIn check
     const linkedinLink = footer.locator('a[href*="linkedin.com"]');

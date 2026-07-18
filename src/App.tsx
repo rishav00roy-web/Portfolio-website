@@ -1,22 +1,22 @@
 "use client";
 
+import { useState } from "react";
 import { useReducedMotion } from "framer-motion";
 import { ReactLenis } from "lenis/react";
 import Hero from "./components/Hero";
 import KineticGrid from "./components/KineticGrid";
 import Projects from "./components/Projects";
 import About from "./components/About";
+import Certificates from "./components/Certificates";
 import Footer from "./components/Footer";
+import CommandMenu from "./components/CommandMenu";
 
 import { useFontLoading } from "./hooks/useFontLoading";
 
 export default function App() {
-  // Trigger rebuild to deploy yesterday's version
-  // The original version always wrapped the page in ReactLenis, so anyone
-  // with prefers-reduced-motion on still got smoothed/eased scrolling —
-  // that's exactly the kind of motion that setting should turn off.
   const prefersReduced = useReducedMotion();
   const { fontsLoaded } = useFontLoading();
+  const [activeProjectId, setActiveProjectId] = useState<number | null>(null);
 
   const content = (
     <>
@@ -24,10 +24,12 @@ export default function App() {
         <Hero />
         <KineticGrid />
         <div className="relative z-10">
-          <Projects />
+          <Projects activeProjectId={activeProjectId} setActiveProjectId={setActiveProjectId} />
           <About />
+          <Certificates />
           <Footer />
         </div>
+        <CommandMenu onOpenCaseStudy={setActiveProjectId} />
       </main>
     </>
   );

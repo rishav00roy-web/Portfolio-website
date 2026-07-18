@@ -1,15 +1,17 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import CaseStudyModal from "./CaseStudyModal";
 
 const projects = [
   {
     id: 1,
     title: "Tea Country Holidays",
     description:
-      "Commercial travel booking platform built for a travel agency client. Architected a custom CMS independently managing 94+ packages across 24 destinations, and automated client-ready PDF itinerary generation.",
+      "Commercial travel booking platform and bespoke rate-management CMS built for a travel agency client. Architected a custom CMS managing 94+ packages across 24 destinations, and automated client-ready PDF itinerary generation.",
     tags: ["Next.js 14", "React 19", "Supabase", "PostgreSQL", "Tailwind CSS", "Python (ReportLab)", "PKCE OAuth"],
     link: "https://tea-country-holidays.vercel.app",
     images: [
@@ -22,8 +24,8 @@ const projects = [
     id: 2,
     title: "Gym CRM (IQ Iron Fitness)",
     description:
-      "Commercial CRM solution designed, built, and sold to a local gym owner. Manages 500+ members with WhatsApp broadcast messaging, OCR-powered document scanning onboarding, and a companion billing generator.",
-    tags: ["HTML", "JavaScript", "OCR (Tesseract)", "WhatsApp API", "Billing Engine"],
+      "Commercial membership management CRM and offline-first onboarding solution designed, built, and sold to a local gym. Manages 500+ members with Tesseract.js OCR card scanning, offline IndexedDB backup, and WhatsApp notifications.",
+    tags: ["HTML", "JavaScript", "OCR (Tesseract)", "WhatsApp API", "Billing Engine", "IndexedDB"],
     link: "https://github.com/rishav00roy-web/Gym-CRM",
     images: [
       "/assets/projects/gym-1.jpg",
@@ -35,8 +37,8 @@ const projects = [
     id: 3,
     title: "ClashVault",
     description:
-      "Escrow-enabled gaming marketplace built for a Clash of Clans YouTube creator's community. Features native order management, integrating Razorpay and PayPal to support secure cross-border transactions.",
-    tags: ["Next.js", "Supabase", "Razorpay", "PayPal", "Escrow Engine"],
+      "Escrow-secured gaming digital assets marketplace built for a Clash of Clans YouTube creator's community. Features transaction validation, Razorpay and PayPal payment gateways, and a secure holding ledger.",
+    tags: ["Next.js", "Supabase", "Razorpay", "PayPal", "Escrow Engine", "PostgreSQL"],
     link: "https://github.com/rishav00roy-web/ClashVault",
     images: [
       "/assets/projects/clash-1.jpg",
@@ -82,7 +84,6 @@ const projectAccents: Record<number, { text: string; dot: string; border: string
   },
 };
 
-
 function ProjectImage({ src, alt }: { src: string; alt: string }) {
   return (
     <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
@@ -90,6 +91,7 @@ function ProjectImage({ src, alt }: { src: string; alt: string }) {
         src={src}
         alt={alt}
         className="w-full h-full object-cover"
+        loading="lazy"
       />
     </div>
   );
@@ -100,11 +102,13 @@ function Card({
   index,
   scrollYProgress,
   reducedMotion,
+  onOpenCaseStudy,
 }: {
   project: Project;
   index: number;
   scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
   reducedMotion: boolean | null;
+  onOpenCaseStudy: (id: number) => void;
 }) {
   const count = projects.length;
   const [status, setStatus] = useState<ProjectStatus | null>(
@@ -126,18 +130,17 @@ function Card({
         });
     }
   }, [project.id]);
+  
   const step = 1 / count;
   const start = index * step;
   const end = start + step;
 
-  // Center card scale — staged steps for more deliberate feel
   const centerScale = useTransform(
     scrollYProgress,
     [start, start + step * 0.4, start + step * 0.6, end],
     [0.94, 1.08, 1.08, 0.94]
   );
 
-  // Side card transforms — skip entirely if reduced motion
   const leftY = useTransform(scrollYProgress, [start, end], [-90, 90]);
   const rightY = useTransform(scrollYProgress, [start, end], [90, -90]);
   const leftX = useTransform(scrollYProgress, [start, end], [-45, 15]);
@@ -155,17 +158,15 @@ function Card({
             Project 0{index + 1}
           </p>
 
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group/title inline-flex items-center gap-3"
+          <button
+            onClick={() => onOpenCaseStudy(project.id)}
+            className="group/title inline-flex items-center gap-3 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
           >
             <h2 className="text-4xl sm:text-5xl xl:text-6xl font-display uppercase tracking-tight text-white group-hover/title:text-white/80 transition-colors leading-[1.0] mb-4">
               {project.title}
             </h2>
             <ArrowUpRight className="w-8 h-8 opacity-0 group-hover/title:opacity-100 group-hover/title:translate-x-1 group-hover/title:-translate-y-1 transition-all duration-300 text-white/80" />
-          </a>
+          </button>
 
           <p className="text-base sm:text-lg text-white/60 max-w-xl leading-relaxed mb-6 font-sans">
             {project.description}
@@ -212,7 +213,8 @@ function Card({
             {/* Center card */}
             <motion.div
               style={reducedMotion ? {} : { scale: centerScale }}
-              className="relative w-[72%] aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl border border-white/15 z-10 hover:shadow-[0_0_30px_rgba(255,255,255,0.08)] transition-shadow duration-300"
+              className="relative w-[72%] aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl border border-white/15 z-10 hover:shadow-[0_0_30px_rgba(255,255,255,0.08)] transition-shadow duration-300 cursor-pointer"
+              onClick={() => onOpenCaseStudy(project.id)}
             >
               <ProjectImage src={project.images[0]} alt={`${project.title} screenshot 1`} />
             </motion.div>
@@ -234,20 +236,24 @@ function Card({
         </div>
 
         {/* Floating action button */}
-        <a
-          href={project.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="absolute bottom-6 right-6 sm:bottom-10 sm:right-10 flex w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white text-black items-center justify-center hover:scale-105 transition-transform shadow-lg z-20 group"
+        <button
+          onClick={() => onOpenCaseStudy(project.id)}
+          className="absolute bottom-6 right-6 sm:bottom-10 sm:right-10 flex w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white text-black items-center justify-center hover:scale-105 transition-transform shadow-lg z-20 group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          aria-label={`View ${project.title} case study`}
         >
           <ArrowUpRight className="w-6 h-6 sm:w-8 sm:h-8 group-hover:rotate-45 transition-transform duration-300" />
-        </a>
+        </button>
       </div>
     </div>
   );
 }
 
-export default function Projects() {
+interface ProjectsProps {
+  activeProjectId: number | null;
+  setActiveProjectId: (id: number | null) => void;
+}
+
+export default function Projects({ activeProjectId, setActiveProjectId }: ProjectsProps) {
   const outerRef = useRef<HTMLDivElement>(null);
   const count = projects.length;
   const reducedMotion = useReducedMotion();
@@ -271,7 +277,7 @@ export default function Projects() {
   );
 
   return (
-    <section className="relative w-full bg-transparent">
+    <section id="projects" className="relative w-full bg-transparent">
       {/* Section header */}
       <div className="px-6 sm:px-12 xl:px-24 pt-32 pb-12">
         <h2 className="text-5xl sm:text-7xl xl:text-8xl font-display uppercase tracking-tight text-white leading-none">
@@ -294,11 +300,18 @@ export default function Projects() {
                 index={i}
                 scrollYProgress={scrollYProgress}
                 reducedMotion={reducedMotion}
+                onOpenCaseStudy={setActiveProjectId}
               />
             ))}
           </motion.div>
         </div>
       </div>
+
+      {/* Slide-over case study modal */}
+      <CaseStudyModal
+        projectId={activeProjectId}
+        onClose={() => setActiveProjectId(null)}
+      />
     </section>
   );
 }

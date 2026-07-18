@@ -25,10 +25,6 @@ export default function SocialIcon({
 }: SocialIconProps) {
   const [showTooltip, setShowTooltip] = useState(false);
 
-  const isTouch =
-    typeof window !== "undefined" &&
-    window.matchMedia("(pointer: coarse)").matches;
-
   return (
     <div
       className="social-icon-wrapper"
