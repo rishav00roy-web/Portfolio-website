@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { caseStudiesData, projects } from "../../lib/projectsData";
-import { ExternalLink, GitBranch, ArrowLeft, Terminal, Layout, ShieldAlert } from "lucide-react";
+import { caseStudiesData } from "../../lib/projectsData";
+import { ExternalLink, ArrowLeft, Terminal, Layout, ShieldAlert } from "lucide-react";
 import KineticGrid from "../../components/KineticGrid";
 import type { Metadata } from "next";
 
@@ -46,8 +46,7 @@ export default function ProjectsPage() {
 
         {/* Case Studies List */}
         <div className="space-y-32 sm:space-y-48">
-          {allCases.map((caseStudy, index) => {
-            const projectMeta = projects.find(p => p.id === caseStudy.id);
+          {allCases.map((caseStudy) => {
             
             return (
               <article 
@@ -89,7 +88,7 @@ export default function ProjectsPage() {
                     </div>
 
                     <div className="pt-4 flex flex-col gap-4">
-                      {caseStudy.links.map((link: any, i: number) => (
+                      {caseStudy.links.map((link: { url: string; label: string; icon: string }, i: number) => (
                         <a
                           key={i}
                           href={link.url}
@@ -145,7 +144,7 @@ export default function ProjectsPage() {
                         {caseStudy.architecture.description}
                       </p>
                       <div className="space-y-6">
-                        {caseStudy.architecture.steps.map((step: any, i: number) => (
+                        {caseStudy.architecture.steps.map((step: { title: string; desc: string }, i: number) => (
                           <div key={i} className="flex gap-4">
                             <div className="flex-shrink-0 w-6 h-6 rounded-full bg-white/10 text-white/50 flex items-center justify-center text-xs font-mono">
                               {i + 1}
@@ -166,7 +165,7 @@ export default function ProjectsPage() {
                         Key Challenges & Fixes
                       </h3>
                       <div className="grid gap-6">
-                        {caseStudy.challenges.map((challenge: any, i: number) => (
+                        {caseStudy.challenges.map((challenge: { title: string; description: string; fix: string }, i: number) => (
                           <div key={i} className="p-5 rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-xl space-y-3">
                             <h4 className="text-base font-medium text-white/80 flex items-center gap-2">
                               <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
@@ -190,7 +189,7 @@ export default function ProjectsPage() {
                         Impact & Metrics
                       </h3>
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                        {caseStudy.metrics.map((metric: any, i: number) => (
+                        {caseStudy.metrics.map((metric: { value: string; label: string }, i: number) => (
                           <div key={i} className="p-5 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-xl flex flex-col justify-center">
                             <div className="text-2xl sm:text-3xl font-bold mb-2 tracking-tight" style={{ color: caseStudy.color }}>
                               {metric.value}

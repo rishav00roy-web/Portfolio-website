@@ -53,7 +53,26 @@ export const projects = [
   },
 ];
 
-export const caseStudiesData: Record<number, any> = {
+export interface CaseStudy {
+  title: string;
+  tagline: string;
+  client: string;
+  period: string;
+  color: string;
+  tags: string[];
+  links: { label: string; url: string; icon?: string }[];
+  problem: string;
+  solution: string;
+  architecture: {
+    description: string;
+    steps: { title: string; desc: string }[];
+  };
+  challenges: { title: string; description: string; fix: string }[];
+  metrics: { value: string; label: string }[];
+  businessValue: string;
+}
+
+export const caseStudiesData: Record<number, CaseStudy> = {
   1: {
     title: "Tea Country Holidays",
     tagline: "Commercial travel booking platform and bespoke rate-management CMS",
