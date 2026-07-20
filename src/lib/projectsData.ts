@@ -67,7 +67,7 @@ export const caseStudiesData: Record<number, any> = {
     ],
     tags: ["Next.js 14", "React 19", "Supabase", "PostgreSQL", "Tailwind CSS", "Python (ReportLab)", "PKCE OAuth"],
     links: [
-      { label: "Live Demo", url: "https://tea-country-holidays.vercel.app", icon: "live" }
+      { label: "Live Site", url: "https://tea-country-holidays.vercel.app", icon: "live" }
     ],
     problem: "The client operated manually with Excel sheets and static Word files. Generating personalized itineraries, updating rates for dozens of destinations, and managing packages caused extreme administrative lag and conversion drops.",
     solution: "Built a custom database-driven travel CMS using Next.js and Supabase. Features a rate-calculation engine, an admin panel with PKCE OAuth authentication, and a Python ReportLab microservice that converts destination packets into client-ready PDFs dynamically.",
