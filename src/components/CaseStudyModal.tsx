@@ -124,7 +124,7 @@ export default function CaseStudyModal({ projectId, onClose }: CaseStudyModalPro
 
               {/* Action Links */}
               <div className="flex flex-wrap gap-4 border-b border-white/5 pb-8 relative z-10">
-                {data.links.map((link: { label: string; url: string; icon: string }) => (
+                {data.links.map((link: { label: string; url: string; icon?: string }) => (
                   <a
                     key={link.url}
                     href={link.url}

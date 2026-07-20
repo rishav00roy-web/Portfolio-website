@@ -70,6 +70,8 @@ export interface CaseStudy {
   challenges: { title: string; description: string; fix: string }[];
   metrics: { value: string; label: string }[];
   businessValue: string;
+  lessons?: string;
+  futureImprovements?: string;
 }
 
 export const caseStudiesData: Record<number, CaseStudy> = {

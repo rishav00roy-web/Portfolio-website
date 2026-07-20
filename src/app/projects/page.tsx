@@ -88,7 +88,7 @@ export default function ProjectsPage() {
                     </div>
 
                     <div className="pt-4 flex flex-col gap-4">
-                      {caseStudy.links.map((link: { url: string; label: string; icon: string }, i: number) => (
+                      {caseStudy.links.map((link: { url: string; label: string; icon?: string }, i: number) => (
                         <a
                           key={i}
                           href={link.url}
