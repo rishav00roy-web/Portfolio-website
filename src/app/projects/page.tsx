@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { caseStudiesData, projects } from "../../lib/projectsData";
 import { ExternalLink, GitBranch, ArrowLeft, Terminal, Layout, ShieldAlert } from "lucide-react";
+import KineticGrid from "../../components/KineticGrid";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -15,7 +16,10 @@ export default function ProjectsPage() {
   }));
 
   return (
-    <div className="min-h-screen bg-[#030303] text-white selection:bg-white/20">
+    <div className="min-h-screen bg-[#030303] text-white selection:bg-white/20 relative">
+      <KineticGrid spacing={44} radius={260} baseOpacity={0.05} />
+      
+      <div className="relative z-10">
       {/* Header */}
       <header className="sticky top-0 z-50 w-full backdrop-blur-xl border-b border-white/5 bg-[#030303]/80">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -214,6 +218,7 @@ export default function ProjectsPage() {
       <footer className="py-12 border-t border-white/5 text-center text-sm text-white/30 font-mono">
         Rishav Roy — Case Studies Archive
       </footer>
+      </div>
     </div>
   );
 }
