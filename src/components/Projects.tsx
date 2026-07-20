@@ -25,8 +25,8 @@ const projects = [
     id: 2,
     title: "Gym CRM (IQ Iron Fitness)",
     description:
-      "A straightforward membership management CRM designed, developed, and successfully sold to a local gym. The system provides a simple interface for tracking fees and membership details for over 500 members, utilizing Tesseract.js OCR for card scanning and WhatsApp messaging integration.",
-    tags: ["HTML", "JavaScript", "OCR (Tesseract)", "WhatsApp API", "Billing Engine"],
+      "A lightweight CRM for gym owners featuring member management, WhatsApp messaging, and a membership expiry tracker. Built as a standalone application optimized for Chrome and Edge, providing a simple interface for tracking fees and membership details.",
+    tags: ["HTML", "CSS", "JavaScript", "WhatsApp API", "Member Management"],
     link: "https://github.com/rishav00roy-web/Gym-CRM",
     images: [
       "/assets/projects/gym-1.jpg",
