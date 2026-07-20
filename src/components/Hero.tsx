@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 import { useEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform, useSpring, useReducedMotion, AnimatePresence } from "framer-motion";
@@ -209,15 +210,12 @@ export default function Hero() {
               }
               className="mt-6 flex flex-wrap gap-4 z-30 pointer-events-auto"
             >
-              <button
-                onClick={() => {
-                  const el = document.getElementById("projects");
-                  el?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="px-6 py-3.5 rounded-full bg-white text-black font-semibold text-xs sm:text-sm hover:bg-white/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
+              <Link
+                href="/projects"
+                className="inline-block px-6 py-3.5 rounded-full bg-white text-black font-semibold text-xs sm:text-sm hover:bg-white/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
               >
-                View Commercial Projects
-              </button>
+                Case Studies
+              </Link>
               <button
                 onClick={() => {
                   const el = document.querySelector("footer");

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Search, Moon, Sun, BookOpen, FileText, CornerDownLeft, Mail, Phone, Compass, Laptop } from "lucide-react";
 
@@ -16,6 +17,7 @@ export default function CommandMenu({ onOpenCaseStudy }: CommandMenuProps) {
   const [readingMode, setReadingMode] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   // Sync theme with DOM
   useEffect(() => {
@@ -85,12 +87,11 @@ export default function CommandMenu({ onOpenCaseStudy }: CommandMenuProps) {
     },
     {
       category: "Navigation",
-      label: "View Commercial Projects",
+      label: "View Case Studies",
       icon: <Laptop className="w-4 h-4" />,
       action: () => {
-        const el = document.getElementById("projects");
-        el?.scrollIntoView({ behavior: "smooth" });
         setIsOpen(false);
+        router.push("/projects");
       },
     },
     {

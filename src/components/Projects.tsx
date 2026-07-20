@@ -7,47 +7,7 @@ import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "fr
 import { ArrowUpRight } from "lucide-react";
 import CaseStudyModal from "./CaseStudyModal";
 
-const projects = [
-  {
-    id: 1,
-    title: "Tea Country Holidays",
-    description:
-      "A complete travel booking platform accompanied by a custom rate management CMS, developed for a travel agency client. I designed the CMS architecture to support 94+ packages spanning 24 destinations, while also automating the creation of client-ready PDF itineraries.",
-    tags: ["Next.js 14", "React 19", "Supabase", "PostgreSQL", "Tailwind CSS", "Python (ReportLab)", "PKCE OAuth"],
-    link: "https://tea-country-holidays.vercel.app",
-    images: [
-      "/assets/projects/tea-1.jpg",
-      "/assets/projects/tea-2.jpg",
-      "/assets/projects/tea-3.jpg",
-    ],
-  },
-  {
-    id: 2,
-    title: "Gym CRM (IQ Iron Fitness)",
-    description:
-      "A lightweight CRM for gym owners featuring member management, WhatsApp messaging, and a membership expiry tracker. Built as a standalone application optimized for Chrome and Edge, providing a simple interface for tracking fees and membership details.",
-    tags: ["HTML", "CSS", "JavaScript", "WhatsApp API", "Member Management"],
-    link: "https://github.com/rishav00roy-web/Gym-CRM",
-    images: [
-      "/assets/projects/gym-1.jpg",
-      "/assets/projects/gym-2.jpg",
-      "/assets/projects/gym-3.jpg",
-    ],
-  },
-  {
-    id: 3,
-    title: "ClashVault",
-    description:
-      "An escrow-secured digital asset marketplace created for the community of a Clash of Clans YouTube creator. This platform manages transaction validation, integrates Razorpay and PayPal for payments, and maintains a secure holding ledger.",
-    tags: ["Next.js", "Supabase", "Razorpay", "PayPal", "Escrow Engine", "PostgreSQL"],
-    link: "https://github.com/rishav00roy-web/ClashVault",
-    images: [
-      "/assets/projects/clash-1.jpg",
-      "/assets/projects/clash-2.jpg",
-      "/assets/projects/clash-3.jpg",
-    ],
-  },
-];
+import { projects } from "../lib/projectsData";
 
 type Project = {
   id: number;
