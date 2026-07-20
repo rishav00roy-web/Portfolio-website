@@ -217,7 +217,8 @@ interface ProjectsProps {
 
 export default function Projects({ activeProjectId, setActiveProjectId }: ProjectsProps) {
   const outerRef = useRef<HTMLDivElement>(null);
-  const count = projects.length;
+  const commercialProjects = projects.filter(p => p.id !== 4);
+  const count = commercialProjects.length;
   const reducedMotion = useReducedMotion();
 
   const { scrollYProgress } = useScroll({
@@ -255,7 +256,7 @@ export default function Projects({ activeProjectId, setActiveProjectId }: Projec
       >
         <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center">
           <motion.div style={{ x: trackX }} className="flex h-full">
-            {projects.map((project, i) => (
+            {commercialProjects.map((project, i) => (
               <Card
                 key={project.id}
                 project={project}
