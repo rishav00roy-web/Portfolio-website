@@ -196,6 +196,7 @@ export const caseStudiesData: Record<number, any> = {
     ],
     tags: ["Next.js 14", "Framer Motion", "Tailwind CSS", "React 19", "Vercel"],
     links: [
+      { label: "Live Site", url: "https://byrishav.online", icon: "live" },
       { label: "GitHub Code", url: "https://github.com/rishav00roy-web/Portfolio-website", icon: "github" }
     ],
     problem: "Traditional developer portfolios often lack character and fail to demonstrate actual front-end engineering skills. I needed a platform that not only lists my projects but serves as a living, interactive proof of my ability to build polished, performant UIs.",
