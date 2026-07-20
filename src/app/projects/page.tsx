@@ -136,7 +136,7 @@ export default function ProjectsPage() {
                     </div>
 
                     {/* Architecture */}
-                    <section className="bg-white/5 rounded-2xl p-6 sm:p-8 border border-white/5">
+                    <section className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 sm:p-8 border border-white/10 shadow-2xl">
                       <h3 className="text-lg font-medium mb-2 flex items-center gap-2">
                         <Layout className="w-5 h-5 text-white/40" />
                         Architecture & Flow
@@ -167,13 +167,16 @@ export default function ProjectsPage() {
                       </h3>
                       <div className="grid gap-6">
                         {caseStudy.challenges.map((challenge: any, i: number) => (
-                          <div key={i} className="pl-4 border-l-2 border-white/10 space-y-3">
-                            <h4 className="text-base font-medium text-white/80">{challenge.title}</h4>
-                            <p className="text-sm text-white/40 leading-relaxed">
-                              <strong className="text-white/60 font-medium">Issue:</strong> {challenge.description}
+                          <div key={i} className="p-5 rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-xl space-y-3">
+                            <h4 className="text-base font-medium text-white/80 flex items-center gap-2">
+                              <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+                              {challenge.title}
+                            </h4>
+                            <p className="text-sm text-white/50 leading-relaxed">
+                              <strong className="text-white/70 font-medium">Issue:</strong> {challenge.description}
                             </p>
-                            <p className="text-sm text-white/40 leading-relaxed">
-                              <strong className="text-white/60 font-medium">Fix:</strong> {challenge.fix}
+                            <p className="text-sm text-white/50 leading-relaxed">
+                              <strong className="text-white/70 font-medium">Fix:</strong> {challenge.fix}
                             </p>
                           </div>
                         ))}
@@ -188,11 +191,11 @@ export default function ProjectsPage() {
                       </h3>
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                         {caseStudy.metrics.map((metric: any, i: number) => (
-                          <div key={i} className="p-4 rounded-xl bg-white/5 border border-white/5">
-                            <div className="text-2xl font-medium mb-2" style={{ color: caseStudy.color }}>
+                          <div key={i} className="p-5 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-xl flex flex-col justify-center">
+                            <div className="text-2xl sm:text-3xl font-bold mb-2 tracking-tight" style={{ color: caseStudy.color }}>
                               {metric.value}
                             </div>
-                            <div className="text-[10px] uppercase tracking-wider font-mono text-white/40">
+                            <div className="text-[10px] uppercase tracking-widest font-mono text-white/50 font-semibold">
                               {metric.label}
                             </div>
                           </div>
