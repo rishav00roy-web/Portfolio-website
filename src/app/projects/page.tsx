@@ -15,14 +15,10 @@ export default function ProjectsPage() {
   }));
 
   return (
-    <div className="min-h-screen bg-[#030303] text-white selection:bg-white/20 relative">
-      {/* Kinetic Grid Background */}
-      <div className="fixed inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:30px_30px] pointer-events-none z-0" />
-
-      <div className="relative z-10">
-        {/* Header */}
-        <header className="sticky top-0 z-50 w-full backdrop-blur-xl border-b border-white/5 bg-[#030303]/80">
-          <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <div className="min-h-screen bg-[#030303] text-white selection:bg-white/20">
+      {/* Header */}
+      <header className="sticky top-0 z-50 w-full backdrop-blur-xl border-b border-white/5 bg-[#030303]/80">
+        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/" className="text-white/70 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium">
             <ArrowLeft className="w-4 h-4" />
             Back to Home
@@ -218,7 +214,6 @@ export default function ProjectsPage() {
       <footer className="py-12 border-t border-white/5 text-center text-sm text-white/30 font-mono">
         Rishav Roy — Case Studies Archive
       </footer>
-      </div>
     </div>
   );
 }
