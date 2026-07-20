@@ -195,7 +195,7 @@ export default function Hero() {
               }
               className="max-w-2xl text-lg sm:text-2xl text-white/70 font-medium leading-snug font-sans"
             >
-              I build high-performance commercial web applications and rate-management systems that solve real business problems.
+              I build and launch robust web applications and rate management systems tailored to solve concrete operational challenges.
             </motion.p>
 
             {/* Above-the-fold CTA buttons */}
@@ -264,7 +264,7 @@ export default function Hero() {
                   Based in
                 </p>
                 <p className="text-white/80">Kolkata, India</p>
-                <p className="text-white/50 text-[10px]">Originally Jorhat, Assam</p>
+                <p className="text-white/50 text-[10px]">(originally from Jorhat, Assam)</p>
               </div>
               <div>
                 <p className="text-white/30 uppercase tracking-widest mb-2">

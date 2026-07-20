@@ -60,46 +60,46 @@ export default function About() {
     {
       role: "FOIA Specialist",
       company: "SSB Media Pvt. Ltd.",
-      period: "Jan 2025 – Jul 2026",
+      period: "Jan 2025 to Jul 2026",
       isRemote: true,
       bullets: [
-        "Managed high-volume Freedom of Information Act (FOIA) requests (1,500+ total requests submitted) in a fully remote environment.",
-        "Coordinated with U.S. police departments and public agencies to obtain body-worn camera footage (processed 60+ files monthly) and public records.",
-        "Maintained accurate documentation, tracked deadlines, and ensured compliance across multiple jurisdictions, maintaining a database of 100+ agencies.",
-        "Communicated professionally through email and phone while managing multiple concurrent cases (sustaining 300–400 weekly emails).",
-        "Demonstrated strong time management, written communication, and independent problem-solving in an asynchronous remote workflow.",
+        "Processed a massive volume of Freedom of Information Act requests (1,500+ submitted) while working fully remotely.",
+        "Collaborated with U.S. police departments and public agencies to secure body-worn camera footage (processing 60+ files monthly) along with other public records.",
+        "Ensured accurate documentation, monitored strict deadlines, and upheld compliance across various jurisdictions while overseeing a database of 100+ agencies.",
+        "Managed multiple simultaneous cases via professional email and phone correspondence, handling between 300 and 400 emails each week.",
+        "Developed exceptional time management, written communication, and autonomous problem-solving abilities within an asynchronous remote work environment.",
       ],
     },
     {
       role: "HR, Administration & Purchase",
       company: "3RM Management Limited",
-      period: "Jan 2023 – Jan 2024",
+      period: "Jan 2023 to Jan 2024",
       bullets: [
-        "Directed HR operations for 30–40 field employees and 8–10 office staff.",
-        "Managed INR 4–5 lakh in biweekly operational funds covering procurement and administrative expenses across departments.",
-        "Prepared quotations of up to INR 5,10,000 for rural energy infrastructure projects.",
+        "Directed HR operations supporting a team of 30 to 40 field employees and 8 to 10 office staff members.",
+        "Administered INR 4 to 5 lakh in biweekly operational budgets covering procurement and general administrative expenses.",
+        "Drafted project quotations reaching up to INR 5,10,000 for various rural energy infrastructure initiatives.",
       ],
     },
     {
       role: "Assistant Manager",
       company: "Yogesh Commercial Pvt. Ltd. (YCPL)",
-      period: "Jan 2021 – Jan 2023",
+      period: "Jan 2021 to Jan 2023",
       bullets: [
-        "Oversaw daily operations for a team of 30–40 laborers and 8–10 office staff.",
-        "Recruited and hired 15 sales representatives within a 2–3 week window.",
-        "Allocated INR 8–10 lakh in monthly funds toward sourcing and logistics for active rural energy infrastructure projects.",
-        "Modernized decades of paper account records using OCR and Claude AI, replacing manual physical archives — an early hands-on introduction to AI-orchestrated workflows.",
+        "Supervised day-to-day operations for a workforce comprising 30 to 40 laborers and 8 to 10 office employees.",
+        "Sourced and onboarded 15 new sales representatives during a tight 2 to 3 week timeframe.",
+        "Distributed INR 8 to 10 lakh on a monthly basis to manage sourcing and logistics for ongoing rural energy infrastructure developments.",
+        "Converted decades of physical account files into digital formats using OCR and Claude AI, completely phasing out paper archives. This initiative served as my introduction to practical AI-orchestrated workflows.",
       ],
     },
     {
       role: "Founder & COO",
       company: "Shangrila Enterprise",
-      period: "Jan 2020 – Jan 2021",
+      period: "Jan 2020 to Jan 2021",
       bullets: [
-        "Founded and ran an independent commodity trading venture, hiring laborers on an as-needed basis (5–6 at a time).",
-        "Grew the venture to INR 3.5 Cr in cumulative turnover, with individual transactions as large as INR 1.4 Cr.",
-        "Owned compliance, procurement, and logistics end-to-end across 95+ locations in India.",
-        "Sustained relationships with international buyers across Japan, China, and Russia.",
+        "Established and operated an independent commodity trading business, bringing on laborers on an as-needed basis (typically 5 to 6 concurrently).",
+        "Grew the business to achieve INR 3.5 Cr in total cumulative turnover, securing individual transactions valued up to INR 1.4 Cr.",
+        "Managed all aspects of compliance, procurement, and logistics from start to finish across 95+ locations throughout India.",
+        "Cultivated and sustained strong business relationships with international clients located in Japan, China, and Russia.",
       ],
     },
   ];
@@ -157,36 +157,36 @@ export default function About() {
                 variants={fadeUp}
                 className="text-2xl sm:text-3xl text-white/95 leading-relaxed font-sans font-medium"
               >
-                I got into software development by building commercial websites for
-                real clients. From the beginning, I was drawn to solving real
-                business problems rather than simply learning programming
-                languages. Today, I design and build production software that
-                focuses on reliability, maintainability, and measurable business
-                value.
+                My entry into software development began with delivering commercial
+                websites for paying clients. My priority has always been to solve
+                actual business challenges rather than simply writing code for
+                practice. Today, I create and launch production-ready software with
+                a strong emphasis on reliability, easy maintenance, and clear
+                business value.
               </motion.p>
               <motion.p
                 variants={fadeUp}
                 className="text-lg sm:text-xl text-white/80 leading-relaxed font-sans"
               >
-                I treat AI as a productivity multiplier, not a replacement for
-                engineering. It helps me move faster through architecture,
-                debugging, testing, and repetitive tasks, but every technical
-                decision is mine. I design the systems, review every line that
-                matters, validate the results, and take full responsibility for
-                what reaches production. If something breaks, I own it.
+                I view AI as a productivity enhancer rather than a replacement for
+                sound engineering judgment. While it accelerates system architecture,
+                debugging, testing, and routine tasks, all technical decisions
+                remain firmly in my hands. I architect the systems, examine every
+                critical line of code, validate the outcomes, and assume total
+                responsibility for the final product. Any failures fall squarely on my shoulders.
               </motion.p>
               <motion.p
                 variants={fadeUp}
                 className="text-lg sm:text-xl text-white/80 leading-relaxed font-sans"
               >
-                Before becoming a full-time developer, I spent more than six years
-                in operations, working across HR, procurement, business
-                administration, compliance, and team leadership. That experience
-                fundamentally changed how I approach software. I understand the
-                constraints businesses operate under because I&apos;ve worked on
-                the other side of the table. I don&apos;t build features for the
-                sake of shipping code. I build software that solves problems,
-                improves workflows, and creates measurable value.
+                Prior to transitioning into full-time development, I gained over
+                six years of operational experience spanning HR, procurement, business
+                administration, compliance, and team leadership. This professional
+                background deeply influences my current approach to building software.
+                Having experienced the operational side firsthand, I recognize the
+                practical constraints that businesses face. My goal is never to write
+                code just for the sake of it; instead, I engineer solutions that resolve
+                genuine issues, streamline workflows, and deliver measurable results.
               </motion.p>
             </motion.div>
 

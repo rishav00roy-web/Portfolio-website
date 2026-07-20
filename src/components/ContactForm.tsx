@@ -65,7 +65,7 @@ export default function ContactForm() {
         Send a Message
       </h3>
       <p className="text-white/50 text-xs sm:text-sm font-sans mb-8">
-        Have a project or open role? Get in touch and let&apos;s coordinate.
+        Have a new project or an open role to discuss? Get in touch and let&apos;s explore the possibilities.
       </p>
 
       {status === "success" ? (
@@ -185,7 +185,7 @@ export default function ContactForm() {
           {/* Expected Response Info */}
           <div className="flex items-center gap-2 text-white/40 font-mono text-[10px] uppercase tracking-widest">
             <Clock className="w-3.5 h-3.5" />
-            <span>Response expectations: 12-24 Hours</span>
+            <span>Typical response time: 12 to 24 hours</span>
           </div>
 
           {/* Form CTAs */}

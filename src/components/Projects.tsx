@@ -12,7 +12,7 @@ const projects = [
     id: 1,
     title: "Tea Country Holidays",
     description:
-      "Commercial travel booking platform and bespoke rate-management CMS built for a travel agency client. Architected a custom CMS managing 94+ packages across 24 destinations, and automated client-ready PDF itinerary generation.",
+      "A complete travel booking platform accompanied by a custom rate management CMS, developed for a travel agency client. I designed the CMS architecture to support 94+ packages spanning 24 destinations, while also automating the creation of client-ready PDF itineraries.",
     tags: ["Next.js 14", "React 19", "Supabase", "PostgreSQL", "Tailwind CSS", "Python (ReportLab)", "PKCE OAuth"],
     link: "https://tea-country-holidays.vercel.app",
     images: [
@@ -25,8 +25,8 @@ const projects = [
     id: 2,
     title: "Gym CRM (IQ Iron Fitness)",
     description:
-      "Commercial membership management CRM and offline-first onboarding solution designed, built, and sold to a local gym. Manages 500+ members with Tesseract.js OCR card scanning, offline IndexedDB backup, and WhatsApp notifications.",
-    tags: ["HTML", "JavaScript", "OCR (Tesseract)", "WhatsApp API", "Billing Engine", "IndexedDB"],
+      "A membership management CRM featuring an offline-first onboarding process, which I designed, developed, and successfully sold to a local gym. The system handles 500+ members utilizing Tesseract.js OCR to scan cards, an IndexedDB offline backup layer, and WhatsApp messaging integration.",
+    tags: ["HTML", "JavaScript", "OCR (Tesseract)", "WhatsApp API", "Billing Engine", "IndexedDB", "Offline Web App"],
     link: "https://github.com/rishav00roy-web/Gym-CRM",
     images: [
       "/assets/projects/gym-1.jpg",
@@ -38,7 +38,7 @@ const projects = [
     id: 3,
     title: "ClashVault",
     description:
-      "Escrow-secured gaming digital assets marketplace built for a Clash of Clans YouTube creator's community. Features transaction validation, Razorpay and PayPal payment gateways, and a secure holding ledger.",
+      "An escrow-secured digital asset marketplace created for the community of a Clash of Clans YouTube creator. This platform manages transaction validation, integrates Razorpay and PayPal for payments, and maintains a secure holding ledger.",
     tags: ["Next.js", "Supabase", "Razorpay", "PayPal", "Escrow Engine", "PostgreSQL"],
     link: "https://github.com/rishav00roy-web/ClashVault",
     images: [

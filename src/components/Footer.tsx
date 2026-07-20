@@ -175,7 +175,7 @@ export default function Footer() {
               download="Rishav-Roy-Resume.pdf"
               label="Resume"
               username="Download PDF"
-              bio="PDF resume — updated July 2026."
+              bio="Updated July 2026."
               icon={<FileText className="w-5 h-5" />}
               accentColor="#F5B301"
               initials="CV"
@@ -185,7 +185,7 @@ export default function Footer() {
               href="https://github.com/rishav00roy-web"
               label="GitHub"
               username="@rishav00roy-web"
-              bio="Full-stack projects, AI-orchestrated builds, and experiments."
+              bio="Showcasing full-stack builds, AI-orchestrated projects, and technical experiments."
               icon={<GithubIcon />}
               accentColor="#2EA44F"
               initials="GH"
@@ -194,7 +194,7 @@ export default function Footer() {
               href="https://www.linkedin.com/in/rishav-roy-858b0b365/"
               label="LinkedIn"
               username="Rishav Roy"
-              bio="Full-stack developer. Open to opportunities."
+              bio="Full-stack developer actively open to new opportunities."
               icon={<LinkedinIcon />}
               accentColor="#0A66C2"
               initials="in"
@@ -203,7 +203,7 @@ export default function Footer() {
               href="https://instagram.com/justbeingpsunk_"
               label="Instagram"
               username="@justbeingpsunk_"
-              bio="Life outside the code."
+              bio="Glimpses of life beyond the screen."
               icon={<InstagramIcon />}
               accentColor="#E1306C"
               initials="IG"
@@ -212,7 +212,7 @@ export default function Footer() {
               href="mailto:rishav2000roy@gmail.com"
               label="Gmail"
               username="rishav2000roy@gmail.com"
-              bio="Direct professional email contact. Available for commercial builds."
+              bio="Direct contact for commercial builds and professional inquiries."
               icon={<MailIcon />}
               accentColor="#EA4335"
               initials="GM"
@@ -221,7 +221,7 @@ export default function Footer() {
               href="tel:+916001914771"
               label="Phone"
               username="+91 60019 14771"
-              bio="Voice or WhatsApp communication. Available for inquiries."
+              bio="Available for voice calls or WhatsApp messages regarding new inquiries."
               icon={<PhoneIcon />}
               accentColor="#34A853"
               initials="PH"

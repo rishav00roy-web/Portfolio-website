@@ -33,7 +33,7 @@ export default function Certificates() {
             Certificates
           </h2>
           <p className="font-mono text-sm sm:text-base text-white/50 max-w-2xl">
-            Continuous learning and skill development.
+            Always advancing through continuous learning, earning one credential at a time.
           </p>
         </motion.div>
 
