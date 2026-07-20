@@ -8,7 +8,7 @@ import { Award } from "lucide-react";
 
 const currentlyItems = [
   "Tea Country Holidays",
-  "Gym CRM (Offline Web App)",
+  "Gym CRM",
   "ClashVault (In Progress)"
 ];
 

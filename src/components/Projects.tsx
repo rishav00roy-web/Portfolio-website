@@ -25,8 +25,8 @@ const projects = [
     id: 2,
     title: "Gym CRM (IQ Iron Fitness)",
     description:
-      "A membership management CRM featuring an offline-first onboarding process, which I designed, developed, and successfully sold to a local gym. The system handles 500+ members utilizing Tesseract.js OCR to scan cards, an IndexedDB offline backup layer, and WhatsApp messaging integration.",
-    tags: ["HTML", "JavaScript", "OCR (Tesseract)", "WhatsApp API", "Billing Engine", "IndexedDB", "Offline Web App"],
+      "A straightforward membership management CRM designed, developed, and successfully sold to a local gym. The system provides a simple interface for tracking fees and membership details for over 500 members, utilizing Tesseract.js OCR for card scanning and WhatsApp messaging integration.",
+    tags: ["HTML", "JavaScript", "OCR (Tesseract)", "WhatsApp API", "Billing Engine"],
     link: "https://github.com/rishav00roy-web/Gym-CRM",
     images: [
       "/assets/projects/gym-1.jpg",
@@ -115,7 +115,7 @@ function Card({
   const count = projects.length;
   const [status, setStatus] = useState<ProjectStatus | null>(
     project.id === 2
-      ? { text: "Offline Web App", isRepo: true }
+      ? { text: "Repository", isRepo: true }
       : project.id === 3
       ? { text: "In Progress", isRepo: true }
       : null
