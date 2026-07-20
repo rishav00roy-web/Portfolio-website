@@ -60,7 +60,7 @@ export default function ContactForm() {
   }, [showCalendly]);
 
   return (
-    <div className="w-full max-w-xl bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl relative">
+    <div className="w-full max-w-xl bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl relative">
       <h3 className="font-display text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-white mb-2">
         Send a Message
       </h3>
@@ -99,7 +99,7 @@ export default function ContactForm() {
                 setFormData({ ...formData, name: e.target.value });
                 if (errors.name) setErrors({ ...errors, name: "" });
               }}
-              className={`w-full bg-white/5 border ${
+              className={`w-full bg-white/5 backdrop-blur-md border ${
                 errors.name ? "border-rose-500/50 focus:border-rose-500" : "border-white/10 focus:border-accent"
               } rounded-xl px-4 py-3 text-white outline-none transition-colors text-sm font-sans`}
               placeholder="e.g. Jane Doe"
@@ -125,7 +125,7 @@ export default function ContactForm() {
                 setFormData({ ...formData, email: e.target.value });
                 if (errors.email) setErrors({ ...errors, email: "" });
               }}
-              className={`w-full bg-white/5 border ${
+              className={`w-full bg-white/5 backdrop-blur-md border ${
                 errors.email ? "border-rose-500/50 focus:border-rose-500" : "border-white/10 focus:border-accent"
               } rounded-xl px-4 py-3 text-white outline-none transition-colors text-sm font-sans`}
               placeholder="jane@company.com"
@@ -147,7 +147,7 @@ export default function ContactForm() {
               id="form-type"
               value={formData.type}
               onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-              className="w-full bg-[#121212] border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-accent transition-colors text-sm font-sans"
+              className="w-full bg-white/5 backdrop-blur-md border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-accent transition-colors text-sm font-sans"
             >
               <option value="contract">Freelance Contract / Project</option>
               <option value="recruit">Full-time Recruitment Opportunity</option>
@@ -169,7 +169,7 @@ export default function ContactForm() {
                 if (errors.message) setErrors({ ...errors, message: "" });
               }}
               rows={4}
-              className={`w-full bg-white/5 border ${
+              className={`w-full bg-white/5 backdrop-blur-md border ${
                 errors.message ? "border-rose-500/50 focus:border-rose-500" : "border-white/10 focus:border-accent"
               } rounded-xl px-4 py-3 text-white outline-none transition-colors text-sm font-sans resize-none`}
               placeholder="Outline your project scope or job description..."
@@ -224,7 +224,7 @@ export default function ContactForm() {
       {showCalendly && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/85 backdrop-blur-sm" onClick={() => setShowCalendly(false)} />
-          <div className="relative w-full max-w-4xl h-[85vh] bg-[#0c0c0c] border border-white/10 rounded-2xl overflow-hidden shadow-2xl flex flex-col z-10 animate-in fade-in zoom-in-95 duration-200">
+          <div className="relative w-full max-w-4xl h-[85vh] bg-[#0c0c0c]/80 backdrop-blur-2xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl flex flex-col z-10 animate-in fade-in zoom-in-95 duration-200">
             <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between">
               <span className="font-mono text-xs uppercase tracking-widest text-white/40">
                 Book a Call with Rishav

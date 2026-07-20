@@ -145,7 +145,7 @@ export default function CaseStudyModal({ projectId, onClose }: CaseStudyModalPro
               </div>
 
               {/* Grid Metadata */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-white/5 border border-white/10 p-6 rounded-2xl">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-white/5 backdrop-blur-xl shadow-xl border border-white/10 p-6 rounded-2xl">
                 <div>
                   <span className="block font-mono text-[10px] uppercase tracking-widest text-white/40">Client</span>
                   <span className="block text-sm font-medium mt-1 text-white">{data.client}</span>
@@ -213,7 +213,7 @@ export default function CaseStudyModal({ projectId, onClose }: CaseStudyModalPro
                 </p>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 relative">
                   {data.architecture.steps.map((step: { title: string; desc: string }, index: number) => (
-                    <div key={step.title} className="relative border border-white/10 bg-[#0f0f0f] p-5 rounded-xl flex flex-col">
+                    <div key={step.title} className="relative border border-white/10 bg-[#0f0f0f]/80 backdrop-blur-xl shadow-xl p-5 rounded-xl flex flex-col">
                       <span className="absolute top-4 right-4 font-mono text-xs text-white/20 font-bold">
                         0{index + 1}
                       </span>
@@ -235,7 +235,7 @@ export default function CaseStudyModal({ projectId, onClose }: CaseStudyModalPro
                 </h3>
                 <div className="space-y-6">
                   {data.challenges.map((challenge: { title: string; description: string; fix: string }) => (
-                    <div key={challenge.title} className="border border-white/10 bg-[#0c0c0c] p-6 rounded-xl space-y-3">
+                    <div key={challenge.title} className="border border-white/10 bg-[#0c0c0c]/80 backdrop-blur-xl shadow-xl p-6 rounded-xl space-y-3">
                       <div className="flex items-start gap-2.5 text-rose-500 font-bold text-sm sm:text-base uppercase tracking-wider font-mono">
                         <ShieldAlert className="w-5 h-5 flex-shrink-0" />
                         <span>{challenge.title}</span>
