@@ -103,10 +103,10 @@ function Card({
     [0.94, 1.08, 1.08, 0.94]
   );
 
-  const leftY = useTransform(scrollYProgress, [start, end], [-90, 90]);
-  const rightY = useTransform(scrollYProgress, [start, end], [90, -90]);
-  const leftX = useTransform(scrollYProgress, [start, end], [-45, 15]);
-  const rightX = useTransform(scrollYProgress, [start, end], [45, -15]);
+  const leftY = useTransform(scrollYProgress, [start, end], ["-30%", "30%"]);
+  const rightY = useTransform(scrollYProgress, [start, end], ["30%", "-30%"]);
+  const leftX = useTransform(scrollYProgress, [start, end], ["-15%", "5%"]);
+  const rightX = useTransform(scrollYProgress, [start, end], ["15%", "-5%"]);
   const leftRotate = useTransform(scrollYProgress, [start, end], [-12, 3]);
   const rightRotate = useTransform(scrollYProgress, [start, end], [12, -3]);
 
