@@ -122,8 +122,8 @@ function Card({
   const rightRotate = useTransform(scrollYProgress, [start, end], [12, -3]);
 
   return (
-    <div className="relative w-screen h-full flex items-center justify-center px-4 sm:px-12 xl:px-24 shrink-0">
-      <div className="w-full max-w-7xl relative h-[75vh] sm:h-[80vh] rounded-[2.5rem] overflow-y-auto lg:overflow-hidden overflow-x-hidden shadow-2xl bg-white/5 backdrop-blur-xl border border-white/10 flex flex-col lg:flex-row p-5 sm:p-12 xl:p-16 gap-3 sm:gap-4 lg:gap-12">
+    <div className="relative w-full lg:w-screen h-auto lg:h-full flex items-center justify-center px-4 sm:px-12 xl:px-24 shrink-0 py-4 lg:py-0">
+      <div className="w-full max-w-7xl relative h-auto lg:h-[75vh] sm:lg:h-[80vh] rounded-[2.5rem] overflow-hidden shadow-2xl bg-white/5 backdrop-blur-xl border border-white/10 flex flex-col lg:flex-row p-5 sm:p-12 xl:p-16 gap-3 sm:gap-4 lg:gap-12">
 
         {/* Text content */}
         <div className="w-full lg:w-[38%] flex flex-col justify-start lg:justify-center z-10 pb-2 lg:pb-0 shrink-0">
@@ -167,7 +167,7 @@ function Card({
         </div>
 
         {/* Image collage */}
-        <div className="w-full lg:w-[62%] flex-1 min-h-[22vh] lg:h-full relative flex items-center justify-center z-10 overflow-hidden lg:overflow-visible mt-2 sm:mt-0 pb-4 sm:pb-0">
+        <div className="w-full lg:w-[62%] flex-1 min-h-[250px] sm:min-h-[350px] lg:min-h-0 lg:h-full relative flex items-center justify-center z-10 overflow-hidden lg:overflow-visible mt-6 sm:mt-8 pb-4 sm:pb-0">
           <div className="relative w-[100%] sm:w-[90%] h-[100%] sm:h-[90%] flex items-center justify-center">
             {/* Left card */}
             {isMobile || reducedMotion ? (
@@ -263,10 +263,10 @@ export default function Projects({ activeProjectId, setActiveProjectId }: Projec
       <div
         ref={outerRef}
         className="relative"
-        style={{ height: `${(count - 1) * 100 + 100}vh` }}
+        style={isMobile ? {} : { height: `${(count - 1) * 100 + 100}vh` }}
       >
-        <div className="sticky top-0 h-[100vh] w-full overflow-hidden flex items-center">
-          <motion.div style={{ x: trackX }} className="flex h-full">
+        <div className="relative lg:sticky top-0 h-auto lg:h-[100vh] w-full overflow-hidden flex items-center">
+          <motion.div style={isMobile ? {} : { x: trackX }} className="flex flex-col lg:flex-row h-auto lg:h-full w-full gap-8 lg:gap-0 pb-24 lg:pb-0">
             {commercialProjects.map((project, i) => (
               <Card
                 key={project.id}
