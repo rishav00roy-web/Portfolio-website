@@ -123,34 +123,34 @@ function Card({
 
   return (
     <div className="relative w-screen h-full flex items-center justify-center px-4 sm:px-12 xl:px-24 shrink-0">
-      <div className="w-full max-w-7xl relative h-[85dvh] sm:h-[80dvh] rounded-[2.5rem] overflow-hidden shadow-2xl bg-white/5 backdrop-blur-xl border border-white/10 flex flex-col lg:flex-row items-center p-5 sm:p-12 xl:p-16 gap-4 lg:gap-12">
+      <div className="w-full max-w-7xl relative h-[85dvh] sm:h-[80dvh] rounded-[2.5rem] overflow-y-auto lg:overflow-hidden overflow-x-hidden shadow-2xl bg-white/5 backdrop-blur-xl border border-white/10 flex flex-col lg:flex-row p-5 sm:p-12 xl:p-16 gap-3 sm:gap-4 lg:gap-12">
 
         {/* Text content */}
-        <div className="w-full lg:w-[38%] flex flex-col justify-center z-10 pb-4 lg:pb-0 shrink-0">
-          <p className="font-coffekan text-2xl sm:text-5xl text-white/50 mb-2 sm:mb-4 tracking-wider">
+        <div className="w-full lg:w-[38%] flex flex-col justify-start lg:justify-center z-10 pb-2 lg:pb-0 shrink-0">
+          <p className="font-coffekan text-lg sm:text-5xl text-white/50 mb-1 sm:mb-4 tracking-wider">
             Project 0{index + 1}
           </p>
 
           <button
             onClick={() => onOpenCaseStudy(project.id)}
-            className="group/title inline-flex items-center gap-3 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+            className="group/title inline-flex items-center gap-2 sm:gap-3 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
           >
-            <h2 className="text-3xl sm:text-5xl xl:text-6xl font-display uppercase tracking-tight text-white group-hover/title:text-white/80 transition-colors leading-[1.0] mb-2 sm:mb-4">
+            <h2 className="text-2xl sm:text-5xl xl:text-6xl font-display uppercase tracking-tight text-white group-hover/title:text-white/80 transition-colors leading-[1.0] mb-1 sm:mb-4">
               {project.title}
             </h2>
-            <ArrowUpRight className="w-8 h-8 opacity-0 group-hover/title:opacity-100 group-hover/title:translate-x-1 group-hover/title:-translate-y-1 transition-all duration-300 text-white/80" />
+            <ArrowUpRight className="w-6 h-6 sm:w-8 sm:h-8 opacity-0 group-hover/title:opacity-100 group-hover/title:translate-x-1 group-hover/title:-translate-y-1 transition-all duration-300 text-white/80" />
           </button>
 
-          <p className="text-sm sm:text-lg text-white/60 max-w-xl leading-relaxed mb-4 sm:mb-6 font-sans">
+          <p className="text-xs sm:text-lg text-white/60 max-w-xl leading-relaxed mb-3 sm:mb-6 font-sans line-clamp-3 sm:line-clamp-none">
             {project.description}
           </p>
 
-          <div className="flex flex-wrap items-center gap-3 pr-2 sm:pr-24 lg:pr-0">
-            <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 pr-2 sm:pr-24 lg:pr-0">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
               {project.tags.map((tag: string) => (
                 <span
                   key={tag}
-                  className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-white/80 text-xs sm:text-sm font-sans"
+                  className="px-2.5 py-1 sm:px-4 sm:py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-white/80 text-[10px] sm:text-sm font-sans"
                 >
                   {tag}
                 </span>
@@ -167,7 +167,7 @@ function Card({
         </div>
 
         {/* Image collage */}
-        <div className="w-full lg:w-[62%] flex-1 min-h-0 lg:h-full relative flex items-center justify-center z-10 overflow-hidden lg:overflow-visible">
+        <div className="w-full lg:w-[62%] flex-1 min-h-[22vh] lg:h-full relative flex items-center justify-center z-10 overflow-hidden lg:overflow-visible mt-2 sm:mt-0 pb-4 sm:pb-0">
           <div className="relative w-[100%] sm:w-[90%] h-[100%] sm:h-[90%] flex items-center justify-center">
             {/* Left card */}
             {isMobile || reducedMotion ? (
