@@ -112,11 +112,11 @@ function Card({
 
   return (
     <div className="relative w-screen h-full flex items-center justify-center px-4 sm:px-12 xl:px-24 shrink-0">
-      <div className="w-full max-w-7xl relative h-[75vh] sm:h-[80vh] rounded-[2.5rem] overflow-hidden shadow-2xl bg-white/5 backdrop-blur-xl border border-white/10 flex flex-col lg:flex-row items-center p-8 sm:p-12 xl:p-16 gap-8 lg:gap-12">
+      <div className="w-full max-w-7xl relative h-[82vh] sm:h-[80vh] rounded-[2.5rem] overflow-hidden shadow-2xl bg-white/5 backdrop-blur-xl border border-white/10 flex flex-col lg:flex-row items-center p-6 sm:p-12 xl:p-16 gap-6 lg:gap-12">
 
         {/* Text content */}
-        <div className="w-full lg:w-[38%] flex flex-col justify-center z-10 pb-20 lg:pb-0">
-          <p className="font-coffekan text-3xl sm:text-5xl text-white/50 mb-4 tracking-wider">
+        <div className="w-full lg:w-[38%] flex flex-col justify-center z-10 pb-4 lg:pb-0 shrink-0">
+          <p className="font-coffekan text-2xl sm:text-5xl text-white/50 mb-2 sm:mb-4 tracking-wider">
             Project 0{index + 1}
           </p>
 
@@ -124,17 +124,17 @@ function Card({
             onClick={() => onOpenCaseStudy(project.id)}
             className="group/title inline-flex items-center gap-3 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
           >
-            <h2 className="text-4xl sm:text-5xl xl:text-6xl font-display uppercase tracking-tight text-white group-hover/title:text-white/80 transition-colors leading-[1.0] mb-4">
+            <h2 className="text-3xl sm:text-5xl xl:text-6xl font-display uppercase tracking-tight text-white group-hover/title:text-white/80 transition-colors leading-[1.0] mb-2 sm:mb-4">
               {project.title}
             </h2>
             <ArrowUpRight className="w-8 h-8 opacity-0 group-hover/title:opacity-100 group-hover/title:translate-x-1 group-hover/title:-translate-y-1 transition-all duration-300 text-white/80" />
           </button>
 
-          <p className="text-base sm:text-lg text-white/60 max-w-xl leading-relaxed mb-6 font-sans">
+          <p className="text-sm sm:text-lg text-white/60 max-w-xl leading-relaxed mb-4 sm:mb-6 font-sans">
             {project.description}
           </p>
 
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3 pr-2 sm:pr-24 lg:pr-0">
             <div className="flex flex-wrap gap-2">
               {project.tags.map((tag: string) => (
                 <span
@@ -156,8 +156,8 @@ function Card({
         </div>
 
         {/* Image collage */}
-        <div className="w-full lg:w-[62%] h-[40vh] lg:h-full relative flex items-center justify-center z-10 overflow-hidden lg:overflow-visible">
-          <div className="relative w-[90%] h-[90%] flex items-center justify-center">
+        <div className="w-full lg:w-[62%] flex-1 min-h-[25vh] lg:h-full relative flex items-center justify-center z-10 overflow-hidden lg:overflow-visible">
+          <div className="relative w-[100%] sm:w-[90%] h-[100%] sm:h-[90%] flex items-center justify-center">
             {/* Left card */}
             {reducedMotion ? (
               <div className="absolute left-[-10%] w-[56%] aspect-[16/10] rounded-2xl overflow-hidden shadow-lg border border-white/10 z-0 scale-95 opacity-80">

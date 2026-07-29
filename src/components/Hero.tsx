@@ -184,7 +184,7 @@ export default function Hero() {
           </div>
 
           {/* Bottom content area */}
-          <div className="flex-1 flex flex-col justify-end px-6 sm:px-12 xl:px-24 pb-32 sm:pb-24 pt-16 sm:pt-24">
+          <div className="flex-1 flex flex-col justify-end px-6 sm:px-12 xl:px-24 pb-8 sm:pb-24 pt-4 sm:pt-24">
             {/* Tagline */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -236,7 +236,7 @@ export default function Hero() {
                   ? { duration: 0 }
                   : { duration: 1, delay: 0.6 }
               }
-              className="mt-14 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 max-w-4xl font-mono text-xs sm:text-sm"
+              className="mt-6 sm:mt-14 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-8 max-w-4xl font-mono text-xs sm:text-sm"
             >
               <div>
                 <p className="text-white/30 uppercase tracking-widest mb-2">
@@ -313,7 +313,7 @@ export default function Hero() {
         {/* ---- Mouse scroll indicator ---- */}
         <motion.div
           style={{ opacity: chromeOpacity }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 pointer-events-none"
+          className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-20 pointer-events-none"
         >
           <div className="mouse-btn">
             <span className="mouse-scroll" />
