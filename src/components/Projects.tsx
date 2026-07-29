@@ -73,6 +73,17 @@ function Card({
   onOpenCaseStudy: (id: number) => void;
 }) {
   const count = projects.length;
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   const [status, setStatus] = useState<ProjectStatus | null>(
     project.id === 2
       ? { text: "Repository", isRepo: true }
@@ -159,7 +170,7 @@ function Card({
         <div className="w-full lg:w-[62%] flex-1 min-h-0 lg:h-full relative flex items-center justify-center z-10 overflow-hidden lg:overflow-visible">
           <div className="relative w-[100%] sm:w-[90%] h-[100%] sm:h-[90%] flex items-center justify-center">
             {/* Left card */}
-            {reducedMotion ? (
+            {isMobile || reducedMotion ? (
               <div className="absolute left-[2%] sm:left-[-10%] w-[48%] sm:w-[56%] aspect-[16/10] rounded-2xl overflow-hidden shadow-lg border border-white/10 z-0 scale-95 opacity-80">
                 <ProjectImage src={project.images[1]} alt={`${project.title} screenshot 2`} />
               </div>
@@ -174,7 +185,7 @@ function Card({
 
             {/* Center card */}
             <motion.div
-              style={reducedMotion ? {} : { scale: centerScale }}
+              style={isMobile || reducedMotion ? {} : { scale: centerScale }}
               className="relative w-[65%] sm:w-[72%] aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl border border-white/15 z-10 hover:shadow-[0_0_30px_rgba(255,255,255,0.08)] transition-shadow duration-300 cursor-pointer"
               onClick={() => onOpenCaseStudy(project.id)}
             >
@@ -182,7 +193,7 @@ function Card({
             </motion.div>
 
             {/* Right card */}
-            {reducedMotion ? (
+            {isMobile || reducedMotion ? (
               <div className="absolute right-[2%] sm:right-[-10%] w-[48%] sm:w-[56%] aspect-[16/10] rounded-2xl overflow-hidden shadow-lg border border-white/10 z-0 scale-95 opacity-80">
                 <ProjectImage src={project.images[2]} alt={`${project.title} screenshot 3`} />
               </div>
