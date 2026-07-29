@@ -231,6 +231,16 @@ export default function Projects({ activeProjectId, setActiveProjectId }: Projec
   const commercialProjects = projects.filter(p => p.id !== 4);
   const count = commercialProjects.length;
   const reducedMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: outerRef,
