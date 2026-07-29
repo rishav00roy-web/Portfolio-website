@@ -123,7 +123,7 @@ function Card({
 
   return (
     <div className="relative w-screen h-full flex items-center justify-center px-4 sm:px-12 xl:px-24 shrink-0">
-      <div className="w-full max-w-7xl relative h-[85dvh] sm:h-[80dvh] rounded-[2.5rem] overflow-y-auto lg:overflow-hidden overflow-x-hidden shadow-2xl bg-white/5 backdrop-blur-xl border border-white/10 flex flex-col lg:flex-row p-5 sm:p-12 xl:p-16 gap-3 sm:gap-4 lg:gap-12">
+      <div className="w-full max-w-7xl relative h-[75vh] sm:h-[80vh] rounded-[2.5rem] overflow-y-auto lg:overflow-hidden overflow-x-hidden shadow-2xl bg-white/5 backdrop-blur-xl border border-white/10 flex flex-col lg:flex-row p-5 sm:p-12 xl:p-16 gap-3 sm:gap-4 lg:gap-12">
 
         {/* Text content */}
         <div className="w-full lg:w-[38%] flex flex-col justify-start lg:justify-center z-10 pb-2 lg:pb-0 shrink-0">
@@ -263,9 +263,9 @@ export default function Projects({ activeProjectId, setActiveProjectId }: Projec
       <div
         ref={outerRef}
         className="relative"
-        style={{ height: `${(count - 1) * 120 + 100}vh` }}
+        style={{ height: `${(count - 1) * 100 + 100}vh` }}
       >
-        <div className="sticky top-0 h-[100dvh] w-full overflow-hidden flex items-center">
+        <div className="sticky top-0 h-[100vh] w-full overflow-hidden flex items-center">
           <motion.div style={{ x: trackX }} className="flex h-full">
             {commercialProjects.map((project, i) => (
               <Card
