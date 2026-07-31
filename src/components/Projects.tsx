@@ -86,7 +86,7 @@ function Card({
 
   const [status, setStatus] = useState<ProjectStatus | null>(
     project.id === 2
-      ? { text: "Repository", isRepo: true }
+      ? { text: "In Progress", isRepo: true }
       : project.id === 3
       ? { text: "In Progress", isRepo: true }
       : null
