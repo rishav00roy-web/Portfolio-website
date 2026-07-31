@@ -14,28 +14,28 @@ export const projects = [
   },
   {
     id: 2,
-    title: "Gym CRM (IQ Iron Fitness)",
+    title: "IQ Iron Gym Online CRM",
     description:
-      "A lightweight CRM for gym owners featuring member management, WhatsApp messaging, and a membership expiry tracker. Built as a standalone application optimized for Chrome and Edge, providing a simple interface for tracking fees and membership details.",
-    tags: ["HTML", "CSS", "JavaScript", "WhatsApp API", "Member Management"],
-    link: "https://github.com/rishav00roy-web/Gym-CRM",
+      "A cloud-hosted membership management platform with real-time Supabase sync. Features a custom billing engine for generating membership invoices, an automated employee salary slip builder, and role-based trainer tracking.",
+    tags: ["Next.js 14", "Supabase", "PostgreSQL", "Tailwind CSS", "TypeScript", "Billing Engine"],
+    link: "https://iq-iron-fitness-online-crm.vercel.app",
     images: [
-      "/assets/projects/gym-1.jpg",
-      "/assets/projects/gym-2.jpg",
-      "/assets/projects/gym-3.jpg",
+      "/assets/projects/gym-online-1.png",
+      "/assets/projects/gym-online-2.png",
+      "/assets/projects/gym-online-3.png",
     ],
   },
   {
     id: 3,
-    title: "ClashVault",
+    title: "Clash Bazar",
     description:
-      "An escrow-secured digital asset marketplace created for the community of a Clash of Clans YouTube creator. This platform manages transaction validation, integrates Razorpay and PayPal for payments, and maintains a secure holding ledger.",
+      "A Clash of Clans services marketplace connecting players with pro boosters, coaches, and base builders. Features escrow-secured transactions, custom order management dashboard, and secure holding ledger.",
     tags: ["Next.js", "Supabase", "Razorpay", "PayPal", "Escrow Engine", "PostgreSQL"],
-    link: "https://github.com/rishav00roy-web/ClashVault",
+    link: "https://clash-bazar.vercel.app",
     images: [
-      "/assets/projects/clash-1.jpg",
-      "/assets/projects/clash-2.jpg",
-      "/assets/projects/clash-3.jpg",
+      "/assets/projects/clash-1.png",
+      "/assets/projects/clash-2.png",
+      "/assets/projects/clash-3.png",
     ],
   },
   {
@@ -119,51 +119,52 @@ export const caseStudiesData: Record<number, CaseStudy> = {
     color: "#F5B301"
   },
   2: {
-    title: "Gym CRM (IQ Iron Fitness)",
-    tagline: "Local membership management CRM and OCR document scanning onboarding system",
+    title: "IQ Iron Gym Online CRM",
+    tagline: "Cloud-hosted gym membership management platform and billing engine",
     client: "IQ Iron Fitness Gym Owner",
-    period: "Oct 2025 – Dec 2025",
+    period: "Oct 2025 – Jan 2026 (Online Overhaul)",
     metrics: [
       { label: "Active Members Managed", value: "500+" },
-      { label: "Member Onboarding Time", value: "-90% reduction" },
-      { label: "Renewal Rate Increase", value: "+35%" },
-      { label: "Data Input Errors", value: "Near 0%" }
+      { label: "Sync Overhead", value: "Real-time" },
+      { label: "Invoice Generation Time", value: "< 2 Seconds" },
+      { label: "Payslip Processing", value: "Automated" }
     ],
-    tags: ["HTML", "CSS", "JavaScript", "WhatsApp API", "Member Management"],
+    tags: ["Next.js 14", "Supabase", "PostgreSQL", "Tailwind CSS", "TypeScript", "Billing Engine", "Salary Dashboard"],
     links: [
+      { label: "Live Demo", url: "https://iq-iron-fitness-online-crm.vercel.app", icon: "live" },
       { label: "GitHub Code", url: "https://github.com/rishav00roy-web/Gym-CRM", icon: "github" }
     ],
-    problem: "Member onboarding required writing paper forms. Staff then manually entered details into Excel files. This process led to spelling mistakes in email/phone records and missed billing notifications for expiring memberships.",
-    solution: "Designed and built a local-first web app utilizing Tesseract.js OCR. Staff scan member photo IDs (e.g., Aadhaar cards) via device camera, automatic text extraction fills the fields, and a local database tracks memberships, scheduling SMS/WhatsApp alerts via a Node.js gateway.",
+    problem: "The initial local-first offline CRM was excellent for basement connectivity, but as the gym expanded, the owner needed real-time cloud data sync across multiple admin devices, a professional invoice generator for memberships, and a salary slip generator for personal trainers based on client sessions.",
+    solution: "Migrated the app to a Next.js 14 cloud architecture integrated with Supabase. Built a custom billing engine that generates downloadable PDF invoices for memberships and a salary calculation system for employees that computes base pay plus PT commissions, generating instant employee salary slips.",
     architecture: {
-      description: "A local-first offline-capable architecture designed to run reliably in basement gyms with spotty internet connection.",
+      description: "A cloud-hosted serverless architecture with active PostgreSQL row-level security and dynamic client-side PDF compilation.",
       steps: [
-        { title: "Image Capture", desc: "HTML5 Canvas pre-processes live camera stream to maximize contrast." },
-        { title: "OCR Parsing", desc: "Tesseract.js executes character recognition directly in-browser." },
-        { title: "Local Store", desc: "Data saved in browser IndexedDB to support continuous offline operations." },
-        { title: "Gateway Sync", desc: "WhatsApp API sends automatic broadcast templates when connection is online." }
+        { title: "Real-time Database Sync", desc: "Supabase client subscriptions broadcast table changes instantly to all connected admin dashboards." },
+        { title: "Billing Engine", desc: "Computes total fees, paid amounts, and remaining balances, rendering clean printable invoice vouchers." },
+        { title: "Salary Slip Generator", desc: "Formulas automatically calculate PT commissions based on trainer client count, generating downloadable salary statements." },
+        { title: "Cloud Security", desc: "Supabase Row-Level Security (RLS) protects client and trainer data from unauthorized API queries." }
       ]
     },
     challenges: [
       {
-        title: "OCR Text Errors from Sub-optimal Lighting",
-        description: "Low-quality camera captures in the gym's basement led to incorrect character extraction (OCR accuracy was below 60%).",
-        fix: "Wrote a canvas pre-processor applying grayscale filters, high-pass thresholding, and scale-up resampling before passing the image to Tesseract, raising accuracy to 94%."
+        title: "Dynamic PDF Invoice Generation on Client Browsers",
+        description: "Generating layout-accurate printable invoice sheets directly on client mobile devices caused layout overflow bugs in CSS printing.",
+        fix: "Implemented a clean grid-based print layout using modern flex-box borders and standard print css styles, ensuring high resolution outputs without library dependencies."
       },
       {
-        title: "Basement Network Deadzones",
-        description: "Spotty cellular data prevented membership records from reaching cloud servers, stopping sign-ups.",
-        fix: "Restructured the application as a Local-First Web App. Signs ups write to IndexedDB instantly and a service worker syncs records in the background when network is stable."
+        title: "State Synchronizations",
+        description: "Concurrent updates by multiple receptionists caused database locks and stale client lists.",
+        fix: "Configured optimistic state updates via React hooks alongside realtime Supabase replication broadcasts, ensuring a smooth, single-page UI feeling."
       }
     ],
-    businessValue: "Eliminated paper sign-ups completely for 500+ gym members. Cut onboarding registration time from 6 minutes to 30 seconds. WhatsApp broadcasts improved member retention and dues renewal by 35%.",
-    lessons: "Offline-first architectures are crucial for operational systems. Building local-first apps utilizing browser storage makes for bulletproof software.",
-    futureImprovements: "Adding fingerprint scanner hardware integration directly via WebAuthn or USB serial API.",
+    businessValue: "Transformed gym operations by moving client management to the cloud. Empowered the gym owner to manage trainer payroll and customer invoicing in seconds, reducing administrative overhead by 80%.",
+    lessons: "Migrating from a local-first architecture to the cloud requires a robust state management layer to maintain a fast, responsive UI while ensuring data integrity.",
+    futureImprovements: "Full SMS gateway integration and biometric scanner API sync.",
     color: "#10B981"
   },
   3: {
-    title: "ClashVault",
-    tagline: "Escrow-secured digital gaming assets marketplace and transactions engine",
+    title: "Clash Bazar",
+    tagline: "Escrow-secured Clash of Clans services marketplace and boosting transactions engine",
     client: "YouTube Gaming Community Creator",
     period: "May 2026 – Ongoing",
     metrics: [
@@ -174,10 +175,11 @@ export const caseStudiesData: Record<number, CaseStudy> = {
     ],
     tags: ["Next.js", "Supabase", "Razorpay", "PayPal", "Escrow Engine", "PostgreSQL", "Webhooks"],
     links: [
+      { label: "Live Demo", url: "https://clash-bazar.vercel.app", icon: "live" },
       { label: "GitHub Code", url: "https://github.com/rishav00roy-web/ClashVault", icon: "github" }
     ],
-    problem: "Buying and selling high-value gaming accounts within online communities is plagued by scams. Sellers often pull back accounts via security recoveries, and buyers commit chargeback fraud, leading to high transaction distrust.",
-    solution: "Architected a secure digital escrow platform. The seller surrenders account credentials, which are verified. The buyer deposits funds into the escrow vault. The platform secures both and schedules account transfers, releasing funds to the seller only after a 7-day security lock.",
+    problem: "Buying and selling high-value gaming accounts and purchasing boosting or coaching services is plagued by scams. Buyers commit chargeback fraud and sellers can reclaim their accounts, leading to high transaction distrust.",
+    solution: "Architected a secure digital escrow platform. The seller surrenders account credentials, or boosters verify completion of services, while the buyer deposits funds into the escrow vault. The platform secures both and releases funds only after confirmation or warranty period.",
     architecture: {
       description: "An escrow validation pipeline using PostgreSQL transaction isolation and secure payment webhook handlers.",
       steps: [
@@ -217,7 +219,8 @@ export const caseStudiesData: Record<number, CaseStudy> = {
     ],
     tags: ["Next.js 14", "Framer Motion", "Tailwind CSS", "React 19", "Vercel"],
     links: [
-      { label: "Live Site", url: "https://byrishav.online", icon: "live" }
+      { label: "Live Site", url: "https://byrishav.online", icon: "live" },
+      { label: "GitHub Code", url: "https://github.com/rishav00roy-web/Portfolio-website", icon: "github" }
     ],
     problem: "Traditional developer portfolios often lack character and fail to demonstrate actual front-end engineering skills. I needed a platform that not only lists my projects but serves as a living, interactive proof of my ability to build polished, performant UIs.",
     solution: "Developed an immersive portfolio experience using Next.js App Router and Framer Motion. Implemented scroll-linked animations, a custom command menu (Ctrl+K), and a highly optimized rendering strategy to maintain 60fps animations across devices.",

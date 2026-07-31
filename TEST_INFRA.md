@@ -42,7 +42,7 @@ The Tier 4 test simulates a user navigating the entire personal portfolio:
 2. Scrolls down to view the work and about sections.
 3. Hovers over each of the three project rows:
    - "Tea Country Holidays"
-   - "ClashVault"
+   - "Clash Bazar"
    - "IQ Iron Fitness — Gym CRM"
    and verifies that the preview image thumbnail becomes visible.
 4. Reads the "About" section to verify educational details (specifically looking for "BCA" and "Sem" to verify they are in Semester II) and work experience.

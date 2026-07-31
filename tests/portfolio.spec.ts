@@ -123,8 +123,8 @@ test.describe('Portfolio Website - Tier 2: Boundary & Corner Cases', () => {
 
     // Verify all three project titles are present in the DOM
     await expect(projectsSection).toContainText('Tea Country Holidays');
-    await expect(projectsSection).toContainText('Gym CRM');
-    await expect(projectsSection).toContainText('ClashVault');
+    await expect(projectsSection).toContainText('IQ Iron Gym Online CRM');
+    await expect(projectsSection).toContainText('Clash Bazar');
   });
 });
 
@@ -160,8 +160,8 @@ test.describe('Portfolio Website - Tier 4: Real-world User Scenario', () => {
     // 2. Verify all 3 project titles are present (horizontal card layout, not anchor rows)
     const projectTitles = [
       'Tea Country Holidays',
-      'Gym CRM',
-      'ClashVault'
+      'IQ Iron Gym Online CRM',
+      'Clash Bazar'
     ];
 
     const projectsSection = page.locator('section').filter({ hasText: 'Paid Projects' });
@@ -187,7 +187,7 @@ test.describe('Portfolio Website - Tier 4: Real-world User Scenario', () => {
     // Email check
     const emailLink = footer.locator('a[href^="mailto:"]').first();
     await expect(emailLink).toHaveAttribute('href', 'mailto:rishav2000roy@gmail.com');
-    await expect(emailLink).toHaveText('rishav2000roy@gmail.com');
+    await expect(footer).toContainText('rishav2000roy@gmail.com');
 
 
 

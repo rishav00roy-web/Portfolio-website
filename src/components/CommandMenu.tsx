@@ -126,7 +126,7 @@ export default function CommandMenu({ onOpenCaseStudy }: CommandMenuProps) {
     },
     {
       category: "Commercial Projects",
-      label: "Project: Gym CRM (IQ Iron Fitness)",
+      label: "Project: IQ Iron Gym Online CRM",
       icon: <FileText className="w-4 h-4 text-emerald-400" />,
       action: () => {
         onOpenCaseStudy(2);
@@ -135,7 +135,7 @@ export default function CommandMenu({ onOpenCaseStudy }: CommandMenuProps) {
     },
     {
       category: "Commercial Projects",
-      label: "Project: ClashVault (Escrow Marketplace)",
+      label: "Project: Clash Bazar (Escrow Marketplace)",
       icon: <FileText className="w-4 h-4 text-violet-400" />,
       action: () => {
         onOpenCaseStudy(3);

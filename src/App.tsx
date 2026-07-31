@@ -6,6 +6,7 @@ import { ReactLenis } from "lenis/react";
 import Hero from "./components/Hero";
 import KineticGrid from "./components/KineticGrid";
 import Projects from "./components/Projects";
+import ExtraProjects from "./components/ExtraProjects";
 import About from "./components/About";
 import Certificates from "./components/Certificates";
 import Footer from "./components/Footer";
@@ -25,6 +26,7 @@ export default function App() {
         <KineticGrid />
         <div className="relative z-10">
           <Projects activeProjectId={activeProjectId} setActiveProjectId={setActiveProjectId} />
+          <ExtraProjects />
           <About />
           <Certificates />
           <Footer />

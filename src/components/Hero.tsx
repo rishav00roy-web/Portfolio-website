@@ -9,8 +9,8 @@ import { Award } from "lucide-react";
 
 const currentlyItems = [
   "Tea Country Holidays",
-  "Gym CRM",
-  "ClashVault (In Progress)"
+  "IQ Iron Gym Online CRM",
+  "Clash Bazar (In Progress)"
 ];
 
 export default function Hero() {
