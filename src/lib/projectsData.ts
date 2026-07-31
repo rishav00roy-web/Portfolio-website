@@ -14,7 +14,7 @@ export const projects = [
   },
   {
     id: 2,
-    title: "IQ Iron Gym Online CRM",
+    title: "IQ Iron Fitness",
     description:
       "A cloud-hosted membership management platform with real-time Supabase sync. Features a custom billing engine for generating membership invoices, an automated employee salary slip builder, and role-based trainer tracking.",
     tags: ["Next.js 14", "Supabase", "PostgreSQL", "Tailwind CSS", "TypeScript", "Billing Engine"],
@@ -119,7 +119,7 @@ export const caseStudiesData: Record<number, CaseStudy> = {
     color: "#F5B301"
   },
   2: {
-    title: "IQ Iron Gym Online CRM",
+    title: "IQ Iron Fitness",
     tagline: "Cloud-hosted gym membership management platform and billing engine",
     client: "IQ Iron Fitness Gym Owner",
     period: "Oct 2025 – Jan 2026 (Online Overhaul)",
@@ -132,7 +132,7 @@ export const caseStudiesData: Record<number, CaseStudy> = {
     tags: ["Next.js 14", "Supabase", "PostgreSQL", "Tailwind CSS", "TypeScript", "Billing Engine", "Salary Dashboard"],
     links: [
       { label: "Live Demo", url: "https://iq-iron-fitness-online-crm.vercel.app", icon: "live" },
-      { label: "GitHub Code", url: "https://github.com/rishav00roy-web/Gym-CRM", icon: "github" }
+      { label: "GitHub Code", url: "https://github.com/rishav00roy-web/IQ-iron-fitness-online-crm", icon: "github" }
     ],
     problem: "The initial local-first offline CRM was excellent for basement connectivity, but as the gym expanded, the owner needed real-time cloud data sync across multiple admin devices, a professional invoice generator for memberships, and a salary slip generator for personal trainers based on client sessions.",
     solution: "Migrated the app to a Next.js 14 cloud architecture integrated with Supabase. Built a custom billing engine that generates downloadable PDF invoices for memberships and a salary calculation system for employees that computes base pay plus PT commissions, generating instant employee salary slips.",

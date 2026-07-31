@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://rishavroy.dev/sitemap.xml
+Sitemap: https://byrishav.online/sitemap.xml

@@ -126,7 +126,7 @@ export default function CommandMenu({ onOpenCaseStudy }: CommandMenuProps) {
     },
     {
       category: "Commercial Projects",
-      label: "Project: IQ Iron Gym Online CRM",
+      label: "Project: IQ Iron Fitness (Gym CRM)",
       icon: <FileText className="w-4 h-4 text-emerald-400" />,
       action: () => {
         onOpenCaseStudy(2);

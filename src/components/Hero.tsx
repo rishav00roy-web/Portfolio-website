@@ -9,7 +9,7 @@ import { Award } from "lucide-react";
 
 const currentlyItems = [
   "Tea Country Holidays",
-  "IQ Iron Gym Online CRM",
+  "IQ Iron Fitness",
   "Clash Bazar (In Progress)"
 ];
 

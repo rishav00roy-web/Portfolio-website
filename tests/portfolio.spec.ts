@@ -123,7 +123,7 @@ test.describe('Portfolio Website - Tier 2: Boundary & Corner Cases', () => {
 
     // Verify all three project titles are present in the DOM
     await expect(projectsSection).toContainText('Tea Country Holidays');
-    await expect(projectsSection).toContainText('IQ Iron Gym Online CRM');
+    await expect(projectsSection).toContainText('IQ Iron Fitness');
     await expect(projectsSection).toContainText('Clash Bazar');
   });
 });
@@ -160,7 +160,7 @@ test.describe('Portfolio Website - Tier 4: Real-world User Scenario', () => {
     // 2. Verify all 3 project titles are present (horizontal card layout, not anchor rows)
     const projectTitles = [
       'Tea Country Holidays',
-      'IQ Iron Gym Online CRM',
+      'IQ Iron Fitness',
       'Clash Bazar'
     ];
 

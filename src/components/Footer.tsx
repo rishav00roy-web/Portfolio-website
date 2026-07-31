@@ -194,7 +194,7 @@ export default function Footer() {
               href="https://www.linkedin.com/in/rishav-roy-858b0b365/"
               label="LinkedIn"
               username="Rishav Roy"
-              bio="Full-stack developer actively open to new opportunities."
+              bio="Agentic Full-Stack Developer actively open to new opportunities."
               icon={<LinkedinIcon />}
               accentColor="#0A66C2"
               initials="in"

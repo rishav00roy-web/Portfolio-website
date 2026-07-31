@@ -6,12 +6,12 @@ export default function Certificates() {
   const certificates = [
     {
       id: 1,
-      title: "Coursera Credential",
+      title: "Introduction to AI",
       url: "/certificates/Coursera-Certificate-1.pdf",
     },
     {
       id: 2,
-      title: "Coursera Credential",
+      title: "Maximize Productivity With AI Tools",
       url: "/certificates/Coursera-Certificate-2.pdf",
     }
   ];
@@ -49,7 +49,7 @@ export default function Certificates() {
             >
               <div className="relative h-[200px] sm:h-[400px] lg:h-[450px] rounded-xl overflow-hidden border border-white/10 bg-white/[0.02] flex flex-col">
                 <div className="h-10 bg-black/40 border-b border-white/10 flex items-center px-4 font-mono text-xs text-white/50 tracking-wider uppercase">
-                  {cert.title} {index + 1}
+                  {cert.title}
                 </div>
                 <div className="flex-1 w-full relative flex items-center justify-center bg-black/20 p-6">
                   {/* Desktop iframe */}
