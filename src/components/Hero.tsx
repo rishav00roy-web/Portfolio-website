@@ -26,27 +26,37 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, []);
 
-  const [commitCount, setCommitCount] = useState<number | null>(null);
+  const [commitCount, setCommitCount] = useState<number | null>(() => {
+    if (typeof window !== "undefined") {
+      const cached = localStorage.getItem("github-commit-count");
+      return cached ? parseInt(cached, 10) : null;
+    }
+    return null;
+  });
 
   useEffect(() => {
     fetch("https://api.github.com/repos/rishav00roy-web/Portfolio-website/commits?per_page=1")
       .then((res) => {
+        if (!res.ok) return; // rate-limited or error — keep cached value
         const linkHeader = res.headers.get("Link");
         if (linkHeader) {
           const match = linkHeader.match(/page=(\d+)>; rel="last"/);
           if (match && match[1]) {
-            setCommitCount(parseInt(match[1], 10));
+            const count = parseInt(match[1], 10);
+            setCommitCount(count);
+            localStorage.setItem("github-commit-count", String(count));
           }
         } else {
           res.json().then((data) => {
-            if (Array.isArray(data)) {
+            if (Array.isArray(data) && data.length > 0) {
               setCommitCount(data.length);
+              localStorage.setItem("github-commit-count", String(data.length));
             }
           });
         }
       })
       .catch(() => {
-        setCommitCount(84); // Fallback to a static commit count
+        // Keep cached value from localStorage init, or null
       });
   }, []);
 
@@ -284,7 +294,7 @@ export default function Hero() {
                   Commits
                 </p>
                 <p className="text-white/80">
-                  {commitCount !== null ? `${commitCount} Commits` : "84 Commits"}
+                  {commitCount !== null ? `${commitCount} Commits` : "— Commits"}
                 </p>
                 <p className="text-white/50 text-[10px] mt-1">on GitHub</p>
               </div>

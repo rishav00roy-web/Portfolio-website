@@ -195,3 +195,33 @@ html.lenis body {
   transform: translate(15px, -15px);
   filter: drop-shadow(0 0 2px var(--accent)) drop-shadow(0 0 8px var(--accent));
 }
+
+/* ── Reading Mode ── */
+[data-reading-mode="true"] body {
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.8;
+  background-color: #111;
+}
+
+[data-reading-mode="true"] * {
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+  transition-duration: 0s !important;
+  transition-delay: 0s !important;
+}
+
+[data-reading-mode="true"] .mouse-btn,
+[data-reading-mode="true"] .mouse-scroll {
+  display: none !important;
+}
+
+[data-reading-mode="true"] section {
+  max-width: 48rem;
+  margin-inline: auto;
+}
+
+[data-reading-mode="true"] p,
+[data-reading-mode="true"] li,
+[data-reading-mode="true"] span {
+  letter-spacing: 0.01em;
+}

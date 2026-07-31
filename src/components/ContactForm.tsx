@@ -34,9 +34,28 @@ export default function ContactForm() {
 
     setStatus("loading");
 
-    // Simulate API call for local hosting demo
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const typeLabels: Record<string, string> = {
+        contract: "Freelance Contract / Project",
+        recruit: "Full-time Recruitment Opportunity",
+        consulting: "Technical Consulting",
+        other: "General Inquiry / Quick Question",
+      };
+
+      const message = [
+        `📩 *New Portfolio Inquiry*`,
+        ``,
+        `*Name:* ${formData.name}`,
+        `*Email:* ${formData.email}`,
+        `*Type:* ${typeLabels[formData.type] || formData.type}`,
+        ``,
+        `*Message:*`,
+        formData.message,
+      ].join("\n");
+
+      const encoded = encodeURIComponent(message);
+      window.open(`https://wa.me/916001914771?text=${encoded}`, "_blank");
+
       setStatus("success");
       setFormData({ name: "", email: "", type: "contract", message: "" });
     } catch {
@@ -72,10 +91,10 @@ export default function ContactForm() {
         <div className="py-10 flex flex-col items-center justify-center text-center space-y-4">
           <CheckCircle2 className="w-16 h-16 text-emerald-400" />
           <h4 className="text-xl font-bold text-white uppercase tracking-tight font-display">
-            Message Sent!
+            WhatsApp Opened!
           </h4>
           <p className="text-white/60 text-sm max-w-sm leading-relaxed font-sans">
-            Thank you for reaching out. I will respond to your email within <strong>12 to 24 hours</strong>.
+            Your message has been pre-filled in WhatsApp. Please tap <strong>Send</strong> in the WhatsApp window to complete delivery.
           </p>
           <button
             onClick={() => setStatus("idle")}
@@ -203,7 +222,7 @@ export default function ContactForm() {
               ) : (
                 <>
                   <Send className="w-4 h-4" />
-                  <span>Send Message</span>
+                  <span>Send via WhatsApp</span>
                 </>
               )}
             </button>
