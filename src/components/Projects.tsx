@@ -85,9 +85,7 @@ function Card({
   }, []);
 
   const [status, setStatus] = useState<ProjectStatus | null>(
-    project.id === 2
-      ? { text: "In Progress", isRepo: true }
-      : project.id === 3
+    project.id === 3
       ? { text: "In Progress", isRepo: true }
       : null
   );
@@ -95,6 +93,14 @@ function Card({
   useEffect(() => {
     if (project.id === 1) {
       fetch("https://tea-country-holidays.vercel.app", { method: "HEAD", mode: "no-cors" })
+        .then(() => {
+          setStatus({ text: "Live", isLive: true });
+        })
+        .catch(() => {
+          setStatus({ text: "Unreachable", isLive: false });
+        });
+    } else if (project.id === 2) {
+      fetch("https://iq-iron-fitness-online-crm.vercel.app", { method: "HEAD", mode: "no-cors" })
         .then(() => {
           setStatus({ text: "Live", isLive: true });
         })
