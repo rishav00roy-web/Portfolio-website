@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
 import { Search, Moon, Sun, BookOpen, FileText, CornerDownLeft, Mail, Phone, Compass, Laptop } from "lucide-react";
 
 interface CommandMenuProps {
@@ -73,7 +72,7 @@ export default function CommandMenu({ onOpenCaseStudy }: CommandMenuProps) {
     };
   }, [isOpen]);
 
-  const items = [
+  const items = useMemo(() => [
     // Navigation
     {
       category: "Navigation",
@@ -189,7 +188,7 @@ export default function CommandMenu({ onOpenCaseStudy }: CommandMenuProps) {
         setIsOpen(false);
       },
     },
-  ];
+  ], [onOpenCaseStudy, router, theme, readingMode]);
 
   // Filter items by search query
   const filteredItems = items.filter((item) =>
@@ -244,31 +243,23 @@ export default function CommandMenu({ onOpenCaseStudy }: CommandMenuProps) {
       )}
 
       {/* Main Command Menu Dialog */}
-      <AnimatePresence>
-        {isOpen && (
-          <div className="fixed inset-0 z-50 flex items-start justify-center pt-[10vh] sm:pt-[15vh] px-4">
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsOpen(false)}
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-            />
+      {isOpen && (
+        <div className="fixed inset-0 z-50 flex items-start justify-center pt-[10vh] sm:pt-[15vh] px-4">
+          {/* Backdrop */}
+          <div
+            onClick={() => setIsOpen(false)}
+            className="absolute inset-0 bg-black/80 animate-in fade-in duration-200"
+          />
 
-            {/* Panel */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.97, y: -10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.97, y: -10 }}
-              transition={{ duration: 0.15, ease: "easeOut" }}
-              className="relative w-full max-w-2xl bg-[#0f0f0f] border border-white/10 rounded-2xl overflow-hidden shadow-2xl flex flex-col focus:outline-none"
-              tabIndex={-1}
-              role="dialog"
-              aria-modal="true"
-              aria-label="Command palette"
-              onKeyDown={handleListKeyDown}
-            >
+          {/* Panel */}
+          <div
+            className="relative w-full max-w-2xl bg-[#0f0f0f] border border-white/10 rounded-2xl overflow-hidden shadow-2xl flex flex-col focus:outline-none animate-in fade-in zoom-in-95 slide-in-from-top-4 duration-200 ease-out"
+            tabIndex={-1}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Command palette"
+            onKeyDown={handleListKeyDown}
+          >
               {/* Top border colored stripe */}
               <div className="h-[2px] w-full bg-accent" />
 
@@ -367,10 +358,9 @@ export default function CommandMenu({ onOpenCaseStudy }: CommandMenuProps) {
                 </div>
                 <span>Ctrl+K to toggle</span>
               </div>
-            </motion.div>
+            </div>
           </div>
         )}
-      </AnimatePresence>
-    </>
+      </>
   );
 }
