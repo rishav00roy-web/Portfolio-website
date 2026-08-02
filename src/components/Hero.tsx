@@ -260,7 +260,7 @@ export default function Hero() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -8 }}
                       transition={{ duration: 0.25, ease: "easeInOut" }}
-                      className="text-white/80 absolute left-0 right-0 truncate sm:whitespace-nowrap text-[10px] sm:text-[11px] md:text-xs tracking-tight font-mono"
+                      className="text-white/80 absolute left-0 right-0 line-clamp-2 text-[10px] sm:text-[11px] md:text-xs tracking-tight font-mono break-words"
                     >
                       {currentlyItems[currentlyIndex]}
                     </motion.p>
@@ -279,8 +279,8 @@ export default function Hero() {
                   Resume
                 </p>
                 <a
-                  href="/Rishav-Roy-Resume.pdf"
-                  download="Rishav-Roy-Resume.pdf"
+                  href="/Rishav-Roy-CV.pdf"
+                  download="Rishav-Roy-CV.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white/80 hover:text-amber-400 transition-colors underline decoration-white/20 hover:decoration-amber-400/40"

@@ -171,8 +171,8 @@ export default function Footer() {
             className="flex flex-wrap gap-4 sm:gap-6 mt-16"
           >
             <SocialIcon
-              href="/Rishav-Roy-Resume.pdf"
-              download="Rishav-Roy-Resume.pdf"
+              href="/Rishav-Roy-CV.pdf"
+              download="Rishav-Roy-CV.pdf"
               label="Resume"
               username="Download PDF"
               bio="Updated July 2026."

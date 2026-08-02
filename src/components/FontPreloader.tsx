@@ -1,4 +1,4 @@
-export function FontPreloader() {
+function FontPreloader() {
   return (
     <>
       <link

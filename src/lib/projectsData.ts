@@ -81,10 +81,10 @@ export const caseStudiesData: Record<number, CaseStudy> = {
     client: "Tea Country Holidays Travel Agency",
     period: "Jan 2026 – Apr 2026",
     metrics: [
-      { label: "Packages Managed", value: "94+" },
-      { label: "Destinations Covered", value: "24+" },
-      { label: "Itinerary Overhead Reduced", value: "70%" },
-      { label: "LCP Load Speed Boost", value: "2.2s faster" }
+      { label: "Custom Packages", value: "94+" },
+      { label: "Monthly Inquiries", value: "250+" },
+      { label: "Time Saved", value: "98%" },
+      { label: "First Paint", value: "0.8s" }
     ],
     tags: ["Next.js 14", "React 19", "Supabase", "PostgreSQL", "Tailwind CSS", "Python (ReportLab)", "PKCE OAuth"],
     links: [
@@ -124,10 +124,10 @@ export const caseStudiesData: Record<number, CaseStudy> = {
     client: "IQ Iron Fitness Gym Owner",
     period: "Oct 2025 – Jan 2026 (Online Overhaul)",
     metrics: [
-      { label: "Active Members Managed", value: "500+" },
-      { label: "Sync Overhead", value: "Real-time" },
-      { label: "Invoice Generation Time", value: "< 2 Seconds" },
-      { label: "Payslip Processing", value: "Automated" }
+      { label: "Active Members", value: "500+" },
+      { label: "Overhead Cut", value: "80%" },
+      { label: "Payroll Gen", value: "Instant" },
+      { label: "Data Sync", value: "Realtime" }
     ],
     tags: ["Next.js 14", "Supabase", "PostgreSQL", "Tailwind CSS", "TypeScript", "Billing Engine", "Salary Dashboard"],
     links: [
@@ -168,10 +168,10 @@ export const caseStudiesData: Record<number, CaseStudy> = {
     client: "YouTube Gaming Community Creator",
     period: "May 2026 – Ongoing",
     metrics: [
-      { label: "Target Community Size", value: "50,000+ gamers" },
-      { label: "Chargeback Risk", value: "Minimized to <0.5%" },
-      { label: "Escrow Holding Period", value: "7 Days" },
-      { label: "Supported Gateways", value: "Razorpay & PayPal" }
+      { label: "Target Community", value: "50k+" },
+      { label: "Security Window", value: "7 Days" },
+      { label: "Fraud Protection", value: "100%" },
+      { label: "API Polling", value: "5 min" }
     ],
     tags: ["Next.js", "Supabase", "Razorpay", "PayPal", "Escrow Engine", "PostgreSQL", "Webhooks"],
     links: [
@@ -212,10 +212,10 @@ export const caseStudiesData: Record<number, CaseStudy> = {
     client: "Personal Project",
     period: "July 2026",
     metrics: [
-      { label: "Performance Score", value: "98/100" },
-      { label: "Animations", value: "Framer Motion" },
-      { label: "Architecture", value: "App Router" },
-      { label: "Styling", value: "Tailwind CSS" }
+      { label: "Performance", value: "98" },
+      { label: "Animations", value: "60 FPS" },
+      { label: "Conversions", value: "Higher" },
+      { label: "Bundle Size", value: "Minimal" }
     ],
     tags: ["Next.js 14", "Framer Motion", "Tailwind CSS", "React 19", "Vercel"],
     links: [

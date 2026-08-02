@@ -161,8 +161,8 @@ export default function CommandMenu({ onOpenCaseStudy }: CommandMenuProps) {
       icon: <FileText className="w-4 h-4" />,
       action: () => {
         const link = document.createElement("a");
-        link.href = "/Rishav-Roy-Resume.pdf";
-        link.download = "Rishav-Roy-Resume.pdf";
+        link.href = "/Rishav-Roy-CV.pdf";
+        link.download = "Rishav-Roy-CV.pdf";
         link.target = "_blank";
         link.click();
         setIsOpen(false);
@@ -191,10 +191,12 @@ export default function CommandMenu({ onOpenCaseStudy }: CommandMenuProps) {
   ], [onOpenCaseStudy, router, theme, readingMode]);
 
   // Filter items by search query
-  const filteredItems = items.filter((item) =>
-    item.label.toLowerCase().includes(search.toLowerCase()) ||
-    item.category.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredItems = useMemo(() => {
+    return items.filter((item) =>
+      item.label.toLowerCase().includes(search.toLowerCase()) ||
+      item.category.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [items, search]);
 
   // Navigate options via keyboard
   const handleListKeyDown = (e: React.KeyboardEvent) => {

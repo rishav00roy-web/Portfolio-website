@@ -148,7 +148,7 @@ export default function About() {
             className="lg:w-2/3 flex flex-col gap-16"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
+            viewport={{ once: true }}
             variants={staggerContainer}
           >
             {/* Bio paragraphs */}
@@ -195,7 +195,7 @@ export default function About() {
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-60px" }}
+              viewport={{ once: true }}
             >
               <h3 className="font-mono text-xs uppercase tracking-[0.3em] text-white/60 mb-6 border-b border-white/10 pb-2">
                 Work Experience
@@ -205,7 +205,7 @@ export default function About() {
                 variants={staggerContainer}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-40px" }}
+                viewport={{ once: true }}
               >
                 {experience.map((exp, i) => (
                   <motion.div
@@ -246,7 +246,7 @@ export default function About() {
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-60px" }}
+              viewport={{ once: true }}
             >
               <h3 className="font-mono text-xs uppercase tracking-[0.3em] text-white/60 mb-6 border-b border-white/10 pb-2">
                 Skills
@@ -256,7 +256,7 @@ export default function About() {
                 variants={staggerContainer}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-40px" }}
+                viewport={{ once: true }}
               >
                 {skills.map((group, idx) => (
                   <motion.div key={idx} variants={fadeUp} className="space-y-2">
@@ -283,7 +283,7 @@ export default function About() {
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-60px" }}
+              viewport={{ once: true }}
             >
               <h3 className="font-mono text-xs uppercase tracking-[0.3em] text-white/60 mb-6 border-b border-white/10 pb-2">
                 Education
@@ -293,7 +293,7 @@ export default function About() {
                 variants={staggerContainer}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-40px" }}
+                viewport={{ once: true }}
               >
                 {education.map((edu, i) => (
                   <motion.div
@@ -322,7 +322,7 @@ export default function About() {
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-60px" }}
+              viewport={{ once: true }}
             >
               <h3 className="font-mono text-xs uppercase tracking-[0.3em] text-white/60 mb-6 border-b border-white/10 pb-2">
                 Languages
@@ -332,7 +332,7 @@ export default function About() {
                 variants={staggerContainer}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-40px" }}
+                viewport={{ once: true }}
               >
                 {languages.map((lang, i) => (
                   <motion.div key={i} variants={fadeUp}>
