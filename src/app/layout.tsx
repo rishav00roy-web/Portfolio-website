@@ -27,6 +27,9 @@ export const metadata: Metadata = {
     siteName: "Rishav Roy Portfolio",
     type: "website",
   },
+  alternates: {
+    canonical: "/",
+  },
   twitter: {
     card: "summary_large_image",
     title: "Rishav Roy — Agentic Full-Stack Developer",
