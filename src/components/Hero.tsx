@@ -115,7 +115,7 @@ export default function Hero() {
   }, [shouldReduceMotion]);
 
   return (
-    <div ref={outerRef} className="relative h-[280vh] bg-transparent">
+    <div ref={outerRef} className="relative h-[280dvh] bg-transparent">
       <section
         className="sticky top-0 h-screen w-full overflow-hidden text-white z-10"
         style={{ perspective: "1200px" }}
@@ -128,7 +128,7 @@ export default function Hero() {
         >
           <Image
             src="/assets/hero-bg.jpg"
-            alt=""
+            alt="Rishav Roy - Agentic Full-Stack Developer Background"
             fill
             priority
             className="object-cover"
@@ -166,7 +166,7 @@ export default function Hero() {
             rotateX: shouldReduceMotion ? 0 : tilt.rotateX,
             rotateY: shouldReduceMotion ? 0 : tilt.rotateY,
           }}
-          className="absolute inset-0 z-10 flex items-start pt-[18vh] sm:pt-0 sm:items-center justify-center pointer-events-none"
+          className="absolute inset-0 z-10 flex items-start pt-[18dvh] sm:pt-0 sm:items-center justify-center pointer-events-none"
         >
           <h1 className="font-display leading-[0.82] uppercase tracking-tight text-center">
             <span className="block text-[15vw] sm:text-[8.5rem] lg:text-[12.5rem] font-extrabold text-white">

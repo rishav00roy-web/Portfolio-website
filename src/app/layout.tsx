@@ -18,10 +18,13 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Rishav Roy — Agentic Full-Stack Developer",
   description: "Building and shipping high-performance production web apps through AI-augmented development.",
+  keywords: ["Rishav Roy", "Agentic Developer", "Full-Stack Developer", "Kolkata Developer", "React", "Next.js", "Portfolio"],
   metadataBase: new URL("https://byrishav.online"),
   openGraph: {
     title: "Rishav Roy — Agentic Full-Stack Developer",
     description: "Building and shipping high-performance production web apps through AI-augmented development.",
+    url: "https://byrishav.online",
+    siteName: "Rishav Roy Portfolio",
     type: "website",
   },
   twitter: {
@@ -46,27 +49,45 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              "name": "Rishav Roy",
-              "jobTitle": "Agentic Full-Stack Developer",
-              "url": "https://byrishav.online",
-              "description": "Building and shipping high-performance production web apps through AI-augmented development.",
-              "sameAs": [
-                "https://github.com/rishav00roy-web",
-                "https://www.linkedin.com/in/rishav-roy-858b0b365/"
-              ],
-              "knowsAbout": [
-                "Next.js",
-                "React",
-                "Supabase",
-                "PostgreSQL",
-                "Python",
-                "Technical SEO",
-                "OCR Onboarding"
-              ]
-            })
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "Person",
+                "name": "Rishav Roy",
+                "jobTitle": "Agentic Full-Stack Developer",
+                "url": "https://byrishav.online",
+                "description": "Building and shipping high-performance production web apps through AI-augmented development.",
+                "sameAs": [
+                  "https://github.com/rishav00roy-web",
+                  "https://www.linkedin.com/in/rishav-roy-858b0b365/",
+                  "https://instagram.com/justbeingpsunk_"
+                ],
+                "knowsAbout": [
+                  "Next.js",
+                  "React",
+                  "Supabase",
+                  "PostgreSQL",
+                  "Python",
+                  "Technical SEO",
+                  "OCR Onboarding"
+                ]
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "name": "Rishav Roy Portfolio",
+                "url": "https://byrishav.online"
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "ProfilePage",
+                "dateCreated": "2026-08-01T00:00:00+00:00",
+                "mainEntity": {
+                  "@type": "Person",
+                  "name": "Rishav Roy"
+                }
+              }
+            ])
           }}
         />
         <noscript>
