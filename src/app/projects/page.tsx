@@ -67,11 +67,11 @@ export default function ProjectsPage() {
 
                     <div className="py-6 border-y border-white/5 space-y-4">
                       <div>
-                        <span className="block text-xs font-mono text-white/30 uppercase tracking-wider mb-1">Client</span>
+                        <span className="block text-xs font-mono text-white/50 uppercase tracking-wider mb-1">Client</span>
                         <span className="text-sm text-white/80">{caseStudy.client}</span>
                       </div>
                       <div>
-                        <span className="block text-xs font-mono text-white/30 uppercase tracking-wider mb-1">Timeline</span>
+                        <span className="block text-xs font-mono text-white/50 uppercase tracking-wider mb-1">Timeline</span>
                         <span className="text-sm text-white/80">{caseStudy.period}</span>
                       </div>
                     </div>
@@ -217,7 +217,7 @@ export default function ProjectsPage() {
         </div>
       </main>
 
-      <footer className="py-12 border-t border-white/5 text-center text-sm text-white/30 font-mono">
+      <footer className="py-12 border-t border-white/5 text-center text-sm text-white/50 font-mono">
         Rishav Roy — Case Studies Archive
       </footer>
       </div>
