@@ -100,7 +100,7 @@ export default function ExtraProjects() {
                     <div>
                       <span
                         className="text-xs font-mono tracking-widest uppercase mb-1 block"
-                        style={{ color: isActive ? project.accentColor : "rgba(255,255,255,0.3)" }}
+                        style={{ color: isActive ? project.accentColor : "rgba(255, 255, 255, 0.5)" }}
                       >
                         Experiment 0{idx + 1}
                       </span>
@@ -114,7 +114,7 @@ export default function ExtraProjects() {
                     <ArrowUpRight
                       className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                       style={{
-                        color: isActive ? project.accentColor : "rgba(255,255,255,0.3)",
+                        color: isActive ? project.accentColor : "rgba(255, 255, 255, 0.5)",
                         opacity: isActive ? 1 : 0.4
                       }}
                     />
