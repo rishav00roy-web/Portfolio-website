@@ -21,7 +21,7 @@ export default function App() {
 
   const content = (
     <>
-      <main className={`min-h-screen text-white selection:bg-white/20 selection:text-white relative transition-opacity duration-300 ${fontsLoaded ? "opacity-100" : "opacity-0"}`}>
+      <main className="min-h-screen text-white selection:bg-white/20 selection:text-white relative">
         <Hero />
         <KineticGrid />
         <div className="relative z-10">

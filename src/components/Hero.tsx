@@ -169,10 +169,11 @@ export default function Hero() {
           className="absolute inset-0 z-10 flex items-start pt-[18dvh] sm:pt-0 sm:items-center justify-center pointer-events-none"
         >
           <h1 className="font-display leading-[0.82] uppercase tracking-tight text-center">
-            <span className="block text-[15vw] sm:text-[8.5rem] lg:text-[12.5rem] font-extrabold text-white">
+            <span className="sr-only">Rishav Roy — Agentic Full-Stack Developer</span>
+            <span aria-hidden="true" className="block text-[15vw] sm:text-[8.5rem] lg:text-[12.5rem] font-extrabold text-white">
               Rishav
             </span>
-            <span className="block text-[15vw] sm:text-[8.5rem] lg:text-[12.5rem] font-extrabold text-transparent [-webkit-text-stroke:2px_rgba(255,255,255,0.4)]">
+            <span aria-hidden="true" className="block text-[15vw] sm:text-[8.5rem] lg:text-[12.5rem] font-extrabold text-transparent [-webkit-text-stroke:2px_rgba(255,255,255,0.4)]">
               Roy
             </span>
           </h1>
