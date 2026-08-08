@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Sora, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import FontPreloader from "@/components/FontPreloader";
-
+import { Analytics } from "@vercel/analytics/next";
 const sora = Sora({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -97,6 +97,7 @@ export default function RootLayout({
           <style>{`main { opacity: 1 !important; }`}</style>
         </noscript>
         {children}
+        <Analytics />
       </body>
     </html>
   );
