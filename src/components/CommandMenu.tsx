@@ -267,7 +267,7 @@ export default function CommandMenu({ onOpenCaseStudy }: CommandMenuProps) {
 
               {/* Search Bar */}
               <div className="flex items-center gap-3 px-4 py-3.5 border-b border-white/10">
-                <Search className="w-5 h-5 text-white/30" />
+                <Search className="w-5 h-5 text-white/50" />
                 <input
                   ref={inputRef}
                   type="text"
@@ -282,7 +282,7 @@ export default function CommandMenu({ onOpenCaseStudy }: CommandMenuProps) {
                 />
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="text-xs uppercase tracking-wider text-white/30 hover:text-white/60 transition-colors font-mono px-2 py-1 border border-white/10 rounded"
+                  className="text-xs uppercase tracking-wider text-white/50 hover:text-white/60 transition-colors font-mono px-2 py-1 border border-white/10 rounded"
                 >
                   ESC
                 </button>
@@ -296,7 +296,7 @@ export default function CommandMenu({ onOpenCaseStudy }: CommandMenuProps) {
                 aria-label="Commands"
               >
                 {filteredItems.length === 0 ? (
-                  <div className="px-6 py-10 text-center text-white/30 font-mono text-xs uppercase tracking-wider">
+                  <div className="px-6 py-10 text-center text-white/50 font-mono text-xs uppercase tracking-wider">
                     No commands or matching sections found
                   </div>
                 ) : (
@@ -308,7 +308,7 @@ export default function CommandMenu({ onOpenCaseStudy }: CommandMenuProps) {
                     }, {} as Record<string, typeof items>)
                   ).map(([category, catItems]) => (
                     <div key={category} className="py-2">
-                      <div className="px-4 py-1 text-[9px] font-mono uppercase tracking-[0.2em] text-white/30 font-bold">
+                      <div className="px-4 py-1 text-[9px] font-mono uppercase tracking-[0.2em] text-white/50 font-bold">
                         {category}
                       </div>
                       {catItems.map((item) => {
@@ -353,7 +353,7 @@ export default function CommandMenu({ onOpenCaseStudy }: CommandMenuProps) {
               </div>
 
               {/* Bottom status bar */}
-              <div className="flex items-center justify-between px-4 py-2.5 bg-black/40 border-t border-white/5 font-mono text-[9px] uppercase tracking-wider text-white/30">
+              <div className="flex items-center justify-between px-4 py-2.5 bg-black/40 border-t border-white/5 font-mono text-[9px] uppercase tracking-wider text-white/50">
                 <div className="flex gap-4">
                   <span>↑↓ Navigate</span>
                   <span>Enter Select</span>

@@ -97,7 +97,7 @@ export default function SocialIcon({
       </a>
 
       {/* Label below icon (visible on touch) */}
-      <span className="mt-1.5 font-mono text-[9px] uppercase tracking-wider text-white/30 sm:hidden">
+      <span className="mt-1.5 font-mono text-[9px] uppercase tracking-wider text-white/50 sm:hidden">
         {label}
       </span>
     </div>

@@ -26,15 +26,18 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, []);
 
-  const [commitCount, setCommitCount] = useState<number | null>(() => {
-    if (typeof window !== "undefined") {
-      const cached = localStorage.getItem("github-commit-count");
-      return cached ? parseInt(cached, 10) : null;
-    }
-    return null;
-  });
+  const [commitCount, setCommitCount] = useState<number | null>(null);
 
   useEffect(() => {
+    // 1. Read cached value on mount (client-side only)
+    if (typeof window !== "undefined") {
+      const cached = localStorage.getItem("github-commit-count");
+      if (cached) {
+        setCommitCount(parseInt(cached, 10));
+      }
+    }
+
+    // 2. Fetch fresh data
     fetch("https://api.github.com/repos/rishav00roy-web/Portfolio-website/commits?per_page=1")
       .then((res) => {
         if (!res.ok) return; // rate-limited or error — keep cached value
@@ -56,7 +59,7 @@ export default function Hero() {
         }
       })
       .catch(() => {
-        // Keep cached value from localStorage init, or null
+        // Keep cached value
       });
   }, []);
 
@@ -250,7 +253,7 @@ export default function Hero() {
               className="mt-6 sm:mt-14 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-8 max-w-4xl font-mono text-xs sm:text-sm"
             >
               <div>
-                <p className="text-white/30 uppercase tracking-widest mb-2">
+                <p className="text-white/50 uppercase tracking-widest mb-2">
                   Currently
                 </p>
                 <div className="relative h-[2.5em] overflow-hidden">
@@ -269,14 +272,14 @@ export default function Hero() {
                 </div>
               </div>
               <div>
-                <p className="text-white/30 uppercase tracking-widest mb-2">
+                <p className="text-white/50 uppercase tracking-widest mb-2">
                   Based in
                 </p>
                 <p className="text-white/80">Kolkata, India</p>
                 <p className="text-white/50 text-[10px]">(originally from Jorhat, Assam)</p>
               </div>
               <div>
-                <p className="text-white/30 uppercase tracking-widest mb-2">
+                <p className="text-white/50 uppercase tracking-widest mb-2">
                   Resume
                 </p>
                 <a
@@ -291,7 +294,7 @@ export default function Hero() {
                 <p className="text-white/50 text-[10px] mt-1">July 2026</p>
               </div>
               <div>
-                <p className="text-white/30 uppercase tracking-widest mb-2">
+                <p className="text-white/50 uppercase tracking-widest mb-2">
                   Commits
                 </p>
                 <p className="text-white/80">
@@ -300,7 +303,7 @@ export default function Hero() {
                 <p className="text-white/50 text-[10px] mt-1">on GitHub</p>
               </div>
               <div>
-                <p className="text-white/30 uppercase tracking-widest mb-2">
+                <p className="text-white/50 uppercase tracking-widest mb-2">
                   Credentials
                 </p>
                 <a 

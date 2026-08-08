@@ -237,13 +237,13 @@ export default function Footer() {
 
       {/* Bottom bar: copyright + back to top */}
       <div className="relative z-10 mt-24 flex items-center justify-between w-full border-t border-white/5 pt-8">
-        <p className="font-mono text-[10px] sm:text-xs text-white/30 uppercase tracking-[0.25em]">
+        <p className="font-mono text-[10px] sm:text-xs text-white/50 uppercase tracking-[0.25em]">
           &copy; Designed &amp; Developed by Me
         </p>
 
         <button
           onClick={scrollToTop}
-          className="group flex items-center gap-2 font-mono text-[10px] sm:text-xs text-white/30 uppercase tracking-[0.25em] hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 rounded px-2 py-1 cursor-pointer"
+          className="group flex items-center gap-2 font-mono text-[10px] sm:text-xs text-white/50 uppercase tracking-[0.25em] hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 rounded px-2 py-1 cursor-pointer"
           aria-label="Back to top"
         >
           <ArrowUp className="w-3 h-3 group-hover:-translate-y-0.5 transition-transform" />
