@@ -24,7 +24,7 @@ export default function App() {
       <main className="min-h-screen text-white selection:bg-white/20 selection:text-white relative">
         <Hero />
         <KineticGrid />
-        <div className="relative z-10">
+        <div className="relative z-10 w-full overflow-x-hidden">
           <Projects activeProjectId={activeProjectId} setActiveProjectId={setActiveProjectId} />
           <ExtraProjects />
           <About />
