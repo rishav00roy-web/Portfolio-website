@@ -190,11 +190,14 @@ export default function ProjectsPage() {
                       </h3>
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                         {caseStudy.metrics.map((metric: { value: string; label: string }, i: number) => (
-                          <div key={i} className="p-5 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-xl flex flex-col justify-center">
-                            <div className="text-2xl sm:text-3xl font-bold mb-2 tracking-tight" style={{ color: caseStudy.color }}>
+                          <div key={i} className="p-5 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-xl flex flex-col justify-center overflow-hidden">
+                            <div 
+                              className={`font-bold mb-2 tracking-tight leading-tight ${metric.value.length > 8 ? 'text-xl sm:text-xl md:text-2xl' : 'text-2xl sm:text-3xl'}`} 
+                              style={{ color: caseStudy.color }}
+                            >
                               {metric.value}
                             </div>
-                            <div className="text-[10px] uppercase tracking-widest font-mono text-white/50 font-semibold">
+                            <div className="text-[10px] uppercase tracking-widest font-mono text-white/50 font-semibold truncate">
                               {metric.label}
                             </div>
                           </div>
