@@ -131,7 +131,7 @@ export default function Hero() {
         >
           <Image
             src="/assets/hero-bg.jpg"
-            alt="Rishav Roy - Agentic Full-Stack Developer Background"
+            alt="Rishav Roy - Agentic Engineer Background"
             fill
             priority
             className="object-cover"
@@ -172,7 +172,7 @@ export default function Hero() {
           className="absolute inset-0 z-10 flex items-start pt-[18dvh] sm:pt-0 sm:items-center justify-center pointer-events-none"
         >
           <h1 className="font-display leading-[0.82] uppercase tracking-tight text-center">
-            <span className="sr-only">Rishav Roy — Agentic Full-Stack Developer</span>
+            <span className="sr-only">Rishav Roy — Agentic Engineer</span>
             <span aria-hidden="true" className="block text-[15vw] sm:text-[8.5rem] lg:text-[12.5rem] font-extrabold text-white">
               Rishav
             </span>
@@ -210,7 +210,7 @@ export default function Hero() {
               }
               className="max-w-2xl text-lg sm:text-2xl text-white/70 font-medium leading-snug font-sans"
             >
-              I build and launch robust web applications and rate management systems tailored to solve concrete operational challenges.
+              Ex-ops guy who got tired of manual work. Now I build tools so nobody else has to.
             </motion.p>
 
             {/* Above-the-fold CTA buttons */}

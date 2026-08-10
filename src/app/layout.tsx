@@ -16,12 +16,12 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Rishav Roy — Agentic Full-Stack Developer",
+  title: "Rishav Roy — Agentic Engineer",
   description: "Building and shipping high-performance production web apps through AI-augmented development.",
   keywords: ["Rishav Roy", "Agentic Developer", "Full-Stack Developer", "Kolkata Developer", "React", "Next.js", "Portfolio"],
   metadataBase: new URL("https://byrishav.online"),
   openGraph: {
-    title: "Rishav Roy — Agentic Full-Stack Developer",
+    title: "Rishav Roy — Agentic Engineer",
     description: "Building and shipping high-performance production web apps through AI-augmented development.",
     url: "https://byrishav.online",
     siteName: "Rishav Roy Portfolio",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rishav Roy — Agentic Full-Stack Developer",
+    title: "Rishav Roy — Agentic Engineer",
     description: "Building and shipping high-performance production web apps through AI-augmented development.",
   }
 };
@@ -57,7 +57,7 @@ export default function RootLayout({
                 "@context": "https://schema.org",
                 "@type": "Person",
                 "name": "Rishav Roy",
-                "jobTitle": "Agentic Full-Stack Developer",
+                "jobTitle": "Agentic Engineer",
                 "url": "https://byrishav.online",
                 "description": "Building and shipping high-performance production web apps through AI-augmented development.",
                 "sameAs": [

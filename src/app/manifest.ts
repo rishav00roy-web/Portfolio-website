@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Rishav Roy — Agentic Full-Stack Developer",
+    name: "Rishav Roy — Agentic Engineer",
     short_name: "Rishav Roy",
     description:
       "Building and shipping high-performance production web apps through AI-augmented development.",
