@@ -92,21 +92,9 @@ function Card({
 
   useEffect(() => {
     if (project.id === 1) {
-      fetch("https://tea-country-holidays.vercel.app", { method: "HEAD", mode: "no-cors" })
-        .then(() => {
-          setStatus({ text: "Live", isLive: true });
-        })
-        .catch(() => {
-          setStatus({ text: "Unreachable", isLive: false });
-        });
+      setStatus({ text: "Live", isLive: true });
     } else if (project.id === 2) {
-      fetch("https://iq-iron-fitness-online-crm.vercel.app", { method: "HEAD", mode: "no-cors" })
-        .then(() => {
-          setStatus({ text: "Live", isLive: true });
-        })
-        .catch(() => {
-          setStatus({ text: "Unreachable", isLive: false });
-        });
+      setStatus({ text: "Live", isLive: true });
     }
   }, [project.id]);
   
@@ -147,7 +135,7 @@ function Card({
             <ArrowUpRight className="w-6 h-6 sm:w-8 sm:h-8 opacity-0 group-hover/title:opacity-100 group-hover/title:translate-x-1 group-hover/title:-translate-y-1 transition-all duration-300 text-white/80" />
           </button>
 
-          <p className="text-xs sm:text-lg text-white/60 max-w-xl leading-relaxed mb-3 sm:mb-6 font-sans line-clamp-3 sm:line-clamp-none">
+          <p className="text-xs sm:text-lg text-white/60 max-w-xl leading-relaxed mb-4 sm:mb-8 font-sans line-clamp-3 sm:line-clamp-none">
             {project.description}
           </p>
 

@@ -225,3 +225,4 @@ html.lenis body {
 [data-reading-mode="true"] span {
   letter-spacing: 0.01em;
 }
+body { overflow-x: hidden; }
