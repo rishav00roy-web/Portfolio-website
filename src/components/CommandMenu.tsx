@@ -246,7 +246,7 @@ export default function CommandMenu({ onOpenCaseStudy }: CommandMenuProps) {
 
       {/* Main Command Menu Dialog */}
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center pt-[10vh] sm:pt-[15vh] px-4">
+        <div className="fixed inset-0 z-50 flex items-start justify-center pt-[10dvh] sm:pt-[15dvh] px-4">
           {/* Backdrop */}
           <div
             onClick={() => setIsOpen(false)}

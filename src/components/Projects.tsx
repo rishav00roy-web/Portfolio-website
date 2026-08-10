@@ -129,7 +129,7 @@ function Card({
 
   return (
     <div className="relative w-full lg:w-screen h-auto lg:h-full flex items-center justify-center px-4 sm:px-12 xl:px-24 shrink-0 py-4 lg:py-0">
-      <div className="w-full max-w-7xl relative h-auto lg:h-[75vh] sm:lg:h-[80vh] rounded-[2.5rem] overflow-hidden shadow-2xl bg-white/5 backdrop-blur-xl border border-white/10 flex flex-col lg:flex-row p-5 sm:p-12 xl:p-16 gap-3 sm:gap-4 lg:gap-12">
+      <div className="w-full max-w-7xl relative h-auto lg:h-[75dvh] sm:lg:h-[80dvh] rounded-[2.5rem] overflow-hidden shadow-2xl bg-white/5 backdrop-blur-xl border border-white/10 flex flex-col lg:flex-row p-5 sm:p-12 xl:p-16 gap-3 sm:gap-4 lg:gap-12">
 
         {/* Text content */}
         <div className="w-full lg:w-[38%] flex flex-col justify-start lg:justify-center z-10 pb-2 lg:pb-0 shrink-0">
@@ -279,9 +279,9 @@ export default function Projects({ activeProjectId, setActiveProjectId }: Projec
       <div
         ref={outerRef}
         className="relative"
-        style={isMobile ? {} : { height: `${(count - 1) * 100 + 100}vh` }}
+        style={isMobile ? {} : { height: `${(count - 1) * 100 + 100}dvh` }}
       >
-        <div className="relative lg:sticky top-0 h-auto lg:h-[100vh] w-full overflow-hidden flex items-center">
+        <div className="relative lg:sticky top-0 h-auto lg:h-[100dvh] w-full overflow-hidden flex items-center">
           <motion.div style={isMobile ? {} : { x: trackX }} className="flex flex-col lg:flex-row h-auto lg:h-full w-full gap-8 lg:gap-0 pb-24 lg:pb-0">
             {commercialProjects.map((project, i) => (
               <Card

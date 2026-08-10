@@ -243,7 +243,7 @@ export default function ContactForm() {
       {showCalendly && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/85 backdrop-blur-sm" onClick={() => setShowCalendly(false)} />
-          <div className="relative w-full max-w-4xl h-[85vh] bg-[#0c0c0c]/80 backdrop-blur-2xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl flex flex-col z-10 animate-in fade-in zoom-in-95 duration-200">
+          <div className="relative w-full max-w-4xl h-[85dvh] bg-[#0c0c0c]/80 backdrop-blur-2xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl flex flex-col z-10 animate-in fade-in zoom-in-95 duration-200">
             <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between">
               <span className="font-mono text-xs uppercase tracking-widest text-white/40">
                 Book a Call with Rishav
