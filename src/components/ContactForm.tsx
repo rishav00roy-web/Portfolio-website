@@ -120,7 +120,7 @@ export default function ContactForm() {
               }}
               className={`w-full bg-white/5 backdrop-blur-md border ${
                 errors.name ? "border-rose-500/50 focus:border-rose-500" : "border-white/10 focus:border-accent"
-              } rounded-xl px-4 py-3 text-white outline-none transition-colors text-sm font-sans`}
+              } rounded-xl px-4 py-3 text-white outline-none transition-colors text-base sm:text-sm font-sans`}
               placeholder="e.g. Jane Doe"
             />
             {errors.name && (
@@ -146,7 +146,7 @@ export default function ContactForm() {
               }}
               className={`w-full bg-white/5 backdrop-blur-md border ${
                 errors.email ? "border-rose-500/50 focus:border-rose-500" : "border-white/10 focus:border-accent"
-              } rounded-xl px-4 py-3 text-white outline-none transition-colors text-sm font-sans`}
+              } rounded-xl px-4 py-3 text-white outline-none transition-colors text-base sm:text-sm font-sans`}
               placeholder="jane@company.com"
             />
             {errors.email && (
@@ -166,7 +166,7 @@ export default function ContactForm() {
               id="form-type"
               value={formData.type}
               onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-              className="w-full bg-white/5 backdrop-blur-md border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-accent transition-colors text-sm font-sans"
+              className="w-full bg-white/5 backdrop-blur-md border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-accent transition-colors text-base sm:text-sm font-sans"
             >
               <option value="contract">Freelance Contract / Project</option>
               <option value="recruit">Full-time Recruitment Opportunity</option>
@@ -190,7 +190,7 @@ export default function ContactForm() {
               rows={4}
               className={`w-full bg-white/5 backdrop-blur-md border ${
                 errors.message ? "border-rose-500/50 focus:border-rose-500" : "border-white/10 focus:border-accent"
-              } rounded-xl px-4 py-3 text-white outline-none transition-colors text-sm font-sans resize-none`}
+              } rounded-xl px-4 py-3 text-white outline-none transition-colors text-base sm:text-sm font-sans resize-none`}
               placeholder="Outline your project scope or job description..."
             />
             {errors.message && (
