@@ -52,7 +52,7 @@ export default function About() {
     },
     {
       category: "Tools & Platforms",
-      items: ["Git", "GitHub", "Vercel", "OCR (Tesseract)", "Razorpay", "PayPal", "ReportLab"],
+      items: ["Git", "GitHub", "Vercel", "OCR (Tesseract)", "Stripe", "PayPal"],
     },
   ];
 
@@ -64,7 +64,7 @@ export default function About() {
       isRemote: true,
       bullets: [
         "Processed a massive volume of Freedom of Information Act requests (1,500+ submitted) while working fully remotely.",
-        "Collaborated with U.S. police departments and public agencies to secure body-worn camera footage (processing 60+ files monthly) along with other public records.",
+        "Collaborated with U.S. police departments and public agencies to secure body-worn camera footage, averaging 55 files per month with a personal best of 110.",
         "Ensured accurate documentation, monitored strict deadlines, and upheld compliance across various jurisdictions while overseeing a database of 100+ agencies.",
         "Managed multiple simultaneous cases via professional email and phone correspondence, handling between 300 and 400 emails each week.",
         "Developed exceptional time management, written communication, and autonomous problem-solving abilities within an asynchronous remote work environment.",
@@ -157,36 +157,34 @@ export default function About() {
                 variants={fadeUp}
                 className="text-2xl sm:text-3xl text-white/95 leading-relaxed font-sans font-medium"
               >
-                My entry into software development began with delivering commercial
-                websites for paying clients. My priority has always been to solve
-                actual business challenges rather than simply writing code for
-                practice. Today, I create and launch production-ready software with
-                a strong emphasis on reliability, easy maintenance, and clear
-                business value.
+                My path into software engineering didn&#39;t start with side projects—it
+                started with shipping commercial platforms for paying clients. After
+                six-plus years in operations, I got tired of watching businesses drown
+                in manual work. So I started building the tools to fix it.
               </motion.p>
               <motion.p
                 variants={fadeUp}
                 className="text-lg sm:text-xl text-white/80 leading-relaxed font-sans"
               >
-                I view AI as a productivity enhancer rather than a replacement for
-                sound engineering judgment. While it accelerates system architecture,
-                debugging, testing, and routine tasks, all technical decisions
-                remain firmly in my hands. I architect the systems, examine every
-                critical line of code, validate the outcomes, and assume total
-                responsibility for the final product. Any failures fall squarely on my shoulders.
+                Today I build production-ready web applications with a focus on
+                reliability, easy maintenance, and real business value. My operational
+                background runs through everything I build: I don&#39;t write code for
+                the sake of it. I build systems that non-technical owners can actually
+                run themselves—managing their own data, their own pricing, their own
+                content—without calling a developer every time something needs to change.
               </motion.p>
               <motion.p
                 variants={fadeUp}
                 className="text-lg sm:text-xl text-white/80 leading-relaxed font-sans"
               >
-                Prior to transitioning into full-time development, I gained over
-                six years of operational experience spanning HR, procurement, business
-                administration, compliance, and team leadership. This professional
-                background deeply influences my current approach to building software.
-                Having experienced the operational side firsthand, I recognize the
-                practical constraints that businesses face. My goal is never to write
-                code just for the sake of it; instead, I engineer solutions that resolve
-                genuine issues, streamline workflows, and deliver measurable results.
+                I use AI heavily as a development and productivity tool. It accelerates
+                architecture decisions, debugging, testing, and routine work. But I
+                don&#39;t treat it as a substitute for engineering judgment. I architect
+                the systems, review every critical line of code, validate the outcomes,
+                and take full responsibility for the final product. I&#39;m also actively
+                deepening my understanding of AI systems—exploring areas like
+                retrieval-augmented generation and model evaluation—while continuing
+                to ship production software for real clients.
               </motion.p>
             </motion.div>
 
