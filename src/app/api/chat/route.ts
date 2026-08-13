@@ -6,6 +6,19 @@ export const maxDuration = 30;
 
 export async function POST(req: Request) {
   try {
+    if (!process.env.GROQ_API_KEY) {
+      console.error("GROQ_API_KEY is not defined in environment variables!");
+      return new Response(
+        JSON.stringify({ 
+          error: "GROQ_API_KEY is missing. Please add it to your Vercel Project Settings > Environment Variables, then redeploy." 
+        }), 
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json" }
+        }
+      );
+    }
+
     const { messages } = await req.json();
 
     // Map UIMessages (which use 'parts') to CoreMessages (which use 'content' or array content)
@@ -22,6 +35,7 @@ export async function POST(req: Request) {
 
     const result = streamText({
       model: groq('llama-3.3-70b-versatile'), // Use Groq's fast Llama 3.3 model
+      maxRetries: 5, // Automatically retry requests on rate limits (429) or transient API failures
       system: `You are Psunk, a casual, friendly, and extremely concise assistant for Rishav's portfolio website.
       CRITICAL RULES:
       1. DO NOT sound like an AI. Use a natural, conversational, and confident tone.
