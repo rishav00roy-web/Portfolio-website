@@ -21,7 +21,7 @@ export default function App() {
 
   const content = (
     <>
-      <main className="min-h-screen text-white selection:bg-white/20 selection:text-white relative overflow-x-hidden w-full max-w-full">
+      <main className="min-h-screen text-white selection:bg-white/20 selection:text-white relative">
         <Hero />
         <KineticGrid />
         <div className="relative z-10">
