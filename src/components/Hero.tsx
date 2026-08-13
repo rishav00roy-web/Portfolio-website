@@ -36,8 +36,6 @@ export default function Hero() {
         setCommitCount(parseInt(cached, 10));
       }
     }
-
-    // 2. Fetch fresh data
     fetch("https://api.github.com/repos/rishav00roy-web/Portfolio-website/commits?per_page=1")
       .then((res) => {
         if (!res.ok) return; // rate-limited or error — keep cached value
