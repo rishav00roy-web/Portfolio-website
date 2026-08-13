@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { Send, CheckCircle2, AlertTriangle, Calendar, X, Clock } from "lucide-react";
+import { useState } from "react";
+import { Send, CheckCircle2, AlertTriangle, Clock } from "lucide-react";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -13,7 +13,6 @@ export default function ContactForm() {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [showCalendly, setShowCalendly] = useState(false);
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
@@ -63,20 +62,7 @@ export default function ContactForm() {
     }
   };
 
-  // Close Calendly modal on ESC
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setShowCalendly(false);
-    };
-    if (showCalendly) {
-      window.addEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "hidden";
-    }
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "";
-    };
-  }, [showCalendly]);
+
 
   return (
     <div className="w-full max-w-xl bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl relative">
@@ -208,11 +194,11 @@ export default function ContactForm() {
           </div>
 
           {/* Form CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 pt-2">
+          <div className="flex gap-4 pt-2">
             <button
               type="submit"
               disabled={status === "loading"}
-              className="flex-1 flex items-center justify-center gap-2 bg-white text-black font-semibold py-3.5 px-6 rounded-full hover:bg-white/85 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-50"
+              className="w-full flex items-center justify-center gap-2 bg-white text-black font-semibold py-3.5 px-6 rounded-full hover:bg-white/85 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-50"
             >
               {status === "loading" ? (
                 <>
@@ -226,50 +212,10 @@ export default function ContactForm() {
                 </>
               )}
             </button>
-
-            <button
-              type="button"
-              onClick={() => setShowCalendly(true)}
-              className="flex items-center justify-center gap-2 border border-white/15 hover:border-white/35 text-white py-3.5 px-6 rounded-full transition-colors font-semibold"
-            >
-              <Calendar className="w-4 h-4" />
-              <span>Book Calendar Call</span>
-            </button>
           </div>
         </form>
       )}
 
-      {/* Calendly Integration Modal */}
-      {showCalendly && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-black/85 backdrop-blur-sm" onClick={() => setShowCalendly(false)} />
-          <div className="relative w-full max-w-4xl h-[85dvh] bg-[#0c0c0c]/80 backdrop-blur-2xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl flex flex-col z-10 animate-in fade-in zoom-in-95 duration-200">
-            <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between">
-              <span className="font-mono text-xs uppercase tracking-widest text-white/40">
-                Book a Call with Rishav
-              </span>
-              <button
-                onClick={() => setShowCalendly(false)}
-                className="w-8 h-8 rounded-full border border-white/10 text-white/50 hover:text-white flex items-center justify-center transition-colors"
-                aria-label="Close scheduler"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-            <div className="flex-1 w-full h-full bg-[#121212]">
-              {/* Calendly iframe embed - fallback to message in offline environment */}
-              <iframe
-                src="https://calendly.com/rishav2000roy?hide_landing_page_details=1&hide_gdpr_banner=1"
-                width="100%"
-                height="100%"
-                frameBorder="0"
-                title="Calendly Scheduler"
-                className="w-full h-full"
-              />
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
