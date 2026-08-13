@@ -49,7 +49,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://api.github.com" />
         <FontPreloader />
       </head>
-      <body className={`${sora.variable} ${jetbrainsMono.variable} flex flex-col bg-background text-foreground selection:bg-accent selection:text-background`}>
+      <body className={`${sora.variable} ${jetbrainsMono.variable} flex flex-col bg-background text-foreground selection:bg-accent selection:text-background min-h-screen overflow-x-hidden w-full max-w-full`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
