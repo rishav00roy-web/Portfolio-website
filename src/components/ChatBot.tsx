@@ -21,7 +21,7 @@ export default function ChatBot() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   
   const [btnHovered, setBtnHovered] = useState(false);
-  const btnContainerRef = useRef<HTMLDivElement>(null);
+  const btnContainerRef = useRef<HTMLButtonElement>(null);
   
   // Magnetic mouse tracking coordinates
   const mouseX = useMotionValue(0);
@@ -68,7 +68,8 @@ export default function ChatBot() {
   return (
     <>
       {/* Floating Action Button - Ultimate Lightning Reactor */}
-      <motion.div
+      <motion.button
+        type="button"
         ref={btnContainerRef}
         initial={{ scale: 0, opacity: 0 }}
         animate={{ 
@@ -81,7 +82,7 @@ export default function ChatBot() {
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setBtnHovered(true)}
         onMouseLeave={handleMouseLeave}
-        className="fixed bottom-6 right-6 w-16 h-16 bg-zinc-950/80 border border-zinc-900 rounded-full shadow-2xl z-50 flex items-center justify-center cursor-pointer overflow-hidden backdrop-blur-md"
+        className="fixed bottom-6 right-6 w-16 h-16 bg-zinc-950/80 border border-zinc-900 rounded-full shadow-2xl z-50 flex items-center justify-center cursor-pointer overflow-hidden backdrop-blur-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
         aria-label="Open Psunk AI Chat"
       >
         {/* Ambient background glow */}
@@ -179,7 +180,7 @@ export default function ChatBot() {
             />
           </motion.div>
         </div>
-      </motion.div>
+      </motion.button>
 
       {/* Chat Window */}
       <AnimatePresence>

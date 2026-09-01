@@ -5,7 +5,10 @@ import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import CaseStudyModal from "./CaseStudyModal";
+import dynamic from "next/dynamic";
+
+// Renders nothing until a card is opened; defer it out of the initial bundle.
+const CaseStudyModal = dynamic(() => import("./CaseStudyModal"), { ssr: false });
 
 import { projects } from "../lib/projectsData";
 

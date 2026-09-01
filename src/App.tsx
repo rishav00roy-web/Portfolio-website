@@ -10,7 +10,10 @@ import ExtraProjects from "./components/ExtraProjects";
 import About from "./components/About";
 import Certificates from "./components/Certificates";
 import Footer from "./components/Footer";
-import CommandMenu from "./components/CommandMenu";
+import dynamic from "next/dynamic";
+
+// Hidden until invoked (Ctrl+K), so it does not belong in the first-paint bundle.
+const CommandMenu = dynamic(() => import("./components/CommandMenu"), { ssr: false });
 
 
 export default function App() {

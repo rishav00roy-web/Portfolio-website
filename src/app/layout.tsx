@@ -3,7 +3,7 @@ import { Sora, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import FontPreloader from "@/components/FontPreloader";
 import { Analytics } from "@vercel/analytics/next";
-import ChatBot from "@/components/ChatBot";
+import ChatBotLoader from "@/components/ChatBotLoader";
 const sora = Sora({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -103,7 +103,7 @@ export default function RootLayout({
           <style>{`main { opacity: 1 !important; }`}</style>
         </noscript>
         {children}
-        <ChatBot />
+        <ChatBotLoader />
         <Analytics />
       </body>
     </html>
