@@ -61,6 +61,20 @@ export default function RootLayout({
                 "jobTitle": "Agentic Engineer",
                 "url": "https://byrishav.online",
                 "description": "Building and shipping high-performance production web apps through AI-augmented development.",
+                "image": "https://byrishav.online/opengraph-image.jpg",
+                "email": "rishav2000roy@gmail.com",
+                "telephone": "+91-60019-14771",
+                "address": {
+                  "@type": "PostalAddress",
+                  "addressLocality": "Kolkata",
+                  "addressRegion": "West Bengal",
+                  "addressCountry": "IN"
+                },
+                "alumniOf": {
+                  "@type": "CollegeOrUniversity",
+                  "name": "Manipal University Jaipur"
+                },
+                "knowsLanguage": ["English", "Hindi", "Assamese", "Bengali"],
                 "sameAs": [
                   "https://github.com/rishav00roy-web",
                   "https://www.linkedin.com/in/rishav-roy-858b0b365/",
@@ -81,15 +95,6 @@ export default function RootLayout({
                 "@type": "WebSite",
                 "name": "Rishav Roy Portfolio",
                 "url": "https://byrishav.online"
-              },
-              {
-                "@context": "https://schema.org",
-                "@type": "ProfilePage",
-                "dateCreated": "2026-08-01T00:00:00+00:00",
-                "mainEntity": {
-                  "@type": "Person",
-                  "name": "Rishav Roy"
-                }
               }
             ])
           }}

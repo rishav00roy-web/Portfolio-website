@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import KineticGrid from "../../../components/KineticGrid";
 import CaseStudyArticle from "../../../components/CaseStudyArticle";
 import { allCaseStudies, getCaseStudyBySlug } from "../../../lib/projectsData";
+import { caseStudySchema, breadcrumbSchema, jsonLd } from "../../../lib/schema";
 
 export async function generateStaticParams() {
   return allCaseStudies.map((c) => ({ slug: c.slug }));
@@ -61,6 +62,17 @@ export default async function CaseStudyPage({
 
   return (
     <div className="min-h-screen bg-[#030303] text-white selection:bg-white/20 relative">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd([
+          caseStudySchema(caseStudy),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Case Studies", path: "/projects" },
+            { name: caseStudy.title, path: `/projects/${caseStudy.slug}` },
+          ]),
+        ])}
+      />
       <KineticGrid spacing={44} radius={260} baseOpacity={0.05} />
 
       <div className="relative z-10">

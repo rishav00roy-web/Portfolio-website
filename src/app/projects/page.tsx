@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import type { Metadata } from "next";
 import KineticGrid from "../../components/KineticGrid";
 import { allCaseStudies } from "../../lib/projectsData";
+import { caseStudyIndexSchema, breadcrumbSchema, jsonLd } from "../../lib/schema";
 
 export const metadata: Metadata = {
   title: "Case Studies | Rishav Roy",
@@ -29,6 +30,16 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   return (
     <div className="min-h-screen bg-[#030303] text-white selection:bg-white/20 relative">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd([
+          caseStudyIndexSchema(allCaseStudies),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Case Studies", path: "/projects" },
+          ]),
+        ])}
+      />
       <KineticGrid spacing={44} radius={260} baseOpacity={0.05} />
 
       <div className="relative z-10">
