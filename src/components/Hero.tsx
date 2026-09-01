@@ -206,9 +206,14 @@ export default function Hero() {
 
           {/* Bottom content area */}
           <div className="flex-1 flex flex-col justify-end px-6 sm:px-12 xl:px-24 pb-8 sm:pb-24 pt-4 sm:pt-24">
-            {/* Tagline */}
+            {/* Tagline — this is the LCP element. Chrome does not count an
+                element at opacity 0 as contentful, so fading it in meant LCP
+                was recorded only once the animation finished: 2.6s of pure
+                element render delay on mobile. It now paints immediately and
+                only slides, since a translated element still counts as
+                painted. Do not reintroduce an opacity transition here. */}
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 1, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={
                 shouldReduceMotion
