@@ -226,3 +226,10 @@ html.lenis body {
   letter-spacing: 0.01em;
 }
 body { overflow-x: hidden; }
+
+/* The chat panel spans nearly the full width on phones, and the command-menu
+   trigger is fixed bottom-left at z-9999 — so it paints on top of the chat
+   input. Pull the trigger while the chat is open. */
+[data-chat-open="true"] [data-command-menu-trigger] {
+  display: none;
+}

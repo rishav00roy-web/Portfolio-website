@@ -2,13 +2,21 @@
 
 import { useChat } from '@ai-sdk/react';
 import { useState, useRef, useEffect } from 'react';
-import { MessageSquare, X, Send, Bot, User, Loader2 } from 'lucide-react';
+import { X, Send, Bot, User, Loader2 } from 'lucide-react';
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
   const { messages, status, sendMessage } = useChat();
+
+  // The command-menu trigger is fixed bottom-left at z-9999. On phones the chat
+  // panel spans nearly the full width, so that pill paints on top of the chat
+  // input. Publish open state and let CSS pull the trigger while chat is open.
+  useEffect(() => {
+    document.documentElement.setAttribute("data-chat-open", String(isOpen));
+    return () => document.documentElement.removeAttribute("data-chat-open");
+  }, [isOpen]);
   const isLoading = status === 'submitted' || status === 'streaming';
   const messagesEndRef = useRef<HTMLDivElement>(null);
   
@@ -181,7 +189,7 @@ export default function ChatBot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
             transition={{ duration: 0.3, type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed bottom-6 right-6 w-full max-w-[350px] sm:max-w-[400px] h-[500px] max-h-[80vh] z-50 flex flex-col rounded-2xl overflow-hidden shadow-2xl border border-white/20 bg-black/60 backdrop-blur-xl"
+            className="fixed bottom-6 left-4 right-4 w-auto sm:left-auto sm:right-6 sm:w-full sm:max-w-[400px] h-[500px] max-h-[80vh] z-50 flex flex-col rounded-2xl overflow-hidden shadow-2xl border border-white/20 bg-black/60 backdrop-blur-xl"
           >
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b border-white/10 bg-white/5">
@@ -209,7 +217,7 @@ export default function ChatBot() {
                 <div className="flex flex-col items-center justify-center h-full text-center space-y-4 opacity-70">
                   <Bot className="w-12 h-12 text-white/30" />
                   <p className="text-sm text-white/60 px-4">
-                    Hi there! I'm Psunk, an AI assistant trained on Rishav's portfolio. How can I help you today?
+                    Hi there! I&apos;m Psunk, an AI assistant trained on Rishav&apos;s portfolio. How can I help you today?
                   </p>
                 </div>
               )}
@@ -238,7 +246,7 @@ export default function ChatBot() {
                       <span key={i}>
                         {part.type === 'text' ? part.text : null}
                       </span>
-                    )) : (m as any).content}
+                    )) : (m as { content?: string }).content}
                   </div>
 
                   {m.role === 'user' && (
