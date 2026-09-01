@@ -193,7 +193,7 @@ test.describe('Portfolio Website - Tier 4: Real-world User Scenario', () => {
 
     // LinkedIn check
     const linkedinLink = footer.locator('a[href*="linkedin.com"]');
-    await expect(linkedinLink).toHaveAttribute('href', 'https://www.linkedin.com/in/rishav-roy-858b0b365/');
+    await expect(linkedinLink).toHaveAttribute('href', 'https://www.linkedin.com/in/rishav-the-roy/');
 
     // Instagram check
     const instagramLink = footer.locator('a[href*="instagram.com"]');

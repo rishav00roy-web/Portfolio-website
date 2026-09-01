@@ -191,7 +191,7 @@ export default function Footer() {
               initials="GH"
             />
             <SocialIcon
-              href="https://www.linkedin.com/in/rishav-roy-858b0b365/"
+              href="https://www.linkedin.com/in/rishav-the-roy/"
               label="LinkedIn"
               username="Rishav Roy"
               bio="Operations and automation specialist, actively open to new roles."

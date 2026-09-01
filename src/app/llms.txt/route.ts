@@ -43,7 +43,7 @@ export function GET() {
 - Email: rishav2000roy@gmail.com
 - Phone: +91 60019 14771
 - GitHub: https://github.com/rishav00roy-web
-- LinkedIn: https://www.linkedin.com/in/rishav-roy-858b0b365/
+- LinkedIn: https://www.linkedin.com/in/rishav-the-roy/
 - Site: ${SITE_URL}
 
 ## Stack

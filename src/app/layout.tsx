@@ -77,7 +77,7 @@ export default function RootLayout({
                 "knowsLanguage": ["English", "Hindi", "Assamese", "Bengali"],
                 "sameAs": [
                   "https://github.com/rishav00roy-web",
-                  "https://www.linkedin.com/in/rishav-roy-858b0b365/",
+                  "https://www.linkedin.com/in/rishav-the-roy/",
                   "https://instagram.com/justbeingpsunk_"
                 ],
                 "knowsAbout": [
