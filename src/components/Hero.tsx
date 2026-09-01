@@ -118,7 +118,7 @@ export default function Hero() {
   return (
     <div ref={outerRef} className="relative h-[280dvh] bg-transparent">
       <section
-        className="sticky top-0 h-screen w-full overflow-hidden text-white z-10 select-none"
+        className="sticky top-0 h-[100dvh] w-full overflow-hidden text-white z-10 select-none"
         style={{ 
           perspective: "1200px",
           transform: "translate3d(0, 0, 0)",
