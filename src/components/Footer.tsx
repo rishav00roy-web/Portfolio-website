@@ -194,7 +194,7 @@ export default function Footer() {
               href="https://www.linkedin.com/in/rishav-roy-858b0b365/"
               label="LinkedIn"
               username="Rishav Roy"
-              bio="Agentic Engineer actively open to new opportunities."
+              bio="Operations and automation specialist, actively open to new roles."
               icon={<LinkedinIcon />}
               accentColor="#0A66C2"
               initials="in"

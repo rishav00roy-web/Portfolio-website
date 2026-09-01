@@ -17,13 +17,13 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Rishav Roy — Agentic Engineer",
-  description: "Building and shipping high-performance production web apps through AI-augmented development.",
-  keywords: ["Rishav Roy", "Agentic Developer", "Full-Stack Developer", "Kolkata Developer", "React", "Next.js", "Portfolio"],
+  title: "Rishav Roy | Operations & Automation Specialist",
+  description: "Six years running operations, HR and procurement, now building the software that removes the manual work. FOIA processing at scale, custom CRMs, and business automation.",
+  keywords: ["Rishav Roy", "Operations Specialist", "Business Automation", "Remote Operations", "HR and Admin", "Custom CRM", "Kolkata"],
   metadataBase: new URL("https://byrishav.online"),
   openGraph: {
-    title: "Rishav Roy — Agentic Engineer",
-    description: "Building and shipping high-performance production web apps through AI-augmented development.",
+    title: "Rishav Roy | Operations & Automation Specialist",
+    description: "Six years running operations, HR and procurement, now building the software that removes the manual work. FOIA processing at scale, custom CRMs, and business automation.",
     url: "https://byrishav.online",
     siteName: "Rishav Roy Portfolio",
     type: "website",
@@ -33,8 +33,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rishav Roy — Agentic Engineer",
-    description: "Building and shipping high-performance production web apps through AI-augmented development.",
+    title: "Rishav Roy | Operations & Automation Specialist",
+    description: "Six years running operations, HR and procurement, now building the software that removes the manual work. FOIA processing at scale, custom CRMs, and business automation.",
   }
 };
 
@@ -58,9 +58,9 @@ export default function RootLayout({
                 "@context": "https://schema.org",
                 "@type": "Person",
                 "name": "Rishav Roy",
-                "jobTitle": "Agentic Engineer",
+                "jobTitle": "Operations & Automation Specialist",
                 "url": "https://byrishav.online",
-                "description": "Building and shipping high-performance production web apps through AI-augmented development.",
+                "description": "Six years running operations, HR and procurement, now building the software that removes the manual work. FOIA processing at scale, custom CRMs, and business automation.",
                 "image": "https://byrishav.online/opengraph-image.jpg",
                 "email": "rishav2000roy@gmail.com",
                 "telephone": "+91-60019-14771",

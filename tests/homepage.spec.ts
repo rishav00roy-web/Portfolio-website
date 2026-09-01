@@ -5,7 +5,7 @@ test('has title and intro text', async ({ page }) => {
   await page.goto('/');
 
   // Expect a title to contain "Rishav Roy".
-  await expect(page).toHaveTitle(/Rishav Roy — Agentic Engineer/i);
+  await expect(page).toHaveTitle("Rishav Roy | Operations & Automation Specialist");
 
   // Expect the main heading/text to contain "Rishav"
   const heading = page.locator('h1');

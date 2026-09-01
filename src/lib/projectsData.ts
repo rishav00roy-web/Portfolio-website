@@ -3,7 +3,7 @@ export const projects = [
     id: 1,
     title: "Tea Country Holidays",
     description:
-      "A custom database-driven travel platform built for a non-technical agency owner. The CMS lets her manage 34 packages across 24 destinations, update pricing, and post new offers\u2014without touching code or calling a developer.",
+      "A custom database-driven travel platform built for a non-technical agency owner. The CMS lets her manage 34 packages across 24 destinations, update pricing, and post new offers, without touching code or calling a developer.",
     tags: ["Next.js", "Supabase", "PostgreSQL", "Tailwind CSS", "Custom CMS", "PKCE OAuth"],
     link: "https://tea-country-holidays.vercel.app",
     images: [
@@ -16,7 +16,7 @@ export const projects = [
     id: 2,
     title: "IQ Iron Fitness",
     description:
-      "A cloud-hosted membership CRM with a custom billing engine, salary-slip generator, and operational dashboard\u2014optimized for the owner\u2019s older laptop and iPhone 15 Pro Max.",
+      "A cloud-hosted membership CRM with a custom billing engine, salary-slip generator, and operational dashboard, optimized for the owner\u2019s older laptop and iPhone 15 Pro Max.",
     tags: ["Next.js", "Supabase", "PostgreSQL", "Tailwind CSS", "TypeScript", "Billing Engine"],
     link: "https://iq-iron-fitness-online-crm.vercel.app",
     images: [
@@ -91,7 +91,7 @@ export const caseStudiesData: Record<number, CaseStudy> = {
       { label: "Live Site", url: "https://tea-country-holidays.vercel.app", icon: "live" }
     ],
     problem: "The client was running her travel business on Excel sheets, static Word files, and Gemini-assisted itinerary drafts. She had previously paid good money for a website that underdelivered. She had no way to update package information, pricing, or offers without depending on a developer for every small change.",
-    solution: "Built a custom travel platform from scratch with a bespoke admin dashboard. The non-technical owner can now add and edit packages, update fixed pricing, manage destination content, and post promotional offers\u2014all through the CMS without writing code.",
+    solution: "Built a custom travel platform from scratch with a bespoke admin dashboard. The non-technical owner can now add and edit packages, update fixed pricing, manage destination content, and post promotional offers, all through the CMS without writing code.",
     architecture: {
       description: "A database-driven content platform with a custom admin layer designed for a non-technical operator.",
       steps: [
@@ -105,7 +105,7 @@ export const caseStudiesData: Record<number, CaseStudy> = {
       {
         title: "Designing for a Non-Technical Operator",
         description: "Off-the-shelf CMS platforms were too complex and bloated for the client\u2019s needs, while a static site would require a developer for every price change.",
-        fix: "Built a custom Supabase-backed admin panel with a streamlined interface mapped directly to the owner\u2019s real workflow\u2014packages, destinations, pricing, and offers."
+        fix: "Built a custom Supabase-backed admin panel with a streamlined interface mapped directly to the owner\u2019s real workflow: packages, destinations, pricing, and offers."
       },
       {
         title: "Content Architecture for 24 Destinations",
@@ -113,7 +113,7 @@ export const caseStudiesData: Record<number, CaseStudy> = {
         fix: "Designed the data model around the owner\u2019s mental model of her business rather than abstract relational purity, keeping the admin interface intuitive."
       }
     ],
-    businessValue: "Transformed the client\u2019s operation from a scattered mix of Excel and Word documents into a centralized platform she fully controls. She no longer depends on a developer for routine updates\u2014pricing changes, new packages, and promotional offers are all self-service.",
+    businessValue: "Transformed the client\u2019s operation from a scattered mix of Excel and Word documents into a centralized platform she fully controls. She no longer depends on a developer for routine updates: pricing changes, new packages, and promotional offers are all self-service.",
     lessons: "When building for a non-technical owner, the admin interface and data model matter just as much as the public-facing website. The CMS has to match how the client actually thinks about her business.",
     futureImprovements: "Integration with direct flight APIs and an automated CRM payment gateway link.",
     color: "#F5B301"
@@ -134,7 +134,7 @@ export const caseStudiesData: Record<number, CaseStudy> = {
       { label: "Live Demo", url: "https://iq-iron-fitness-online-crm.vercel.app", icon: "live" },
       { label: "GitHub Code", url: "https://github.com/rishav00roy-web/IQ-iron-fitness-online-crm", icon: "github" }
     ],
-    problem: "The gym owner needed to track 110+ active members, handle billing, and calculate trainer pay. The system had to run smoothly on an older laptop and provide a usable mobile experience on an iPhone 15 Pro Max\u2014no room for a heavy, sluggish UI.",
+    problem: "The gym owner needed to track 110+ active members, handle billing, and calculate trainer pay. The system had to run smoothly on an older laptop and provide a usable mobile experience on an iPhone 15 Pro Max. There was no room for a heavy, sluggish UI.",
     solution: "Built a Next.js + Supabase cloud platform with real-time sync, a custom billing engine that generates membership invoices, and a salary-slip builder that computes trainer commissions. The dashboard gives the owner an immediate operational snapshot: pending memberships, expiring memberships, expired memberships, today\u2019s birthdays, outstanding payments, and monthly collection totals.",
     architecture: {
       description: "A cloud-hosted architecture with real-time data sync, automated billing, and a hardware-conscious UI layer.",
@@ -158,7 +158,7 @@ export const caseStudiesData: Record<number, CaseStudy> = {
       }
     ],
     businessValue: "Replaced manual record-keeping with a cloud platform that gives the owner instant operational visibility. Billing and payroll are automated, and the system is built to scale comfortably as the gym grows toward 500+ members.",
-    lessons: "Designing for real-world hardware constraints\u2014like the owner\u2019s specific older laptop\u2014shapes performance and UI decisions more than abstract benchmarks ever will.",
+    lessons: "Designing for real-world hardware constraints, like the owner\u2019s specific older laptop, shapes performance and UI decisions more than abstract benchmarks ever will.",
     futureImprovements: "Full SMS gateway integration and biometric scanner API sync.",
     color: "#10B981"
   },
@@ -178,7 +178,7 @@ export const caseStudiesData: Record<number, CaseStudy> = {
       { label: "Live Demo", url: "https://clash-bazar.vercel.app", icon: "live" },
       { label: "GitHub Code", url: "https://github.com/rishav00roy-web/ClashVault", icon: "github" }
     ],
-    problem: "High-value gaming trades are riddled with scams\u2014buyers commit chargeback fraud, sellers reclaim accounts after getting paid. The creator needed a structured platform to protect both sides of every transaction within their 12K+ subscriber community.",
+    problem: "High-value gaming trades are riddled with scams: buyers commit chargeback fraud, and sellers reclaim accounts after getting paid. The creator needed a structured platform to protect both sides of every transaction within their 12K+ subscriber community.",
     solution: "Built a secure e-commerce platform with an application-managed escrow-style workflow. Payments via Stripe and PayPal are held securely until the order is verified and a 7-day security window expires. Created a custom admin dashboard so the non-technical owner can manage orders, monitor operations, and maintain a financial ledger without writing code. Connected the platform to Discord for community giveaways and free item distribution.",
     architecture: {
       description: "An application-managed transaction pipeline with secure payment handling and automated status verification.",
@@ -201,7 +201,7 @@ export const caseStudiesData: Record<number, CaseStudy> = {
         fix: "Implemented a mandatory 7-day security window during which the account\u2019s credentials must be fully transferred and locked before funds are released."
       }
     ],
-    businessValue: "Gave the creator a secure middleman platform that protects their 12K+ subscriber community from fraud\u2014complete with the admin tools a non-technical owner needs to run the operation independently.",
+    businessValue: "Gave the creator a secure middleman platform that protects their 12K+ subscriber community from fraud, complete with the admin tools a non-technical owner needs to run the operation independently.",
     lessons: "Financial workflows require defensive engineering. Every payment state transition needs an idempotent fallback, and you cannot rely solely on webhooks for critical transaction confirmation.",
     futureImprovements: "Full automation of game account checking using Supercell API integrations.",
     color: "#8B5CF6"
@@ -252,7 +252,7 @@ export const caseStudiesData: Record<number, CaseStudy> = {
   }
 };
 
-/** URL slug for each case study. Keep these stable — they are public URLs. */
+/** URL slug for each case study. Keep these stable, they are public URLs. */
 export const caseStudySlugs: Record<number, string> = {
   1: "tea-country-holidays",
   2: "iq-iron-fitness",

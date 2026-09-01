@@ -25,7 +25,7 @@ export function caseStudySchema(caseStudy: CaseStudyWithSlug) {
   return {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: `${caseStudy.title} — Case Study`,
+    headline: `${caseStudy.title} Case Study`,
     name: caseStudy.title,
     description: caseStudy.tagline,
     abstract: caseStudy.problem,

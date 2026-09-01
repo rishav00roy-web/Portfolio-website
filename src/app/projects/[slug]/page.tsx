@@ -24,7 +24,7 @@ export async function generateMetadata({
   const caseStudy = getCaseStudyBySlug(slug);
   if (!caseStudy) return {};
 
-  const title = `${caseStudy.title} — Case Study | Rishav Roy`;
+  const title = `${caseStudy.title} Case Study | Rishav Roy`;
   const description = caseStudy.tagline;
 
   return {
@@ -134,7 +134,7 @@ export default async function CaseStudyPage({
         </main>
 
         <footer className="py-12 border-t border-white/5 text-center text-sm text-white/50 font-mono">
-          Rishav Roy — Case Studies Archive
+          Rishav Roy | Case Studies Archive
         </footer>
       </div>
     </div>

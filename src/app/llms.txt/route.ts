@@ -32,10 +32,11 @@ export function GET() {
 
   const body = `# Rishav Roy
 
-> Full-stack developer in Kolkata, India, building and shipping production web
-> applications for paying clients. Ex-operations: six years running HR,
-> procurement and logistics before moving into software, which is why the work
-> skews toward tools that non-technical owners can run themselves.
+> Operations and automation specialist in Kolkata, India. Six years running
+> HR, procurement, logistics and compliance, including fully remote FOIA
+> processing at scale, alongside building the production software that removes
+> the manual work. The through-line is operations first: every system below was
+> built so a non-technical owner could run it without a developer.
 
 ## Contact
 

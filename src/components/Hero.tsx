@@ -138,7 +138,7 @@ export default function Hero() {
         >
           <Image
             src="/assets/hero-bg.jpg"
-            alt="Rishav Roy - Agentic Engineer Background"
+            alt="Rishav Roy, Operations and Automation Specialist"
             fill
             priority
             className="object-cover"
@@ -179,7 +179,7 @@ export default function Hero() {
           className="absolute inset-0 z-10 flex items-start pt-[18dvh] sm:pt-0 sm:items-center justify-center pointer-events-none"
         >
           <h1 className="font-display leading-[0.82] uppercase tracking-tight text-center">
-            <span className="sr-only">Rishav Roy — Agentic Engineer</span>
+            <span className="sr-only">Rishav Roy, Operations &amp; Automation Specialist</span>
             <span aria-hidden="true" className="block text-[15vw] sm:text-[8.5rem] lg:text-[12.5rem] font-extrabold text-white">
               Rishav
             </span>
@@ -305,7 +305,7 @@ export default function Hero() {
                   Commits
                 </p>
                 <p className="text-white/80">
-                  {commitCount !== null ? `${commitCount} Commits` : "— Commits"}
+                  {commitCount !== null ? `${commitCount} Commits` : "... Commits"}
                 </p>
                 <p className="text-white/50 text-[10px] mt-1">on GitHub</p>
               </div>

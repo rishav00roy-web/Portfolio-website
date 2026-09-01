@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Rishav Roy — Agentic Engineer",
+    name: "Rishav Roy | Operations & Automation Specialist",
     short_name: "Rishav Roy",
     description:
       "Building and shipping high-performance production web apps through AI-augmented development.",
@@ -12,9 +12,9 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#030303",
     icons: [
       {
-        src: "/favicon.ico",
+        src: "/icon.svg",
         sizes: "any",
-        type: "image/x-icon",
+        type: "image/svg+xml",
       },
     ],
   };

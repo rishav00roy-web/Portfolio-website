@@ -131,7 +131,7 @@ export default function ProjectsPage() {
         </main>
 
         <footer className="py-12 border-t border-white/5 text-center text-sm text-white/50 font-mono">
-          Rishav Roy — Case Studies Archive
+          Rishav Roy | Case Studies Archive
         </footer>
       </div>
     </div>

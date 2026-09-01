@@ -157,7 +157,7 @@ export default function About() {
                 variants={fadeUp}
                 className="text-2xl sm:text-3xl text-white/95 leading-relaxed font-sans font-medium"
               >
-                My path into software engineering didn&#39;t start with side projects—it
+                My path into software engineering didn&#39;t start with side projects. It
                 started with shipping commercial platforms for paying clients. After
                 six-plus years in operations, I got tired of watching businesses drown
                 in manual work. So I started building the tools to fix it.
@@ -170,8 +170,8 @@ export default function About() {
                 reliability, easy maintenance, and real business value. My operational
                 background runs through everything I build: I don&#39;t write code for
                 the sake of it. I build systems that non-technical owners can actually
-                run themselves—managing their own data, their own pricing, their own
-                content—without calling a developer every time something needs to change.
+                run themselves: managing their own data, their own pricing, their own
+                content, without calling a developer every time something needs to change.
               </motion.p>
               <motion.p
                 variants={fadeUp}
@@ -182,8 +182,8 @@ export default function About() {
                 don&#39;t treat it as a substitute for engineering judgment. I architect
                 the systems, review every critical line of code, validate the outcomes,
                 and take full responsibility for the final product. I&#39;m also actively
-                deepening my understanding of AI systems—exploring areas like
-                retrieval-augmented generation and model evaluation—while continuing
+                deepening my understanding of AI systems, exploring areas like
+                retrieval-augmented generation and model evaluation, while continuing
                 to ship production software for real clients.
               </motion.p>
             </motion.div>
