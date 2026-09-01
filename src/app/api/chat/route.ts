@@ -4,6 +4,15 @@ import { streamText } from 'ai';
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
 
+// The client sends AI SDK UIMessages (content lives in `parts`); the model
+// expects CoreMessages (a flat `content` string).
+type UIRole = "system" | "user" | "assistant";
+type UIPart = { type: string; text?: string };
+type UIMessage = { role: UIRole; content?: string; parts?: UIPart[] };
+
+const isUIRole = (r: unknown): r is UIRole =>
+  r === "system" || r === "user" || r === "assistant";
+
 export async function POST(req: Request) {
   try {
     if (!process.env.GROQ_API_KEY) {
@@ -19,13 +28,15 @@ export async function POST(req: Request) {
       );
     }
 
-    const { messages } = await req.json();
+    const { messages }: { messages: UIMessage[] } = await req.json();
 
     // Map UIMessages (which use 'parts') to CoreMessages (which use 'content' or array content)
-    const coreMessages = messages.map((m: any) => {
+    // Roles arrive over the wire, so drop anything outside the union the
+    // model accepts rather than trusting the request body.
+    const coreMessages = messages.filter((m) => isUIRole(m.role)).map((m: UIMessage) => {
       let content = m.content;
       if (m.parts && Array.isArray(m.parts)) {
-        content = m.parts.map((p: any) => p.type === 'text' ? p.text : '').join('');
+        content = m.parts.map((p: UIPart) => (p.type === 'text' ? p.text : '')).join('');
       }
       return {
         role: m.role,

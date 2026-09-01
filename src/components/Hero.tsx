@@ -33,6 +33,11 @@ export default function Hero() {
     if (typeof window !== "undefined") {
       const cached = localStorage.getItem("github-commit-count");
       if (cached) {
+        // Deliberately set after mount rather than via a lazy useState
+        // initialiser: localStorage is unavailable during SSR, and seeding
+        // state from it during render would make the server markup ("—
+        // Commits") disagree with the client and trip a hydration mismatch.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setCommitCount(parseInt(cached, 10));
       }
     }

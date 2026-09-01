@@ -84,19 +84,13 @@ function Card({
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const [status, setStatus] = useState<ProjectStatus | null>(
-    project.id === 3
-      ? { text: "In Progress", isRepo: true }
-      : null
-  );
-
-  useEffect(() => {
-    if (project.id === 1) {
-      setStatus({ text: "Live", isLive: true });
-    } else if (project.id === 2) {
-      setStatus({ text: "Live", isLive: true });
-    }
-  }, [project.id]);
+  // Derived straight from the project id - no state, no effect.
+  const status: ProjectStatus | null =
+    project.id === 1 || project.id === 2
+      ? { text: "Live", isLive: true }
+      : project.id === 3
+        ? { text: "In Progress", isRepo: true }
+        : null;
   
   const step = 1 / count;
   const start = index * step;

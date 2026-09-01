@@ -12,11 +12,9 @@ import Certificates from "./components/Certificates";
 import Footer from "./components/Footer";
 import CommandMenu from "./components/CommandMenu";
 
-import { useFontLoading } from "./hooks/useFontLoading";
 
 export default function App() {
   const prefersReduced = useReducedMotion();
-  const { fontsLoaded } = useFontLoading();
   const [activeProjectId, setActiveProjectId] = useState<number | null>(null);
 
   const content = (
