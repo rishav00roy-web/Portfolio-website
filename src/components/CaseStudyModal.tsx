@@ -2,14 +2,15 @@
 
 import { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ShieldAlert, GitBranch, ExternalLink } from "lucide-react";
+import Link from "next/link";
+import { X, ShieldAlert, GitBranch, ExternalLink, ArrowRight } from "lucide-react";
 
 interface CaseStudyModalProps {
   projectId: number | null;
   onClose: () => void;
 }
 
-import { caseStudiesData } from "../lib/projectsData";
+import { caseStudiesData, getSlugById } from "../lib/projectsData";
 
 export default function CaseStudyModal({ projectId, onClose }: CaseStudyModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
@@ -124,6 +125,15 @@ export default function CaseStudyModal({ projectId, onClose }: CaseStudyModalPro
 
               {/* Action Links */}
               <div className="flex flex-wrap gap-4 border-b border-white/5 pb-8 relative z-10">
+                {getSlugById(projectId) && (
+                  <Link
+                    href={`/projects/${getSlugById(projectId)}`}
+                    className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-medium hover:bg-white/85 transition-all shadow-xl text-sm"
+                  >
+                    <span>Read the full case study</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                  </Link>
+                )}
                 {data.links.map((link: { label: string; url: string; icon?: string }) => (
                   <a
                     key={link.url}

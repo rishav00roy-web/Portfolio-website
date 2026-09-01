@@ -251,3 +251,26 @@ export const caseStudiesData: Record<number, CaseStudy> = {
     color: "#3B82F6"
   }
 };
+
+/** URL slug for each case study. Keep these stable — they are public URLs. */
+export const caseStudySlugs: Record<number, string> = {
+  1: "tea-country-holidays",
+  2: "iq-iron-fitness",
+  3: "clash-bazar",
+  4: "personal-portfolio-v2",
+};
+
+export type CaseStudyWithSlug = CaseStudy & { id: number; slug: string };
+
+export const allCaseStudies: CaseStudyWithSlug[] = Object.keys(caseStudiesData).map((key) => {
+  const id = Number(key);
+  return { id, slug: caseStudySlugs[id], ...caseStudiesData[id] };
+});
+
+export function getCaseStudyBySlug(slug: string): CaseStudyWithSlug | null {
+  return allCaseStudies.find((c) => c.slug === slug) ?? null;
+}
+
+export function getSlugById(id: number): string | undefined {
+  return caseStudySlugs[id];
+}
