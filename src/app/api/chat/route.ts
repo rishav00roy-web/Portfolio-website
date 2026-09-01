@@ -45,7 +45,8 @@ export async function POST(req: Request) {
     });
 
     const result = streamText({
-      model: groq('llama-3.3-70b-versatile'), // Use Groq's fast Llama 3.3 model
+      // Groq retired the Llama 3.3 endpoint; this key has no Llama access at all.
+      model: groq('openai/gpt-oss-120b'),
       maxRetries: 5, // Automatically retry requests on rate limits (429) or transient API failures
       system: `You are Psunk, a casual, friendly, and extremely concise assistant for Rishav's portfolio website.
       CRITICAL RULES:
