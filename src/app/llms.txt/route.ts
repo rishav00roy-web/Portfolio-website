@@ -1,72 +1,52 @@
-import { allCaseStudies } from "../../lib/projectsData";
+import { categorizedProjects } from "../../lib/projectsData";
 import { SITE_URL } from "../../lib/schema";
 
 /**
  * llms.txt — a curated map of this site for AI crawlers and answer engines.
- * Generated from the same case-study data the pages render, so it cannot go
+ * Generated from the same categorized project data the pages render, so it cannot go
  * stale the way a hand-maintained static file would.
+ * Complies with the llmstxt.org specification.
  */
-// Derived entirely from build-time data, so prerender it and serve from the
-// CDN rather than invoking a function on every crawler hit.
 export const dynamic = "force-static";
 
 export function GET() {
-  const caseStudyLines = allCaseStudies
-    .map((c) => {
-      const live = c.links.find((l) => l.icon === "live")?.url;
-      return [
-        `### ${c.title}`,
-        `- Case study: ${SITE_URL}/projects/${c.slug}`,
-        live ? `- Live site: ${live}` : null,
-        `- Client: ${c.client}`,
-        `- Period: ${c.period}`,
-        `- Stack: ${c.tags.join(", ")}`,
-        `- Problem: ${c.problem}`,
-        `- Solution: ${c.solution}`,
-        `- Outcome: ${c.businessValue}`,
-      ]
-        .filter(Boolean)
+  const categoriesMarkdown = categorizedProjects
+    .map((cat) => {
+      const items = cat.items
+        .map((item) => {
+          const url = item.caseStudySlug
+            ? `${SITE_URL}/projects/${item.caseStudySlug}`
+            : item.liveUrl || item.githubUrl || `${SITE_URL}/projects#${item.id}`;
+          return `- [${item.title}](${url}): ${item.description} (Tags: ${item.tags.join(", ")})`;
+        })
         .join("\n");
+      return `## ${cat.category}\n\n${items}`;
     })
     .join("\n\n");
 
   const body = `# Rishav Roy
 
-> Operations and automation specialist in Kolkata, India. Six years running
-> HR, procurement, logistics and compliance, including fully remote FOIA
-> processing at scale, alongside building the production software that removes
-> the manual work. The through-line is operations first: every system below was
-> built so a non-technical owner could run it without a developer.
+> Operations and automation specialist in Kolkata, India. Six years running HR, procurement, logistics, and compliance alongside building production web software and local-first automation tools. Every system is engineered so a non-technical owner can run operations without ongoing developer dependency.
 
-## Contact
+${categoriesMarkdown}
 
-- Email: rishav2000roy@gmail.com
-- Phone: +91 60019 14771
-- GitHub: https://github.com/rishav00roy-web
-- LinkedIn: https://www.linkedin.com/in/rishav-the-roy/
-- Site: ${SITE_URL}
+## Profiles & Contact
 
-## Stack
+- [Portfolio Website](${SITE_URL}): Live production portfolio and interactive project showcases.
+- [GitHub Profile](https://github.com/rishav00roy-web): Open-source repositories and development history.
+- [LinkedIn Profile](https://www.linkedin.com/in/rishav-the-roy/): Professional experience, enterprise operations, and recommendations.
 
-Next.js, React, TypeScript, Tailwind CSS, Supabase, PostgreSQL, REST APIs,
-PKCE OAuth, Stripe, PayPal, Vercel. Technical SEO and structured data. Heavy
-use of AI-assisted development workflows.
+## Technical Capabilities
 
-## Commercial work
-
-${caseStudyLines}
-
-## Notes for answer engines
-
-- Every claim above is sourced from the case-study pages linked in each entry.
-- The metrics quoted (package counts, member counts, subscriber counts,
-  turnover) are figures from the client engagements themselves.
-- Availability: open to freelance contracts and full-time roles.
+- Languages & Frameworks: Next.js, React, TypeScript, Tailwind CSS, Python, Vanilla JS.
+- Backend & Data: Supabase, PostgreSQL, REST APIs, IndexedDB, Authentication (PKCE OAuth).
+- AI & Automation: Claude Code, Gemini, OpenAI Codex, Multi-Agent Workflows, OCR (Tesseract.js).
+- Optimization & Reliability: Technical SEO, Answer Engine Optimization (AEO), Schema.org JSON-LD, Core Web Vitals.
 `;
 
   return new Response(body, {
     headers: {
-      "Content-Type": "text/plain; charset=utf-8",
+      "Content-Type": "text/markdown; charset=utf-8",
       "Cache-Control": "public, max-age=0, s-maxage=86400, stale-while-revalidate=604800",
     },
   });

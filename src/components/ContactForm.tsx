@@ -53,7 +53,7 @@ export default function ContactForm() {
       ].join("\n");
 
       const encoded = encodeURIComponent(message);
-      window.open(`https://wa.me/916001914771?text=${encoded}`, "_blank");
+      window.open(`https://wa.me/916001914771?text=${encoded}`, "_blank", "noopener,noreferrer");
 
       setStatus("success");
       setFormData({ name: "", email: "", type: "contract", message: "" });
@@ -61,8 +61,6 @@ export default function ContactForm() {
       setStatus("error");
     }
   };
-
-
 
   return (
     <div className="w-full max-w-xl bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl relative">

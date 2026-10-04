@@ -6,35 +6,36 @@ import { ReactLenis } from "lenis/react";
 import Hero from "./components/Hero";
 import KineticGrid from "./components/KineticGrid";
 import Projects from "./components/Projects";
-import ExtraProjects from "./components/ExtraProjects";
+import SelectedWork from "./components/SelectedWork";
 import About from "./components/About";
 import Certificates from "./components/Certificates";
 import Footer from "./components/Footer";
+import SectionRail from "./components/SectionRail";
+import ScrollProgress from "./components/ScrollProgress";
 import dynamic from "next/dynamic";
 
 // Hidden until invoked (Ctrl+K), so it does not belong in the first-paint bundle.
 const CommandMenu = dynamic(() => import("./components/CommandMenu"), { ssr: false });
-
 
 export default function App() {
   const prefersReduced = useReducedMotion();
   const [activeProjectId, setActiveProjectId] = useState<number | null>(null);
 
   const content = (
-    <>
-      <main className="min-h-screen text-white selection:bg-white/20 selection:text-white relative">
-        <Hero />
-        <KineticGrid />
-        <div className="relative z-10">
-          <Projects activeProjectId={activeProjectId} setActiveProjectId={setActiveProjectId} />
-          <ExtraProjects />
-          <About />
-          <Certificates />
-          <Footer />
-        </div>
-        <CommandMenu onOpenCaseStudy={setActiveProjectId} />
-      </main>
-    </>
+    <main className="min-h-screen text-white selection:bg-white/20 selection:text-white relative">
+      <ScrollProgress />
+      <Hero />
+      <KineticGrid />
+      <SectionRail />
+      <div className="relative z-10">
+        <Projects activeProjectId={activeProjectId} setActiveProjectId={setActiveProjectId} />
+        <SelectedWork />
+        <About />
+        <Certificates />
+        <Footer />
+      </div>
+      <CommandMenu onOpenCaseStudy={setActiveProjectId} />
+    </main>
   );
 
   // prefersReduced is `null` during the very first render (before Framer
@@ -48,9 +49,10 @@ export default function App() {
     <ReactLenis
       root
       options={{
-        lerp: 0.12,
+        lerp: 0.085,
         smoothWheel: true,
         touchMultiplier: 0,
+        wheelMultiplier: 0.95,
       }}
     >
       {content}

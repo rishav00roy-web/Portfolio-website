@@ -274,3 +274,159 @@ export function getCaseStudyBySlug(slug: string): CaseStudyWithSlug | null {
 export function getSlugById(id: number): string | undefined {
   return caseStudySlugs[id];
 }
+
+export interface ProjectListing {
+  id: string;
+  title: string;
+  githubRepoName: string;
+  category: "Client Websites" | "Design-Heavy / Showcase Builds" | "Web Apps / Tools";
+  description: string;
+  tags: string[];
+  caseStudySlug?: string;
+  liveUrl?: string;
+  githubUrl?: string;
+  badge?: string;
+}
+
+export const categorizedProjects: {
+  category: "Client Websites" | "Design-Heavy / Showcase Builds" | "Web Apps / Tools";
+  summary: string;
+  items: ProjectListing[];
+}[] = [
+  {
+    category: "Client Websites",
+    summary: "Production database-driven systems and client-acquisition platforms engineered for commercial businesses.",
+    items: [
+      {
+        id: "tea-country-holidays",
+        title: "Tea Country Holidays",
+        githubRepoName: "tea-country-holidays",
+        category: "Client Websites",
+        description: "Database-driven travel platform for a non-technical agency owner. Custom CMS for managing 34 packages across 24 destinations, role-gated admin dashboard, Gemini-powered AI concierge chat, server-side booking flow.",
+        tags: ["Next.js 16", "Supabase", "PKCE OAuth", "Google Gemini"],
+        caseStudySlug: "tea-country-holidays",
+        liveUrl: "https://tea-country-holidays.vercel.app",
+        githubUrl: "https://github.com/rishav00roy-web/tea-country-holidays",
+        badge: "Commercial CMS",
+      },
+      {
+        id: "iq-iron-fitness-online-crm",
+        title: "IQ Iron Fitness (Cloud CRM)",
+        githubRepoName: "IQ-iron-fitness-online-crm",
+        category: "Client Websites",
+        description: "Cloud-hosted gym membership CRM with a custom billing engine, salary-slip generator, and operational dashboard. Built and sold as a commercial product, optimized for the owner's older laptop and mobile.",
+        tags: ["Next.js", "Supabase", "PostgreSQL", "TypeScript"],
+        caseStudySlug: "iq-iron-fitness",
+        liveUrl: "https://iq-iron-fitness-online-crm.vercel.app",
+        githubUrl: "https://github.com/rishav00roy-web/IQ-iron-fitness-online-crm",
+        badge: "Commercial CRM",
+      },
+      {
+        id: "microgreens-site",
+        title: "Microgreens Storefront",
+        githubRepoName: "microgreens-site",
+        category: "Client Websites",
+        description: "Brand and catalog marketing site for a Toronto microgreens subscription service. Motion-driven storefront with product, recipe, and blog routes; dashboard in planning.",
+        tags: ["Next.js", "Tailwind v4", "Motion", "Lenis"],
+        githubUrl: "https://github.com/rishav00roy-web/microgreens-site",
+        badge: "Storefront",
+      },
+      {
+        id: "truwest-company-page",
+        title: "TruWest Mortgage",
+        githubRepoName: "Truwest-company-page-",
+        category: "Client Websites",
+        description: "Lead-generation platform for a BC/Alberta mortgage broker. Targeted borrower funnels, embedded mortgage calculator suite, 30+ city SEO pages, multi-step lead qualification wizard.",
+        tags: ["Next.js 16", "Turbopack", "Tailwind CSS", "Financial Engine"],
+        githubUrl: "https://github.com/rishav00roy-web/Truwest-company-page-",
+        badge: "FinTech Funnel",
+      },
+      {
+        id: "dr-laara-dutta-portfolio",
+        title: "Dr. Laara Dutta Portfolio",
+        githubRepoName: "Dr.laara-dutta-portfolio",
+        category: "Client Websites",
+        description: "Client-acquisition site for a veterinarian-consultant, styled as an authoritative 'technical data sheet' for animal-health buyers. Mathematically modeled torn-paper edge, industry-sourced color system.",
+        tags: ["Next.js 16", "React 19", "Motion", "Tailwind CSS"],
+        githubUrl: "https://github.com/rishav00roy-web/Dr.laara-dutta-portfolio",
+        badge: "Consultant Portal",
+      },
+      {
+        id: "clashvault",
+        title: "ClashVault (Clash Bazar)",
+        githubRepoName: "ClashVault",
+        category: "Client Websites",
+        description: "E-commerce and services marketplace for a gaming YouTuber with 12K+ subscribers. Payments held through a secure transaction workflow until order completion and a 7-day security window expires. Dispute resolution admin panel, dual buyer/seller dashboards.",
+        tags: ["Next.js", "Supabase", "Stripe", "PayPal", "Discord API"],
+        caseStudySlug: "clash-bazar",
+        liveUrl: "https://clash-bazar.vercel.app",
+        githubUrl: "https://github.com/rishav00roy-web/ClashVault",
+        badge: "Escrow Marketplace",
+      },
+    ],
+  },
+  {
+    category: "Design-Heavy / Showcase Builds",
+    summary: "Visual design showcases featuring compositor-driven scroll dynamics, bespoke typography, and high-performance layout architecture.",
+    items: [
+      {
+        id: "roy-and-co-website",
+        title: "Roy Group & Co",
+        githubRepoName: "Roy-and-co-website",
+        category: "Design-Heavy / Showcase Builds",
+        description: "Desktop-first marketing site for a wedding/events brand, kept as a design showcase. Compositor-only scroll animations, Lenis smooth scroll, tone-shifting header. Built with Claude Code.",
+        tags: ["Next.js", "React 19", "CSS Scroll Timeline", "Editorial Design"],
+        githubUrl: "https://github.com/rishav00roy-web/Roy-and-co-website",
+        badge: "Design Showcase",
+      },
+      {
+        id: "chriskennelsite",
+        title: "Chris Kennels (Willchris)",
+        githubRepoName: "Chriskennelsite",
+        category: "Design-Heavy / Showcase Builds",
+        description: "Multi-page site for a dog boarding/daycare/grooming business, kept as a design showcase. Full service pages for daycare, boarding, grooming, and trail walks.",
+        tags: ["Next.js", "Supabase", "Tailwind CSS", "PostgreSQL"],
+        githubUrl: "https://github.com/rishav00roy-web/Chriskennelsite",
+        badge: "Design Showcase",
+      },
+    ],
+  },
+  {
+    category: "Web Apps / Tools",
+    summary: "Autonomous workflows, agentic email pipelines, offline-first databases, and developer engineering tools.",
+    items: [
+      {
+        id: "gym-crm",
+        title: "Gym CRM (Offline Local-First)",
+        githubRepoName: "Gym-CRM",
+        category: "Web Apps / Tools",
+        description: "Offline-first member management system built for basement gyms in dead cellular zones. Real-time camera-based OCR for frictionless member onboarding, client-side IndexedDB replication that queues broadcasts until service resumes.",
+        tags: ["Vanilla JS", "IndexedDB", "Tesseract.js OCR", "Service Workers"],
+        githubUrl: "https://github.com/rishav00roy-web/Gym-CRM",
+        badge: "Offline Local-First",
+      },
+      {
+        id: "job-tracker-and-email-tracker",
+        title: "Agentic Job Tracker",
+        githubRepoName: "JOB-TRACKER-AND-EMAIL-TRACKER",
+        category: "Web Apps / Tools",
+        description: "Agentic job application and intelligence platform (Turborepo monorepo). ATS ingestion and scoring engine across 54 platforms, autonomous email tracker that moves Kanban cards on interview/rejection emails, and a truth-guarded resume tailorer that rejects hallucinated claims server-side.",
+        tags: ["Next.js 16", "Turborepo", "Supabase", "IMAP Engine", "Claude AI"],
+        githubUrl: "https://github.com/rishav00roy-web/JOB-TRACKER-AND-EMAIL-TRACKER",
+        badge: "Agentic Monorepo",
+      },
+      {
+        id: "personal-portfolio-v2",
+        title: "Personal Portfolio V2",
+        githubRepoName: "Portfolio-website",
+        category: "Web Apps / Tools",
+        description: "An immersive, animation-driven developer portfolio built with Next.js App Router and Framer Motion. Features complex scroll-linked animations, a custom command palette (⌘K), and 100/100 Lighthouse performance across categories.",
+        tags: ["Next.js 16", "Framer Motion", "Tailwind CSS v4", "React 19"],
+        caseStudySlug: "personal-portfolio-v2",
+        liveUrl: "https://byrishav.online",
+        githubUrl: "https://github.com/rishav00roy-web/Portfolio-website",
+        badge: "Interactive UI",
+      },
+    ],
+  },
+];

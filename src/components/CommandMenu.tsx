@@ -235,9 +235,8 @@ export default function CommandMenu({ onOpenCaseStudy }: CommandMenuProps) {
           onClick={() => setIsOpen(true)}
           data-command-menu-trigger
           className="fixed bottom-6 left-6 z-[9999] pointer-events-auto flex items-center gap-2 px-4 py-2.5 rounded-full border border-white/10 bg-[#0f0f0f]/90 backdrop-blur-md text-white/70 hover:text-white hover:border-white/30 hover:bg-white/5 transition-all font-mono text-[10px] sm:text-xs uppercase tracking-widest shadow-2xl focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 cursor-pointer"
-          aria-label="Open command menu"
         >
-          <Search className="w-3.5 h-3.5" />
+          <Search className="w-3.5 h-3.5" aria-hidden="true" />
           <span>Menu</span>
           <span className="hidden sm:inline border border-white/15 px-1.5 py-0.5 rounded text-[9px] bg-white/5">
             ⌘K

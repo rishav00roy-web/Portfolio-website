@@ -225,7 +225,10 @@ html.lenis body {
 [data-reading-mode="true"] span {
   letter-spacing: 0.01em;
 }
-body { overflow-x: hidden; }
+html,
+body {
+  overflow-x: clip;
+}
 
 /* The chat panel spans nearly the full width on phones, and the command-menu
    trigger is fixed bottom-left at z-9999 — so it paints on top of the chat

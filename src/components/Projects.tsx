@@ -95,26 +95,27 @@ function Card({
         ? { text: "In Progress", isRepo: true }
         : null;
   
-  const step = 1 / count;
-  const start = index * step;
-  const end = start + step;
+  const cardCenter = count > 1 ? index / (count - 1) : 0.5;
+  const cardStart = Math.max(0, cardCenter - 0.25);
+  const cardEnd = Math.min(1, cardCenter + 0.25);
 
   const centerScale = useTransform(
     scrollYProgress,
-    [start, start + step * 0.4, start + step * 0.6, end],
-    [0.94, 1.08, 1.08, 0.94]
+    [cardStart, cardCenter, cardEnd],
+    [0.96, 1.04, 0.96],
+    { clamp: true }
   );
 
-  const leftY = useTransform(scrollYProgress, [start, end], ["-30%", "30%"]);
-  const rightY = useTransform(scrollYProgress, [start, end], ["30%", "-30%"]);
-  const leftX = useTransform(scrollYProgress, [start, end], ["-15%", "5%"]);
-  const rightX = useTransform(scrollYProgress, [start, end], ["15%", "-5%"]);
-  const leftRotate = useTransform(scrollYProgress, [start, end], [-12, 3]);
-  const rightRotate = useTransform(scrollYProgress, [start, end], [12, -3]);
+  const leftY = useTransform(scrollYProgress, [cardStart, cardEnd], ["-8%", "8%"], { clamp: true });
+  const rightY = useTransform(scrollYProgress, [cardStart, cardEnd], ["8%", "-8%"], { clamp: true });
+  const leftX = useTransform(scrollYProgress, [cardStart, cardEnd], ["-4%", "4%"], { clamp: true });
+  const rightX = useTransform(scrollYProgress, [cardStart, cardEnd], ["4%", "-4%"], { clamp: true });
+  const leftRotate = useTransform(scrollYProgress, [cardStart, cardEnd], [-4, 2], { clamp: true });
+  const rightRotate = useTransform(scrollYProgress, [cardStart, cardEnd], [4, -2], { clamp: true });
 
   return (
     <div className="relative w-full lg:w-screen h-auto lg:h-full flex items-center justify-center px-4 sm:px-12 xl:px-24 shrink-0 py-4 lg:py-0">
-      <div className="w-full max-w-7xl relative h-auto lg:h-[75dvh] sm:lg:h-[80dvh] rounded-[2.5rem] overflow-hidden shadow-2xl bg-white/5 backdrop-blur-xl border border-white/10 flex flex-col lg:flex-row p-5 sm:p-12 xl:p-16 gap-3 sm:gap-4 lg:gap-12">
+      <div className="w-full max-w-7xl relative h-auto lg:h-[75dvh] sm:lg:h-[80dvh] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl bg-white/5 backdrop-blur-xl border border-white/10 flex flex-col lg:flex-row p-5 sm:p-12 xl:p-16 gap-3 sm:gap-4 lg:gap-12">
 
         {/* Text content */}
         <div className="w-full lg:w-[38%] flex flex-col justify-start lg:justify-center z-10 pb-2 lg:pb-0 shrink-0">
@@ -267,7 +268,7 @@ export default function Projects({ activeProjectId, setActiveProjectId }: Projec
         style={isMobile ? {} : { height: `${(count - 1) * 100 + 100}dvh` }}
       >
         <div className="relative lg:sticky top-0 h-auto lg:h-[100dvh] w-full overflow-hidden flex items-center">
-          <motion.div style={isMobile ? {} : { x: trackX }} className="flex flex-col lg:flex-row h-auto lg:h-full w-full gap-8 lg:gap-0 pb-24 lg:pb-0">
+          <motion.div style={isMobile ? {} : { x: trackX }} className="flex flex-col lg:flex-row h-auto lg:h-full w-full gap-8 lg:gap-0 pb-24 lg:pb-0 transform-gpu">
             {commercialProjects.map((project, i) => (
               <Card
                 key={project.id}

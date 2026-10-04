@@ -74,6 +74,15 @@ export default function RootLayout({
                   "@type": "CollegeOrUniversity",
                   "name": "Manipal University Jaipur"
                 },
+                "hasOccupation": {
+                  "@type": "Occupation",
+                  "name": "Operations & Automation Specialist",
+                  "description": "Building commercial-grade local-first CRMs, enterprise FOIA workflows, and full-stack web applications."
+                },
+                "worksFor": {
+                  "@type": "Organization",
+                  "name": "Tea Country Holidays"
+                },
                 "knowsLanguage": ["English", "Hindi", "Assamese", "Bengali"],
                 "sameAs": [
                   "https://github.com/rishav00roy-web",
@@ -82,12 +91,19 @@ export default function RootLayout({
                 ],
                 "knowsAbout": [
                   "Next.js",
-                  "React",
+                  "React 19",
+                  "Framer Motion",
+                  "Tailwind CSS",
                   "Supabase",
                   "PostgreSQL",
                   "Python",
+                  "Local-first Architecture",
+                  "IndexedDB",
+                  "Tesseract.js OCR",
                   "Technical SEO",
-                  "OCR Onboarding"
+                  "Answer Engine Optimization (AEO)",
+                  "FOIA Automation",
+                  "Business Automation"
                 ]
               },
               {

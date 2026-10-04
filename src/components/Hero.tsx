@@ -6,6 +6,8 @@ import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform, useSpring, useReducedMotion, AnimatePresence } from "framer-motion";
 import { Award } from "lucide-react";
+import { useLenis } from "lenis/react";
+import HyperText from "./HyperText";
 
 const currentlyItems = [
   "Tea Country Holidays",
@@ -15,7 +17,17 @@ const currentlyItems = [
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
+  const lenis = useLenis();
 
+  const scrollToContact = () => {
+    const el = document.getElementById("contact");
+    if (!el) return;
+    if (lenis) {
+      lenis.scrollTo(el, { offset: 0, duration: 1.4 });
+    } else {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   const [currentlyIndex, setCurrentlyIndex] = useState(0);
 
@@ -121,7 +133,7 @@ export default function Hero() {
   }, [shouldReduceMotion]);
 
   return (
-    <div ref={outerRef} className="relative h-[280dvh] bg-transparent">
+    <div id="hero" ref={outerRef} className="relative h-[280dvh] bg-transparent">
       <section
         className="sticky top-0 h-[100dvh] w-full overflow-hidden text-white z-10 select-none"
         style={{ 
@@ -197,10 +209,14 @@ export default function Hero() {
           {/* Top nav bar */}
           <div className="flex items-center justify-between px-6 sm:px-12 xl:px-24 py-6 font-mono text-[10px] sm:text-xs uppercase tracking-widest text-white/40 z-30">
             <span>Rishav Roy</span>
-            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/5 text-emerald-400 text-[9px] sm:text-[10px] font-bold">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <button
+              onClick={scrollToContact}
+              className="group flex items-center gap-1.5 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/5 text-emerald-400 text-[9px] sm:text-[10px] font-bold hover:bg-emerald-500/10 hover:border-emerald-500/40 hover:shadow-[0_0_12px_rgba(16,185,129,0.25)] active:scale-95 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400"
+              aria-label="Available for Hire — Navigate to contact section"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse group-hover:scale-125 transition-transform" />
               <span>Available for Hire</span>
-            </div>
+            </button>
             <span className="hidden sm:block">Kolkata, India</span>
           </div>
 
@@ -212,7 +228,7 @@ export default function Hero() {
                 element render delay on mobile. It now paints immediately and
                 only slides, since a translated element still counts as
                 painted. Do not reintroduce an opacity transition here. */}
-            <motion.p
+            <motion.div
               initial={{ opacity: 1, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={
@@ -220,10 +236,18 @@ export default function Hero() {
                   ? { duration: 0 }
                   : { duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] as const }
               }
-              className="max-w-2xl text-lg sm:text-2xl text-white/70 font-medium leading-snug font-sans"
+              className="max-w-2xl text-lg sm:text-2xl text-white/90 font-medium leading-snug font-sans pointer-events-auto cursor-default"
             >
-              Ex-ops guy who got tired of manual work. Now I build tools so nobody else has to.
-            </motion.p>
+              <HyperText
+                as="p"
+                preserveCase
+                duration={800}
+                animateOnHover
+                className="text-lg sm:text-2xl text-white/90 font-medium leading-snug font-sans inline-block drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]"
+              >
+                Ex-ops guy who got tired of manual work. Now I build tools so nobody else has to.
+              </HyperText>
+            </motion.div>
 
             {/* Above-the-fold CTA buttons */}
             <motion.div
@@ -238,16 +262,13 @@ export default function Hero() {
             >
               <Link
                 href="/projects"
-                className="inline-block px-6 py-3.5 rounded-full bg-white text-black font-semibold text-xs sm:text-sm hover:bg-white/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
+                className="inline-block px-6 py-3.5 rounded-full bg-white text-black font-semibold text-xs sm:text-sm hover:bg-white/90 hover:shadow-[0_0_24px_rgba(255,255,255,0.25)] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
               >
                 Case Studies
               </Link>
               <button
-                onClick={() => {
-                  const el = document.querySelector("footer");
-                  el?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="px-6 py-3.5 rounded-full border border-white/20 text-white hover:bg-white/5 transition-colors font-semibold text-xs sm:text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
+                onClick={scrollToContact}
+                className="px-6 py-3.5 rounded-full border border-white/20 text-white hover:bg-white/10 hover:border-white/40 transition-all font-semibold text-xs sm:text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
               >
                 Get in Touch
               </button>
@@ -262,12 +283,16 @@ export default function Hero() {
                   ? { duration: 0 }
                   : { duration: 1, delay: 0.6 }
               }
-              className="mt-6 sm:mt-14 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-8 max-w-4xl font-mono text-xs sm:text-sm"
+              className="mt-8 sm:mt-12 pt-6 border-t border-white/10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-8 max-w-4xl font-mono text-xs sm:text-sm"
             >
               <div>
-                <p className="text-white/50 uppercase tracking-widest mb-2">
+                <HyperText
+                  className="text-white/50 uppercase tracking-widest text-[10px] sm:text-xs mb-2 block cursor-default"
+                  duration={600}
+                  animateOnHover
+                >
                   Currently
-                </p>
+                </HyperText>
                 <div className="relative h-[2.5em] overflow-hidden">
                   <AnimatePresence mode="wait">
                     <motion.p
@@ -284,45 +309,65 @@ export default function Hero() {
                 </div>
               </div>
               <div>
-                <p className="text-white/50 uppercase tracking-widest mb-2">
+                <HyperText
+                  className="text-white/50 uppercase tracking-widest text-[10px] sm:text-xs mb-2 block cursor-default"
+                  duration={600}
+                  animateOnHover
+                >
                   Based in
-                </p>
+                </HyperText>
                 <p className="text-white/80">Kolkata, India</p>
                 <p className="text-white/50 text-[10px]">(originally from Jorhat, Assam)</p>
               </div>
               <div>
-                <p className="text-white/50 uppercase tracking-widest mb-2">
+                <HyperText
+                  className="text-white/50 uppercase tracking-widest text-[10px] sm:text-xs mb-2 block cursor-default"
+                  duration={600}
+                  animateOnHover
+                >
                   Resume
-                </p>
+                </HyperText>
                 <a
                   href="/Rishav-Roy-CV.pdf"
                   download="Rishav-Roy-CV.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/80 hover:text-amber-400 transition-colors underline decoration-white/20 hover:decoration-amber-400/40"
+                  className="block text-white/80 hover:text-amber-400 transition-colors underline decoration-white/20 hover:decoration-amber-400/40"
                 >
                   Download PDF
                 </a>
                 <p className="text-white/50 text-[10px] mt-1">July 2026</p>
               </div>
               <div>
-                <p className="text-white/50 uppercase tracking-widest mb-2">
+                <HyperText
+                  className="text-white/50 uppercase tracking-widest text-[10px] sm:text-xs mb-2 block cursor-default"
+                  duration={600}
+                  animateOnHover
+                >
                   Commits
-                </p>
+                </HyperText>
                 <p className="text-white/80">
                   {commitCount !== null ? `${commitCount} Commits` : "... Commits"}
                 </p>
                 <p className="text-white/50 text-[10px] mt-1">on GitHub</p>
               </div>
               <div>
-                <p className="text-white/50 uppercase tracking-widest mb-2">
+                <HyperText
+                  className="text-white/50 uppercase tracking-widest text-[10px] sm:text-xs mb-2 block cursor-default"
+                  duration={600}
+                  animateOnHover
+                >
                   Credentials
-                </p>
+                </HyperText>
                 <a 
                   href="#certificates"
                   onClick={(e) => {
                     e.preventDefault();
-                    document.getElementById("certificates")?.scrollIntoView({ behavior: "smooth" });
+                    if (lenis) {
+                      lenis.scrollTo("#certificates", { duration: 1.4 });
+                    } else {
+                      document.getElementById("certificates")?.scrollIntoView({ behavior: "smooth" });
+                    }
                   }}
                   className="flex items-center gap-2 group cursor-pointer mt-1"
                 >
