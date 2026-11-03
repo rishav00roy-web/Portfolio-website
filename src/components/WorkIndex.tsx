@@ -63,7 +63,7 @@ export default function WorkIndex() {
               href={w.href}
               target="_blank"
               rel="noopener noreferrer"
-              onPointerEnter={() => setActive(w.id)}
+              onPointerEnter={(e) => e.pointerType === "mouse" && setActive(w.id)}
               onFocus={() => setActive(w.id)}
               onBlur={() => setActive(null)}
               className="group grid grid-cols-[2.5rem_1fr_auto] lg:grid-cols-[4rem_minmax(0,1.3fr)_minmax(0,1fr)_minmax(0,1fr)_2rem] items-baseline gap-x-4 lg:gap-x-8 py-6 lg:py-8"
@@ -72,12 +72,29 @@ export default function WorkIndex() {
               <span className="font-display uppercase text-3xl sm:text-4xl xl:text-5xl leading-none tracking-[-0.01em] text-white transition-[color,transform] duration-500 ease-out-expo group-hover:text-accent group-hover:translate-x-2 group-focus-visible:text-accent">
                 {w.title}
               </span>
-              <ArrowUpRight
-                className="lg:hidden h-5 w-5 self-center text-white/50 group-hover:text-accent"
-                aria-hidden="true"
-              />
-              <span className="col-start-2 col-span-2 lg:col-span-1 lg:col-start-auto mt-3 lg:mt-0 text-sm text-white/60 line-clamp-2 lg:line-clamp-none">
+              <span className="lg:hidden" aria-hidden="true" />
+              {/* Touch screens can't hover, so phones and tablets get the screenshot inline */}
+              {w.preview && (
+                <span className="lg:hidden col-start-2 col-span-2 mt-5 block relative aspect-[16/10] overflow-hidden rounded-lg border border-white/10 bg-surface">
+                  <Image
+                    src={w.preview}
+                    alt={`${w.title} screenshot`}
+                    fill
+                    sizes="(max-width: 1023px) 85vw, 1px"
+                    className="object-cover object-top"
+                  />
+                </span>
+              )}
+              <span className="col-start-2 col-span-2 lg:col-span-1 lg:col-start-auto mt-4 lg:mt-0 text-sm leading-relaxed text-white/65">
                 {w.description}
+              </span>
+              <span className="lg:hidden col-start-2 col-span-2 mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-[0.12em] text-white/50">
+                <span className="text-accent/85">{w.badge}</span>
+                <span className="normal-case tracking-normal">{w.tags.join(" · ")}</span>
+              </span>
+              <span className="lg:hidden col-start-2 col-span-2 mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-accent">
+                {w.href.includes("github.com") ? "View the code" : "Open the site"}
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
               </span>
               <span className="hidden lg:block font-mono text-[11px] uppercase tracking-[0.15em] text-white/55">
                 {w.badge}
