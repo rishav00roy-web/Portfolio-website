@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import { gsap, ScrollTrigger } from "./lib/gsap";
 import Hero from "./components/Hero";
 import { PaperAbout, PaperContact, PaperMoreWork, PaperWork } from "./components/v2/Paper";
+import BentoWork from "./components/v2/BentoWork";
 
 const CommandMenu = dynamic(() => import("./components/CommandMenu"), { ssr: false });
 
@@ -15,7 +16,9 @@ const CommandMenu = dynamic(() => import("./components/CommandMenu"), { ssr: fal
  * and the rest reads like a printed magazine. Deliberately light on motion:
  * no background canvas, no pinning, a handful of entrance reveals.
  */
-export default function AppV2() {
+export type V2Variant = "paper" | "night" | "bento";
+
+export default function AppV2({ variant = "paper" }: { variant?: V2Variant }) {
   const prefersReduced = useReducedMotion();
   const lenisRef = useRef<LenisRef>(null);
 
@@ -32,12 +35,20 @@ export default function AppV2() {
     };
   }, [prefersReduced]);
 
+  const night = variant !== "paper";
+
   const content = (
     <main className="relative min-h-screen text-white">
       <Hero />
-      <div className="relative z-20 -mt-[18vh] rounded-t-[2rem] sm:rounded-t-[3rem] bg-paper text-ink shadow-[0_-40px_80px_-20px_rgba(0,0,0,0.6)]">
-        <PaperWork />
-        <PaperMoreWork />
+      <div
+        className={
+          night
+            ? "night afterglow relative z-20 bg-paper text-ink"
+            : "relative z-20 -mt-[18vh] rounded-t-[2rem] sm:rounded-t-[3rem] bg-paper text-ink shadow-[0_-40px_80px_-20px_rgba(0,0,0,0.6)]"
+        }
+      >
+        {variant === "bento" ? <BentoWork /> : <PaperWork />}
+        {variant !== "bento" && <PaperMoreWork />}
         <PaperAbout />
       </div>
       <PaperContact />
