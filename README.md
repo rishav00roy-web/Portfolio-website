@@ -19,7 +19,6 @@ A high-performance portfolio website built with **Next.js 16**, **Tailwind CSS 4
 
 - Server-rendered homepage (no client JS needed to read content)
 - Case study pages with per-page generated OG images
-
 - Fully responsive design
 - SEO optimized with structured data (JSON-LD)
 - OG image and Twitter cards
