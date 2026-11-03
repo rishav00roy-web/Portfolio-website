@@ -24,9 +24,9 @@ const currentlyItems = [
  * peaks. Both plates share every transform so the cut line never drifts.
  */
 const PLATE_POSITION = "50% 38%";
-// Both plates are toned down together, keeping the original site's dusk mood
-// and giving the light name enough contrast against the sky.
-const PLATE_FILTER = "brightness(0.62) saturate(1.08)";
+// Both plates are pre-toned (darker, slightly warmer) in the image files
+// themselves; a CSS filter on two full-screen transformed layers cost
+// visible frames while scrolling on phones.
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
@@ -141,13 +141,13 @@ export default function Hero() {
         {/* Plate 1: sky */}
         <div data-hero-plate className="absolute inset-0 z-0 will-change-transform">
           <Image
-            src="/assets/hero-sky.webp"
+            src="/assets/hero-sky-dusk.webp"
             alt=""
             fill
             priority
             sizes="100vw"
             className="object-cover"
-            style={{ objectPosition: PLATE_POSITION, filter: PLATE_FILTER }}
+            style={{ objectPosition: PLATE_POSITION }}
           />
         </div>
 
@@ -173,13 +173,13 @@ export default function Hero() {
         {/* Plate 2: the ridge, cut from the same photo */}
         <div data-hero-plate aria-hidden="true" className="absolute inset-0 z-[3] pointer-events-none will-change-transform">
           <Image
-            src="/assets/hero-ridge.webp"
+            src="/assets/hero-ridge-dusk.webp"
             alt=""
             fill
             priority
             sizes="100vw"
             className="object-cover"
-            style={{ objectPosition: PLATE_POSITION, filter: PLATE_FILTER }}
+            style={{ objectPosition: PLATE_POSITION }}
           />
         </div>
 

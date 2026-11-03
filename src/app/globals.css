@@ -60,6 +60,12 @@
   --color-white: #f4ede3;
   --color-black: #0d0b09;
 
+  /* v2 "paper" sections: warm stock and ink, the morning after the hero's sunset. */
+  --color-paper: #f3ebdf;
+  --color-paper-2: #eadfce;
+  --color-ink: #1b140d;
+  --color-rust: #b4531b;
+
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
