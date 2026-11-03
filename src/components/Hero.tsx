@@ -4,7 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { useEffect, useState, useRef } from "react";
-import { motion, useScroll, useTransform, useSpring, useReducedMotion, AnimatePresence } from "framer-motion";
+import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
+import { gsap, SplitText, useGSAP } from "@/lib/gsap";
 import { ArrowRight, Award, Download } from "lucide-react";
 import { useLenis } from "lenis/react";
 import HyperText from "./HyperText";
@@ -89,38 +90,56 @@ export default function Hero() {
 
   const outerRef = useRef<HTMLDivElement>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: outerRef,
-    offset: ["start start", "end end"],
-  });
-
-  const progress = useSpring(scrollYProgress, {
-    stiffness: 40,
-    damping: 22,
-    mass: 0.7,
-    restDelta: 0.0005,
-  });
-
-  // Plates drift together; the name sinks behind the ridge.
-  const plateScale = useTransform(progress, [0, 1], [1, 1.14]);
-  const plateY = useTransform(progress, [0, 1], ["0%", "-3%"]);
-  const nameY = useTransform(progress, [0, 0.8], ["0vh", "34vh"]);
-  const signatureOpacity = useTransform(progress, [0, 0.35], [1, 0]);
-  const sunOpacity = useTransform(progress, [0, 0.7], [1, 0.15]);
-  const dusk = useTransform(progress, [0.45, 1], [0, 1]);
-  const chromeOpacity = useTransform(progress, [0, 0.28], [1, 0]);
-  const chromeY = useTransform(progress, [0, 0.28], [0, -32]);
-
   const still = shouldReduceMotion;
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        // Intro: the letters rise from behind the ridge (the name layer sits
+        // under the ridge plate, so the mountain itself is the mask).
+        const split = SplitText.create("[data-hero-name]", { type: "chars" });
+        const intro = gsap.timeline({ defaults: { ease: "expo.out" } });
+        intro
+          .from(split.chars, { yPercent: 115, duration: 1.6, stagger: 0.06 }, 0.15)
+          .from("[data-hero-sun]", { opacity: 0, scale: 0.6, duration: 2.2, ease: "power2.out" }, 0)
+          .fromTo(
+            "[data-hero-signature]",
+            { clipPath: "inset(0 100% 0 0)" },
+            { clipPath: "inset(0 0% 0 0)", duration: 1.4, ease: "power3.inOut" },
+            0.9,
+          );
+
+        // Scroll: the name sets behind the peaks like the sun.
+        const sunset = gsap.timeline({
+          defaults: { ease: "none" },
+          scrollTrigger: {
+            trigger: outerRef.current,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 1,
+          },
+        });
+        sunset
+          .to("[data-hero-plate]", { scale: 1.14, yPercent: -3 }, 0)
+          .to("[data-hero-name-wrap]", { y: () => window.innerHeight * 0.36 }, 0)
+          .to("[data-hero-signature]", { opacity: 0, y: 40, duration: 0.35 }, 0)
+          .to("[data-hero-sun]", { opacity: 0.15, duration: 0.7 }, 0)
+          .to("[data-hero-chrome]", { opacity: 0, y: -32, duration: 0.28 }, 0)
+          .to("[data-hero-dusk]", { opacity: 1, duration: 0.55 }, 0.45);
+
+        return () => split.revert();
+      });
+      return () => mm.revert();
+    },
+    { scope: outerRef },
+  );
 
   return (
     <div id="hero" ref={outerRef} className="relative h-[200dvh] bg-transparent">
       <section className="sticky top-0 h-[100dvh] w-full overflow-hidden text-white z-10">
         {/* Plate 1: sky */}
-        <motion.div
-          style={still ? undefined : { scale: plateScale, y: plateY }}
-          className="absolute inset-0 z-0 will-change-transform"
-        >
+        <div data-hero-plate className="absolute inset-0 z-0 will-change-transform">
           <Image
             src="/assets/hero-sky.webp"
             alt=""
@@ -130,37 +149,29 @@ export default function Hero() {
             className="object-cover"
             style={{ objectPosition: PLATE_POSITION, filter: PLATE_FILTER }}
           />
-        </motion.div>
+        </div>
 
         {/* Sun line glow behind the name */}
-        <motion.div
-          aria-hidden="true"
-          style={still ? undefined : { opacity: sunOpacity }}
-          className="sunline absolute inset-x-0 top-[22%] h-[30%] z-[1] pointer-events-none mix-blend-screen"
+        <div data-hero-sun aria-hidden="true" className="sunline absolute inset-x-0 top-[22%] h-[30%] z-[1] pointer-events-none mix-blend-screen"
         />
 
         {/* The name, between the plates */}
-        <motion.div
-          style={still ? undefined : { y: nameY }}
-          className="absolute inset-x-0 top-[25%] sm:top-[18%] lg:top-[12%] z-[2] flex justify-center pointer-events-none select-none"
+        <div data-hero-name-wrap className="absolute inset-x-0 top-[25%] sm:top-[18%] lg:top-[12%] z-[2] flex justify-center pointer-events-none select-none"
         >
           <h1 className="font-display uppercase text-center leading-[0.78] tracking-[-0.02em]">
             <span className="sr-only">Rishav Roy, Operations &amp; Automation Specialist</span>
             <span
               aria-hidden="true"
+              data-hero-name
               className="block text-[24vw] lg:text-[17.5vw] text-[#fbf3e6] drop-shadow-[0_8px_40px_rgba(224,121,31,0.35)]"
             >
               Rishav
             </span>
           </h1>
-        </motion.div>
+        </div>
 
         {/* Plate 2: the ridge, cut from the same photo */}
-        <motion.div
-          aria-hidden="true"
-          style={still ? undefined : { scale: plateScale, y: plateY }}
-          className="absolute inset-0 z-[3] pointer-events-none will-change-transform"
-        >
+        <div data-hero-plate aria-hidden="true" className="absolute inset-0 z-[3] pointer-events-none will-change-transform">
           <Image
             src="/assets/hero-ridge.webp"
             alt=""
@@ -170,29 +181,20 @@ export default function Hero() {
             className="object-cover"
             style={{ objectPosition: PLATE_POSITION, filter: PLATE_FILTER }}
           />
-        </motion.div>
+        </div>
 
         {/* "Roy", signed on the mountain */}
-        <motion.p
-          aria-hidden="true"
-          style={still ? undefined : { opacity: signatureOpacity }}
-          className="absolute z-[4] right-[8%] lg:right-[17%] top-[33%] lg:top-[34%] font-coffekan text-[15vw] lg:text-[8vw] leading-none text-accent -rotate-6 pointer-events-none select-none drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]"
+        <p data-hero-signature aria-hidden="true" className="absolute z-[4] right-[8%] lg:right-[17%] top-[33%] lg:top-[34%] font-coffekan text-[15vw] lg:text-[8vw] leading-none text-accent -rotate-6 pointer-events-none select-none drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]"
         >
           Roy
-        </motion.p>
+        </p>
 
         {/* Ground fade so copy reads on the shadowed slope, then dusk on scroll */}
         <div className="absolute inset-x-0 bottom-0 h-[55%] z-[4] bg-gradient-to-t from-background via-background/70 to-transparent pointer-events-none" />
-        <motion.div
-          style={still ? { opacity: 0 } : { opacity: dusk }}
-          className="absolute inset-0 z-[5] bg-background pointer-events-none"
-        />
+        <div data-hero-dusk className="absolute inset-0 z-[5] bg-background pointer-events-none opacity-0" />
 
         {/* Chrome */}
-        <motion.div
-          style={still ? undefined : { opacity: chromeOpacity, y: chromeY }}
-          className="relative z-20 flex flex-col h-full"
-        >
+        <div data-hero-chrome className="relative z-20 flex flex-col h-full">
           <div className="flex items-center justify-between px-6 sm:px-12 xl:px-24 py-6 font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] text-white/70">
             <span>Rishav Roy</span>
             <button
@@ -323,7 +325,7 @@ export default function Hero() {
               </div>
             </motion.dl>
           </div>
-        </motion.div>
+        </div>
       </section>
     </div>
   );

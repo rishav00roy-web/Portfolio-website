@@ -134,7 +134,7 @@ export default function Footer() {
             whileInView={{ clipPath: "inset(0 0% 0 0)" }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] as const }}
-            className="font-display font-extrabold text-5xl sm:text-8xl uppercase tracking-tight leading-[0.9] mb-10 text-white"
+            className="font-display font-extrabold text-[15vw] sm:text-[11vw] lg:text-[8.5vw] uppercase tracking-tight leading-[0.9] mb-10 text-white"
           >
             Let&apos;s Build <br /> Something
           </motion.h2>

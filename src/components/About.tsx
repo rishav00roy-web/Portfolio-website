@@ -1,6 +1,8 @@
 "use client";
 
+import { useRef } from "react";
 import { motion, MotionConfig } from "framer-motion";
+import { gsap, SplitText, useGSAP } from "@/lib/gsap";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 18 },
@@ -19,6 +21,41 @@ const staggerContainer = {
 } as const;
 
 export default function About() {
+  const root = useRef<HTMLElement>(null);
+
+  // The lead statement fills in word by word as it scrolls through the
+  // viewport, and the experience rail draws itself alongside the roles.
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const split = SplitText.create("[data-reveal]", { type: "words" });
+        gsap.fromTo(
+          split.words,
+          { opacity: 0.14 },
+          {
+            opacity: 1,
+            ease: "none",
+            stagger: 0.05,
+            scrollTrigger: { trigger: "[data-reveal]", start: "top 80%", end: "bottom 45%", scrub: true },
+          },
+        );
+        gsap.fromTo(
+          "[data-rail]",
+          { scaleY: 0 },
+          {
+            scaleY: 1,
+            ease: "none",
+            scrollTrigger: { trigger: "[data-rail-wrap]", start: "top 70%", end: "bottom 60%", scrub: true },
+          },
+        );
+        return () => split.revert();
+      });
+      return () => mm.revert();
+    },
+    { scope: root },
+  );
+
   const skills = [
     {
       category: "Languages & Frameworks",
@@ -126,7 +163,7 @@ export default function About() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <section id="about" className="relative bg-transparent px-6 sm:px-12 xl:px-24 py-24 sm:py-32 border-t border-white/10">
+      <section ref={root} id="about" className="relative bg-transparent px-6 sm:px-12 xl:px-24 py-24 sm:py-32 border-t border-white/10">
         {/* Scrim layer — sits above the global grid, below the content */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/95 to-black/0 pointer-events-none" />
 
@@ -138,7 +175,7 @@ export default function About() {
         <div className="relative z-10 flex flex-col lg:flex-row gap-16 lg:gap-24">
           {/* Sticky title */}
           <div className="lg:w-1/3">
-            <h2 className="font-display font-extrabold text-5xl sm:text-7xl uppercase tracking-tight text-white sticky top-12">
+            <h2 className="font-display font-extrabold text-[17vw] sm:text-8xl xl:text-9xl uppercase tracking-[-0.02em] leading-[0.85] text-white lg:sticky lg:top-24">
               About
             </h2>
           </div>
@@ -153,15 +190,15 @@ export default function About() {
           >
             {/* Bio paragraphs */}
             <motion.div className="space-y-8" variants={staggerContainer}>
-              <motion.p
-                variants={fadeUp}
-                className="text-2xl sm:text-3xl text-white/95 leading-relaxed font-sans font-medium"
+              <p
+                data-reveal
+                className="text-3xl sm:text-4xl xl:text-5xl text-white leading-[1.15] font-sans font-medium tracking-[-0.02em] text-balance"
               >
                 My path into software engineering didn&#39;t start with side projects. It
                 started with shipping commercial platforms for paying clients. After
                 six-plus years in operations, I got tired of watching businesses drown
                 in manual work. So I started building the tools to fix it.
-              </motion.p>
+              </p>
               <motion.p
                 variants={fadeUp}
                 className="text-lg sm:text-xl text-white/80 leading-relaxed font-sans"
@@ -195,11 +232,15 @@ export default function About() {
               whileInView="visible"
               viewport={{ once: true }}
             >
+                <div aria-hidden="true" className="absolute left-0 top-2 bottom-2 w-px bg-white/10">
+                  <div data-rail className="absolute inset-0 origin-top bg-gradient-to-b from-accent via-ember to-accent/0" />
+                </div>
               <h3 className="font-coffekan normal-case tracking-normal text-4xl sm:text-5xl text-accent mb-6 border-b border-accent/20 pb-3">
                 Work Experience
               </h3>
               <motion.div
-                className="flex flex-col gap-10"
+                data-rail-wrap
+                className="relative flex flex-col gap-12 pl-8 sm:pl-12"
                 variants={staggerContainer}
                 initial="hidden"
                 whileInView="visible"
@@ -209,8 +250,9 @@ export default function About() {
                   <motion.div
                     key={i}
                     variants={fadeUp}
-                    className="flex flex-col gap-3"
+                    className="relative flex flex-col gap-3"
                   >
+                    <span aria-hidden="true" className="absolute -left-8 sm:-left-12 top-2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-accent ring-4 ring-background" />
                     <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
                       <div className="flex items-center flex-wrap gap-3">
                         <h4 className="text-2xl sm:text-3xl font-display text-white uppercase tracking-tight leading-none">

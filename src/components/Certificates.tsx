@@ -32,7 +32,7 @@ export default function Certificates() {
           transition={{ duration: 0.6 }}
           className="mb-12 sm:mb-16"
         >
-          <h2 className="font-display font-extrabold text-5xl sm:text-7xl uppercase tracking-tight text-white mb-4">
+          <h2 className="font-display font-extrabold text-[15vw] sm:text-[10vw] lg:text-[8vw] uppercase leading-[0.85] tracking-tight text-white mb-4">
             Certificates
           </h2>
           <p className="font-mono text-sm sm:text-base text-white/50 max-w-2xl">

@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 
-import { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
+import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { ArrowUpRight } from "lucide-react";
 import dynamic from "next/dynamic";
 
@@ -65,28 +65,12 @@ function ProjectImage({ src, alt }: { src: string; alt: string }) {
 function Card({
   project,
   index,
-  scrollYProgress,
-  reducedMotion,
   onOpenCaseStudy,
 }: {
   project: Project;
   index: number;
-  scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
-  reducedMotion: boolean | null;
   onOpenCaseStudy: (id: number) => void;
 }) {
-  const count = projects.length;
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
   // Derived straight from the project id - no state, no effect.
   const status: ProjectStatus | null =
     project.id === 1 || project.id === 2
@@ -94,31 +78,13 @@ function Card({
       : project.id === 3
         ? { text: "In Progress", isRepo: true }
         : null;
-  
-  const cardCenter = count > 1 ? index / (count - 1) : 0.5;
-  const cardStart = Math.max(0, cardCenter - 0.25);
-  const cardEnd = Math.min(1, cardCenter + 0.25);
-
-  const centerScale = useTransform(
-    scrollYProgress,
-    [cardStart, cardCenter, cardEnd],
-    [0.96, 1.04, 0.96],
-    { clamp: true }
-  );
-
-  const leftY = useTransform(scrollYProgress, [cardStart, cardEnd], ["-8%", "8%"], { clamp: true });
-  const rightY = useTransform(scrollYProgress, [cardStart, cardEnd], ["8%", "-8%"], { clamp: true });
-  const leftX = useTransform(scrollYProgress, [cardStart, cardEnd], ["-4%", "4%"], { clamp: true });
-  const rightX = useTransform(scrollYProgress, [cardStart, cardEnd], ["4%", "-4%"], { clamp: true });
-  const leftRotate = useTransform(scrollYProgress, [cardStart, cardEnd], [-4, 2], { clamp: true });
-  const rightRotate = useTransform(scrollYProgress, [cardStart, cardEnd], [4, -2], { clamp: true });
 
   return (
-    <div className="relative w-full lg:w-screen h-auto lg:h-full flex items-center justify-center px-4 sm:px-12 xl:px-24 shrink-0 py-4 lg:py-0">
+    <div data-card className="relative w-full lg:w-screen h-auto lg:h-full flex items-center justify-center px-4 sm:px-12 xl:px-24 shrink-0 py-4 lg:py-0">
       <div className="w-full max-w-7xl relative h-auto lg:h-[75dvh] sm:lg:h-[80dvh] rounded-2xl sm:rounded-[28px] overflow-hidden bg-surface bg-[radial-gradient(70%_60%_at_100%_0%,rgba(245,179,1,0.09),transparent_65%)] border border-white/[0.07] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.85)] flex flex-col lg:flex-row p-5 sm:p-12 xl:p-16 gap-3 sm:gap-4 lg:gap-12">
 
         {/* Text content */}
-        <div className="w-full lg:w-[38%] flex flex-col justify-start lg:justify-center z-10 pb-2 lg:pb-0 shrink-0">
+        <div data-card-copy className="w-full lg:w-[38%] flex flex-col justify-start lg:justify-center z-10 pb-2 lg:pb-0 shrink-0">
           <p className="font-coffekan text-3xl sm:text-5xl text-accent mb-1 sm:mb-4 tracking-wide">
             Project 0{index + 1}
           </p>
@@ -163,41 +129,23 @@ function Card({
         <div className="w-full lg:w-[62%] flex-1 min-h-[250px] sm:min-h-[350px] lg:min-h-0 lg:h-full relative flex items-center justify-center z-10 overflow-hidden lg:overflow-visible mt-6 sm:mt-8 pb-4 sm:pb-0">
           <div className="relative w-[100%] sm:w-[90%] h-[100%] sm:h-[90%] flex items-center justify-center">
             {/* Left card */}
-            {isMobile || reducedMotion ? (
-              <div className="absolute left-[2%] sm:left-[-10%] w-[48%] sm:w-[56%] aspect-[16/10] rounded-2xl overflow-hidden shadow-lg border border-white/10 z-0 scale-95 opacity-80">
+            <div data-card-side="left" className="absolute left-[2%] sm:left-[-10%] w-[48%] sm:w-[56%] aspect-[16/10] rounded-2xl overflow-hidden shadow-lg border border-white/10 z-0 scale-95 opacity-80">
                 <ProjectImage src={project.images[1]} alt={`${project.title} screenshot 2`} />
               </div>
-            ) : (
-              <motion.div
-                style={{ y: leftY, x: leftX, rotate: leftRotate }}
-                className="absolute left-[2%] sm:left-[-10%] w-[48%] sm:w-[56%] aspect-[16/10] rounded-2xl overflow-hidden shadow-lg border border-white/10 z-0 scale-95 opacity-80"
-              >
-                <ProjectImage src={project.images[1]} alt={`${project.title} screenshot 2`} />
-              </motion.div>
-            )}
 
             {/* Center card */}
-            <motion.div
-              style={isMobile || reducedMotion ? {} : { scale: centerScale }}
+            <div
+              data-card-center
               className="relative w-[65%] sm:w-[72%] aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl border border-white/15 z-10 hover:shadow-[0_0_30px_rgba(255,255,255,0.08)] transition-shadow duration-300 cursor-pointer"
               onClick={() => onOpenCaseStudy(project.id)}
             >
               <ProjectImage src={project.images[0]} alt={`${project.title} screenshot 1`} />
-            </motion.div>
+            </div>
 
             {/* Right card */}
-            {isMobile || reducedMotion ? (
-              <div className="absolute right-[2%] sm:right-[-10%] w-[48%] sm:w-[56%] aspect-[16/10] rounded-2xl overflow-hidden shadow-lg border border-white/10 z-0 scale-95 opacity-80">
+            <div data-card-side="right" className="absolute right-[2%] sm:right-[-10%] w-[48%] sm:w-[56%] aspect-[16/10] rounded-2xl overflow-hidden shadow-lg border border-white/10 z-0 scale-95 opacity-80">
                 <ProjectImage src={project.images[2]} alt={`${project.title} screenshot 3`} />
               </div>
-            ) : (
-              <motion.div
-                style={{ y: rightY, x: rightX, rotate: rightRotate }}
-                className="absolute right-[2%] sm:right-[-10%] w-[48%] sm:w-[56%] aspect-[16/10] rounded-2xl overflow-hidden shadow-lg border border-white/10 z-0 scale-95 opacity-80"
-              >
-                <ProjectImage src={project.images[2]} alt={`${project.title} screenshot 3`} />
-              </motion.div>
-            )}
           </div>
         </div>
 
@@ -223,42 +171,52 @@ interface ProjectsProps {
 export default function Projects({ activeProjectId, setActiveProjectId }: ProjectsProps) {
   const outerRef = useRef<HTMLDivElement>(null);
   const commercialProjects = projects.filter(p => p.id !== 4);
-  const count = commercialProjects.length;
-  const reducedMotion = useReducedMotion();
-  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  // Desktop: pin the section and slide the track sideways as you scroll down,
+  // with each card's collage drifting against it. Phones and reduced motion
+  // get a plain vertical stack.
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
+        const track = outerRef.current?.querySelector<HTMLElement>("[data-track]");
+        if (!track) return;
+        const distance = () => track.scrollWidth - window.innerWidth;
+        const slide = gsap.to(track, {
+          x: () => -distance(),
+          ease: "none",
+          scrollTrigger: {
+            trigger: outerRef.current,
+            start: "top top",
+            end: () => `+=${distance()}`,
+            pin: true,
+            scrub: 1,
+            invalidateOnRefresh: true,
+          },
+        });
 
-  const { scrollYProgress } = useScroll({
-    target: outerRef,
-    offset: ["start start", "end end"],
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 30,
-    damping: 20,
-    mass: 0.8,
-    restDelta: 0.0005,
-  });
-
-  const trackX = useTransform(
-    smoothProgress,
-    [0, 1],
-    ["0vw", `-${(count - 1) * 100}vw`]
+        gsap.utils.toArray<HTMLElement>("[data-card]").forEach((card) => {
+          const at = { trigger: card, containerAnimation: slide, start: "left right", end: "right left", scrub: true };
+          gsap.fromTo(card.querySelector("[data-card-side='left']"), { yPercent: -10, rotate: -5 }, { yPercent: 10, rotate: 3, ease: "none", scrollTrigger: at });
+          gsap.fromTo(card.querySelector("[data-card-side='right']"), { yPercent: 10, rotate: 5 }, { yPercent: -10, rotate: -3, ease: "none", scrollTrigger: at });
+          gsap.fromTo(card.querySelector("[data-card-center]"), { scale: 0.92 }, { scale: 1.04, ease: "none", scrollTrigger: { ...at, end: "center center" } });
+          gsap.from(card.querySelectorAll("[data-card-copy] > *"), {
+            y: 40, opacity: 0, stagger: 0.08, duration: 1,
+            scrollTrigger: { trigger: card, containerAnimation: slide, start: "left 70%", toggleActions: "play none none reverse" },
+          });
+        });
+        ScrollTrigger.refresh();
+      });
+      return () => mm.revert();
+    },
+    { scope: outerRef },
   );
 
   return (
     <section id="projects" className="relative w-full bg-transparent">
       {/* Section header */}
       <div className="px-6 sm:px-12 xl:px-24 pt-32 pb-12">
-        <h2 className="text-5xl sm:text-7xl xl:text-8xl font-display uppercase tracking-tight text-white leading-none">
+        <h2 className="text-[17vw] sm:text-[12vw] xl:text-[10vw] font-display uppercase tracking-[-0.02em] text-white leading-[0.85]">
           Paid Projects
         </h2>
         <p className="mt-4 max-w-xl text-base sm:text-lg text-white/65">
@@ -268,24 +226,18 @@ export default function Projects({ activeProjectId, setActiveProjectId }: Projec
       </div>
 
       {/* Horizontal scroll track */}
-      <div
-        ref={outerRef}
-        className="relative"
-        style={isMobile ? {} : { height: `${(count - 1) * 100 + 100}dvh` }}
-      >
-        <div className="relative lg:sticky top-0 h-auto lg:h-[100dvh] w-full overflow-hidden flex items-center">
-          <motion.div style={isMobile ? {} : { x: trackX }} className="flex flex-col lg:flex-row h-auto lg:h-full w-full gap-8 lg:gap-0 pb-24 lg:pb-0 transform-gpu">
+      <div ref={outerRef} className="relative lg:h-[100dvh] lg:overflow-hidden">
+        <div className="relative h-auto lg:h-[100dvh] w-full flex items-center">
+          <div data-track className="flex flex-col lg:flex-row h-auto lg:h-full w-full gap-8 lg:gap-0 pb-24 lg:pb-0">
             {commercialProjects.map((project, i) => (
               <Card
                 key={project.id}
                 project={project}
                 index={i}
-                scrollYProgress={scrollYProgress}
-                reducedMotion={reducedMotion}
                 onOpenCaseStudy={setActiveProjectId}
               />
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
 
