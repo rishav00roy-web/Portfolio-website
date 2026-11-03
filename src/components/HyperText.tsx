@@ -8,7 +8,6 @@ import {
   type RefAttributes,
 } from "react";
 import {
-  AnimatePresence,
   motion,
   type DOMMotionComponents,
   type HTMLMotionProps,
@@ -170,20 +169,19 @@ export default function HyperText({
   return (
     <MotionComponent
       ref={elementRef}
-      className={cn("flex flex-wrap overflow-hidden font-mono", className)}
+      className={cn("block overflow-hidden font-mono", className)}
       onMouseEnter={handleAnimationTrigger}
       {...props}
     >
-      {/* Screen readers and crawlers get the real sentence once; the
-          scrambling letters are presentation only. */}
-      <span className="sr-only">{children}</span>
-      <AnimatePresence>
         {groupWords(displayText).map(({ word, start }) =>
-          word === " " ? null : (
+          // A real space between words keeps the copied/indexed text readable
+          // and collapses at a line start, so wrapped lines stay flush.
+          word === " " ? (
+            " "
+          ) : (
             // Letters are inline-blocks, so without a no-wrap wrapper per word
-            // the line can break mid-word ("nobody el / se"). Word gaps are a
-            // margin rather than a space glyph so a wrapped line starts flush.
-            <span key={start} aria-hidden="true" className="inline-block whitespace-nowrap mr-[0.3em] last:mr-0">
+            // the line can break mid-word ("nobody el / se").
+            <span key={start} className="inline-block whitespace-nowrap">
               {word.split("").map((letter, i) => (
                 <motion.span key={start + i} className="inline-block">
                   {preserveCase ? letter : letter.toUpperCase()}
@@ -192,7 +190,6 @@ export default function HyperText({
             </span>
           ),
         )}
-      </AnimatePresence>
     </MotionComponent>
   );
 }
