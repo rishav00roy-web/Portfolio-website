@@ -33,7 +33,7 @@ function useRise(scope: React.RefObject<HTMLElement | null>) {
 }
 
 function Kicker({ children }: { children: ReactNode }) {
-  return <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-rust">{children}</p>;
+  return <p className="text-sm text-rust">{children}</p>;
 }
 
 function SectionTitle({ id, children, note }: { id: string; children: ReactNode; note?: ReactNode }) {
@@ -82,7 +82,7 @@ export function PaperWork() {
 
               <div className="mt-8 grid gap-6 lg:grid-cols-12 lg:gap-10">
                 <div data-rise className="lg:col-span-5">
-                  <Kicker>Project 0{i + 1} · {p.period}</Kicker>
+                  <Kicker>Project 0{i + 1}, {p.period}</Kicker>
                   <h3 className="mt-3 font-display uppercase text-5xl sm:text-6xl leading-[0.9] tracking-[-0.02em]">
                     <Link href={`/projects/${p.slug}`} className="hover:text-rust transition-colors">
                       {p.title}
@@ -167,8 +167,8 @@ export function PaperMoreWork() {
                 <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-ink/40 group-hover:text-rust transition-colors" aria-hidden="true" />
               </div>
               <p className="mt-2 text-[15px] leading-relaxed text-ink/70">{w.description}</p>
-              <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.12em] text-ink/50">
-                <span className="text-rust">{w.badge}</span> · {w.tags.join(" · ")}
+              <p className="mt-3 text-sm text-ink/50">
+                <span className="text-rust">{w.badge}</span>, {w.tags.join(", ")}
               </p>
             </a>
           </li>
@@ -230,7 +230,7 @@ export function PaperAbout() {
             {education.map((e) => (
               <span key={e.degree} className="block">
                 {e.degree}
-                <span className="block text-sm text-ink/55">{e.school} · {e.period}</span>
+                <span className="block text-sm text-ink/55">{e.school}, {e.period}</span>
               </span>
             ))}
           </dd>
@@ -244,12 +244,12 @@ export function PaperAbout() {
           <li key={job.company} data-rise className="border-b border-ink/15">
             <details className="group" open={job === experience[0]}>
               <summary className="grid cursor-pointer list-none grid-cols-[1fr_auto] items-baseline gap-x-6 gap-y-1 py-6 sm:grid-cols-[12rem_1fr_auto] [&::-webkit-details-marker]:hidden">
-                <span className="order-2 col-span-2 font-mono text-xs uppercase tracking-[0.12em] text-ink/55 sm:order-none sm:col-span-1">{job.period}</span>
+                <span className="order-2 col-span-2 text-sm text-ink/55 sm:order-none sm:col-span-1">{job.period}</span>
                 <span>
                   <span className="font-display uppercase text-2xl sm:text-3xl leading-none">{job.role}</span>
                   <span className="mt-1 block text-sm text-ink/60">
                     {job.company}
-                    {"remote" in job && job.remote && " · Remote"}
+                    {"remote" in job && job.remote && ", remote"}
                   </span>
                 </span>
                 <span aria-hidden="true" className="font-mono text-xl text-rust transition-transform duration-300 group-open:rotate-45">+</span>
