@@ -200,10 +200,6 @@ export default function Projects({ activeProjectId, setActiveProjectId }: Projec
           gsap.fromTo(card.querySelector("[data-card-side='left']"), { yPercent: -10, rotate: -5 }, { yPercent: 10, rotate: 3, ease: "none", scrollTrigger: at });
           gsap.fromTo(card.querySelector("[data-card-side='right']"), { yPercent: 10, rotate: 5 }, { yPercent: -10, rotate: -3, ease: "none", scrollTrigger: at });
           gsap.fromTo(card.querySelector("[data-card-center]"), { scale: 0.92 }, { scale: 1.04, ease: "none", scrollTrigger: { ...at, end: "center center" } });
-          gsap.from(card.querySelectorAll("[data-card-copy] > *"), {
-            y: 40, opacity: 0, stagger: 0.08, duration: 1,
-            scrollTrigger: { trigger: card, containerAnimation: slide, start: "left 70%", toggleActions: "play none none reverse" },
-          });
         });
         ScrollTrigger.refresh();
       });

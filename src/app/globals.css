@@ -52,6 +52,15 @@
   --color-foreground: var(--foreground);
   --color-border-muted: var(--border);
   --color-accent: var(--accent);
+  --color-ember: var(--ember);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  /* Remap the neutral extremes so every text-white/bg-black utility in the
+     codebase picks up the warm palette without touching each class. */
+  --color-white: #f4ede3;
+  --color-black: #0d0b09;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 ::selection {
@@ -83,7 +92,7 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  font-variant-numeric: tabular-nums;
 }
 
 ::-webkit-scrollbar {
