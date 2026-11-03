@@ -117,7 +117,7 @@ export default function Hero() {
             trigger: outerRef.current,
             start: "top top",
             end: "bottom bottom",
-            scrub: 1,
+            scrub: true,
           },
         });
         sunset
@@ -152,18 +152,18 @@ export default function Hero() {
         </div>
 
         {/* Sun line glow behind the name */}
-        <div data-hero-sun aria-hidden="true" className="sunline absolute inset-x-0 top-[22%] h-[30%] z-[1] pointer-events-none mix-blend-screen"
+        <div data-hero-sun aria-hidden="true" className="sunline absolute inset-x-0 top-[22%] h-[30%] z-[1] pointer-events-none"
         />
 
         {/* The name, between the plates */}
-        <div data-hero-name-wrap className="absolute inset-x-0 top-[25%] sm:top-[18%] lg:top-[12%] z-[2] flex justify-center pointer-events-none select-none"
+        <div data-hero-name-wrap className="will-change-transform absolute inset-x-0 top-[25%] sm:top-[18%] lg:top-[12%] z-[2] flex justify-center pointer-events-none select-none"
         >
           <h1 className="font-display uppercase text-center leading-[0.78] tracking-[-0.02em]">
             <span className="sr-only">Rishav Roy, Operations &amp; Automation Specialist</span>
             <span
               aria-hidden="true"
               data-hero-name
-              className="block text-[24vw] lg:text-[17.5vw] text-[#fbf3e6] drop-shadow-[0_8px_40px_rgba(224,121,31,0.35)]"
+              className="block text-[24vw] lg:text-[17.5vw] text-[#fbf3e6] [text-shadow:0_8px_40px_rgba(224,121,31,0.35)]"
             >
               Rishav
             </span>
@@ -184,7 +184,7 @@ export default function Hero() {
         </div>
 
         {/* "Roy", signed on the mountain */}
-        <p data-hero-signature aria-hidden="true" className="absolute z-[4] right-[8%] lg:right-[17%] top-[33%] lg:top-[34%] font-coffekan text-[15vw] lg:text-[8vw] leading-none text-accent -rotate-6 pointer-events-none select-none drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]"
+        <p data-hero-signature aria-hidden="true" className="absolute z-[4] right-[8%] lg:right-[17%] top-[33%] lg:top-[34%] font-coffekan text-[15vw] lg:text-[8vw] leading-none text-accent -rotate-6 pointer-events-none select-none will-change-[transform,opacity] [text-shadow:0_4px_24px_rgba(0,0,0,0.6)]"
         >
           Roy
         </p>
@@ -194,12 +194,12 @@ export default function Hero() {
         <div data-hero-dusk className="absolute inset-0 z-[5] bg-background pointer-events-none opacity-0" />
 
         {/* Chrome */}
-        <div data-hero-chrome className="relative z-20 flex flex-col h-full">
+        <div data-hero-chrome className="will-change-[transform,opacity] relative z-20 flex flex-col h-full">
           <div className="flex items-center justify-between px-6 sm:px-12 xl:px-24 py-6 font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] text-white/70">
             <span>Rishav Roy</span>
             <button
               onClick={scrollToContact}
-              className="group flex items-center gap-2 px-3.5 py-2 rounded-full border border-emerald-400/30 bg-black/30 backdrop-blur-sm text-emerald-300 text-[10px] sm:text-[11px] font-semibold tracking-[0.15em] hover:border-emerald-400/60 transition-colors cursor-pointer"
+              className="group flex items-center gap-2 px-3.5 py-2 rounded-full border border-emerald-400/30 bg-black/55 text-emerald-300 text-[10px] sm:text-[11px] font-semibold tracking-[0.15em] hover:border-emerald-400/60 transition-colors cursor-pointer"
               aria-label="Available for hire, jump to contact"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse motion-reduce:animate-none" />
@@ -245,7 +245,7 @@ export default function Hero() {
                 </Link>
                 <button
                   onClick={scrollToContact}
-                  className="px-6 py-3.5 rounded-full border border-white/25 bg-black/20 backdrop-blur-sm text-white hover:border-white/50 transition-colors font-semibold text-sm cursor-pointer"
+                  className="px-6 py-3.5 rounded-full border border-white/25 bg-black/45 text-white hover:border-white/50 transition-colors font-semibold text-sm cursor-pointer"
                 >
                   Get in Touch
                 </button>

@@ -189,12 +189,34 @@ export default function KineticGrid({
     // Pause the animation loop when the tab isn't visible — a fixed
     // full-viewport canvas has no natural "off-screen" state to lean on,
     // so this is the one that actually saves battery/CPU on long pages.
-    let running = !document.hidden;
+    // It also sleeps while the hero covers the viewport: the hero paints over
+    // it completely, and a full-screen canvas redrawing underneath was the
+    // main cost of scrolling the hero on slower phones.
+    let tabVisible = !document.hidden;
+    let heroCovering = false;
+    let running = tabVisible;
+    const resume = () => {
+      const next = tabVisible && !heroCovering;
+      if (next && !running) {
+        running = true;
+        raf = requestAnimationFrame(frame);
+      }
+      running = next;
+    };
     const onVisibility = () => {
-      running = !document.hidden;
-      if (running) raf = requestAnimationFrame(frame);
+      tabVisible = !document.hidden;
+      resume();
     };
     document.addEventListener("visibilitychange", onVisibility);
+    const hero = document.getElementById("hero");
+    const heroWatch = hero
+      ? new IntersectionObserver(([entry]) => {
+          // "Covering" = the hero still fills most of the screen.
+          heroCovering = entry.intersectionRect.height > window.innerHeight * 0.6;
+          resume();
+        }, { threshold: Array.from({ length: 11 }, (_, i) => i / 10) })
+      : null;
+    if (hero) heroWatch?.observe(hero);
 
     let raf = 0;
     const frame = () => {
@@ -290,6 +312,7 @@ export default function KineticGrid({
       cancelAnimationFrame(raf);
       ro?.disconnect();
       document.removeEventListener("visibilitychange", onVisibility);
+      heroWatch?.disconnect();
       window.removeEventListener("mousemove", onMove);
       document.removeEventListener("mouseleave", onLeave);
       window.removeEventListener("touchmove", onTouch);
