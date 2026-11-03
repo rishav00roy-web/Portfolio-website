@@ -36,12 +36,12 @@ test.describe('Portfolio Website - Tier 1: Feature Coverage', () => {
     expect(monoFont).toMatch(/JetBrains Mono/i);
   });
 
-  test('Background color is dark #030303', async ({ page }) => {
+  test('Background is the warm near-black #0d0b09', async ({ page }) => {
     const bgColor = await page.evaluate(() => {
       return window.getComputedStyle(document.body).backgroundColor;
     });
-    // #030303 translates to rgb(3, 3, 3) in browser computed style
-    expect(bgColor).toBe('rgb(3, 3, 3)');
+    // #0d0b09, the golden-hour background token
+    expect(bgColor).toBe('rgb(13, 11, 9)');
   });
 
   test('Amber accent #F5B301 sparse usage', async ({ page }) => {

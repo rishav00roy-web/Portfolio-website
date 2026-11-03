@@ -56,7 +56,7 @@ export default function PerformanceMetrics() {
   }, []);
 
   return (
-    <div className="w-full sm:w-[320px] p-5 rounded-2xl border border-white/10 bg-[#0a0a0a]/50 backdrop-blur-md relative overflow-hidden group">
+    <div className="w-full sm:w-[320px] p-5 rounded-2xl border border-white/10 bg-surface relative overflow-hidden group">
       {/* Background hover glow effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
       

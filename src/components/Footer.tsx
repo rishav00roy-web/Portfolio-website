@@ -138,6 +138,7 @@ export default function Footer() {
           >
             Let&apos;s Build <br /> Something
           </motion.h2>
+          <p className="-mt-6 mb-10 font-coffekan text-4xl sm:text-5xl text-accent">before the sun sets.</p>
 
           {/* Thin rule */}
           <motion.div

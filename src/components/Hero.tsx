@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { useEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform, useSpring, useReducedMotion, AnimatePresence } from "framer-motion";
-import { Award } from "lucide-react";
+import { ArrowRight, Award, Download } from "lucide-react";
 import { useLenis } from "lenis/react";
 import HyperText from "./HyperText";
 
@@ -14,6 +14,18 @@ const currentlyItems = [
   "IQ Iron Fitness",
   "Clash Bazar (In Progress)"
 ];
+
+/*
+ * The hero is one photograph split into two plates: the sky, and the ridge
+ * cut out of it (public/assets/hero-ridge.webp, an alpha matte derived from
+ * hero-bg.jpg). The name is set between them, so it rises from behind the
+ * mountains; scrolling sinks it back down like the sun going behind the
+ * peaks. Both plates share every transform so the cut line never drifts.
+ */
+const PLATE_POSITION = "50% 38%";
+// Both plates are toned down together, keeping the original site's dusk mood
+// and giving the light name enough contrast against the sky.
+const PLATE_FILTER = "brightness(0.62) saturate(1.08)";
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
@@ -41,14 +53,11 @@ export default function Hero() {
   const [commitCount, setCommitCount] = useState<number | null>(null);
 
   useEffect(() => {
-    // 1. Read cached value on mount (client-side only)
     if (typeof window !== "undefined") {
       const cached = localStorage.getItem("github-commit-count");
       if (cached) {
-        // Deliberately set after mount rather than via a lazy useState
-        // initialiser: localStorage is unavailable during SSR, and seeding
-        // state from it during render would make the server markup ("—
-        // Commits") disagree with the client and trip a hydration mismatch.
+        // Set after mount: localStorage is unavailable during SSR, and seeding
+        // state from it during render would trip a hydration mismatch.
         // eslint-disable-next-line react-hooks/set-state-in-effect
         setCommitCount(parseInt(cached, 10));
       }
@@ -80,314 +89,239 @@ export default function Hero() {
 
   const outerRef = useRef<HTMLDivElement>(null);
 
-  // ---- Scroll-linked progress ----
   const { scrollYProgress } = useScroll({
     target: outerRef,
     offset: ["start start", "end end"],
   });
 
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 30,
-    damping: 20,
-    mass: 0.8,
+  const progress = useSpring(scrollYProgress, {
+    stiffness: 40,
+    damping: 22,
+    mass: 0.7,
     restDelta: 0.0005,
   });
 
-  // ---- Layer 1: Background image (deepest) ----
-  const bgScale = useTransform(smoothProgress, [0, 1], [1, 1.3]);
-  const bgOpacity = useTransform(smoothProgress, [0, 0.6, 1], [0.65, 0.4, 0.2]);
-  const darkOverlayOpacity = useTransform(smoothProgress, [0, 1], [0.3, 0.85]);
+  // Plates drift together; the name sinks behind the ridge.
+  const plateScale = useTransform(progress, [0, 1], [1, 1.14]);
+  const plateY = useTransform(progress, [0, 1], ["0%", "-3%"]);
+  const nameY = useTransform(progress, [0, 0.8], ["0vh", "34vh"]);
+  const signatureOpacity = useTransform(progress, [0, 0.35], [1, 0]);
+  const sunOpacity = useTransform(progress, [0, 0.7], [1, 0.15]);
+  const dusk = useTransform(progress, [0.45, 1], [0, 1]);
+  const chromeOpacity = useTransform(progress, [0, 0.28], [1, 0]);
+  const chromeY = useTransform(progress, [0, 0.28], [0, -32]);
 
-
-  // ---- Layer 3: Title (foreground) — staged easing with hang-time ----
-  const titleScale = useTransform(
-    smoothProgress,
-    [0, 0.25, 0.45, 0.7],
-    [1, 1.4, 3.5, 9.5]
-  );
-  const titleOpacity = useTransform(smoothProgress, [0, 0.5, 0.75], [1, 1, 0]);
-
-  // ---- Chrome (meta UI) ----
-  const chromeOpacity = useTransform(smoothProgress, [0, 0.25], [1, 0]);
-  const chromeY = useTransform(smoothProgress, [0, 0.25], [0, -40]);
-
-
-  // ---- Mouse parallax (desktop only) ----
-  const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 });
-
-  useEffect(() => {
-    if (shouldReduceMotion) return;
-    if (typeof window === "undefined") return;
-    if (window.matchMedia("(pointer: coarse)").matches) return;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rx = -(e.clientY / window.innerHeight - 0.5) * 5;
-      const ry = (e.clientX / window.innerWidth - 0.5) * 5;
-      setTilt({ rotateX: rx, rotateY: ry });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove, { passive: true });
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, [shouldReduceMotion]);
+  const still = shouldReduceMotion;
 
   return (
-    <div id="hero" ref={outerRef} className="relative h-[280dvh] bg-transparent">
-      <section
-        className="sticky top-0 h-[100dvh] w-full overflow-hidden text-white z-10 select-none"
-        style={{ 
-          perspective: "1200px",
-          transform: "translate3d(0, 0, 0)",
-          WebkitTransform: "translate3d(0, 0, 0)"
-        }}
-      >
-
-        {/* ---- Layer 1: Background image (deepest) ---- */}
+    <div id="hero" ref={outerRef} className="relative h-[200dvh] bg-transparent">
+      <section className="sticky top-0 h-[100dvh] w-full overflow-hidden text-white z-10">
+        {/* Plate 1: sky */}
         <motion.div
-          style={{ scale: bgScale, opacity: bgOpacity }}
-          className="absolute inset-0 z-0"
+          style={still ? undefined : { scale: plateScale, y: plateY }}
+          className="absolute inset-0 z-0 will-change-transform"
         >
           <Image
-            src="/assets/hero-bg.jpg"
+            src="/assets/hero-sky.webp"
             alt=""
             fill
             priority
+            sizes="100vw"
             className="object-cover"
-          />
-          {/* Vignette overlay replaces blur — pure GPU opacity */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(ellipse at center, transparent 0%, rgba(3,3,3,0.5) 70%, rgba(3,3,3,0.9) 100%)",
-            }}
-          />
-          {/* Darkening overlay driven by scroll */}
-          <motion.div
-            style={{ opacity: darkOverlayOpacity }}
-            className="absolute inset-0 bg-[#030303]"
+            style={{ objectPosition: PLATE_POSITION, filter: PLATE_FILTER }}
           />
         </motion.div>
 
-        {/* ---- Grain texture overlay ---- */}
-        <div
-          className="absolute inset-0 z-[5] pointer-events-none opacity-[0.025]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-            backgroundRepeat: "repeat",
-            backgroundSize: "256px 256px",
-          }}
+        {/* Sun line glow behind the name */}
+        <motion.div
+          aria-hidden="true"
+          style={still ? undefined : { opacity: sunOpacity }}
+          className="sunline absolute inset-x-0 top-[22%] h-[30%] z-[1] pointer-events-none mix-blend-screen"
         />
 
-        {/* ---- Layer 3: Title (foreground, mouse parallax) ---- */}
+        {/* The name, between the plates */}
         <motion.div
-          style={{
-            scale: titleScale,
-            opacity: titleOpacity,
-            rotateX: shouldReduceMotion ? 0 : tilt.rotateX,
-            rotateY: shouldReduceMotion ? 0 : tilt.rotateY,
-          }}
-          className="absolute inset-0 z-10 flex items-start pt-[18dvh] sm:pt-0 sm:items-center justify-center pointer-events-none"
+          style={still ? undefined : { y: nameY }}
+          className="absolute inset-x-0 top-[25%] sm:top-[18%] lg:top-[12%] z-[2] flex justify-center pointer-events-none select-none"
         >
-          <h1 className="font-display leading-[0.82] uppercase tracking-tight text-center">
+          <h1 className="font-display uppercase text-center leading-[0.78] tracking-[-0.02em]">
             <span className="sr-only">Rishav Roy, Operations &amp; Automation Specialist</span>
-            <span aria-hidden="true" className="block text-[15vw] sm:text-[8.5rem] lg:text-[12.5rem] font-extrabold text-white">
+            <span
+              aria-hidden="true"
+              className="block text-[24vw] lg:text-[17.5vw] text-[#fbf3e6] drop-shadow-[0_8px_40px_rgba(224,121,31,0.35)]"
+            >
               Rishav
-            </span>
-            <span aria-hidden="true" className="block text-[15vw] sm:text-[8.5rem] lg:text-[12.5rem] font-extrabold text-transparent [-webkit-text-stroke:2px_rgba(255,255,255,0.4)]">
-              Roy
             </span>
           </h1>
         </motion.div>
 
-        {/* ---- Chrome: meta UI + tagline + info grid ---- */}
+        {/* Plate 2: the ridge, cut from the same photo */}
         <motion.div
-          style={{ opacity: chromeOpacity, y: chromeY }}
+          aria-hidden="true"
+          style={still ? undefined : { scale: plateScale, y: plateY }}
+          className="absolute inset-0 z-[3] pointer-events-none will-change-transform"
+        >
+          <Image
+            src="/assets/hero-ridge.webp"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+            style={{ objectPosition: PLATE_POSITION, filter: PLATE_FILTER }}
+          />
+        </motion.div>
+
+        {/* "Roy", signed on the mountain */}
+        <motion.p
+          aria-hidden="true"
+          style={still ? undefined : { opacity: signatureOpacity }}
+          className="absolute z-[4] right-[8%] lg:right-[17%] top-[33%] lg:top-[34%] font-coffekan text-[15vw] lg:text-[8vw] leading-none text-accent -rotate-6 pointer-events-none select-none drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]"
+        >
+          Roy
+        </motion.p>
+
+        {/* Ground fade so copy reads on the shadowed slope, then dusk on scroll */}
+        <div className="absolute inset-x-0 bottom-0 h-[55%] z-[4] bg-gradient-to-t from-background via-background/70 to-transparent pointer-events-none" />
+        <motion.div
+          style={still ? { opacity: 0 } : { opacity: dusk }}
+          className="absolute inset-0 z-[5] bg-background pointer-events-none"
+        />
+
+        {/* Chrome */}
+        <motion.div
+          style={still ? undefined : { opacity: chromeOpacity, y: chromeY }}
           className="relative z-20 flex flex-col h-full"
         >
-          {/* Top nav bar */}
-          <div className="flex items-center justify-between px-6 sm:px-12 xl:px-24 py-6 font-mono text-[10px] sm:text-xs uppercase tracking-widest text-white/55 z-30">
+          <div className="flex items-center justify-between px-6 sm:px-12 xl:px-24 py-6 font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] text-white/70">
             <span>Rishav Roy</span>
             <button
               onClick={scrollToContact}
-              className="group flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-emerald-500/20 bg-emerald-500/5 text-emerald-400 text-[9px] sm:text-[10px] font-bold hover:bg-emerald-500/10 hover:border-emerald-500/40 hover:shadow-[0_0_12px_rgba(16,185,129,0.25)] active:scale-95 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400"
-              aria-label="Available for Hire — Navigate to contact section"
+              className="group flex items-center gap-2 px-3.5 py-2 rounded-full border border-emerald-400/30 bg-black/30 backdrop-blur-sm text-emerald-300 text-[10px] sm:text-[11px] font-semibold tracking-[0.15em] hover:border-emerald-400/60 transition-colors cursor-pointer"
+              aria-label="Available for hire, jump to contact"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse group-hover:scale-125 transition-transform" />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse motion-reduce:animate-none" />
               <span>Available for Hire</span>
             </button>
             <span className="hidden sm:block">Kolkata, India</span>
           </div>
 
-          {/* Bottom content area */}
-          <div className="flex-1 flex flex-col justify-end px-6 sm:px-12 xl:px-24 pb-8 sm:pb-24 pt-4 sm:pt-24">
-            {/* Tagline — this is the LCP element. Chrome does not count an
-                element at opacity 0 as contentful, so fading it in meant LCP
-                was recorded only once the animation finished: 2.6s of pure
-                element render delay on mobile. It now paints immediately and
-                only slides, since a translated element still counts as
-                painted. Do not reintroduce an opacity transition here. */}
-            <motion.div
-              initial={{ opacity: 1, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={
-                shouldReduceMotion
-                  ? { duration: 0 }
-                  : { duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] as const }
-              }
-              className="max-w-2xl text-lg sm:text-2xl text-white/90 font-medium leading-snug font-sans pointer-events-auto cursor-default"
-            >
-              <HyperText
-                as="p"
-                preserveCase
-                duration={800}
-                animateOnHover
-                className="text-lg sm:text-2xl text-white/90 font-medium leading-snug font-sans inline-block drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]"
+          <div className="flex-1 flex flex-col justify-end px-6 sm:px-12 xl:px-24 pb-24 sm:pb-14">
+            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 lg:gap-12">
+              {/* Tagline is the LCP element: it paints at full opacity on the
+                  first frame and only slides. Do not add an opacity fade. */}
+              <motion.div
+                initial={{ opacity: 1, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={still ? { duration: 0 } : { duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] as const }}
+                className="max-w-xl"
               >
-                Ex-ops guy who got tired of manual work. Now I build tools so nobody else has to.
-              </HyperText>
-            </motion.div>
+                <p className="font-coffekan text-3xl sm:text-4xl text-accent mb-1">Operations &amp; Automation</p>
+                <HyperText
+                  as="p"
+                  preserveCase
+                  duration={800}
+                  animateOnHover
+                  className="text-xl sm:text-[1.75rem] text-white font-medium leading-[1.3] font-sans text-balance"
+                >
+                  Ex-ops guy who got tired of manual work. Now I build tools so nobody else has to.
+                </HyperText>
+              </motion.div>
 
-            {/* Above-the-fold CTA buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={
-                shouldReduceMotion
-                  ? { duration: 0 }
-                  : { duration: 1, delay: 0.45, ease: [0.16, 1, 0.3, 1] as const }
-              }
-              className="mt-6 flex flex-wrap gap-4 z-30 pointer-events-auto"
-            >
-              <Link
-                href="/projects"
-                className="inline-block px-6 py-3.5 rounded-full bg-white text-black font-semibold text-xs sm:text-sm hover:bg-white/90 hover:shadow-[0_0_24px_rgba(255,255,255,0.25)] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={still ? { duration: 0 } : { duration: 1, delay: 0.35, ease: [0.16, 1, 0.3, 1] as const }}
+                className="flex flex-wrap gap-3 shrink-0"
               >
-                Case Studies
-              </Link>
-              <button
-                onClick={scrollToContact}
-                className="px-6 py-3.5 rounded-full border border-white/20 text-white hover:bg-white/10 hover:border-white/40 transition-all font-semibold text-xs sm:text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
-              >
-                Get in Touch
-              </button>
-            </motion.div>
+                <Link
+                  href="/projects"
+                  className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-accent text-background font-semibold text-sm hover:bg-[#ffc72c] transition-colors cursor-pointer"
+                >
+                  Case Studies
+                  <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-out-expo group-hover:translate-x-0.5" aria-hidden="true" />
+                </Link>
+                <button
+                  onClick={scrollToContact}
+                  className="px-6 py-3.5 rounded-full border border-white/25 bg-black/20 backdrop-blur-sm text-white hover:border-white/50 transition-colors font-semibold text-sm cursor-pointer"
+                >
+                  Get in Touch
+                </button>
+              </motion.div>
+            </div>
 
-            {/* Info grid */}
-            <motion.div
+            {/* Ledger */}
+            <motion.dl
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={
-                shouldReduceMotion
-                  ? { duration: 0 }
-                  : { duration: 1, delay: 0.6 }
-              }
-              className="mt-8 sm:mt-12 pt-6 border-t border-white/10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-8 max-w-4xl font-mono text-xs sm:text-sm"
+              transition={still ? { duration: 0 } : { duration: 1, delay: 0.5 }}
+              className="mt-8 sm:mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 border-t border-accent/25"
             >
-              <div>
-                <HyperText
-                  className="text-white/50 uppercase tracking-widest text-[10px] sm:text-xs mb-2 block cursor-default"
-                  duration={600}
-                  animateOnHover
-                >
-                  Currently
-                </HyperText>
-                <div className="relative h-[2.5em] overflow-hidden">
+              <div className="pt-4 pr-4">
+                <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent/80 mb-1.5">Currently</dt>
+                <dd className="relative h-[2.6em] overflow-hidden text-sm text-white/90">
                   <AnimatePresence mode="wait">
-                    <motion.p
+                    <motion.span
                       key={currentlyIndex}
                       initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -8 }}
                       transition={{ duration: 0.25, ease: "easeInOut" }}
-                      className="text-white/80 absolute left-0 right-0 line-clamp-2 text-[10px] sm:text-[11px] md:text-xs tracking-tight font-mono break-words"
+                      className="absolute inset-x-0 line-clamp-2"
                     >
                       {currentlyItems[currentlyIndex]}
-                    </motion.p>
+                    </motion.span>
                   </AnimatePresence>
-                </div>
+                </dd>
               </div>
-              <div>
-                <HyperText
-                  className="text-white/50 uppercase tracking-widest text-[10px] sm:text-xs mb-2 block cursor-default"
-                  duration={600}
-                  animateOnHover
-                >
-                  Based in
-                </HyperText>
-                <p className="text-white/80">Kolkata, India</p>
-                <p className="text-white/50 text-[10px]">(originally from Jorhat, Assam)</p>
+              <div className="pt-4 pr-4">
+                <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent/80 mb-1.5">Based in</dt>
+                <dd className="text-sm text-white/90">
+                  Kolkata, India
+                  <span className="block text-xs text-white/55">from Jorhat, Assam</span>
+                </dd>
               </div>
-              <div>
-                <HyperText
-                  className="text-white/50 uppercase tracking-widest text-[10px] sm:text-xs mb-2 block cursor-default"
-                  duration={600}
-                  animateOnHover
-                >
-                  Resume
-                </HyperText>
-                <a
-                  href="/Rishav-Roy-CV.pdf"
-                  download="Rishav-Roy-CV.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-white/80 hover:text-amber-400 transition-colors underline decoration-white/20 hover:decoration-amber-400/40"
-                >
-                  Download PDF
-                </a>
-                <p className="text-white/50 text-[10px] mt-1">July 2026</p>
+              <div className="pt-4 pr-4">
+                <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent/80 mb-1.5">Resume</dt>
+                <dd className="text-sm">
+                  <a
+                    href="/Rishav-Roy-CV.pdf"
+                    download="Rishav-Roy-CV.pdf"
+                    className="inline-flex items-center gap-1.5 text-white/90 hover:text-accent transition-colors underline decoration-white/25 hover:decoration-accent/60"
+                  >
+                    <Download className="w-3.5 h-3.5" aria-hidden="true" />
+                    Download PDF
+                  </a>
+                  <span className="block text-xs text-white/55">July 2026</span>
+                </dd>
               </div>
-              <div>
-                <HyperText
-                  className="text-white/50 uppercase tracking-widest text-[10px] sm:text-xs mb-2 block cursor-default"
-                  duration={600}
-                  animateOnHover
-                >
-                  Commits
-                </HyperText>
-                <p className="text-white/80">
-                  {commitCount !== null ? `${commitCount} Commits` : "... Commits"}
-                </p>
-                <p className="text-white/50 text-[10px] mt-1">on GitHub</p>
+              <div className="pt-4 pr-4">
+                <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent/80 mb-1.5">Commits</dt>
+                <dd className="text-sm text-white/90">
+                  {commitCount !== null ? `${commitCount} on GitHub` : "… on GitHub"}
+                </dd>
               </div>
-              <div>
-                <HyperText
-                  className="text-white/50 uppercase tracking-widest text-[10px] sm:text-xs mb-2 block cursor-default"
-                  duration={600}
-                  animateOnHover
-                >
-                  Credentials
-                </HyperText>
-                <a 
-                  href="#certificates"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (lenis) {
-                      lenis.scrollTo("#certificates", { duration: 1.4 });
-                    } else {
-                      document.getElementById("certificates")?.scrollIntoView({ behavior: "smooth" });
-                    }
-                  }}
-                  className="flex items-center gap-2 group cursor-pointer mt-1"
-                >
-                  <div className="bg-white/10 p-1.5 rounded-md group-hover:bg-white/20 transition-colors">
-                    <Award className="w-4 h-4 text-white/80 group-hover:text-amber-400 transition-colors" />
-                  </div>
-                  <span className="text-white/80 group-hover:text-amber-400 transition-colors">Coursera</span>
-                </a>
+              <div className="pt-4 pr-4 hidden sm:block">
+                <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent/80 mb-1.5">Credentials</dt>
+                <dd className="text-sm">
+                  <a
+                    href="#certificates"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (lenis) {
+                        lenis.scrollTo("#certificates", { duration: 1.4 });
+                      } else {
+                        document.getElementById("certificates")?.scrollIntoView({ behavior: "smooth" });
+                      }
+                    }}
+                    className="inline-flex items-center gap-1.5 text-white/90 hover:text-accent transition-colors"
+                  >
+                    <Award className="w-3.5 h-3.5" aria-hidden="true" />
+                    Google · Coursera
+                  </a>
+                </dd>
               </div>
-            </motion.div>
-          </div>
-        </motion.div>
-
-        {/* ---- Mouse scroll indicator ---- */}
-        <motion.div
-          style={{ opacity: chromeOpacity }}
-          className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-20 pointer-events-none"
-        >
-          <div className="mouse-btn">
-            <span className="mouse-scroll" />
+            </motion.dl>
           </div>
         </motion.div>
       </section>

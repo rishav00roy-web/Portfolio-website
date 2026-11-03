@@ -115,11 +115,11 @@ function Card({
 
   return (
     <div className="relative w-full lg:w-screen h-auto lg:h-full flex items-center justify-center px-4 sm:px-12 xl:px-24 shrink-0 py-4 lg:py-0">
-      <div className="w-full max-w-7xl relative h-auto lg:h-[75dvh] sm:lg:h-[80dvh] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl bg-white/5 backdrop-blur-xl border border-white/10 flex flex-col lg:flex-row p-5 sm:p-12 xl:p-16 gap-3 sm:gap-4 lg:gap-12">
+      <div className="w-full max-w-7xl relative h-auto lg:h-[75dvh] sm:lg:h-[80dvh] rounded-2xl sm:rounded-[28px] overflow-hidden bg-surface bg-[radial-gradient(70%_60%_at_100%_0%,rgba(245,179,1,0.09),transparent_65%)] border border-white/[0.07] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.85)] flex flex-col lg:flex-row p-5 sm:p-12 xl:p-16 gap-3 sm:gap-4 lg:gap-12">
 
         {/* Text content */}
         <div className="w-full lg:w-[38%] flex flex-col justify-start lg:justify-center z-10 pb-2 lg:pb-0 shrink-0">
-          <p className="font-coffekan text-lg sm:text-5xl text-white/50 mb-1 sm:mb-4 tracking-wider">
+          <p className="font-coffekan text-3xl sm:text-5xl text-accent mb-1 sm:mb-4 tracking-wide">
             Project 0{index + 1}
           </p>
 
@@ -143,7 +143,7 @@ function Card({
               {project.tags.map((tag: string) => (
                 <span
                   key={tag}
-                  className="px-2.5 py-1 sm:px-4 sm:py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-white/80 text-[10px] sm:text-sm font-sans"
+                  className="px-2.5 py-1 sm:px-4 sm:py-1.5 rounded-full border border-white/10 bg-surface-2 text-white/80 text-[10px] sm:text-sm font-sans"
                 >
                   {tag}
                 </span>
@@ -205,7 +205,7 @@ function Card({
         <a
           href={`/projects/${getSlugById(project.id)}`}
           onClick={(e) => { e.preventDefault(); onOpenCaseStudy(project.id); }}
-          className="absolute bottom-6 right-6 sm:bottom-10 sm:right-10 flex w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white text-black items-center justify-center hover:scale-105 transition-transform shadow-lg z-20 group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          className="absolute bottom-6 right-6 sm:bottom-10 sm:right-10 flex w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-accent text-background items-center justify-center hover:scale-105 transition-transform shadow-lg z-20 group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           aria-label={`View ${project.title} case study`}
         >
           <ArrowUpRight className="w-6 h-6 sm:w-8 sm:h-8 group-hover:rotate-45 transition-transform duration-300" />
@@ -261,6 +261,10 @@ export default function Projects({ activeProjectId, setActiveProjectId }: Projec
         <h2 className="text-5xl sm:text-7xl xl:text-8xl font-display uppercase tracking-tight text-white leading-none">
           Paid Projects
         </h2>
+        <p className="mt-4 max-w-xl text-base sm:text-lg text-white/65">
+          <span className="font-coffekan text-3xl sm:text-4xl text-accent mr-2">for paying clients.</span>
+          Commercial builds, each with a full case study.
+        </p>
       </div>
 
       {/* Horizontal scroll track */}

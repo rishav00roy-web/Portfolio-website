@@ -97,7 +97,7 @@ export default function CaseStudyModal({ projectId, onClose }: CaseStudyModalPro
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:30px_30px] pointer-events-none z-0" />
 
             {/* Header */}
-            <div className="sticky top-0 bg-[#0a0a0a]/90 backdrop-blur-md px-6 sm:px-10 py-5 border-b border-white/10 flex items-center justify-between z-20">
+            <div className="sticky top-0 bg-surface/95 backdrop-blur-md px-6 sm:px-10 py-5 border-b border-white/10 flex items-center justify-between z-20">
               <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-white/55">
                 <GitBranch className="w-4 h-4 text-accent" />
                 <span>Case Study</span>
@@ -128,7 +128,7 @@ export default function CaseStudyModal({ projectId, onClose }: CaseStudyModalPro
                 {getSlugById(projectId) && (
                   <Link
                     href={`/projects/${getSlugById(projectId)}`}
-                    className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-medium hover:bg-white/85 transition-all shadow-xl text-sm"
+                    className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-background font-medium hover:bg-[#ffc72c] transition-all shadow-xl text-sm"
                   >
                     <span>Read the full case study</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -140,7 +140,7 @@ export default function CaseStudyModal({ projectId, onClose }: CaseStudyModalPro
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/20 bg-white/5 backdrop-blur-xl text-white font-medium hover:bg-white/10 hover:border-white/40 transition-all shadow-xl text-sm"
+                    className="group inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/20 bg-surface text-white font-medium hover:bg-white/10 hover:border-white/40 transition-all shadow-xl text-sm"
                   >
                     <span>{link.label}</span>
                     {link.icon === "github" ? (
@@ -155,7 +155,7 @@ export default function CaseStudyModal({ projectId, onClose }: CaseStudyModalPro
               </div>
 
               {/* Grid Metadata */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-white/5 backdrop-blur-xl shadow-xl border border-white/10 p-6 rounded-2xl">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-surface shadow-xl border border-white/10 p-6 rounded-2xl">
                 <div>
                   <span className="block font-mono text-[10px] uppercase tracking-widest text-white/55">Client</span>
                   <span className="block text-sm font-medium mt-1 text-white">{data.client}</span>
@@ -223,7 +223,7 @@ export default function CaseStudyModal({ projectId, onClose }: CaseStudyModalPro
                 </p>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 relative">
                   {data.architecture.steps.map((step: { title: string; desc: string }, index: number) => (
-                    <div key={step.title} className="relative border border-white/10 bg-[#0f0f0f]/80 backdrop-blur-xl shadow-xl p-5 rounded-xl flex flex-col">
+                    <div key={step.title} className="relative border border-white/10 bg-surface shadow-xl p-5 rounded-xl flex flex-col">
                       <span className="absolute top-4 right-4 font-mono text-xs text-white/20 font-bold">
                         0{index + 1}
                       </span>
@@ -245,7 +245,7 @@ export default function CaseStudyModal({ projectId, onClose }: CaseStudyModalPro
                 </h3>
                 <div className="space-y-6">
                   {data.challenges.map((challenge: { title: string; description: string; fix: string }) => (
-                    <div key={challenge.title} className="border border-white/10 bg-[#0c0c0c]/80 backdrop-blur-xl shadow-xl p-6 rounded-xl space-y-3">
+                    <div key={challenge.title} className="border border-white/10 bg-surface shadow-xl p-6 rounded-xl space-y-3">
                       <div className="flex items-start gap-2.5 text-rose-500 font-bold text-sm sm:text-base uppercase tracking-wider font-mono">
                         <ShieldAlert className="w-5 h-5 flex-shrink-0" />
                         <span>{challenge.title}</span>

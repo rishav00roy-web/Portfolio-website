@@ -19,12 +19,18 @@
 }
 
 :root {
-  --background: #030303;
-  --foreground: #ffffff;
-  --muted: rgba(255, 255, 255, 0.6);
-  --border: rgba(255, 255, 255, 0.1);
+  /* Golden hour: warm near-black from the shadowed ridge, parchment white
+     from the lit sky, amber from the sun line. */
+  --background: #0d0b09;
+  --surface: #16120e;
+  --surface-2: #1d1812;
+  --foreground: #f4ede3;
+  --muted: rgba(244, 237, 227, 0.66);
+  --border: rgba(244, 237, 227, 0.1);
   --accent: #F5B301;
   --accent-rgb: 245, 179, 1;
+  --ember: #e0791f;
+  color-scheme: dark;
 }
 
 [data-theme="light"] {
@@ -50,7 +56,26 @@
 
 ::selection {
   background-color: var(--accent);
-  color: #030303;
+  color: var(--background);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+::placeholder {
+  color: rgba(244, 237, 227, 0.4);
+}
+
+input,
+textarea,
+select {
+  caret-color: var(--accent);
+}
+
+a {
+  text-underline-offset: 0.2em;
 }
 
 
@@ -66,24 +91,24 @@ body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #030303;
+  background: #0d0b09;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(244, 237, 227, 0.12);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(245, 179, 1, 0.5);
 }
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.1) #030303;
+  scrollbar-color: rgba(244, 237, 227, 0.12) #0d0b09;
 }
 
 /* Mouse scroll indicator (from Uiverse.io by mrhyddenn, recolored) */
 .mouse-btn {
   width: 26px;
   height: 42px;
-  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  border: 1.5px solid rgba(245, 179, 1, 0.5);
   border-radius: 14px;
   display: flex;
 }
@@ -235,4 +260,15 @@ body {
    input. Pull the trigger while the chat is open. */
 [data-chat-open="true"] [data-command-menu-trigger] {
   display: none;
+}
+
+/* Hero: the sun line glow that sits on the ridge. */
+.sunline {
+  background: radial-gradient(60% 100% at 50% 100%, rgba(245, 179, 1, 0.35), transparent 70%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mouse-scroll {
+    animation: none;
+  }
 }

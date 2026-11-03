@@ -50,7 +50,7 @@ export default function CaseStudyArticle({ caseStudy }: { caseStudy: CaseStudyWi
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-xl text-white font-medium hover:bg-white/10 hover:border-white/40 transition-all shadow-xl text-sm w-fit"
+                className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-full border border-white/20 bg-surface text-white font-medium hover:bg-white/10 hover:border-white/40 transition-all shadow-xl text-sm w-fit"
               >
                 <span>{link.label}</span>
                 {link.icon === "github" ? (
@@ -84,7 +84,7 @@ export default function CaseStudyArticle({ caseStudy }: { caseStudy: CaseStudyWi
           </div>
 
           {/* Architecture */}
-          <section className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 sm:p-8 border border-white/10 shadow-2xl">
+          <section className="bg-surface rounded-2xl p-6 sm:p-8 border border-white/10 shadow-2xl">
             <h3 className="text-lg font-medium mb-2 flex items-center gap-2">
               <Layout className="w-5 h-5 text-white/55" />
               Architecture &amp; Flow
@@ -115,7 +115,7 @@ export default function CaseStudyArticle({ caseStudy }: { caseStudy: CaseStudyWi
             </h3>
             <div className="grid gap-6">
               {caseStudy.challenges.map((challenge, i) => (
-                <div key={i} className="p-5 rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-xl space-y-3">
+                <div key={i} className="p-5 rounded-xl border border-white/10 bg-surface shadow-xl space-y-3">
                   <h4 className="text-base font-medium text-white/80 flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
                     {challenge.title}
@@ -139,7 +139,7 @@ export default function CaseStudyArticle({ caseStudy }: { caseStudy: CaseStudyWi
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {caseStudy.metrics.map((metric, i) => (
-                <div key={i} className="p-5 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-xl flex flex-col justify-center overflow-hidden">
+                <div key={i} className="p-5 rounded-xl bg-surface border border-white/10 shadow-xl flex flex-col justify-center overflow-hidden">
                   <div
                     className={`font-bold mb-2 tracking-tight leading-tight ${
                       metric.value.length > 8 ? "text-xl sm:text-xl md:text-2xl" : "text-2xl sm:text-3xl"

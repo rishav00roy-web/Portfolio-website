@@ -38,9 +38,9 @@ interface KineticGridProps {
   baseOpacity?: number;
 }
 
-const DOT_COLOR = "#FFFFFF";
-const LINE_COLOR = "#FFFFFF";
-const TRAIL_COLOR = "rgba(255,255,255,0.9)";
+const DOT_COLOR = "#F4EDE3";
+const LINE_COLOR = "#F5B301";
+const TRAIL_COLOR = "rgba(245,179,1,0.85)";
 
 export default function KineticGrid({
   spacing = 44,

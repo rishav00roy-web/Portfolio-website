@@ -195,7 +195,7 @@ export default function About() {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <h3 className="font-mono text-xs uppercase tracking-[0.3em] text-white/60 mb-6 border-b border-white/10 pb-2">
+              <h3 className="font-coffekan normal-case tracking-normal text-4xl sm:text-5xl text-accent mb-6 border-b border-accent/20 pb-3">
                 Work Experience
               </h3>
               <motion.div
@@ -213,7 +213,7 @@ export default function About() {
                   >
                     <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
                       <div className="flex items-center flex-wrap gap-3">
-                        <h4 className="text-xl sm:text-2xl font-bold text-white uppercase tracking-tight">
+                        <h4 className="text-2xl sm:text-3xl font-display text-white uppercase tracking-tight leading-none">
                           {exp.role}
                         </h4>
                         {"isRemote" in exp && exp.isRemote && (
@@ -222,14 +222,14 @@ export default function About() {
                           </span>
                         )}
                       </div>
-                      <span className="font-mono text-xs sm:text-sm text-white/60">
+                      <span className="font-mono text-xs sm:text-sm text-accent/80">
                         {exp.period}
                       </span>
                     </div>
                     <p className="text-white/85 font-mono text-xs sm:text-sm uppercase tracking-wider">
                       {exp.company}
                     </p>
-                    <ul className="list-disc pl-4 text-white/85 text-sm sm:text-base space-y-2 mt-2 leading-relaxed font-sans">
+                    <ul className="list-disc marker:text-accent/70 pl-4 text-white/85 text-sm sm:text-base space-y-2 mt-2 leading-relaxed font-sans">
                       {exp.bullets.map((bullet, idx) => (
                         <li key={idx}>{bullet}</li>
                       ))}
@@ -246,7 +246,7 @@ export default function About() {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <h3 className="font-mono text-xs uppercase tracking-[0.3em] text-white/60 mb-6 border-b border-white/10 pb-2">
+              <h3 className="font-coffekan normal-case tracking-normal text-4xl sm:text-5xl text-accent mb-6 border-b border-accent/20 pb-3">
                 Skills
               </h3>
               <motion.div
@@ -265,7 +265,7 @@ export default function About() {
                       {group.items.map((skill, i) => (
                         <span
                           key={i}
-                          className="px-3 py-1.5 border border-white/10 rounded-full font-mono text-[10px] sm:text-xs text-white/85 bg-white/[0.03] hover:bg-white/[0.08] backdrop-blur-md hover:border-white/30 hover:text-white transition-all shadow-sm"
+                          className="px-3 py-1.5 border border-white/10 rounded-full font-mono text-[10px] sm:text-xs text-white/85 hover:bg-accent/10 hover:border-white/30 hover:text-white transition-all shadow-sm"
                         >
                           {skill}
                         </span>
@@ -283,7 +283,7 @@ export default function About() {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <h3 className="font-mono text-xs uppercase tracking-[0.3em] text-white/60 mb-6 border-b border-white/10 pb-2">
+              <h3 className="font-coffekan normal-case tracking-normal text-4xl sm:text-5xl text-accent mb-6 border-b border-accent/20 pb-3">
                 Education
               </h3>
               <motion.div
@@ -322,7 +322,7 @@ export default function About() {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <h3 className="font-mono text-xs uppercase tracking-[0.3em] text-white/60 mb-6 border-b border-white/10 pb-2">
+              <h3 className="font-coffekan normal-case tracking-normal text-4xl sm:text-5xl text-accent mb-6 border-b border-accent/20 pb-3">
                 Languages
               </h3>
               <motion.div

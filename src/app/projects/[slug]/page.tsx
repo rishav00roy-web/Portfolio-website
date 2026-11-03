@@ -66,7 +66,7 @@ export default async function CaseStudyPage({
   const next = allCaseStudies[(index + 1) % allCaseStudies.length];
 
   return (
-    <div className="min-h-screen bg-[#030303] text-white selection:bg-white/20 relative">
+    <div className="min-h-screen bg-[#0d0b09] text-white selection:bg-white/20 relative">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd([
@@ -81,7 +81,7 @@ export default async function CaseStudyPage({
       <KineticGrid spacing={44} radius={260} baseOpacity={0.05} />
 
       <div className="relative z-10">
-        <header className="sticky top-0 z-50 w-full backdrop-blur-xl border-b border-white/5 bg-[#030303]/80">
+        <header className="sticky top-0 z-50 w-full backdrop-blur-xl border-b border-white/5 bg-[#0d0b09]/80">
           <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
             <Link
               href="/projects"

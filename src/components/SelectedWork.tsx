@@ -140,7 +140,7 @@ export default function SelectedWork() {
           >
             <div
               className={cn(
-                "w-full max-w-[1360px] h-[470px] sm:h-[500px] lg:h-[510px] xl:h-[530px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.85)] border flex flex-col justify-between lg:grid lg:grid-cols-12 text-[#f3f1ea] transform-gpu",
+                "w-full max-w-[1360px] h-[470px] sm:h-[500px] lg:h-[510px] xl:h-[530px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.85)] border flex flex-col justify-between lg:grid lg:grid-cols-12 text-white transform-gpu",
                 project.bgClass
               )}
             >
@@ -149,7 +149,7 @@ export default function SelectedWork() {
                 {/* Header Lockup */}
                 <div>
                   <div className="flex items-center justify-between gap-3 mb-1">
-                    <p className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-[#f3f1ea]/50 truncate">
+                    <p className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-white/50 truncate">
                       0{total} PROJECTS ACROSS ARCHITECTURES
                     </p>
                     <div className="flex items-center gap-2 shrink-0">
@@ -168,7 +168,7 @@ export default function SelectedWork() {
                           />
                         ))}
                       </div>
-                      <span className="font-mono text-[9px] sm:text-[10px] text-[#f3f1ea]/60 font-semibold">
+                      <span className="font-mono text-[9px] sm:text-[10px] text-white/60 font-semibold">
                         0{i + 1} / 0{total}
                       </span>
                     </div>
@@ -191,11 +191,11 @@ export default function SelectedWork() {
                       {project.title}
                     </h3>
 
-                    <p className="text-[11px] sm:text-xs text-[#f3f1ea]/70 max-w-md leading-relaxed line-clamp-2 sm:line-clamp-3">
+                    <p className="text-[11px] sm:text-xs text-white/70 max-w-md leading-relaxed line-clamp-2 sm:line-clamp-3">
                       {project.description}
                     </p>
 
-                    <p className="font-mono text-[9px] uppercase tracking-widest text-[#f3f1ea]/70">
+                    <p className="font-mono text-[9px] uppercase tracking-widest text-white/70">
                       {project.place}
                     </p>
 
@@ -223,7 +223,7 @@ export default function SelectedWork() {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-white text-black text-[11px] sm:text-xs font-medium hover:bg-white/90 transition-all duration-200 cursor-pointer shadow-md group"
+                        className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-accent text-background text-[11px] sm:text-xs font-medium hover:bg-[#ffc72c] transition-all duration-200 cursor-pointer shadow-md group"
                       >
                         <span>Source Code</span>
                         <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

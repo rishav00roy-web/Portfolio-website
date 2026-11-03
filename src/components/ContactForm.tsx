@@ -63,7 +63,7 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="w-full max-w-xl bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl relative">
+    <div className="w-full max-w-xl bg-surface border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl relative">
       <h3 className="font-display text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-white mb-2">
         Send a Message
       </h3>
@@ -105,7 +105,7 @@ export default function ContactForm() {
                 setFormData({ ...formData, name: e.target.value });
                 if (errors.name) setErrors({ ...errors, name: "" });
               }}
-              className={`w-full bg-white/5 backdrop-blur-md border ${
+              className={`w-full bg-surface-2 border ${
                 errors.name ? "border-rose-500/50 focus:border-rose-500" : "border-white/10 focus:border-accent"
               } rounded-xl px-4 py-3 text-white outline-none transition-colors text-base sm:text-sm font-sans`}
               placeholder="e.g. Jane Doe"
@@ -134,7 +134,7 @@ export default function ContactForm() {
                 setFormData({ ...formData, email: e.target.value });
                 if (errors.email) setErrors({ ...errors, email: "" });
               }}
-              className={`w-full bg-white/5 backdrop-blur-md border ${
+              className={`w-full bg-surface-2 border ${
                 errors.email ? "border-rose-500/50 focus:border-rose-500" : "border-white/10 focus:border-accent"
               } rounded-xl px-4 py-3 text-white outline-none transition-colors text-base sm:text-sm font-sans`}
               placeholder="jane@company.com"
@@ -156,7 +156,7 @@ export default function ContactForm() {
               id="form-type"
               value={formData.type}
               onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-              className="w-full bg-white/5 backdrop-blur-md border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-accent transition-colors text-base sm:text-sm font-sans"
+              className="w-full bg-surface-2 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-accent transition-colors text-base sm:text-sm font-sans"
             >
               <option value="contract">Freelance Contract / Project</option>
               <option value="recruit">Full-time Recruitment Opportunity</option>
@@ -181,7 +181,7 @@ export default function ContactForm() {
                 if (errors.message) setErrors({ ...errors, message: "" });
               }}
               rows={4}
-              className={`w-full bg-white/5 backdrop-blur-md border ${
+              className={`w-full bg-surface-2 border ${
                 errors.message ? "border-rose-500/50 focus:border-rose-500" : "border-white/10 focus:border-accent"
               } rounded-xl px-4 py-3 text-white outline-none transition-colors text-base sm:text-sm font-sans resize-none`}
               placeholder="Outline your project scope or job description..."
@@ -205,11 +205,11 @@ export default function ContactForm() {
             <button
               type="submit"
               disabled={status === "loading"}
-              className="w-full flex items-center justify-center gap-2 bg-white text-black font-semibold py-3.5 px-6 rounded-full hover:bg-white/85 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-50"
+              className="w-full flex items-center justify-center gap-2 bg-accent text-background font-semibold py-3.5 px-6 rounded-full hover:bg-[#ffc72c] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-50"
             >
               {status === "loading" ? (
                 <>
-                  <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                  <span className="w-4 h-4 border-2 border-background border-t-transparent rounded-full animate-spin" />
                   <span>Sending Message...</span>
                 </>
               ) : (
