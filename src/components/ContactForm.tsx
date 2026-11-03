@@ -63,18 +63,18 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="w-full rounded-2xl border border-line bg-surface p-6 sm:p-8">
-      <h3 className="text-xl font-semibold tracking-tight text-foreground mb-1">
+    <div className="w-full max-w-xl bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl relative">
+      <h3 className="font-display text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-white mb-2">
         Send a Message
       </h3>
-      <p className="text-muted text-sm mb-8">
+      <p className="text-white/50 text-xs sm:text-sm font-sans mb-8">
         Have a new project or an open role to discuss? Get in touch and let&apos;s explore the possibilities.
       </p>
 
       {status === "success" ? (
         <div className="py-10 flex flex-col items-center justify-center text-center space-y-4">
           <CheckCircle2 className="w-16 h-16 text-emerald-400" />
-          <h4 className="text-xl font-semibold text-foreground tracking-tight">
+          <h4 className="text-xl font-bold text-white uppercase tracking-tight font-display">
             WhatsApp Opened!
           </h4>
           <p className="text-white/60 text-sm max-w-sm leading-relaxed font-sans">
@@ -91,24 +91,27 @@ export default function ContactForm() {
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Name Field */}
           <div>
-            <label htmlFor="form-name" className="block text-xs font-medium text-muted mb-2">
+            <label htmlFor="form-name" className="block font-mono text-[10px] uppercase tracking-widest text-white/55 mb-2">
               Name
             </label>
             <input
               id="form-name"
+              aria-invalid={errors.name ? true : undefined}
+              aria-describedby={errors.name ? "form-name-error" : undefined}
+              aria-required="true"
               type="text"
               value={formData.name}
               onChange={(e) => {
                 setFormData({ ...formData, name: e.target.value });
                 if (errors.name) setErrors({ ...errors, name: "" });
               }}
-              className={`w-full bg-background border ${
-                errors.name ? "border-rose-500/50 focus:border-rose-500" : "border-line-strong focus:border-accent"
-              } rounded-lg px-4 py-3 text-foreground placeholder:text-subtle outline-none focus-visible:outline-none transition-colors text-base sm:text-sm font-sans`}
+              className={`w-full bg-white/5 backdrop-blur-md border ${
+                errors.name ? "border-rose-500/50 focus:border-rose-500" : "border-white/10 focus:border-accent"
+              } rounded-xl px-4 py-3 text-white outline-none transition-colors text-base sm:text-sm font-sans`}
               placeholder="e.g. Jane Doe"
             />
             {errors.name && (
-              <span className="flex items-center gap-1.5 text-rose-400 text-xs mt-1.5">
+              <span id="form-name-error" role="alert" className="flex items-center gap-1.5 text-rose-500 text-[10px] font-mono mt-1">
                 <AlertTriangle className="w-3 h-3" />
                 <span>{errors.name}</span>
               </span>
@@ -117,24 +120,27 @@ export default function ContactForm() {
 
           {/* Email Field */}
           <div>
-            <label htmlFor="form-email" className="block text-xs font-medium text-muted mb-2">
+            <label htmlFor="form-email" className="block font-mono text-[10px] uppercase tracking-widest text-white/55 mb-2">
               Email Address
             </label>
             <input
               id="form-email"
+              aria-invalid={errors.email ? true : undefined}
+              aria-describedby={errors.email ? "form-email-error" : undefined}
+              aria-required="true"
               type="email"
               value={formData.email}
               onChange={(e) => {
                 setFormData({ ...formData, email: e.target.value });
                 if (errors.email) setErrors({ ...errors, email: "" });
               }}
-              className={`w-full bg-background border ${
-                errors.email ? "border-rose-500/50 focus:border-rose-500" : "border-line-strong focus:border-accent"
-              } rounded-lg px-4 py-3 text-foreground placeholder:text-subtle outline-none focus-visible:outline-none transition-colors text-base sm:text-sm font-sans`}
+              className={`w-full bg-white/5 backdrop-blur-md border ${
+                errors.email ? "border-rose-500/50 focus:border-rose-500" : "border-white/10 focus:border-accent"
+              } rounded-xl px-4 py-3 text-white outline-none transition-colors text-base sm:text-sm font-sans`}
               placeholder="jane@company.com"
             />
             {errors.email && (
-              <span className="flex items-center gap-1.5 text-rose-400 text-xs mt-1.5">
+              <span id="form-email-error" role="alert" className="flex items-center gap-1.5 text-rose-500 text-[10px] font-mono mt-1">
                 <AlertTriangle className="w-3 h-3" />
                 <span>{errors.email}</span>
               </span>
@@ -143,14 +149,14 @@ export default function ContactForm() {
 
           {/* Inquiry Type */}
           <div>
-            <label htmlFor="form-type" className="block text-xs font-medium text-muted mb-2">
+            <label htmlFor="form-type" className="block font-mono text-[10px] uppercase tracking-widest text-white/55 mb-2">
               Project Type
             </label>
             <select
               id="form-type"
               value={formData.type}
               onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-              className="w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-foreground placeholder:text-subtle outline-none focus-visible:outline-none focus:border-accent transition-colors text-base sm:text-sm font-sans"
+              className="w-full bg-white/5 backdrop-blur-md border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-accent transition-colors text-base sm:text-sm font-sans"
             >
               <option value="contract">Freelance Contract / Project</option>
               <option value="recruit">Full-time Recruitment Opportunity</option>
@@ -161,24 +167,27 @@ export default function ContactForm() {
 
           {/* Message Field */}
           <div>
-            <label htmlFor="form-message" className="block text-xs font-medium text-muted mb-2">
+            <label htmlFor="form-message" className="block font-mono text-[10px] uppercase tracking-widest text-white/55 mb-2">
               Message / Project Description
             </label>
             <textarea
               id="form-message"
+              aria-invalid={errors.message ? true : undefined}
+              aria-describedby={errors.message ? "form-message-error" : undefined}
+              aria-required="true"
               value={formData.message}
               onChange={(e) => {
                 setFormData({ ...formData, message: e.target.value });
                 if (errors.message) setErrors({ ...errors, message: "" });
               }}
               rows={4}
-              className={`w-full bg-background border ${
-                errors.message ? "border-rose-500/50 focus:border-rose-500" : "border-line-strong focus:border-accent"
-              } rounded-lg px-4 py-3 text-foreground placeholder:text-subtle outline-none focus-visible:outline-none transition-colors text-base sm:text-sm font-sans resize-none`}
+              className={`w-full bg-white/5 backdrop-blur-md border ${
+                errors.message ? "border-rose-500/50 focus:border-rose-500" : "border-white/10 focus:border-accent"
+              } rounded-xl px-4 py-3 text-white outline-none transition-colors text-base sm:text-sm font-sans resize-none`}
               placeholder="Outline your project scope or job description..."
             />
             {errors.message && (
-              <span className="flex items-center gap-1.5 text-rose-400 text-xs mt-1.5">
+              <span id="form-message-error" role="alert" className="flex items-center gap-1.5 text-rose-500 text-[10px] font-mono mt-1">
                 <AlertTriangle className="w-3 h-3" />
                 <span>{errors.message}</span>
               </span>
@@ -186,7 +195,7 @@ export default function ContactForm() {
           </div>
 
           {/* Expected Response Info */}
-          <div className="flex items-center gap-2 text-subtle text-xs">
+          <div className="flex items-center gap-2 text-white/55 font-mono text-[10px] uppercase tracking-widest">
             <Clock className="w-3.5 h-3.5" />
             <span>Typical response time: 12 to 24 hours</span>
           </div>
@@ -196,7 +205,7 @@ export default function ContactForm() {
             <button
               type="submit"
               disabled={status === "loading"}
-              className="w-full flex items-center justify-center gap-2 bg-foreground text-background font-semibold py-3.5 px-6 rounded-full hover:bg-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-50"
+              className="w-full flex items-center justify-center gap-2 bg-white text-black font-semibold py-3.5 px-6 rounded-full hover:bg-white/85 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-50"
             >
               {status === "loading" ? (
                 <>

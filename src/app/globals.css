@@ -1,111 +1,238 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Kenoky';
+  src: url('/fonts/KenokyLight.woff2') format('woff2'),
+       url('/fonts/KenokyLight.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Coffekan';
+  src: url('/fonts/CoffekanRegular.woff2') format('woff2'),
+       url('/fonts/CoffekanRegular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 :root {
-  --background: #0a0a0b;
-  --surface: #121214;
-  --surface-2: #19191c;
-  --foreground: #ededef;
-  --muted: #a1a1aa;
-  --subtle: #8a8a93;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.16);
-  --accent: #f5b301;
+  --background: #030303;
+  --foreground: #ffffff;
+  --muted: rgba(255, 255, 255, 0.6);
+  --border: rgba(255, 255, 255, 0.1);
+  --accent: #F5B301;
   --accent-rgb: 245, 179, 1;
-  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --background: #fafafa;
+  --foreground: #0a0a0a;
+  --muted: rgba(10, 10, 10, 0.6);
+  --border: rgba(0, 0, 0, 0.1);
+  --accent: #d97706;
+  --accent-rgb: 217, 119, 6;
 }
 
 @theme {
-  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
-  /* The display face is the same family as body copy, set tighter and
-     heavier. One variable font instead of two extra files keeps the
-     render-blocking font payload down. */
-  --font-display: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-mono), ui-monospace, monospace;
+  --font-sans: var(--font-sans), sans-serif;
+  --font-display: "Kenoky", sans-serif;
+  --font-mono: var(--font-mono), monospace;
+  --font-coffekan: "Coffekan", sans-serif;
 
   --color-background: var(--background);
-  --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
   --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
-  --color-subtle: var(--subtle);
-  --color-line: var(--border);
-  --color-line-strong: var(--border-strong);
   --color-border-muted: var(--border);
   --color-accent: var(--accent);
 }
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+::selection {
+  background-color: var(--accent);
+  color: #030303;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-html,
-body {
-  overflow-x: clip;
-}
 
 body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-::selection {
-  background-color: var(--accent);
-  color: #0a0a0b;
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
-
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: 4px;
+::-webkit-scrollbar-track {
+  background: #030303;
 }
-
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.12) var(--background);
+  scrollbar-color: rgba(255, 255, 255, 0.1) #030303;
 }
 
-/* Entrance motion for the hero. Pure CSS so it runs before hydration and
-   never holds back LCP: the text is painted at full opacity from the first
-   frame and only the offset animates. */
-@keyframes rise {
-  from {
-    transform: translateY(14px);
+/* Mouse scroll indicator (from Uiverse.io by mrhyddenn, recolored) */
+.mouse-btn {
+  width: 26px;
+  height: 42px;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 14px;
+  display: flex;
+}
+.mouse-scroll {
+  display: block;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  margin: 6px auto auto;
+  animation: scrolling13 1.4s ease-in-out infinite;
+}
+@keyframes scrolling13 {
+  0% { opacity: 0; transform: translateY(0); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(16px); }
+}
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* SocialIcon layered deck animation */
+.social-icon-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.social-icon-wrapper .icon {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  position: relative;
+  width: 44px;
+  height: 44px;
+}
+@media (min-width: 640px) {
+  .social-icon-wrapper .icon {
+    width: 55px;
+    height: 55px;
   }
-  to {
-    transform: translateY(0);
+}
+
+.social-icon-wrapper .layer {
+  width: 44px;
+  height: 44px;
+  transition: transform 0.3s;
+}
+@media (min-width: 640px) {
+  .social-icon-wrapper .layer {
+    width: 55px;
+    height: 55px;
   }
 }
 
-.rise {
-  animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+.social-icon-wrapper .icon:hover .layer {
+  transform: rotate(-35deg) skew(20deg);
 }
 
-/* Soft amber glow behind the hero; decorative only. */
-.hero-glow {
-  background:
-    radial-gradient(60% 50% at 15% 0%, rgba(var(--accent-rgb), 0.14), transparent 70%),
-    radial-gradient(40% 40% at 90% 10%, rgba(255, 255, 255, 0.05), transparent 70%);
+.social-icon-wrapper .layer span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  transition: all 0.3s;
 }
 
-/* The chat panel spans nearly the full width on phones; keep anything fixed
-   bottom-left out of its way while it is open. */
+.social-icon-wrapper .icon:hover .layer span {
+  border-color: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.social-icon-wrapper .icon:hover .layer span:nth-child(1) { opacity: 0.2; }
+.social-icon-wrapper .icon:hover .layer span:nth-child(2) { opacity: 0.4; transform: translate(5px, -5px); }
+.social-icon-wrapper .icon:hover .layer span:nth-child(3) { opacity: 0.6; transform: translate(10px, -10px); }
+.social-icon-wrapper .icon:hover .layer span:nth-child(4) { opacity: 0.8; transform: translate(15px, -15px); }
+
+.social-icon-wrapper .layer span.fab {
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.3s, transform 0.3s, filter 0.3s;
+}
+
+.social-icon-wrapper .icon:hover .layer span.fab {
+  color: #ffffff;
+  transform: translate(15px, -15px);
+  filter: drop-shadow(0 0 2px var(--accent)) drop-shadow(0 0 8px var(--accent));
+}
+
+/* ── Reading Mode ── */
+[data-reading-mode="true"] body {
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.8;
+  background-color: #111;
+}
+
+[data-reading-mode="true"] * {
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+  transition-duration: 0s !important;
+  transition-delay: 0s !important;
+}
+
+[data-reading-mode="true"] .mouse-btn,
+[data-reading-mode="true"] .mouse-scroll {
+  display: none !important;
+}
+
+[data-reading-mode="true"] section {
+  max-width: 48rem;
+  margin-inline: auto;
+}
+
+[data-reading-mode="true"] p,
+[data-reading-mode="true"] li,
+[data-reading-mode="true"] span {
+  letter-spacing: 0.01em;
+}
+html,
+body {
+  overflow-x: clip;
+}
+
+/* The chat panel spans nearly the full width on phones, and the command-menu
+   trigger is fixed bottom-left at z-9999 — so it paints on top of the chat
+   input. Pull the trigger while the chat is open. */
 [data-chat-open="true"] [data-command-menu-trigger] {
   display: none;
 }

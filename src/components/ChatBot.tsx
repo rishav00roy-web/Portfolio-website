@@ -216,7 +216,7 @@ export default function ChatBot() {
             <div className="flex-1 overflow-y-auto p-4 space-y-4 scroll-smooth">
               {messages.length === 0 && (
                 <div className="flex flex-col items-center justify-center h-full text-center space-y-4 opacity-70">
-                  <Bot className="w-12 h-12 text-white/30" />
+                  <Bot className="w-12 h-12 text-white/50" />
                   <p className="text-sm text-white/60 px-4">
                     Hi there! I&apos;m Psunk, an AI assistant trained on Rishav&apos;s portfolio. How can I help you today?
                   </p>
@@ -288,12 +288,12 @@ export default function ChatBot() {
                   value={input || ''}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Ask a question..."
-                  className="w-full bg-white/10 border border-white/20 text-white placeholder:text-white/40 text-sm rounded-full pl-4 pr-12 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+                  className="w-full bg-white/10 border border-white/20 text-white placeholder:text-white/55 text-sm rounded-full pl-4 pr-12 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
                 />
                 <button
                   type="submit"
                   disabled={isLoading || !input?.trim()}
-                  className="absolute right-2 p-2 rounded-full bg-blue-600 hover:bg-blue-500 disabled:bg-white/10 disabled:text-white/40 text-white transition-colors"
+                  className="absolute right-2 p-2 rounded-full bg-blue-600 hover:bg-blue-500 disabled:bg-white/10 disabled:text-white/55 text-white transition-colors"
                 >
                   <Send className="w-4 h-4" />
                 </button>

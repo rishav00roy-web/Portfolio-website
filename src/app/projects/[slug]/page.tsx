@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
-import SiteHeader from "@/components/home/SiteHeader";
-import { SiteFooter } from "@/components/home/Contact";
+import KineticGrid from "../../../components/KineticGrid";
 import CaseStudyArticle from "../../../components/CaseStudyArticle";
 import { allCaseStudies, getCaseStudyBySlug } from "../../../lib/projectsData";
 import { caseStudySchema, breadcrumbSchema, jsonLd } from "../../../lib/schema";
@@ -67,7 +66,7 @@ export default async function CaseStudyPage({
   const next = allCaseStudies[(index + 1) % allCaseStudies.length];
 
   return (
-    <div className="min-h-screen bg-background text-foreground relative">
+    <div className="min-h-screen bg-[#030303] text-white selection:bg-white/20 relative">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd([
@@ -79,13 +78,26 @@ export default async function CaseStudyPage({
           ]),
         ])}
       />
+      <KineticGrid spacing={44} radius={260} baseOpacity={0.05} />
 
       <div className="relative z-10">
-        <SiteHeader />
+        <header className="sticky top-0 z-50 w-full backdrop-blur-xl border-b border-white/5 bg-[#030303]/80">
+          <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <Link
+              href="/projects"
+              className="text-white/70 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              All case studies
+            </Link>
+            <div className="font-mono text-xs text-white/55 uppercase tracking-widest">Case Study</div>
+          </div>
+        </header>
+
         <main className="max-w-6xl mx-auto px-6 py-16 sm:py-24">
           {/* Breadcrumb trail */}
           <nav aria-label="Breadcrumb" className="mb-12">
-            <ol className="flex flex-wrap items-center gap-2 font-mono text-xs text-white/40 uppercase tracking-widest">
+            <ol className="flex flex-wrap items-center gap-2 font-mono text-xs text-white/55 uppercase tracking-widest">
               <li>
                 <Link href="/" className="hover:text-white/70 transition-colors">
                   Home
@@ -113,7 +125,7 @@ export default async function CaseStudyPage({
 
           {/* Next case study */}
           <div className="mt-24 pt-10 border-t border-white/10">
-            <span className="block font-mono text-xs uppercase tracking-widest text-white/40 mb-3">
+            <span className="block font-mono text-xs uppercase tracking-widest text-white/55 mb-3">
               Next case study
             </span>
             <Link
@@ -125,7 +137,10 @@ export default async function CaseStudyPage({
             </Link>
           </div>
         </main>
-        <SiteFooter />
+
+        <footer className="py-12 border-t border-white/5 text-center text-sm text-white/50 font-mono">
+          Rishav Roy | Case Studies Archive
+        </footer>
       </div>
     </div>
   );

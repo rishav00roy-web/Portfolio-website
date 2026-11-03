@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Sora, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import FontPreloader from "@/components/FontPreloader";
 import { Analytics } from "@vercel/analytics/next";
 import ChatBotLoader from "@/components/ChatBotLoader";
 import { PROFILE } from "@/lib/profile";
@@ -9,15 +10,13 @@ import { SITE_URL, personSchema, websiteSchema, jsonLd } from "@/lib/schema";
 const sora = Sora({
   subsets: ["latin"],
   variable: "--font-sans",
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
-  weight: ["400"],
-  display: "swap",
+  weight: ["400", "500"],
 });
 
 const TITLE = `${PROFILE.name} | ${PROFILE.role}`;
@@ -78,7 +77,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0b",
+  themeColor: "#030303",
   colorScheme: "dark",
 };
 
@@ -88,12 +87,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-IN" className={`${sora.variable} ${jetbrainsMono.variable}`}>
-      <body className="flex min-h-dvh flex-col bg-background font-sans text-foreground">
+    <html lang="en-IN" className="antialiased" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://api.github.com" />
+        <FontPreloader />
+      </head>
+      <body className={`${sora.variable} ${jetbrainsMono.variable} flex flex-col bg-background text-foreground selection:bg-accent selection:text-background`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={jsonLd([personSchema(), websiteSchema()])}
         />
+        <noscript>
+          <style>{`main { opacity: 1 !important; }`}</style>
+        </noscript>
         {children}
         <ChatBotLoader />
         <Analytics />

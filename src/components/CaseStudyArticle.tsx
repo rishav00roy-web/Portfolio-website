@@ -16,6 +16,11 @@ export default function CaseStudyArticle({ caseStudy }: { caseStudy: CaseStudyWi
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
         {/* Left Column: Context & Metadata */}
         <div className="lg:col-span-4 space-y-8">
+          <div>
+            <h2 className="text-3xl font-semibold mb-3">{caseStudy.title}</h2>
+            <p className="text-white/50 text-sm font-medium">{caseStudy.tagline}</p>
+          </div>
+
           <div className="py-6 border-y border-white/5 space-y-4">
             <div>
               <span className="block text-xs font-mono text-white/50 uppercase tracking-wider mb-1">Client</span>
@@ -81,7 +86,7 @@ export default function CaseStudyArticle({ caseStudy }: { caseStudy: CaseStudyWi
           {/* Architecture */}
           <section className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 sm:p-8 border border-white/10 shadow-2xl">
             <h3 className="text-lg font-medium mb-2 flex items-center gap-2">
-              <Layout className="w-5 h-5 text-white/40" />
+              <Layout className="w-5 h-5 text-white/55" />
               Architecture &amp; Flow
             </h3>
             <p className="text-white/50 text-sm mb-6 pb-6 border-b border-white/5">
@@ -105,7 +110,7 @@ export default function CaseStudyArticle({ caseStudy }: { caseStudy: CaseStudyWi
           {/* Challenges */}
           <section>
             <h3 className="text-lg font-medium mb-6 flex items-center gap-2 text-white/90">
-              <ShieldAlert className="w-5 h-5 text-white/40" />
+              <ShieldAlert className="w-5 h-5 text-white/55" />
               Key Challenges &amp; Fixes
             </h3>
             <div className="grid gap-6">
@@ -129,7 +134,7 @@ export default function CaseStudyArticle({ caseStudy }: { caseStudy: CaseStudyWi
           {/* Metrics Grid */}
           <section>
             <h3 className="text-lg font-medium mb-6 flex items-center gap-2 text-white/90">
-              <Terminal className="w-5 h-5 text-white/40" />
+              <Terminal className="w-5 h-5 text-white/55" />
               Impact &amp; Metrics
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
