@@ -65,6 +65,8 @@
   --color-paper-2: #eadfce;
   --color-ink: #1b140d;
   --color-rust: #b4531b;
+  /* v5: the AI work is lit by moonlight, the websites by the sun's amber. */
+  --color-moon: #9fc2d6;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
