@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { commissions } from "@/lib/work";
 import { useSectionMotion } from "@/lib/motion";
+import { gsap, useGSAP } from "@/lib/gsap";
 
 /**
  * Paid projects as chapters. On desktop each chapter is a two-column spread:
@@ -15,6 +16,23 @@ import { useSectionMotion } from "@/lib/motion";
 export default function Commissions() {
   const root = useRef<HTMLElement>(null);
   useSectionMotion(root);
+
+  // Each main screenshot opens like a window as it arrives, the image
+  // settling from a slight zoom. One authored moment per chapter.
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.utils.toArray<HTMLElement>("[data-frame]").forEach((frame) => {
+          const tl = gsap.timeline({ scrollTrigger: { trigger: frame, start: "top 85%", once: true } });
+          tl.fromTo(frame, { clipPath: "inset(18% 12% 18% 12% round 16px)" }, { clipPath: "inset(0% 0% 0% 0% round 16px)", duration: 1.4, ease: "expo.inOut" })
+            .fromTo(frame.querySelector("img"), { scale: 1.18 }, { scale: 1, duration: 1.8, ease: "expo.out" }, 0);
+        });
+      });
+      return () => mm.revert();
+    },
+    { scope: root },
+  );
 
   return (
     <section ref={root} id="projects" aria-labelledby="projects-title" className="relative px-6 sm:px-12 xl:px-24 pt-32 sm:pt-44">
@@ -88,8 +106,11 @@ export default function Commissions() {
               </div>
 
               {/* Screenshots: one hero frame, two offset details */}
-              <div className="flex flex-col gap-8 lg:gap-14">
-                <figure className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-white/10 bg-surface shadow-[0_40px_80px_-30px_rgba(0,0,0,0.9)]">
+              <div className="relative">
+                <figure
+                  data-frame
+                  className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-white/10 bg-surface shadow-[0_40px_80px_-30px_rgba(0,0,0,0.9)]"
+                >
                   <Image
                     src={p.images[0]}
                     alt={`${p.title}, main screen`}
@@ -98,12 +119,12 @@ export default function Commissions() {
                     className="object-cover object-top"
                   />
                 </figure>
-                <div className="grid grid-cols-2 gap-6 lg:gap-10">
+                <div className="relative z-10 -mt-[12%] ml-[8%] grid grid-cols-2 gap-4 lg:gap-6">
                   {p.images.slice(1, 3).map((src, k) => (
                     <figure
                       key={src}
                       data-parallax={k === 0 ? 8 : 16}
-                      className={`relative aspect-[4/3] overflow-hidden rounded-xl border border-white/10 bg-surface ${k === 1 ? "lg:translate-y-16" : ""}`}
+                      className={`relative aspect-[16/10] overflow-hidden rounded-xl border border-white/10 bg-surface ring-8 ring-background shadow-[0_30px_60px_-25px_rgba(0,0,0,0.9)] ${k === 1 ? "mt-[18%]" : ""}`}
                     >
                       <Image
                         src={src}

@@ -70,15 +70,15 @@ export default function About() {
       <div className="mt-20 sm:mt-28 grid lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] gap-14 lg:gap-24">
         <dl className="grid grid-cols-2 lg:grid-cols-1 gap-x-8 gap-y-8 self-start lg:sticky lg:top-[14vh]">
           <div>
-            <dt className="font-coffekan text-3xl text-accent">Based in</dt>
-            <dd className="mt-1 text-white/85">
+            <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent/85">Based in</dt>
+            <dd className="mt-2 text-white/85">
               {PROFILE.location}
               <span className="block text-sm text-white/55">originally from {PROFILE.hometown}</span>
             </dd>
           </div>
           <div>
-            <dt className="font-coffekan text-3xl text-accent">Speaks</dt>
-            <dd className="mt-1 text-white/85">
+            <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent/85">Speaks</dt>
+            <dd className="mt-2 text-white/85">
               {languages.map((l) => (
                 <span key={l.name} className="block">
                   {l.name} <span className="text-sm text-white/50">{l.level.toLowerCase()}</span>
@@ -87,8 +87,8 @@ export default function About() {
             </dd>
           </div>
           <div className="col-span-2 lg:col-span-1">
-            <dt className="font-coffekan text-3xl text-accent">Studied</dt>
-            <dd className="mt-1 space-y-3 text-white/85">
+            <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent/85">Studied</dt>
+            <dd className="mt-2 space-y-3 text-white/85">
               {education.map((e) => (
                 <span key={e.degree} className="block">
                   {e.degree}

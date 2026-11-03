@@ -82,12 +82,12 @@ export default function ChatBot() {
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setBtnHovered(true)}
         onMouseLeave={handleMouseLeave}
-        className="fixed bottom-6 right-6 w-16 h-16 bg-zinc-950/80 border border-zinc-900 rounded-full shadow-2xl z-50 flex items-center justify-center cursor-pointer overflow-hidden backdrop-blur-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
+        className="fixed bottom-6 right-6 w-16 h-16 bg-black/80 border border-white/10 rounded-full shadow-2xl z-50 flex items-center justify-center cursor-pointer overflow-hidden backdrop-blur-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
         aria-label="Open Psunk AI Chat"
       >
         {/* Ambient background glow */}
         <motion.div 
-          className="absolute w-8 h-8 rounded-full bg-violet-600/10 blur-xl z-0"
+          className="absolute w-8 h-8 rounded-full bg-amber-600/10 blur-xl z-0"
           animate={{
             scale: btnHovered ? 1.8 : 1,
             opacity: btnHovered ? 0.8 : 0.2
@@ -97,7 +97,7 @@ export default function ChatBot() {
         <div className="w-12 h-12 flex items-center justify-center relative">
           {/* 1. Outer telemetry ring */}
           <motion.svg 
-            className="w-full h-full absolute text-violet-500/20"
+            className="w-full h-full absolute text-amber-500/20"
             viewBox="0 0 100 100"
             animate={{ rotate: 360 }}
             transition={{ 
@@ -112,7 +112,7 @@ export default function ChatBot() {
 
           {/* 2. Heavy shield arcs */}
           <motion.svg 
-            className="w-[84%] h-[84%] absolute text-violet-400"
+            className="w-[84%] h-[84%] absolute text-amber-400"
             viewBox="0 0 100 100"
             fill="none"
             stroke="currentColor"
@@ -129,7 +129,7 @@ export default function ChatBot() {
 
           {/* 3. Lightning Spark path */}
           {btnHovered && (
-            <svg className="w-full h-full absolute text-violet-300 opacity-90 pointer-events-none z-10" viewBox="0 0 100 100">
+            <svg className="w-full h-full absolute text-amber-300 opacity-90 pointer-events-none z-10" viewBox="0 0 100 100">
               <motion.path 
                 d="M 50 50 L 42 35 L 53 30 L 35 15" 
                 stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" fill="none"
@@ -161,15 +161,15 @@ export default function ChatBot() {
 
           {/* 4. Reactor Core with smooth magnetic tracking */}
           <motion.div 
-            className="w-5.5 h-5.5 rounded-full bg-violet-950 border border-violet-400 flex items-center justify-center relative shadow-[0_0_12px_rgba(139,92,246,0.6)] z-10 overflow-hidden"
+            className="w-5.5 h-5.5 rounded-full bg-amber-950 border border-amber-400 flex items-center justify-center relative shadow-[0_0_12px_rgba(245,179,1,0.6)] z-10 overflow-hidden"
             style={{ x: pupilX, y: pupilY }}
             animate={{
               scale: btnHovered ? 1.2 : 1
             }}
           >
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.1)_50%,transparent_50%)] bg-[size:100%_4px] pointer-events-none" />
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(245,179,1,0.1)_50%,transparent_50%)] bg-[size:100%_4px] pointer-events-none" />
             <motion.div 
-              className="w-4 h-4 border border-dashed border-violet-400/60 rounded-full flex items-center justify-center"
+              className="w-4 h-4 border border-dashed border-amber-400/60 rounded-full flex items-center justify-center"
               animate={{ rotate: 360 }}
               transition={{ duration: btnHovered ? 1.5 : 5, repeat: Infinity, ease: "linear" }}
             />
@@ -195,8 +195,8 @@ export default function ChatBot() {
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b border-white/10 bg-white/5">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-full bg-violet-950/40 border border-violet-500/30 flex items-center justify-center relative w-9 h-9 overflow-hidden">
-                  <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.1)_50%,transparent_50%)] bg-[size:100%_4px] pointer-events-none" />
+                <div className="p-2 rounded-full bg-amber-950/40 border border-amber-500/30 flex items-center justify-center relative w-9 h-9 overflow-hidden">
+                  <div className="absolute inset-0 bg-[linear-gradient(rgba(245,179,1,0.1)_50%,transparent_50%)] bg-[size:100%_4px] pointer-events-none" />
                   <span className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_white] z-10 animate-pulse" />
                 </div>
                 <div>

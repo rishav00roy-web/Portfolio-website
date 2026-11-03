@@ -105,7 +105,7 @@ export default function SectionRail() {
               className={cn(
                 "font-mono text-[9px] tracking-[0.2em] transition-all duration-300",
                 isActive
-                  ? "text-amber-400 font-semibold opacity-100 translate-x-0"
+                  ? "text-accent font-semibold opacity-0 group-hover:opacity-100 translate-x-1 group-hover:translate-x-0"
                   : "text-white/55 opacity-0 group-hover:opacity-100 translate-x-1 group-hover:translate-x-0"
               )}
             >
