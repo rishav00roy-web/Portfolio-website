@@ -5,11 +5,11 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Rishav Roy | Operations & Automation Specialist",
     short_name: "Rishav Roy",
     description:
-      "Building and shipping high-performance production web apps through AI-augmented development.",
+      "Six years running operations, HR and procurement, now building the software that removes the manual work.",
     start_url: "/",
     display: "standalone",
-    background_color: "#030303",
-    theme_color: "#030303",
+    background_color: "#0a0a0b",
+    theme_color: "#0a0a0b",
     icons: [
       {
         src: "/icon.svg",

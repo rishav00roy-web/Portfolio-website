@@ -1,29 +1,23 @@
-import { MetadataRoute } from 'next'
-import { allCaseStudies } from '../lib/projectsData'
+import type { MetadataRoute } from "next";
+import { allCaseStudies } from "@/lib/projectsData";
+import { SITE_URL } from "@/lib/schema";
 
-const BASE = 'https://byrishav.online'
+/**
+ * Bump this when page content actually changes. A lastModified of
+ * `new Date()` stamps every URL as freshly edited on every build, which
+ * teaches crawlers to ignore the field altogether.
+ */
+const CONTENT_UPDATED = new Date("2026-11-03");
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date()
-
   return [
-    {
-      url: BASE,
-      lastModified,
-      changeFrequency: 'yearly',
-      priority: 1,
-    },
-    {
-      url: `${BASE}/projects`,
-      lastModified,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
+    { url: SITE_URL, lastModified: CONTENT_UPDATED, changeFrequency: "monthly", priority: 1 },
+    { url: `${SITE_URL}/projects`, lastModified: CONTENT_UPDATED, changeFrequency: "monthly", priority: 0.8 },
     ...allCaseStudies.map((caseStudy) => ({
-      url: `${BASE}/projects/${caseStudy.slug}`,
-      lastModified,
-      changeFrequency: 'monthly' as const,
+      url: `${SITE_URL}/projects/${caseStudy.slug}`,
+      lastModified: CONTENT_UPDATED,
+      changeFrequency: "yearly" as const,
       priority: 0.7,
     })),
-  ]
+  ];
 }

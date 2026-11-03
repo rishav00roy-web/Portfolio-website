@@ -1,11 +1,17 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
-import KineticGrid from "../../../components/KineticGrid";
+import SiteHeader from "@/components/home/SiteHeader";
+import { SiteFooter } from "@/components/home/Contact";
 import CaseStudyArticle from "../../../components/CaseStudyArticle";
 import { allCaseStudies, getCaseStudyBySlug } from "../../../lib/projectsData";
 import { caseStudySchema, breadcrumbSchema, jsonLd } from "../../../lib/schema";
+
+function clip(text: string, max: number) {
+  if (text.length <= max) return text;
+  return text.slice(0, text.lastIndexOf(" ", max - 1)).replace(/[,.;:]$/, "") + "…";
+}
 
 export async function generateStaticParams() {
   return allCaseStudies.map((c) => ({ slug: c.slug }));
@@ -24,11 +30,13 @@ export async function generateMetadata({
   const caseStudy = getCaseStudyBySlug(slug);
   if (!caseStudy) return {};
 
-  const title = `${caseStudy.title} Case Study | Rishav Roy`;
-  const description = caseStudy.tagline;
+  const title = `${caseStudy.title} Case Study`;
+  // Taglines alone run ~45 characters; pad with the problem statement so the
+  // snippet uses the space search results give it (~155 characters).
+  const description = clip(`${caseStudy.tagline}. ${caseStudy.problem}`, 155);
 
   return {
-    title,
+    title: { absolute: `${title} | Rishav Roy` },
     description,
     alternates: { canonical: `/projects/${slug}` },
     openGraph: {
@@ -37,13 +45,11 @@ export async function generateMetadata({
       url: `/projects/${slug}`,
       siteName: "Rishav Roy Portfolio",
       type: "article",
-      images: ["/opengraph-image.jpg"],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: ["/twitter-image.jpg"],
     },
   };
 }
@@ -61,7 +67,7 @@ export default async function CaseStudyPage({
   const next = allCaseStudies[(index + 1) % allCaseStudies.length];
 
   return (
-    <div className="min-h-screen bg-[#030303] text-white selection:bg-white/20 relative">
+    <div className="min-h-screen bg-background text-foreground relative">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd([
@@ -73,22 +79,9 @@ export default async function CaseStudyPage({
           ]),
         ])}
       />
-      <KineticGrid spacing={44} radius={260} baseOpacity={0.05} />
 
       <div className="relative z-10">
-        <header className="sticky top-0 z-50 w-full backdrop-blur-xl border-b border-white/5 bg-[#030303]/80">
-          <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <Link
-              href="/projects"
-              className="text-white/70 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              All case studies
-            </Link>
-            <div className="font-mono text-xs text-white/40 uppercase tracking-widest">Case Study</div>
-          </div>
-        </header>
-
+        <SiteHeader />
         <main className="max-w-6xl mx-auto px-6 py-16 sm:py-24">
           {/* Breadcrumb trail */}
           <nav aria-label="Breadcrumb" className="mb-12">
@@ -132,10 +125,7 @@ export default async function CaseStudyPage({
             </Link>
           </div>
         </main>
-
-        <footer className="py-12 border-t border-white/5 text-center text-sm text-white/50 font-mono">
-          Rishav Roy | Case Studies Archive
-        </footer>
+        <SiteFooter />
       </div>
     </div>
   );

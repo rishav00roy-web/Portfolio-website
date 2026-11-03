@@ -16,11 +16,6 @@ export default function CaseStudyArticle({ caseStudy }: { caseStudy: CaseStudyWi
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
         {/* Left Column: Context & Metadata */}
         <div className="lg:col-span-4 space-y-8">
-          <div>
-            <h2 className="text-3xl font-semibold mb-3">{caseStudy.title}</h2>
-            <p className="text-white/50 text-sm font-medium">{caseStudy.tagline}</p>
-          </div>
-
           <div className="py-6 border-y border-white/5 space-y-4">
             <div>
               <span className="block text-xs font-mono text-white/50 uppercase tracking-wider mb-1">Client</span>

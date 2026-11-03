@@ -1,41 +1,85 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Sora, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import FontPreloader from "@/components/FontPreloader";
 import { Analytics } from "@vercel/analytics/next";
 import ChatBotLoader from "@/components/ChatBotLoader";
+import { PROFILE } from "@/lib/profile";
+import { SITE_URL, personSchema, websiteSchema, jsonLd } from "@/lib/schema";
+
 const sora = Sora({
   subsets: ["latin"],
   variable: "--font-sans",
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
-  weight: ["400", "500"],
+  weight: ["400"],
+  display: "swap",
 });
 
+const TITLE = `${PROFILE.name} | ${PROFILE.role}`;
+
 export const metadata: Metadata = {
-  title: "Rishav Roy | Operations & Automation Specialist",
-  description: "Six years running operations, HR and procurement, now building the software that removes the manual work. FOIA processing at scale, custom CRMs, and business automation.",
-  keywords: ["Rishav Roy", "Operations Specialist", "Business Automation", "Remote Operations", "HR and Admin", "Custom CRM", "Kolkata"],
-  metadataBase: new URL("https://byrishav.online"),
-  openGraph: {
-    title: "Rishav Roy | Operations & Automation Specialist",
-    description: "Six years running operations, HR and procurement, now building the software that removes the manual work. FOIA processing at scale, custom CRMs, and business automation.",
-    url: "https://byrishav.online",
-    siteName: "Rishav Roy Portfolio",
-    type: "website",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: TITLE,
+    template: `%s | ${PROFILE.name}`,
   },
+  description: PROFILE.summary,
+  applicationName: `${PROFILE.name} Portfolio`,
+  authors: [{ name: PROFILE.name, url: SITE_URL }],
+  creator: PROFILE.name,
+  keywords: [
+    "Rishav Roy",
+    "Operations Specialist",
+    "Automation Specialist",
+    "Business Automation",
+    "Remote Operations",
+    "FOIA Specialist",
+    "Custom CRM",
+    "Next.js Developer",
+    "Kolkata",
+  ],
   alternates: {
     canonical: "/",
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  openGraph: {
+    title: TITLE,
+    description: PROFILE.summary,
+    url: "/",
+    siteName: `${PROFILE.name} Portfolio`,
+    locale: "en_IN",
+    type: "profile",
+    firstName: "Rishav",
+    lastName: "Roy",
+  },
   twitter: {
     card: "summary_large_image",
-    title: "Rishav Roy | Operations & Automation Specialist",
-    description: "Six years running operations, HR and procurement, now building the software that removes the manual work. FOIA processing at scale, custom CRMs, and business automation.",
-  }
+    title: TITLE,
+    description: PROFILE.summary,
+  },
+  formatDetection: {
+    telephone: false,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0a0a0b",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({
@@ -44,80 +88,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="antialiased" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://api.github.com" />
-        <FontPreloader />
-      </head>
-      <body className={`${sora.variable} ${jetbrainsMono.variable} flex flex-col bg-background text-foreground selection:bg-accent selection:text-background`}>
+    <html lang="en-IN" className={`${sora.variable} ${jetbrainsMono.variable}`}>
+      <body className="flex min-h-dvh flex-col bg-background font-sans text-foreground">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify([
-              {
-                "@context": "https://schema.org",
-                "@type": "Person",
-                "name": "Rishav Roy",
-                "jobTitle": "Operations & Automation Specialist",
-                "url": "https://byrishav.online",
-                "description": "Six years running operations, HR and procurement, now building the software that removes the manual work. FOIA processing at scale, custom CRMs, and business automation.",
-                "image": "https://byrishav.online/opengraph-image.jpg",
-                "email": "rishav2000roy@gmail.com",
-                "telephone": "+91-60019-14771",
-                "address": {
-                  "@type": "PostalAddress",
-                  "addressLocality": "Kolkata",
-                  "addressRegion": "West Bengal",
-                  "addressCountry": "IN"
-                },
-                "alumniOf": {
-                  "@type": "CollegeOrUniversity",
-                  "name": "Manipal University Jaipur"
-                },
-                "hasOccupation": {
-                  "@type": "Occupation",
-                  "name": "Operations & Automation Specialist",
-                  "description": "Building commercial-grade local-first CRMs, enterprise FOIA workflows, and full-stack web applications."
-                },
-                "worksFor": {
-                  "@type": "Organization",
-                  "name": "Tea Country Holidays"
-                },
-                "knowsLanguage": ["English", "Hindi", "Assamese", "Bengali"],
-                "sameAs": [
-                  "https://github.com/rishav00roy-web",
-                  "https://www.linkedin.com/in/rishav-the-roy/",
-                  "https://instagram.com/justbeingpsunk_"
-                ],
-                "knowsAbout": [
-                  "Next.js",
-                  "React 19",
-                  "Framer Motion",
-                  "Tailwind CSS",
-                  "Supabase",
-                  "PostgreSQL",
-                  "Python",
-                  "Local-first Architecture",
-                  "IndexedDB",
-                  "Tesseract.js OCR",
-                  "Technical SEO",
-                  "Answer Engine Optimization (AEO)",
-                  "FOIA Automation",
-                  "Business Automation"
-                ]
-              },
-              {
-                "@context": "https://schema.org",
-                "@type": "WebSite",
-                "name": "Rishav Roy Portfolio",
-                "url": "https://byrishav.online"
-              }
-            ])
-          }}
+          dangerouslySetInnerHTML={jsonLd([personSchema(), websiteSchema()])}
         />
-        <noscript>
-          <style>{`main { opacity: 1 !important; }`}</style>
-        </noscript>
         {children}
         <ChatBotLoader />
         <Analytics />

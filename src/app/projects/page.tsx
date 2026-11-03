@@ -1,12 +1,13 @@
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, ExternalLink, Code2, Globe, Sparkles, Wrench, Layers } from "lucide-react";
+import { ArrowUpRight, ExternalLink, Code2, Globe, Sparkles, Wrench, Layers } from "lucide-react";
 import type { Metadata } from "next";
-import KineticGrid from "../../components/KineticGrid";
+import SiteHeader from "@/components/home/SiteHeader";
+import { SiteFooter } from "@/components/home/Contact";
 import { allCaseStudies, categorizedProjects } from "../../lib/projectsData";
 import { caseStudyIndexSchema, breadcrumbSchema, jsonLd } from "../../lib/schema";
 
 export const metadata: Metadata = {
-  title: "Case Studies & Project Directory | Rishav Roy",
+  title: "Case Studies & Project Directory",
   description: "Comprehensive catalog of commercial client platforms, design showcases, and web automation tools engineered by Rishav Roy.",
   alternates: {
     canonical: "/projects",
@@ -17,13 +18,11 @@ export const metadata: Metadata = {
     url: "/projects",
     siteName: "Rishav Roy Portfolio",
     type: "website",
-    images: ["/opengraph-image.jpg"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Case Studies & Project Directory | Rishav Roy",
     description: "Comprehensive catalog of commercial client platforms, design showcases, and web automation tools engineered by Rishav Roy.",
-    images: ["/twitter-image.jpg"],
   },
 };
 
@@ -40,13 +39,8 @@ const categoryIds = {
 } as const;
 
 export default function ProjectsPage() {
-  const totalProjectsCount = categorizedProjects.reduce(
-    (acc, cat) => acc + cat.items.length,
-    0
-  );
-
   return (
-    <div className="min-h-screen bg-[#030303] text-white selection:bg-white/20 relative">
+    <div className="min-h-screen bg-background text-foreground relative">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd([
@@ -57,29 +51,9 @@ export default function ProjectsPage() {
           ]),
         ])}
       />
-      <KineticGrid spacing={44} radius={260} baseOpacity={0.05} />
 
       <div className="relative z-10">
-        <header className="sticky top-0 z-50 w-full backdrop-blur-xl border-b border-white/5 bg-[#030303]/80">
-          <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <Link
-              href="/"
-              className="text-white/70 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back to Home
-            </Link>
-            <div className="flex items-center gap-3">
-              <span className="font-mono text-xs text-white/60 uppercase tracking-widest hidden sm:inline">
-                Catalog Archive
-              </span>
-              <span className="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-white/60 text-[10px] font-mono">
-                {totalProjectsCount} Builds
-              </span>
-            </div>
-          </div>
-        </header>
-
+        <SiteHeader />
         <main className="max-w-6xl mx-auto px-6 py-12 sm:py-20">
           {/* Breadcrumb trail */}
           <nav aria-label="Breadcrumb" className="mb-8">
@@ -102,7 +76,7 @@ export default function ProjectsPage() {
               <Layers className="w-3.5 h-3.5 text-amber-400" />
               <span>Full Engineering Directory</span>
             </div>
-            <h1 className="text-4xl sm:text-6xl font-display uppercase tracking-tight text-white mb-4 leading-[1.05]">
+            <h1 className="text-4xl sm:text-6xl font-display font-bold tracking-tight text-white mb-4 leading-[1.05]">
               Detailed Case Studies
             </h1>
             <p className="text-base sm:text-lg text-white/60 leading-relaxed font-sans">
@@ -143,7 +117,7 @@ export default function ProjectsPage() {
                       <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
                         <Icon className="w-4 h-4 text-amber-400" />
                       </div>
-                      <h2 className="text-2xl sm:text-3xl font-display uppercase tracking-tight text-white">
+                      <h2 className="text-2xl sm:text-3xl font-display font-bold tracking-tight text-white">
                         {group.category}
                       </h2>
                       <span className="font-mono text-xs text-white/50 px-2 py-0.5 rounded-full bg-white/5 border border-white/10">
@@ -187,7 +161,7 @@ export default function ProjectsPage() {
 
                             {/* Title & Description */}
                             <div>
-                              <h3 className="text-xl sm:text-2xl font-display uppercase tracking-tight text-white group-hover:text-white/90 transition-colors">
+                              <h3 className="text-xl sm:text-2xl font-display font-bold tracking-tight text-white group-hover:text-white/90 transition-colors">
                                 {item.title}
                               </h3>
                               <p className="mt-2 text-sm sm:text-base text-white/70 leading-relaxed font-sans max-w-3xl">
@@ -272,10 +246,7 @@ export default function ProjectsPage() {
             })}
           </div>
         </main>
-
-        <footer className="py-12 border-t border-white/10 text-center text-sm text-white/50 font-mono">
-          Rishav Roy | Engineering Case Studies &amp; System Directory
-        </footer>
+        <SiteFooter />
       </div>
     </div>
   );
