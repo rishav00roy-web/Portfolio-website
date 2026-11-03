@@ -60,7 +60,8 @@
   --color-white: #f4ede3;
   --color-black: #0d0b09;
 
-  /* v2 "paper" sections: warm stock and ink, the morning after the hero's sunset. */
+  /* Section colour roles. The v5 page runs them inside .night (below), which
+     remaps them to the hero's palette: paper = background, ink = text. */
   --color-paper: #f3ebdf;
   --color-paper-2: #eadfce;
   --color-ink: #1b140d;
