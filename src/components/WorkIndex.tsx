@@ -1,44 +1,22 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { otherWork } from "@/lib/work";
 import { useSectionMotion } from "@/lib/motion";
-import { gsap, useGSAP } from "@/lib/gsap";
+
+const withShots = otherWork.filter((w) => w.preview);
+const textOnly = otherWork.filter((w) => !w.preview);
 
 /**
- * Everything that isn't a paid case study, as an index. On a desktop with a
- * mouse, a screenshot of the hovered row follows the cursor; elsewhere the
- * rows stand on their own.
+ * Everything that isn't a paid case study, as a contact sheet: every
+ * project shows its screenshot up front, so it reads the same on a phone
+ * (one column) as on a desktop (two staggered columns). No hover needed.
  */
 export default function WorkIndex() {
   const root = useRef<HTMLElement>(null);
-  const preview = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState<string | null>(null);
   useSectionMotion(root);
-
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia();
-      mm.add("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)", () => {
-        const el = preview.current;
-        if (!el) return;
-        const x = gsap.quickTo(el, "x", { duration: 0.6, ease: "power3" });
-        const y = gsap.quickTo(el, "y", { duration: 0.6, ease: "power3" });
-        const move = (e: PointerEvent) => {
-          x(e.clientX + 28);
-          y(e.clientY - el.offsetHeight / 2);
-        };
-        window.addEventListener("pointermove", move, { passive: true });
-        return () => window.removeEventListener("pointermove", move);
-      });
-      return () => mm.revert();
-    },
-    { scope: root },
-  );
-
-  const current = otherWork.find((w) => w.id === active);
 
   return (
     <section ref={root} id="selected-work" aria-labelledby="index-title" className="relative px-6 sm:px-12 xl:px-24 pt-32 sm:pt-44 pb-12">
@@ -56,84 +34,68 @@ export default function WorkIndex() {
         </p>
       </header>
 
-      <ol className="mt-16 border-t border-white/10" onPointerLeave={() => setActive(null)}>
-        {otherWork.map((w, i) => (
-          <li key={w.id} className="border-b border-white/10">
-            <a
-              href={w.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              onPointerEnter={(e) => e.pointerType === "mouse" && setActive(w.id)}
-              onFocus={() => setActive(w.id)}
-              onBlur={() => setActive(null)}
-              className="group grid grid-cols-[2.5rem_1fr_auto] lg:grid-cols-[4rem_minmax(0,1.3fr)_minmax(0,1fr)_minmax(0,1fr)_2rem] items-baseline gap-x-4 lg:gap-x-8 py-6 lg:py-8"
-            >
-              <span className="font-mono text-xs text-accent/80">{String(i + 1).padStart(2, "0")}</span>
-              <span className="font-display uppercase text-3xl sm:text-4xl xl:text-5xl leading-none tracking-[-0.01em] text-white transition-[color,transform] duration-500 ease-out-expo group-hover:text-accent group-hover:translate-x-2 group-focus-visible:text-accent">
-                {w.title}
-              </span>
-              <span className="lg:hidden" aria-hidden="true" />
-              {/* Touch screens can't hover, so phones and tablets get the screenshot inline */}
-              {w.preview && (
-                <span className="lg:hidden col-start-2 col-span-2 mt-5 block relative aspect-[16/10] overflow-hidden rounded-lg border border-white/10 bg-surface">
-                  <Image
-                    src={w.preview}
-                    alt={`${w.title} screenshot`}
-                    fill
-                    sizes="(max-width: 1023px) 85vw, 1px"
-                    className="object-cover object-top"
-                  />
-                </span>
-              )}
-              <span className="col-start-2 col-span-2 lg:col-span-1 lg:col-start-auto mt-4 lg:mt-0 text-sm leading-relaxed text-white/65">
-                {w.description}
-              </span>
-              <span className="lg:hidden col-start-2 col-span-2 mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-[0.12em] text-white/50">
-                <span className="text-accent/85">{w.badge}</span>
-                <span className="normal-case tracking-normal">{w.tags.join(" · ")}</span>
-              </span>
-              <span className="lg:hidden col-start-2 col-span-2 mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-accent">
-                {w.href.includes("github.com") ? "View the code" : "Open the site"}
-                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-              </span>
-              <span className="hidden lg:block font-mono text-[11px] uppercase tracking-[0.15em] text-white/55">
-                {w.badge}
-                <span className="block mt-1 normal-case tracking-normal text-white/45">{w.tags.join(" · ")}</span>
-              </span>
-              <ArrowUpRight
-                className="hidden lg:block h-6 w-6 self-center text-white/40 transition-[color,transform] duration-500 ease-out-expo group-hover:text-accent group-hover:translate-x-1 group-hover:-translate-y-1"
-                aria-hidden="true"
-              />
+      <ol className="mt-16 sm:mt-20 grid md:grid-cols-2 gap-x-10 xl:gap-x-16 gap-y-16 sm:gap-y-20">
+        {withShots.map((w, i) => (
+          <li key={w.id} className={i % 2 === 1 ? "md:mt-28" : undefined}>
+            <a href={w.href} target="_blank" rel="noopener noreferrer" className="group block">
+              <figure
+                className="relative aspect-[16/10] overflow-hidden rounded-xl border border-white/10 bg-surface shadow-[0_30px_60px_-30px_rgba(0,0,0,0.9)] transition-colors duration-500 group-hover:border-accent/60 group-focus-visible:border-accent"
+              >
+                <Image
+                  src={w.preview!}
+                  alt={`${w.title} screenshot`}
+                  fill
+                  sizes="(max-width: 767px) 100vw, 45vw"
+                  className="object-cover object-top"
+                />
+              </figure>
+
+              <div className="mt-6 grid grid-cols-[2.25rem_1fr_auto] items-baseline gap-x-3">
+                <span className="font-mono text-xs text-accent/85">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="font-display uppercase text-[2rem] sm:text-4xl leading-[0.95] tracking-[-0.01em] text-white transition-colors duration-300 group-hover:text-accent">
+                  {w.title}
+                </h3>
+                <ArrowUpRight
+                  className="h-5 w-5 self-start text-white/45 transition-[color,transform] duration-500 ease-out-expo group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent"
+                  aria-hidden="true"
+                />
+                <p className="col-start-2 col-span-2 mt-3 text-[15px] leading-relaxed text-white/65 max-w-[52ch]">{w.description}</p>
+                <p className="col-start-2 col-span-2 mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-[0.12em] text-white/50">
+                  <span className="text-accent/85">{w.badge}</span>
+                  <span className="normal-case tracking-normal">{w.tags.join(" · ")}</span>
+                </p>
+              </div>
             </a>
           </li>
         ))}
       </ol>
 
-      {/* Cursor-follow preview (desktop with a mouse only) */}
-      <div
-        ref={preview}
-        aria-hidden="true"
-        className="pointer-events-none fixed left-0 top-0 z-40 hidden w-[340px] [@media(hover:hover)_and_(pointer:fine)]:block"
-      >
-        <div
-          className={`relative aspect-[16/10] overflow-hidden rounded-xl border border-white/15 bg-surface shadow-[0_30px_60px_-20px_rgba(0,0,0,0.9)] transition-[opacity,transform] duration-300 ease-out-expo ${
-            current?.preview ? "opacity-100 scale-100 rotate-[-2deg]" : "opacity-0 scale-90 rotate-0"
-          }`}
-        >
-          {otherWork
-            .filter((w) => w.preview)
-            .map((w) => (
-              <Image
-                key={w.id}
-                src={w.preview!}
-                alt=""
-                fill
-                sizes="340px"
-                className={`object-cover object-top transition-opacity duration-300 ${active === w.id ? "opacity-100" : "opacity-0"}`}
-              />
+      {textOnly.length > 0 && (
+        <div className="mt-24 sm:mt-32">
+          <h3 className="font-coffekan text-4xl text-accent">Also built</h3>
+          <ul className="mt-6 border-t border-white/10">
+            {textOnly.map((w) => (
+              <li key={w.id} className="border-b border-white/10">
+                <a
+                  href={w.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)_auto] gap-x-10 gap-y-2 py-6 items-baseline"
+                >
+                  <span className="font-display uppercase text-2xl sm:text-3xl leading-none text-white group-hover:text-accent transition-colors">
+                    {w.title}
+                  </span>
+                  <span className="text-[15px] leading-relaxed text-white/60">{w.description}</span>
+                  <span className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.12em] text-white/50 group-hover:text-accent">
+                    {w.badge}
+                    <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                  </span>
+                </a>
+              </li>
             ))}
+          </ul>
         </div>
-      </div>
+      )}
     </section>
   );
 }
