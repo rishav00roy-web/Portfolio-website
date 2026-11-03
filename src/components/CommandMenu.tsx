@@ -1,14 +1,11 @@
 "use client";
 
 import { useEffect, useState, useRef, useMemo, useCallback } from "react";
+import { getSlugById } from "@/lib/projectsData";
 import { useRouter } from "next/navigation";
 import { Search, Moon, Sun, BookOpen, FileText, CornerDownLeft, Mail, Phone, Compass, Laptop } from "lucide-react";
 
-interface CommandMenuProps {
-  onOpenCaseStudy: (projectId: number) => void;
-}
-
-export default function CommandMenu({ onOpenCaseStudy }: CommandMenuProps) {
+export default function CommandMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -119,7 +116,7 @@ export default function CommandMenu({ onOpenCaseStudy }: CommandMenuProps) {
       label: "Project: Tea Country Holidays (Travel Booking)",
       icon: <FileText className="w-4 h-4 text-amber-400" />,
       action: () => {
-        onOpenCaseStudy(1);
+        router.push(`/projects/${getSlugById(1)}`);
         setIsOpen(false);
       },
     },
@@ -128,7 +125,7 @@ export default function CommandMenu({ onOpenCaseStudy }: CommandMenuProps) {
       label: "Project: IQ Iron Fitness (Gym CRM)",
       icon: <FileText className="w-4 h-4 text-emerald-400" />,
       action: () => {
-        onOpenCaseStudy(2);
+        router.push(`/projects/${getSlugById(2)}`);
         setIsOpen(false);
       },
     },
@@ -137,7 +134,7 @@ export default function CommandMenu({ onOpenCaseStudy }: CommandMenuProps) {
       label: "Project: Clash Bazar (Escrow Marketplace)",
       icon: <FileText className="w-4 h-4 text-violet-400" />,
       action: () => {
-        onOpenCaseStudy(3);
+        router.push(`/projects/${getSlugById(3)}`);
         setIsOpen(false);
       },
     },
@@ -188,7 +185,7 @@ export default function CommandMenu({ onOpenCaseStudy }: CommandMenuProps) {
         setIsOpen(false);
       },
     },
-  ], [onOpenCaseStudy, router, theme, readingMode, toggleTheme, toggleReadingMode]);
+  ], [router, theme, readingMode, toggleTheme, toggleReadingMode]);
 
   // Filter items by search query
   const filteredItems = useMemo(() => {

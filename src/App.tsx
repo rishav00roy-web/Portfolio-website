@@ -1,14 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
 import { ReactLenis, type LenisRef } from "lenis/react";
 import { gsap, ScrollTrigger } from "./lib/gsap";
-import Marquee from "./components/Marquee";
 import Hero from "./components/Hero";
 import KineticGrid from "./components/KineticGrid";
-import Projects from "./components/Projects";
-import SelectedWork from "./components/SelectedWork";
+import Commissions from "./components/Commissions";
+import WorkIndex from "./components/WorkIndex";
 import About from "./components/About";
 import Certificates from "./components/Certificates";
 import Footer from "./components/Footer";
@@ -20,7 +19,6 @@ const CommandMenu = dynamic(() => import("./components/CommandMenu"), { ssr: fal
 
 export default function App() {
   const prefersReduced = useReducedMotion();
-  const [activeProjectId, setActiveProjectId] = useState<number | null>(null);
   const lenisRef = useRef<LenisRef>(null);
 
   // One clock for everything: GSAP's ticker drives Lenis, and every Lenis
@@ -40,19 +38,18 @@ export default function App() {
   }, [prefersReduced]);
 
   const content = (
-    <main className="min-h-screen text-white selection:bg-white/20 selection:text-white relative">
+    <main className="min-h-screen text-white relative">
       <Hero />
       <KineticGrid />
       <SectionRail />
       <div className="relative z-10">
-        <Marquee />
-        <Projects activeProjectId={activeProjectId} setActiveProjectId={setActiveProjectId} />
-        <SelectedWork />
+        <Commissions />
+        <WorkIndex />
         <About />
         <Certificates />
         <Footer />
       </div>
-      <CommandMenu onOpenCaseStudy={setActiveProjectId} />
+      <CommandMenu />
     </main>
   );
 

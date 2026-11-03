@@ -113,29 +113,6 @@ body {
   scrollbar-color: rgba(244, 237, 227, 0.12) #0d0b09;
 }
 
-/* Mouse scroll indicator (from Uiverse.io by mrhyddenn, recolored) */
-.mouse-btn {
-  width: 26px;
-  height: 42px;
-  border: 1.5px solid rgba(245, 179, 1, 0.5);
-  border-radius: 14px;
-  display: flex;
-}
-.mouse-scroll {
-  display: block;
-  width: 4px;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 50%;
-  margin: 6px auto auto;
-  animation: scrolling13 1.4s ease-in-out infinite;
-}
-@keyframes scrolling13 {
-  0% { opacity: 0; transform: translateY(0); }
-  30% { opacity: 1; }
-  100% { opacity: 0; transform: translateY(16px); }
-}
-
 /* Lenis smooth scroll */
 html.lenis,
 html.lenis body {
@@ -154,82 +131,6 @@ html.lenis body {
   overflow: hidden;
 }
 
-/* SocialIcon layered deck animation */
-.social-icon-wrapper {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.social-icon-wrapper .icon {
-  text-decoration: none;
-  color: #fff;
-  display: block;
-  position: relative;
-  width: 44px;
-  height: 44px;
-}
-@media (min-width: 640px) {
-  .social-icon-wrapper .icon {
-    width: 55px;
-    height: 55px;
-  }
-}
-
-.social-icon-wrapper .layer {
-  width: 44px;
-  height: 44px;
-  transition: transform 0.3s;
-}
-@media (min-width: 640px) {
-  .social-icon-wrapper .layer {
-    width: 55px;
-    height: 55px;
-  }
-}
-
-.social-icon-wrapper .icon:hover .layer {
-  transform: rotate(-35deg) skew(20deg);
-}
-
-.social-icon-wrapper .layer span {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 8px;
-  transition: all 0.3s;
-}
-
-.social-icon-wrapper .icon:hover .layer span {
-  border-color: var(--accent);
-  box-shadow: 0 0 10px var(--accent);
-}
-
-.social-icon-wrapper .icon:hover .layer span:nth-child(1) { opacity: 0.2; }
-.social-icon-wrapper .icon:hover .layer span:nth-child(2) { opacity: 0.4; transform: translate(5px, -5px); }
-.social-icon-wrapper .icon:hover .layer span:nth-child(3) { opacity: 0.6; transform: translate(10px, -10px); }
-.social-icon-wrapper .icon:hover .layer span:nth-child(4) { opacity: 0.8; transform: translate(15px, -15px); }
-
-.social-icon-wrapper .layer span.fab {
-  border: none;
-  background: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255, 255, 255, 0.7);
-  transition: color 0.3s, transform 0.3s, filter 0.3s;
-}
-
-.social-icon-wrapper .icon:hover .layer span.fab {
-  color: #ffffff;
-  transform: translate(15px, -15px);
-  filter: drop-shadow(0 0 2px var(--accent)) drop-shadow(0 0 8px var(--accent));
-}
-
 /* ── Reading Mode ── */
 [data-reading-mode="true"] body {
   font-family: Georgia, "Times New Roman", serif;
@@ -244,10 +145,6 @@ html.lenis body {
   transition-delay: 0s !important;
 }
 
-[data-reading-mode="true"] .mouse-btn,
-[data-reading-mode="true"] .mouse-scroll {
-  display: none !important;
-}
 
 [data-reading-mode="true"] section {
   max-width: 48rem;
@@ -276,8 +173,3 @@ body {
   background: radial-gradient(60% 100% at 50% 100%, rgba(245, 179, 1, 0.35), transparent 70%);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .mouse-scroll {
-    animation: none;
-  }
-}

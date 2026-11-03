@@ -1,257 +1,108 @@
 "use client";
 
-import { motion, useReducedMotion, MotionConfig } from "framer-motion";
+import { useRef } from "react";
 import { useLenis } from "lenis/react";
-import { ArrowUp, FileText } from "lucide-react";
-import SocialIcon from "./SocialIcon";
+import { ArrowUp, ArrowUpRight, Download } from "lucide-react";
 import ContactForm from "./ContactForm";
-import PerformanceMetrics from "./PerformanceMetrics";
-
-const GithubIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-    <path d="M9 18c-4.51 2-5-2-7-2" />
-  </svg>
-);
-
-const LinkedinIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-    <rect width="4" height="12" x="2" y="9" />
-    <circle cx="4" cy="4" r="2" />
-  </svg>
-);
-
-const InstagramIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-  </svg>
-);
-
-const MailIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <rect width="20" height="16" x="2" y="4" rx="2" />
-    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-  </svg>
-);
-
-const PhoneIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-  </svg>
-);
+import { PROFILE } from "@/lib/profile";
+import { useSectionMotion } from "@/lib/motion";
 
 export default function Footer() {
-  const shouldReduceMotion = useReducedMotion();
+  const root = useRef<HTMLElement>(null);
   const lenis = useLenis();
+  useSectionMotion(root);
 
   const scrollToTop = () => {
-    // Once Lenis is mounted (see App.tsx / Prompt 1) it intercepts scroll,
-    // so calling native window.scrollTo({ behavior: "smooth" }) fights it
-    // and produces a janky double-smoothed scroll. Route through Lenis's
-    // own API when it's available, and fall back to native scroll if the
-    // app is ever run without Lenis.
+    // Route through Lenis when it is running; a native smooth scroll would
+    // fight its interpolation.
     if (lenis) {
-      lenis.scrollTo(0, { duration: shouldReduceMotion ? 0 : 1.2 });
+      lenis.scrollTo(0, { duration: 1.4 });
       return;
     }
-    if (typeof window === "undefined") return;
-    window.scrollTo({ top: 0, behavior: shouldReduceMotion ? "auto" : "smooth" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    // reducedMotion="user" makes every motion.* below automatically skip
-    // transform-based entrance animation for OS-level reduced-motion users
-    // (content still appears, just without the clip-path/slide-up motion).
-    <MotionConfig reducedMotion="user">
-    <footer id="contact" className="relative bg-transparent text-white px-6 sm:px-12 xl:px-24 py-24 sm:py-32 border-t border-white/10">
-      {/* Scrim layer — sits above the global grid, below the content */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent pointer-events-none" />
+    <footer ref={root} id="contact" className="relative px-6 sm:px-12 xl:px-24 pt-32 sm:pt-44 pb-10">
+      {/* A last warm light at the bottom of the page, echoing the hero */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[60%] bg-[radial-gradient(60%_60%_at_50%_100%,rgba(224,121,31,0.18),transparent_70%)]"
+      />
 
-      {/* Faint background watermark */}
-      <div className="absolute bottom-24 right-6 sm:right-12 xl:right-24 font-display text-[10rem] sm:text-[16rem] xl:text-[20rem] leading-none text-white/[0.015] pointer-events-none select-none">
-        05
-      </div>
+      <div className="relative">
+        <h2
+          data-heading
+          className="font-display uppercase text-[17vw] sm:text-[12vw] xl:text-[10.5vw] leading-[0.84] tracking-[-0.02em] text-white"
+        >
+          Let&apos;s build
+          <br />
+          something
+        </h2>
+        <p className="mt-4 font-coffekan text-4xl sm:text-5xl text-accent">before the sun sets.</p>
 
-      <div className="relative z-10 w-full flex flex-col lg:flex-row gap-16 justify-between items-start">
-        {/* Left Column: Headline, links, and socials */}
-        <div className="w-full lg:w-1/2 flex flex-col items-start">
-          {/* Headline with clip-path reveal */}
-          <motion.h2
-            initial={{ clipPath: "inset(0 100% 0 0)" }}
-            whileInView={{ clipPath: "inset(0 0% 0 0)" }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] as const }}
-            className="font-display font-extrabold text-[15vw] sm:text-[11vw] lg:text-[8.5vw] uppercase tracking-tight leading-[0.9] mb-10 text-white"
-          >
-            Let&apos;s Build <br /> Something
-          </motion.h2>
-          <p className="-mt-6 mb-10 font-coffekan text-4xl sm:text-5xl text-accent">before the sun sets.</p>
-
-          {/* Thin rule */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] as const }}
-            className="w-full max-w-xl h-[1px] bg-white/10 origin-left mb-10"
-          />
-
-          {/* Contact links & Spotify */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-col gap-4"
-          >
-            {/* Site Performance Widget */}
-            <div className="mt-4">
-              <PerformanceMetrics />
+        <div className="mt-20 grid lg:grid-cols-2 gap-16 lg:gap-24">
+          <div className="flex flex-col gap-12">
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent/85">Write to me</p>
+              <a
+                href={`mailto:${PROFILE.email}`}
+                className="mt-3 inline-block break-all font-display text-3xl sm:text-5xl leading-none text-white underline decoration-white/20 decoration-1 underline-offset-[0.2em] hover:text-accent hover:decoration-accent transition-colors"
+              >
+                {PROFILE.email}
+              </a>
             </div>
-          </motion.div>
 
-          {/* Social icons row */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="flex flex-wrap gap-4 sm:gap-6 mt-16"
-          >
-            <SocialIcon
-              href="/Rishav-Roy-CV.pdf"
-              download="Rishav-Roy-CV.pdf"
-              label="Resume"
-              username="Download PDF"
-              bio="Updated July 2026."
-              icon={<FileText className="w-5 h-5" />}
-              accentColor="#F5B301"
-              initials="CV"
-            />
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent/85">Call or WhatsApp</p>
+              <a href={PROFILE.phoneHref} className="mt-3 inline-block font-display text-3xl sm:text-4xl text-white hover:text-accent transition-colors">
+                {PROFILE.phone}
+              </a>
+            </div>
 
-            <SocialIcon
-              href="https://github.com/rishav00roy-web"
-              label="GitHub"
-              username="@rishav00roy-web"
-              bio="Showcasing full-stack builds, AI-orchestrated projects, and technical experiments."
-              icon={<GithubIcon />}
-              accentColor="#2EA44F"
-              initials="GH"
-            />
-            <SocialIcon
-              href="https://www.linkedin.com/in/rishav-the-roy/"
-              label="LinkedIn"
-              username="Rishav Roy"
-              bio="Operations and automation specialist, actively open to new roles."
-              icon={<LinkedinIcon />}
-              accentColor="#0A66C2"
-              initials="in"
-            />
-            <SocialIcon
-              href="https://instagram.com/justbeingpsunk_"
-              label="Instagram"
-              username="@justbeingpsunk_"
-              bio="Glimpses of life beyond the screen."
-              icon={<InstagramIcon />}
-              accentColor="#E1306C"
-              initials="IG"
-            />
-            <SocialIcon
-              href="mailto:rishav2000roy@gmail.com"
-              label="Gmail"
-              username="rishav2000roy@gmail.com"
-              bio="Direct contact for commercial builds and professional inquiries."
-              icon={<MailIcon />}
-              accentColor="#EA4335"
-              initials="GM"
-            />
-            <SocialIcon
-              href="tel:+916001914771"
-              label="Phone"
-              username="+91 60019 14771"
-              bio="Available for voice calls or WhatsApp messages regarding new inquiries."
-              icon={<PhoneIcon />}
-              accentColor="#34A853"
-              initials="PH"
-            />
-          </motion.div>
-        </div>
+            <ul className="border-t border-white/10">
+              {PROFILE.socials.map((s) => (
+                <li key={s.label} className="border-b border-white/10">
+                  <a
+                    href={s.url}
+                    target="_blank"
+                    rel="me noopener noreferrer"
+                    className="group flex items-center justify-between py-4"
+                  >
+                    <span className="text-lg text-white group-hover:text-accent transition-colors">{s.label}</span>
+                    <span className="flex items-center gap-3 text-sm text-white/50">
+                      {s.handle}
+                      <ArrowUpRight className="h-4 w-4 transition-transform duration-500 ease-out-expo group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent" aria-hidden="true" />
+                    </span>
+                  </a>
+                </li>
+              ))}
+              <li className="border-b border-white/10">
+                <a href={PROFILE.resume} download className="group flex items-center justify-between py-4">
+                  <span className="text-lg text-white group-hover:text-accent transition-colors">Résumé</span>
+                  <span className="flex items-center gap-3 text-sm text-white/50">
+                    PDF, {PROFILE.resumeUpdated}
+                    <Download className="h-4 w-4 group-hover:text-accent" aria-hidden="true" />
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
 
-        {/* Right Column: Contact Form */}
-        <div className="w-full lg:w-1/2 flex justify-end lg:pt-12">
           <ContactForm />
         </div>
-      </div>
 
-      {/* Bottom bar: copyright + back to top */}
-      <div className="relative z-10 mt-24 flex items-center justify-between w-full border-t border-white/5 pt-8">
-        <p className="font-mono text-[10px] sm:text-xs text-white/50 uppercase tracking-[0.25em]">
-          &copy; {new Date().getFullYear()} Rishav Roy &middot; Designed &amp; Developed by Me
-        </p>
-
-        <button
-          onClick={scrollToTop}
-          className="group flex items-center gap-2 font-mono text-[10px] sm:text-xs text-white/50 uppercase tracking-[0.25em] hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 rounded px-2 py-1 cursor-pointer"
-          aria-label="Back to top"
-        >
-          <ArrowUp className="w-3 h-3 group-hover:-translate-y-0.5 transition-transform" />
-          <span className="hidden sm:inline">Top</span>
-        </button>
+        <div className="mt-24 flex items-center justify-between gap-6 border-t border-white/10 pt-8 text-sm text-white/50">
+          <p>&copy; {new Date().getFullYear()} {PROFILE.name}. Designed and built by me.</p>
+          <button
+            onClick={scrollToTop}
+            className="group inline-flex items-center gap-2 hover:text-white transition-colors cursor-pointer"
+          >
+            Back to the top
+            <ArrowUp className="h-4 w-4 transition-transform group-hover:-translate-y-0.5" aria-hidden="true" />
+          </button>
+        </div>
       </div>
     </footer>
-    </MotionConfig>
   );
 }

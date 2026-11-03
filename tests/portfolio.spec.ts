@@ -136,8 +136,8 @@ test.describe('Portfolio Website - Tier 3: Cross-Feature Combinations', () => {
     const projectsSection = page.locator('section').filter({ hasText: 'Paid Projects' });
     await expect(projectsSection).toBeVisible();
 
-    // All 3 cards should be in the DOM (horizontal scroll, sticky)
-    const cards = projectsSection.locator('div[class*="rounded"]');
+    // One article per paid project, each linking to its case study
+    const cards = projectsSection.locator('article');
     const count = await cards.count();
     expect(count).toBeGreaterThanOrEqual(3);
 
