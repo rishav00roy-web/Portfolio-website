@@ -205,7 +205,7 @@ export default function ContactForm() {
             <button
               type="submit"
               disabled={status === "loading"}
-              className="w-full flex items-center justify-center gap-2 bg-accent text-background font-semibold py-3.5 px-6 rounded-full hover:bg-[#ffc72c] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-50"
+              className="w-full flex items-center justify-center gap-2 bg-accent text-background font-semibold py-3.5 px-6 rounded-full hover:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-50"
             >
               {status === "loading" ? (
                 <>

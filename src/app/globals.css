@@ -215,3 +215,50 @@ body {
 .stage-in { animation: stage-in 0.6s var(--ease-out-expo) both; }
 @keyframes stage-in { from { opacity: 0; transform: translateY(14px); } }
 @media (prefers-reduced-motion: reduce) { .stage-in { animation: none; } }
+
+/*
+ * Atelier Systems: the studio's own identity, taken from its line-drawn AS
+ * mark. Graphite instead of the portfolio's warm dusk, chalk text, one
+ * signal-lime accent, and a geometric sans (Jost) for everything, the way
+ * the logo's wordmark is set. The AI work keeps its moonlight blue.
+ */
+.studio {
+  --background: #0d1112;
+  --surface: #141a1b;
+  --surface-2: #1a2223;
+  --foreground: #e8ebe4;
+  --muted: rgba(232, 235, 228, 0.66);
+  --border: rgba(232, 235, 228, 0.1);
+  --accent: #cfe07a;
+  --accent-rgb: 207, 224, 122;
+  --color-white: #e8ebe4;
+  --color-black: #0d1112;
+  --color-paper: #0d1112;
+  --color-paper-2: #151c1d;
+  --color-ink: #e8ebe4;
+  --color-rust: #cfe07a;
+  /* Theme tokens resolve at :root, so remap the resolved ones too. */
+  --color-background: #0d1112;
+  --color-foreground: #e8ebe4;
+  --color-surface: #141a1b;
+  --color-surface-2: #1a2223;
+  --color-accent: #cfe07a;
+  --color-border-muted: rgba(232, 235, 228, 0.1);
+  --font-sans: var(--font-studio), sans-serif;
+  --font-display: var(--font-studio), sans-serif;
+  font-family: var(--font-studio), sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+body:has(.studio) { background-color: #0d1112; }
+/* The studio sets headings the way the mark's wordmark is drawn: no shouting. */
+.studio .font-display { text-transform: none; font-weight: 500; letter-spacing: -0.03em; }
+.studio ::selection { background-color: #cfe07a; color: #0d1112; }
+/* Drafting-table grid behind the studio's opening, fading out downward. */
+.studio-grid {
+  background-image:
+    linear-gradient(rgba(232, 235, 228, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232, 235, 228, 0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
+}

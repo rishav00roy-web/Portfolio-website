@@ -61,42 +61,48 @@ export default function Atelier({ asPage = false }: { asPage?: boolean }) {
   return (
     <div ref={root} id="atelier">
       {/* The studio */}
-      <section aria-labelledby="atelier-title" className={`mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 ${asPage ? "pt-16 sm:pt-24" : "pt-28 sm:pt-40"}`}>
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-end">
+      <section aria-labelledby="atelier-title" className={`relative mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 ${asPage ? "pt-10 sm:pt-16" : "pt-28 sm:pt-40"}`}>
+        {asPage && <div aria-hidden="true" className="studio-grid pointer-events-none absolute inset-x-0 top-0 h-[44rem]" />}
+        <div className={`relative grid gap-12 lg:items-center ${asPage ? "lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:min-h-[min(40rem,78svh)]" : "lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-end"}`}>
           <div className="min-w-0">
-            <Image
-              data-at-mark
-              src="/brand/atelier-monogram.webp"
-              alt=""
-              width={357}
-              height={292}
-              className="h-auto w-28 sm:w-36 opacity-90"
-            />
-            <Title id="atelier-title" data-at-rise className="mt-8 font-display uppercase text-[13vw] sm:text-7xl xl:text-8xl leading-[0.85] tracking-[-0.02em]">
+            {!asPage && (
+              <Image data-at-mark src="/brand/atelier-monogram.webp" alt="" width={357} height={292} className="mb-8 h-auto w-28 sm:w-36 opacity-90" />
+            )}
+            <Title id="atelier-title" data-at-rise className={`font-display ${asPage ? "text-[15vw] sm:text-8xl xl:text-[8.5rem] leading-[0.9]" : "uppercase text-[13vw] sm:text-7xl xl:text-8xl leading-[0.85] tracking-[-0.02em]"}`}>
               Atelier Systems
             </Title>
+            <div data-at-rise className="mt-8 max-w-xl">
+              <p className="text-xl sm:text-2xl leading-snug text-ink/85">
+                {asPage
+                  ? "Websites, automation and AI agents for small businesses. A one-person studio run by Rishav Roy, built end to end."
+                  : "My studio. Websites, automation and AI agents for small businesses, built end to end by me."}
+              </p>
+              <p className="mt-4 text-lg leading-relaxed text-ink/55">Every project below was made under Atelier Systems.</p>
+              {asPage && (
+                <div className="mt-10 flex flex-wrap gap-3">
+                  <a href="#contact" className="inline-flex min-h-12 items-center gap-2 rounded-full bg-rust px-7 py-3.5 text-base font-semibold text-paper hover:opacity-90 transition-opacity">
+                    Start a project
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </a>
+                  <a href="#projects" className="inline-flex min-h-12 items-center rounded-full border border-ink/25 px-7 py-3.5 text-base hover:border-rust hover:text-rust transition-colors">
+                    See the work
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
-          <div data-at-rise className="min-w-0 lg:pb-3">
-            <p className="text-xl sm:text-2xl leading-snug text-ink/85">
-              {asPage
-                ? "Websites, automation and AI agents for small businesses. A one-person studio run by Rishav Roy, built end to end."
-                : "My studio. Websites, automation and AI agents for small businesses, built end to end by me."}
-            </p>
-            <p className="mt-4 text-[15px] leading-relaxed text-ink/55">Every project below was made under Atelier Systems.</p>
-            {asPage && (
-              <a href="#contact" className="mt-8 inline-flex items-center gap-2 rounded-full bg-rust px-6 py-3.5 text-sm font-semibold text-paper hover:opacity-90 transition-opacity">
-                Start a project
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </a>
-            )}
-          </div>
+          {asPage && (
+            <div className="relative hidden min-w-0 lg:block">
+              <Image data-at-mark src="/brand/atelier-monogram.webp" alt="" width={357} height={292} priority className="ml-auto h-auto w-full max-w-[26rem] opacity-90" />
+            </div>
+          )}
         </div>
 
-        <ul data-at-rise className="mt-16 grid gap-x-10 border-t border-ink/10 sm:grid-cols-2 lg:grid-cols-3">
+        <ul data-at-rise className={`${asPage ? "mt-20" : "mt-16"} grid gap-x-10 border-t border-ink/10 sm:grid-cols-2 lg:grid-cols-3`}>
           {SERVICES.map((s) => (
             <li key={s.name} className="border-b border-ink/10 py-6">
-              <p className="text-lg text-ink/90">{s.name}</p>
-              <p className="mt-1 text-[15px] leading-relaxed text-ink/55">{s.detail}</p>
+              <p className="text-xl text-ink/90">{s.name}</p>
+              <p className="mt-1.5 text-lg leading-relaxed text-ink/55">{s.detail}</p>
             </li>
           ))}
         </ul>
@@ -110,7 +116,7 @@ export default function Atelier({ asPage = false }: { asPage?: boolean }) {
         <div className="rounded-3xl border border-ink/10 bg-paper-2/60 p-8 sm:p-12">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
             <div data-at-rise>
-              <h2 id="process-title" className="font-display uppercase text-4xl sm:text-5xl leading-[0.9]">How a project runs</h2>
+              <h2 id="process-title" className="font-display uppercase text-4xl sm:text-5xl leading-[0.95]">How a project runs</h2>
               <a
                 href="#contact"
                 className="group mt-8 inline-flex items-center gap-2 rounded-full bg-rust px-6 py-3.5 text-sm font-semibold text-paper hover:opacity-90 transition-opacity"
@@ -124,8 +130,8 @@ export default function Atelier({ asPage = false }: { asPage?: boolean }) {
                 <li key={p.name} className="grid grid-cols-[2rem_minmax(0,1fr)] gap-3">
                   <span className="font-display text-2xl leading-none text-rust">{i + 1}</span>
                   <span>
-                    <span className="block text-lg">{p.name}</span>
-                    <span className="mt-1 block text-[15px] leading-relaxed text-ink/55">{p.detail}</span>
+                    <span className="block text-xl">{p.name}</span>
+                    <span className="mt-1 block text-lg leading-relaxed text-ink/55">{p.detail}</span>
                   </span>
                 </li>
               ))}

@@ -178,7 +178,7 @@ export function PaperAbout() {
 
 /* ───────────────────────── Contact ───────────────────────── */
 
-export function PaperContact() {
+export function PaperContact({ studio = false }: { studio?: boolean }) {
   const root = useRef<HTMLElement>(null);
   useRise(root);
 
@@ -186,16 +186,33 @@ export function PaperContact() {
     <footer
       ref={root}
       id="contact"
-      className="relative overflow-hidden bg-background text-white bg-[radial-gradient(60%_50%_at_50%_100%,rgba(224,121,31,0.2),transparent_70%)]"
+      className={`relative overflow-hidden bg-background text-white ${
+        studio
+          ? "border-t border-white/10 bg-[radial-gradient(55%_45%_at_50%_100%,rgba(207,224,122,0.08),transparent_70%)]"
+          : "bg-[radial-gradient(60%_50%_at_50%_100%,rgba(224,121,31,0.2),transparent_70%)]"
+      }`}
     >
       <div className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-32 sm:pt-44 pb-10">
         <div className="text-center">
-          <h2 data-rise className="font-display uppercase text-[13vw] sm:text-7xl xl:text-8xl leading-[0.86] tracking-[-0.02em]">
-            Let&apos;s build
-            <br />
-            something
-          </h2>
-          <p data-rise className="mt-4 font-coffekan text-4xl sm:text-5xl text-accent">before the sun sets.</p>
+          {studio ? (
+            <>
+              <h2 data-rise className="font-display text-[11vw] sm:text-7xl leading-[0.95]">
+                Start a project
+              </h2>
+              <p data-rise className="mx-auto mt-5 max-w-lg text-lg leading-relaxed text-white/65">
+                Tell me what the business needs. You get a written, fixed-scope quote before any work starts.
+              </p>
+            </>
+          ) : (
+            <>
+              <h2 data-rise className="font-display uppercase text-[13vw] sm:text-7xl xl:text-8xl leading-[0.86] tracking-[-0.02em]">
+                Let&apos;s build
+                <br />
+                something
+              </h2>
+              <p data-rise className="mt-4 font-coffekan text-4xl sm:text-5xl text-accent">before the sun sets.</p>
+            </>
+          )}
 
           <a
             data-rise
@@ -231,7 +248,7 @@ export function PaperContact() {
         </div>
 
         <p className="mt-24 border-t border-white/10 pt-8 text-center text-sm text-white/50">
-          &copy; {new Date().getFullYear()} {PROFILE.name}. Designed and built by me.
+          &copy; {new Date().getFullYear()} {studio ? "Atelier Systems, run by " + PROFILE.name : PROFILE.name}. Designed and built by me.
         </p>
       </div>
     </footer>
