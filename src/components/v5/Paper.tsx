@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import { ArrowUpRight, Download } from "lucide-react";
 import ContactForm from "../ContactForm";
+import { Doodle } from "../studio/Organic";
 import { bio, certificates, education, experience, languages, PROFILE, skills } from "@/lib/profile";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
@@ -188,12 +189,18 @@ export function PaperContact({ studio = false }: { studio?: boolean }) {
       id="contact"
       className={`relative overflow-hidden bg-background text-white ${
         studio
-          ? "bg-[radial-gradient(50%_40%_at_30%_100%,rgba(207,224,122,0.09),transparent_70%),radial-gradient(40%_35%_at_80%_90%,rgba(159,194,214,0.07),transparent_70%)]"
+          ? ""
           : "bg-[radial-gradient(60%_50%_at_50%_100%,rgba(224,121,31,0.2),transparent_70%)]"
       }`}
     >
       <div className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-32 sm:pt-44 pb-10">
-        <div className="text-center">
+        <div className="relative text-center">
+          {studio && (
+            <>
+              <Doodle kind="pencil" className="left-[6%] top-4 hidden w-32 -rotate-6 lg:block" />
+              <Doodle kind="phone" className="right-[8%] top-10 hidden w-28 rotate-6 lg:block" />
+            </>
+          )}
           {studio ? (
             <>
               <h2 data-rise className="font-display text-[11vw] sm:text-7xl leading-[0.95]">

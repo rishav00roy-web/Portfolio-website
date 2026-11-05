@@ -299,3 +299,19 @@ a, button { touch-action: manipulation; }
 .process-lamp { transition: background-color 0.5s, border-color 0.5s, box-shadow 0.5s; }
 .process-step.is-lit .process-lamp { background-color: #cfe07a; border-color: #cfe07a; box-shadow: 0 0 18px rgba(207, 224, 122, 0.5); }
 @media (prefers-reduced-motion: reduce) { .process-lamp { background-color: #cfe07a; border-color: #cfe07a; } }
+
+/* ── /atelier-3 micro-motion: slow, small, transform and opacity only ── */
+.typing span:nth-child(2) { animation-delay: 0.15s; }
+.typing span:nth-child(3) { animation-delay: 0.3s; }
+@media (prefers-reduced-motion: no-preference) {
+  .typing span { animation: typing 1.2s ease-in-out infinite; }
+  .group:hover .icon-wiggle { animation: wiggle 0.5s ease-out; }
+}
+@keyframes typing { 0%, 100% { opacity: 0.35; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-3px); } }
+@keyframes wiggle { 30% { transform: rotate(-10deg); } 60% { transform: rotate(6deg); } }
+
+/* Sketchbook doodles breathe, very slowly, once drawn. */
+@media (prefers-reduced-motion: no-preference) {
+  .doodle { animation: breathe 9s ease-in-out infinite alternate; }
+}
+@keyframes breathe { to { translate: 0 -6px; } }

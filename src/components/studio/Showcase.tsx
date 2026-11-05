@@ -3,10 +3,10 @@
 import { useMemo, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, LayoutGrid, Rows3 } from "lucide-react";
+import { ArrowRight, Bot, Globe, HeartHandshake, LayoutDashboard, LayoutGrid, MonitorSmartphone, Plug, Rows3, Search, Star } from "lucide-react";
 import { SupportStage, InvoiceStage } from "../v5/AIStage";
 import StudioHero from "./StudioHero";
-import { ProcessPath, Swash } from "./Organic";
+import { Doodle, ProcessPath, Swash } from "./Organic";
 import { SERVICES, PROCESS } from "./Sheet";
 import { commissions, otherWork } from "@/lib/work";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
@@ -140,11 +140,15 @@ const ENTRIES: Entry[] = [
     })),
 ];
 
-const FILTERS: { id: "all" | Kind; label: string }[] = [
-  { id: "all", label: "All" },
-  { id: "website", label: "Websites" },
-  { id: "product", label: "AI and products" },
+const FILTERS: { id: "all" | Kind; label: string; Icon: typeof Globe }[] = [
+  { id: "all", label: "All", Icon: LayoutGrid },
+  { id: "website", label: "Websites", Icon: Globe },
+  { id: "product", label: "AI and products", Icon: Bot },
 ];
+
+/** One line icon per service, in the order of SERVICES. */
+const SERVICE_ICONS = [MonitorSmartphone, Search, LayoutDashboard, Plug, Bot, HeartHandshake];
+
 
 const openChat = () => document.querySelector<HTMLButtonElement>('[aria-label="Open Psunk AI Chat"]')?.click();
 
@@ -152,7 +156,6 @@ const openChat = () => document.querySelector<HTMLButtonElement>('[aria-label="O
 function Stage({ e }: { e: Entry }) {
   return (
     <div className="relative overflow-hidden rounded-2xl bg-paper-2/60">
-      <span aria-hidden="true" className="absolute inset-[10%_8%_0_14%] rounded-[58%_42%_55%_45%/48%_58%_42%_52%] bg-[radial-gradient(closest-side,rgba(207,224,122,0.09),transparent)]" />
       <svg aria-hidden="true" viewBox="0 0 400 250" fill="none" className="absolute inset-0 h-full w-full">
         <path d="M-10 210 C 70 150, 140 250, 220 190 S 340 90, 410 120" stroke="rgba(232,235,228,0.10)" strokeWidth="1.2" strokeLinecap="round" />
       </svg>
@@ -273,12 +276,11 @@ export default function Showcase() {
 
   return (
     <div ref={root} className="relative overflow-x-clip">
-      {/* Ambient light drifting down the page, loosely shaped */}
-      <span aria-hidden="true" className="pointer-events-none absolute right-[-10%] top-[90vh] h-[60rem] w-[50rem] rounded-[58%_42%_55%_45%/48%_58%_42%_52%] bg-[radial-gradient(closest-side,rgba(207,224,122,0.06),transparent)]" />
-      <span aria-hidden="true" className="pointer-events-none absolute left-[-15%] bottom-[10%] h-[50rem] w-[50rem] rounded-[45%_55%_40%_60%/55%_45%_60%_40%] bg-[radial-gradient(closest-side,rgba(159,194,214,0.06),transparent)]" />
       <StudioHero />
 
-      <section id="projects" aria-labelledby="work-title" className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-20 sm:pt-28">
+      <section id="projects" aria-labelledby="work-title" className="relative mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-20 sm:pt-28">
+        <Doodle kind="browser" className="left-[30rem] top-14 hidden w-32 -rotate-6 lg:block" />
+        <Doodle kind="cursor" className="left-[38rem] top-32 hidden w-12 rotate-6 lg:block" />
         <div className="grid gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end">
           <h2 id="work-title" data-rise className="font-display text-7xl leading-[0.85] sm:text-8xl">
             Work<span className="text-rust">.</span>
@@ -303,6 +305,7 @@ export default function Showcase() {
                     on ? "bg-ink text-paper" : "border border-ink/20 text-ink/75 hover:border-ink/50 hover:text-ink"
                   }`}
                 >
+                  <f.Icon className="h-4 w-4" strokeWidth={1.5} aria-hidden="true" />
                   {f.label}
                   <span className={`text-sm tabular-nums ${on ? "text-paper/75" : "text-ink/55"}`}>{count(f.id)}</span>
                 </button>
@@ -346,7 +349,16 @@ export default function Showcase() {
                     <span className="text-rust">{String(i + 1).padStart(2, "0")}</span>
                     <span className="text-ink/55"> / {String(shown.length).padStart(2, "0")}</span>
                   </span>
-                  <span className={e.featured ? "text-rust" : "text-ink/55"}>{e.featured ? e.featured.label : e.kind === "website" ? "Website" : "Product"}</span>
+                  <span className={`inline-flex items-center gap-1.5 ${e.featured ? "text-rust" : "text-ink/55"}`}>
+                    {e.featured ? (
+                      <Star className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden="true" />
+                    ) : e.kind === "website" ? (
+                      <Globe className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden="true" />
+                    ) : (
+                      <Bot className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden="true" />
+                    )}
+                    {e.featured ? e.featured.label : e.kind === "website" ? "Website" : "Product"}
+                  </span>
                 </div>
                 <Stage e={e} />
                 <div className="flex flex-1 flex-col px-2 pt-6 pb-2">
@@ -405,23 +417,30 @@ export default function Showcase() {
           <div>
             <h2 id="services-title" data-rise className="font-display text-5xl sm:text-6xl leading-[0.95]">What the studio does</h2>
             <ul className="mt-10">
-              {SERVICES.map((sv) => (
-                <li key={sv.name} data-rise className="grid grid-cols-[2.25rem_minmax(0,1fr)] py-4">
-                  <svg aria-hidden="true" viewBox="0 0 28 14" fill="none" className="mt-2 h-3.5 w-7">
-                    <path d="M1 9 C 6 2, 11 13, 16 6 S 24 3, 27 6" stroke="rgba(207,224,122,0.8)" strokeWidth="1.6" strokeLinecap="round" />
-                  </svg>
+              {SERVICES.map((sv, i) => {
+                const Icon = SERVICE_ICONS[i];
+                return (
+                <li key={sv.name} data-rise className="group grid grid-cols-[3.5rem_minmax(0,1fr)] items-start py-4">
+                  <span aria-hidden="true" className="grid size-11 place-items-center rounded-[42%_58%_55%_45%/50%_45%_55%_50%] bg-rust/10 text-rust transition-colors duration-300 group-hover:bg-rust/20">
+                    <Icon className="icon-wiggle h-5 w-5" strokeWidth={1.5} />
+                  </span>
                   <span>
                   <span className="block text-xl text-ink/90">{sv.name}</span>
                   <span className="mt-1 block text-lg leading-relaxed text-ink/55">{sv.detail}</span>
                   </span>
                 </li>
-              ))}
+                );
+              })}
             </ul>
           </div>
           <div>
             <h2 data-rise className="font-display text-5xl sm:text-6xl leading-[0.95]">How a project runs</h2>
             <ProcessPath steps={PROCESS} />
           </div>
+        </div>
+        <div aria-hidden="true">
+          <Doodle kind="chat" className="right-[4%] top-[38%] hidden w-36 rotate-3 lg:block" />
+          <Doodle kind="code" className="right-[10%] bottom-10 hidden w-28 -rotate-3 lg:block" />
         </div>
       </section>
     </div>

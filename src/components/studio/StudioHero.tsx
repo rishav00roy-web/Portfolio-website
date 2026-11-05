@@ -68,9 +68,6 @@ export default function StudioHero() {
 
         {/* The stage */}
         <div aria-hidden="true" className="relative mx-auto aspect-[5/4] w-full max-w-[40rem] sm:aspect-square lg:max-w-none">
-          {/* A soft pool of light, loosely shaped, not a circle */}
-          <span className="absolute inset-[6%] rounded-[58%_42%_55%_45%/48%_58%_42%_52%] bg-[radial-gradient(closest-side,rgba(207,224,122,0.18),rgba(207,224,122,0.05)_60%,transparent)]" />
-          <span className="absolute inset-[18%_4%_10%_22%] rounded-[45%_55%_40%_60%/55%_45%_60%_40%] bg-[radial-gradient(closest-side,rgba(159,194,214,0.14),transparent)]" />
           {/* The S swash from the AS mark, drawn loose and large behind the work */}
           <svg viewBox="0 0 600 600" fill="none" className="absolute inset-0 h-full w-full overflow-visible">
             <path data-h-swash pathLength={1} strokeDasharray="1" d="M30 470 C 120 360, 230 560, 320 420 S 430 120, 560 170 C 610 190, 600 260, 540 270" stroke="rgba(207,224,122,0.7)" strokeWidth="2" strokeLinecap="round" />
@@ -109,6 +106,12 @@ export default function StudioHero() {
               <p className="ml-auto w-fit max-w-[85%] rounded-2xl rounded-br-md bg-moon px-3.5 py-2 text-sm text-paper">Got the Phoenix Rise Tee in XL?</p>
               <p className="mt-2 w-fit max-w-[90%] rounded-2xl rounded-bl-md bg-ink/[0.07] px-3.5 py-2 text-sm leading-snug text-ink/85">
                 It comes in S to XXL. Want me to add XL to your bag?
+              </p>
+              {/* And it keeps going: a typing indicator */}
+              <p className="typing mt-2 flex w-fit gap-1 rounded-2xl rounded-bl-md bg-ink/[0.07] px-3.5 py-3">
+                <span className="size-1.5 rounded-full bg-ink/60" />
+                <span className="size-1.5 rounded-full bg-ink/60" />
+                <span className="size-1.5 rounded-full bg-ink/60" />
               </p>
               <p className="mt-3 text-sm text-ink/55">Support agent, sample</p>
             </div>
