@@ -7,16 +7,14 @@ import { gsap, useGSAP } from "@/lib/gsap";
 
 /*
  * The studio's opening screen. Left: the name, set big, one line, two
- * actions and three true counts. Right: a lit stage built on the AS mark's
- * construction circles, with real work standing on it: a client site in a
+ * actions. Right: a soft pool of light with the AS mark's S swash drawn
+ * loose behind real work, set at easy angles: a client site in a
  * browser, another on a phone, and the support agent mid-answer. The
  * devices rise in one after another, then drift apart slightly as you
  * scroll away (transform only).
  */
 
-type Props = { projects: number; live: number; products: number };
-
-export default function StudioHero({ projects, live, products }: Props) {
+export default function StudioHero() {
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -26,7 +24,7 @@ export default function StudioHero({ projects, live, products }: Props) {
         const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
         tl.from("[data-h-line]", { yPercent: 110, duration: 1.3, stagger: 0.05 })
           .from("[data-h-copy]", { y: 20, opacity: 0, duration: 1, stagger: 0.05 }, "-=0.9")
-          .from("[data-h-ring]", { scale: 0.85, opacity: 0, duration: 1.6, stagger: 0.05 }, 0.1)
+          .fromTo("[data-h-swash]", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 2.4, ease: "power2.inOut", stagger: 0.05 }, 0)
           .from("[data-h-device]", { y: 60, opacity: 0, duration: 1.4, stagger: 0.05 }, 0.3);
 
         // Leaving the hero: the devices part a little, at different speeds.
@@ -66,41 +64,24 @@ export default function StudioHero({ projects, live, products }: Props) {
               See the work
             </a>
           </div>
-          <dl data-h-copy className="mt-14 grid max-w-lg grid-cols-3 border-t border-ink/10 pt-6">
-            {[
-              [projects, "projects built"],
-              [live, "client sites live"],
-              [products, "AI and products"],
-            ].map(([n, label]) => (
-              <div key={label}>
-                <dt className="sr-only">{label}</dt>
-                <dd className="font-mono text-3xl tabular-nums text-ink sm:text-4xl">{String(n).padStart(2, "0")}</dd>
-                <dd className="mt-1 text-base text-ink/55">{label}</dd>
-              </div>
-            ))}
-          </dl>
         </div>
 
         {/* The stage */}
-        <div aria-hidden="true" className="relative mx-auto aspect-square w-full max-w-[40rem] lg:max-w-none">
-          <span className="absolute inset-0 rounded-full bg-[radial-gradient(closest-side,rgba(207,224,122,0.10),rgba(232,235,228,0.04)_55%,transparent)]" />
-          <span data-h-ring className="absolute inset-[2%] rounded-full border border-ink/10" />
-          <span data-h-ring className="absolute inset-[16%] rounded-full border border-ink/10" />
-          <span data-h-ring className="absolute inset-[30%] rounded-full border border-dashed border-ink/10" />
-          <span data-h-ring className="absolute left-1/2 top-0 bottom-0 w-px bg-ink/10" />
-          <span data-h-ring className="absolute top-1/2 left-0 right-0 h-px bg-ink/10" />
-          <Image
-            data-h-ring
-            src="/brand/atelier-monogram.webp"
-            alt=""
-            width={357}
-            height={292}
-            className="absolute left-[41%] top-[8%] w-[18%] opacity-60"
-          />
+        <div aria-hidden="true" className="relative mx-auto aspect-[5/4] w-full max-w-[40rem] sm:aspect-square lg:max-w-none">
+          {/* A soft pool of light, loosely shaped, not a circle */}
+          <span className="absolute inset-[6%] rounded-[58%_42%_55%_45%/48%_58%_42%_52%] bg-[radial-gradient(closest-side,rgba(207,224,122,0.18),rgba(207,224,122,0.05)_60%,transparent)]" />
+          <span className="absolute inset-[18%_4%_10%_22%] rounded-[45%_55%_40%_60%/55%_45%_60%_40%] bg-[radial-gradient(closest-side,rgba(159,194,214,0.14),transparent)]" />
+          {/* The S swash from the AS mark, drawn loose and large behind the work */}
+          <svg viewBox="0 0 600 600" fill="none" className="absolute inset-0 h-full w-full overflow-visible">
+            <path data-h-swash pathLength={1} strokeDasharray="1" d="M30 470 C 120 360, 230 560, 320 420 S 430 120, 560 170 C 610 190, 600 260, 540 270" stroke="rgba(207,224,122,0.7)" strokeWidth="2" strokeLinecap="round" />
+            <path data-h-swash pathLength={1} strokeDasharray="1" d="M70 520 C 170 420, 270 600, 360 460 S 470 180, 590 230" stroke="rgba(232,235,228,0.22)" strokeWidth="1.2" strokeLinecap="round" />
+            <path data-h-swash pathLength={1} strokeDasharray="1" d="M10 600 C 170 680, 360 520, 470 615 S 620 650, 650 560" stroke="rgba(207,224,122,0.45)" strokeWidth="1.6" strokeLinecap="round" />
+            <path data-h-swash pathLength={1} strokeDasharray="1" d="M120 120 C 220 40, 360 90, 420 40" stroke="rgba(232,235,228,0.2)" strokeWidth="1.2" strokeLinecap="round" />
+          </svg>
 
           {/* Browser */}
           <div data-h-device className="absolute left-[2%] top-[24%] w-[78%]">
-            <div data-h-browser className="overflow-hidden rounded-xl border border-ink/15 bg-paper shadow-[0_40px_100px_-30px_rgba(0,0,0,0.95)]">
+            <div data-h-browser className="-rotate-3 overflow-hidden rounded-2xl border border-ink/15 bg-paper shadow-[0_40px_100px_-30px_rgba(0,0,0,0.95)]">
               <div className="flex h-7 items-center gap-1.5 border-b border-ink/10 px-3">
                 <span className="h-2 w-2 rounded-full bg-ink/25" />
                 <span className="h-2 w-2 rounded-full bg-ink/25" />
@@ -115,7 +96,7 @@ export default function StudioHero({ projects, live, products }: Props) {
 
           {/* Phone */}
           <div data-h-device className="absolute right-[4%] top-[34%] w-[25%]">
-            <div data-h-phone className="overflow-hidden rounded-[1.4rem] border-4 border-[#2a3233] bg-paper shadow-[0_40px_80px_-20px_rgba(0,0,0,0.95)]">
+            <div data-h-phone className="rotate-[5deg] overflow-hidden rounded-[1.6rem] border-4 border-[#2a3233] bg-paper shadow-[0_40px_80px_-20px_rgba(0,0,0,0.95)]">
               <div className="relative aspect-[390/844]">
                 <Image src="/assets/projects/mobile/clash-bazar.webp" alt="" fill sizes="(max-width: 1023px) 25vw, 12vw" className="object-cover object-top" />
               </div>
@@ -124,7 +105,7 @@ export default function StudioHero({ projects, live, products }: Props) {
 
           {/* The support agent, mid-answer */}
           <div data-h-device className="absolute bottom-[8%] left-[10%] hidden w-[52%] sm:block">
-            <div data-h-chat className="rounded-2xl border border-moon/25 bg-paper-2/95 p-4 shadow-[0_30px_70px_-25px_rgba(0,0,0,0.95)]">
+            <div data-h-chat className="-rotate-2 rounded-3xl border border-moon/25 bg-paper-2/95 p-4 shadow-[0_30px_70px_-25px_rgba(0,0,0,0.95)]">
               <p className="ml-auto w-fit max-w-[85%] rounded-2xl rounded-br-md bg-moon px-3.5 py-2 text-sm text-paper">5-day Kerala trip in December?</p>
               <p className="mt-2 w-fit max-w-[90%] rounded-2xl rounded-bl-md bg-ink/[0.07] px-3.5 py-2 text-sm leading-snug text-ink/85">
                 Yes, the Backwaters and Hills package. Shall I send the itinerary?

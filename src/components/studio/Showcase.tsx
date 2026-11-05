@@ -225,11 +225,7 @@ export default function Showcase() {
 
   return (
     <div ref={root} className="studio-dots">
-      <StudioHero
-        projects={ENTRIES.length}
-        live={commissions.filter((c) => c.status === "Live").length}
-        products={ENTRIES.filter((e) => e.kind === "product").length}
-      />
+      <StudioHero />
 
       <section id="projects" aria-labelledby="work-title" className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-20 sm:pt-28">
         <div className="grid gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end">
