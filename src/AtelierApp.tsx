@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useReducedMotion } from "framer-motion";
@@ -18,6 +18,12 @@ import { PaperContact } from "./components/v5/Paper";
  */
 export default function AtelierApp() {
   const prefersReduced = useReducedMotion();
+  // Preview only: ?scheme=1|2|3 tries a candidate palette (see globals.css).
+  const scheme = useSyncExternalStore(
+    () => () => {},
+    () => new URLSearchParams(window.location.search).get("scheme") ?? "",
+    () => "",
+  );
   const lenisRef = useRef<LenisRef>(null);
 
   useEffect(() => {
@@ -34,7 +40,7 @@ export default function AtelierApp() {
   }, [prefersReduced]);
 
   const content = (
-    <main id="main" className={`studio ${studioFont.variable} relative min-h-screen`}>
+    <main id="main" data-scheme={scheme || undefined} className={`studio ${studioFont.variable} relative min-h-screen`}>
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-accent focus:px-5 focus:py-3 focus:text-background">
         Skip to content
       </a>

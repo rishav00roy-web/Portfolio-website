@@ -382,3 +382,11 @@ a, button { touch-action: manipulation; }
 }
 
 @media (prefers-reduced-motion: reduce) { .social-icon-wrapper .layer, .social-icon-wrapper .layer span { transition: none; } }
+
+/* Candidate studio palettes, previewed with /atelier?scheme=1|2|3 */
+.studio[data-scheme="1"] { --s-bg: #0b111c; --s-surface: #121a28; --s-surface-2: #182234; --s-paper-2: #131c2b; --s-ink: #e9edf4; --s-ink-rgb: 233, 237, 244; --s-accent: #d8b878; --s-accent-rgb: 216, 184, 120; --s-bezel: #243045; }
+.studio[data-scheme="2"] { --s-bg: #0a1411; --s-surface: #101d18; --s-surface-2: #16261f; --s-paper-2: #11201a; --s-ink: #e5efe9; --s-ink-rgb: 229, 239, 233; --s-accent: #7fd4ae; --s-accent-rgb: 127, 212, 174; --s-bezel: #1f3229; }
+.studio[data-scheme="3"] { --s-bg: #121213; --s-surface: #1a1a1c; --s-surface-2: #222224; --s-paper-2: #1b1b1d; --s-ink: #f2efeb; --s-ink-rgb: 242, 239, 235; --s-accent: #ff8a66; --s-accent-rgb: 255, 138, 102; --s-bezel: #2e2e31; }
+body:has(main.studio[data-scheme="1"]) { background-color: #0b111c; }
+body:has(main.studio[data-scheme="2"]) { background-color: #0a1411; }
+body:has(main.studio[data-scheme="3"]) { background-color: #121213; }
