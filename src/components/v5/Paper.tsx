@@ -29,13 +29,6 @@ function useRise(scope: React.RefObject<HTMLElement | null>) {
   );
 }
 
-/** "Jan 2025 to Jul 2026" -> "2025–26" */
-function span(period: string) {
-  const y = period.match(/\d{4}/g) ?? [];
-  const [a, b] = [y[0], y[y.length - 1]];
-  return a === b ? a : `${a}–${b?.slice(2)}`;
-}
-
 /* ───────────────────────── About ───────────────────────── */
 
 export function PaperAbout() {
@@ -74,80 +67,59 @@ export function PaperAbout() {
                 ))}
               </div>
             </details>
+
+            <dl data-rise className="mt-12 grid gap-x-8 gap-y-3 border-t border-ink/10 pt-8 text-[15px] leading-relaxed sm:grid-cols-[8rem_minmax(0,1fr)]">
+              <dt className="text-ink/45">Based in</dt>
+              <dd className="text-ink/80">{PROFILE.location}, originally from {PROFILE.hometown}</dd>
+              <dt className="text-ink/45">Runs</dt>
+              <dd className="text-ink/80">
+                <a href="/atelier" className="underline decoration-ink/25 underline-offset-4 hover:text-rust hover:decoration-rust">Atelier Systems</a>, my studio
+              </dd>
+              <dt className="text-ink/45">Working with</dt>
+              <dd className="text-ink/80">{PROFILE.currently.join(", ")}</dd>
+              <dt className="text-ink/45">Speaks</dt>
+              <dd className="text-ink/80">{languages.map((l) => `${l.name} (${l.level.toLowerCase()})`).join(", ")}</dd>
+              <dt className="text-ink/45">Résumé</dt>
+              <dd className="text-ink/80">
+                <a href={PROFILE.resume} download className="inline-flex items-center gap-1.5 underline decoration-ink/25 underline-offset-4 hover:text-rust hover:decoration-rust">
+                  Download the PDF <Download className="h-3.5 w-3.5" aria-hidden="true" />
+                </a>
+                <span className="text-ink/45">, updated {PROFILE.resumeUpdated}</span>
+              </dd>
+            </dl>
           </div>
         </div>
 
-        {/* At a glance: the facts that used to crowd the hero */}
-        <dl data-rise className="mt-24 grid gap-px overflow-hidden rounded-3xl border border-ink/10 bg-ink/10 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="bg-paper p-6 sm:p-8">
-            <dt className="text-sm text-rust">Based in</dt>
-            <dd className="mt-3 font-display text-3xl leading-none">{PROFILE.location}</dd>
-            <dd className="mt-2 text-sm text-ink/55">originally from {PROFILE.hometown}</dd>
-          </div>
-          <div className="bg-paper p-6 sm:p-8">
-            <dt className="text-sm text-rust">Runs</dt>
-            <dd className="mt-2 text-ink/85">Atelier Systems, my studio</dd>
-            <dt className="mt-4 text-sm text-rust">Working with</dt>
-            {PROFILE.currently.map((c) => (
-              <dd key={c} className="mt-2 text-ink/85">{c}</dd>
-            ))}
-          </div>
-          <div className="bg-paper p-6 sm:p-8">
-            <dt className="text-sm text-rust">Speaks</dt>
-            {languages.map((l) => (
-              <dd key={l.name} className="mt-2 text-ink/85">
-                {l.name} <span className="text-sm text-ink/50">{l.level.toLowerCase()}</span>
-              </dd>
-            ))}
-          </div>
-          <div className="bg-paper p-6 sm:p-8">
-            <dt className="text-sm text-rust">Résumé</dt>
-            <dd className="mt-3">
-              <a href={PROFILE.resume} download className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-rust px-5 py-3 text-sm font-semibold text-paper hover:opacity-90 transition-opacity">
-                Download PDF <Download className="h-4 w-4" aria-hidden="true" />
-              </a>
-            </dd>
-            <dd className="mt-3 text-sm text-ink/55">Updated {PROFILE.resumeUpdated}</dd>
-          </div>
-        </dl>
-
-        {/* Experience */}
-        <div className="mt-32 sm:mt-40">
-          <h3 data-rise className="font-display uppercase text-4xl sm:text-5xl leading-[0.9]">Experience</h3>
-          <ol className="mt-6 border-t border-ink/15">
+        {/* Experience: quiet rows, everything readable without a click */}
+        <div className="mt-28 sm:mt-36 grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
+          <h3 data-rise className="text-2xl sm:text-3xl font-medium tracking-[-0.01em]">Experience</h3>
+          <ol className="space-y-12">
             {experience.map((job) => (
-              <li key={job.company} data-rise className="border-b border-ink/15">
-                <details className="group">
-                  <summary className="grid cursor-pointer list-none grid-cols-[minmax(0,1fr)_auto] items-center gap-x-6 gap-y-2 py-7 sm:grid-cols-[13rem_minmax(0,1fr)_auto] [&::-webkit-details-marker]:hidden">
-                    <span className="whitespace-nowrap font-display text-4xl sm:text-5xl leading-none text-rust">{span(job.period)}</span>
-                    <span className="col-span-2 row-start-2 min-w-0 sm:col-span-1 sm:row-start-auto">
-                      <span className="block font-display uppercase text-2xl sm:text-4xl leading-[0.95]">{job.role}</span>
-                      <span className="mt-1 block text-sm text-ink/55">
-                        {job.company}
-                        {"remote" in job && job.remote && ", remote"}
-                      </span>
-                    </span>
-                    <span aria-hidden="true" className="col-start-2 row-start-1 grid h-10 w-10 place-items-center rounded-full border border-ink/20 text-rust transition-transform duration-300 group-open:rotate-45 sm:col-start-auto sm:row-start-auto">
-                      +
-                    </span>
-                  </summary>
-                  <ul className="grid gap-x-10 gap-y-3 pb-8 text-[15px] leading-relaxed text-ink/70 sm:pl-[calc(13rem+1.5rem)] lg:grid-cols-2">
+              <li key={job.company} data-rise className="grid gap-x-8 gap-y-2 border-t border-ink/10 pt-8 sm:grid-cols-[10.5rem_minmax(0,1fr)]">
+                <p className="whitespace-nowrap text-sm text-ink/45">{job.period}</p>
+                <div className="min-w-0">
+                  <h4 className="text-xl font-medium leading-snug text-ink/90">{job.role}</h4>
+                  <p className="mt-1 text-sm text-ink/55">
+                    {job.company}
+                    {"remote" in job && job.remote && ", remote"}
+                  </p>
+                  <ul className="mt-4 space-y-2 text-[15px] leading-relaxed text-ink/65">
                     {job.bullets.map((b) => (
-                      <li key={b} className="relative pl-5 before:absolute before:left-0 before:top-[0.65em] before:h-px before:w-2.5 before:bg-rust">
+                      <li key={b} className="relative pl-4 before:absolute before:left-0 before:top-[0.7em] before:h-px before:w-2 before:bg-ink/30">
                         {b}
                       </li>
                     ))}
                   </ul>
-                </details>
+                </div>
               </li>
             ))}
           </ol>
         </div>
 
         {/* Toolkit, studies and credentials */}
-        <div className="mt-32 sm:mt-40 grid gap-16 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+        <div className="mt-28 sm:mt-36 grid gap-16 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
           <div data-rise className="min-w-0">
-            <h3 className="font-display uppercase text-4xl sm:text-5xl leading-[0.9]">Toolkit</h3>
+            <h3 className="text-2xl sm:text-3xl font-medium tracking-[-0.01em]">Toolkit</h3>
             <div className="mt-6 grid gap-x-10 gap-y-8 sm:grid-cols-2">
               {/* Each group opens on demand: a full wall of skill names is noise. */}
               {skills.map((g) => (
@@ -176,7 +148,7 @@ export function PaperAbout() {
             </div>
           </div>
           <div id="certificates" data-rise className="min-w-0">
-            <h3 className="font-display uppercase text-4xl sm:text-5xl leading-[0.9]">Credentials</h3>
+            <h3 className="text-2xl sm:text-3xl font-medium tracking-[-0.01em]">Credentials</h3>
             <ul className="mt-6 grid grid-cols-2 gap-5">
               {certificates.map((c, i) => (
                 <li key={c.title}>
