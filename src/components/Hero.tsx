@@ -156,7 +156,7 @@ export default function Hero() {
         />
 
         {/* The name, between the plates */}
-        <div data-hero-name-wrap className="will-change-transform absolute inset-x-0 top-[25%] sm:top-[18%] lg:top-[12%] z-[2] flex justify-center pointer-events-none select-none"
+        <div data-hero-name-wrap className="will-change-transform absolute inset-x-0 top-[13%] sm:top-[16%] lg:top-[12%] z-[2] flex justify-center pointer-events-none select-none"
         >
           <h1 className="font-display uppercase text-center leading-[0.78] tracking-[-0.02em]">
             <span className="sr-only">Rishav Roy, Operations &amp; Automation Specialist</span>
@@ -184,7 +184,7 @@ export default function Hero() {
         </div>
 
         {/* "Roy", signed on the mountain */}
-        <p data-hero-signature aria-hidden="true" className="absolute z-[4] right-[8%] lg:right-[17%] top-[33%] lg:top-[34%] font-coffekan text-[15vw] lg:text-[8vw] leading-none text-accent -rotate-6 pointer-events-none select-none will-change-[transform,opacity] [text-shadow:0_4px_24px_rgba(0,0,0,0.6)]"
+        <p data-hero-signature aria-hidden="true" className="absolute z-[4] right-[8%] lg:right-[17%] top-[21%] sm:top-[28%] lg:top-[34%] font-coffekan text-[15vw] lg:text-[8vw] leading-none text-accent -rotate-6 pointer-events-none select-none will-change-[transform,opacity] [text-shadow:0_4px_24px_rgba(0,0,0,0.6)]"
         >
           Roy
         </p>
@@ -195,18 +195,6 @@ export default function Hero() {
 
         {/* Chrome */}
         <div data-hero-chrome className="will-change-[transform,opacity] relative z-20 flex flex-col h-full">
-          <div className="flex items-center justify-between px-6 sm:px-12 xl:px-24 py-6 font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] text-white/70">
-            <span>Rishav Roy</span>
-            <button
-              onClick={scrollToContact}
-              className="group flex items-center gap-2 px-3.5 py-2 rounded-full border border-emerald-400/30 bg-black/55 text-emerald-300 text-[10px] sm:text-[11px] font-semibold tracking-[0.15em] hover:border-emerald-400/60 transition-colors cursor-pointer"
-              aria-label="Available for hire, jump to contact"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse motion-reduce:animate-none" />
-              <span>Available for Hire</span>
-            </button>
-            <span className="hidden sm:block">Kolkata, India</span>
-          </div>
 
           <div className="flex-1 flex flex-col justify-end px-6 sm:px-12 xl:px-24 pb-24 sm:pb-14">
             <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 lg:gap-12">
