@@ -223,27 +223,37 @@ body {
  * the logo's wordmark is set. The AI work keeps its moonlight blue.
  */
 .studio {
-  --background: #110d14;
-  --surface: #1a1520;
-  --surface-2: #221b2a;
-  --foreground: #efe9f3;
-  --muted: rgba(239, 233, 243, 0.66);
-  --border: rgba(239, 233, 243, 0.1);
-  --accent: #c6b3ff;
-  --accent-rgb: 198, 179, 255;
-  --color-white: #efe9f3;
-  --color-black: #110d14;
-  --color-paper: #110d14;
-  --color-paper-2: #1c1622;
-  --color-ink: #efe9f3;
-  --color-rust: #c6b3ff;
+  /* The one place the studio palette lives: change these to re-theme it. */
+  --s-bg: #110d14;
+  --s-surface: #1a1520;
+  --s-surface-2: #221b2a;
+  --s-paper-2: #1c1622;
+  --s-ink: #efe9f3;
+  --s-ink-rgb: 239, 233, 243;
+  --s-accent: #c6b3ff;
+  --s-accent-rgb: 198, 179, 255;
+  --s-bezel: #2d2536;
+  --background: var(--s-bg);
+  --surface: var(--s-surface);
+  --surface-2: var(--s-surface-2);
+  --foreground: var(--s-ink);
+  --muted: rgba(var(--s-ink-rgb), 0.66);
+  --border: rgba(var(--s-ink-rgb), 0.1);
+  --accent: var(--s-accent);
+  --accent-rgb: var(--s-accent-rgb);
+  --color-white: var(--s-ink);
+  --color-black: var(--s-bg);
+  --color-paper: var(--s-bg);
+  --color-paper-2: var(--s-paper-2);
+  --color-ink: var(--s-ink);
+  --color-rust: var(--s-accent);
   /* Theme tokens resolve at :root, so remap the resolved ones too. */
-  --color-background: #110d14;
-  --color-foreground: #efe9f3;
-  --color-surface: #1a1520;
-  --color-surface-2: #221b2a;
-  --color-accent: #c6b3ff;
-  --color-border-muted: rgba(239, 233, 243, 0.1);
+  --color-background: var(--s-bg);
+  --color-foreground: var(--s-ink);
+  --color-surface: var(--s-surface);
+  --color-surface-2: var(--s-surface-2);
+  --color-accent: var(--s-accent);
+  --color-border-muted: rgba(var(--s-ink-rgb), 0.1);
   --font-sans: var(--font-studio), sans-serif;
   --font-display: var(--font-studio), sans-serif;
   font-family: var(--font-studio), sans-serif;
@@ -253,7 +263,7 @@ body {
 body:has(main.studio) { background-color: #110d14; }
 /* The studio sets headings the way the mark's wordmark is drawn: no shouting. */
 .studio .font-display { text-transform: none; font-weight: 500; letter-spacing: -0.03em; }
-.studio ::selection { background-color: #c6b3ff; color: #110d14; }
+.studio ::selection { background-color: var(--s-accent); color: var(--s-bg); }
 
 /* v10 trail: a station's lamp lights when the walker reaches it. */
 .trail-lamp { transition: background-color 0.6s, border-color 0.6s, box-shadow 0.6s; }
@@ -276,8 +286,8 @@ a, button { touch-action: manipulation; }
 
 /* /atelier process path: a step's lamp lights when you reach it. */
 .process-lamp { transition: background-color 0.5s, border-color 0.5s, box-shadow 0.5s; }
-.process-step.is-lit .process-lamp { background-color: #c6b3ff; border-color: #c6b3ff; box-shadow: 0 0 18px rgba(198, 179, 255, 0.5); }
-@media (prefers-reduced-motion: reduce) { .process-lamp { background-color: #c6b3ff; border-color: #c6b3ff; } }
+.process-step.is-lit .process-lamp { background-color: var(--s-accent); border-color: var(--s-accent); box-shadow: 0 0 18px rgba(var(--s-accent-rgb), 0.5); }
+@media (prefers-reduced-motion: reduce) { .process-lamp { background-color: var(--s-accent); border-color: var(--s-accent); } }
 
 /* ── /atelier micro-motion: slow, small, transform and opacity only ── */
 .typing span:nth-child(2) { animation-delay: 0.15s; }

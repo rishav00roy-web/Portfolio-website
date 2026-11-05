@@ -157,7 +157,7 @@ function Stage({ e }: { e: Entry }) {
   return (
     <div className="relative overflow-hidden rounded-2xl bg-paper-2/60">
       <svg aria-hidden="true" viewBox="0 0 400 250" fill="none" className="absolute inset-0 h-full w-full">
-        <path d="M-10 210 C 70 150, 140 250, 220 190 S 340 90, 410 120" stroke="rgba(239, 233, 243,0.10)" strokeWidth="1.2" strokeLinecap="round" />
+        <path d="M-10 210 C 70 150, 140 250, 220 190 S 340 90, 410 120" style={{ stroke: "rgba(var(--s-ink-rgb), 0.10)" }} strokeWidth="1.2" strokeLinecap="round" />
       </svg>
       {e.stage ? (
         <div className="relative p-4 sm:p-8">
@@ -186,7 +186,7 @@ function Stage({ e }: { e: Entry }) {
             </div>
           </div>
           {e.phone && (
-            <div className="absolute bottom-6 right-6 hidden w-[17%] rotate-[4deg] lg:block overflow-hidden rounded-[1.3rem] border-[3px] border-[#2d2536] bg-paper shadow-[0_30px_60px_-20px_rgba(0,0,0,0.95)] transition-transform duration-300 ease-out-expo group-hover:-translate-y-2 lg:right-[38%] lg:w-[11%]">
+            <div className="absolute bottom-6 right-6 hidden w-[17%] rotate-[4deg] lg:block overflow-hidden rounded-[1.3rem] border-[3px] border-[var(--s-bezel)] bg-paper shadow-[0_30px_60px_-20px_rgba(0,0,0,0.95)] transition-transform duration-300 ease-out-expo group-hover:-translate-y-2 lg:right-[38%] lg:w-[11%]">
               <div className="relative aspect-[390/844]">
                 <Image src={e.phone} alt={`${e.title}, on a phone`} fill sizes="12vw" className="object-cover object-top" />
               </div>
@@ -208,7 +208,7 @@ function Stage({ e }: { e: Entry }) {
           </div>
           {/* Phone, leaning in front, taken from the live site */}
           {e.phone && (
-            <div className="absolute bottom-5 right-5 w-[26%] rotate-2 overflow-hidden rounded-[1.3rem] border-[3px] border-[#2d2536] bg-paper shadow-[0_30px_60px_-20px_rgba(0,0,0,0.95)] transition-transform duration-300 ease-out-expo group-hover:-translate-y-2 sm:bottom-8 sm:right-10">
+            <div className="absolute bottom-5 right-5 w-[26%] rotate-2 overflow-hidden rounded-[1.3rem] border-[3px] border-[var(--s-bezel)] bg-paper shadow-[0_30px_60px_-20px_rgba(0,0,0,0.95)] transition-transform duration-300 ease-out-expo group-hover:-translate-y-2 sm:bottom-8 sm:right-10">
               <div className="relative aspect-[390/844]">
                 <Image src={e.phone} alt={`${e.title}, on a phone`} fill sizes="(max-width: 1023px) 26vw, 12vw" className="object-cover object-top" />
               </div>
