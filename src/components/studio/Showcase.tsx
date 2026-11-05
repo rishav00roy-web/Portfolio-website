@@ -1,0 +1,349 @@
+"use client";
+
+import { useMemo, useRef, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, LayoutGrid, Rows3 } from "lucide-react";
+import { SupportStage, InvoiceStage } from "../v5/AIStage";
+import { SERVICES, PROCESS } from "./Sheet";
+import { commissions, otherWork } from "@/lib/work";
+import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
+
+/*
+ * /atelier-3: the studio's work as a showroom. Each project sits on its own
+ * lit stage, the desktop build in a browser frame with the real phone view
+ * (captured from the live site) leaning in front. Filters with counts split
+ * websites from products; a toggle swaps the stages for a compact list.
+ * Behind the stages: the AS mark's construction circles, in Atelier's
+ * graphite and lime.
+ */
+
+type Kind = "website" | "product";
+type Entry = {
+  key: string;
+  title: string;
+  description: string;
+  kind: Kind;
+  discipline: string;
+  image?: string;
+  phone?: string;
+  stage?: "support" | "invoice";
+  href: string;
+  internal: boolean;
+  cta: string;
+};
+
+const PHONES: Record<string, string> = {
+  "tea-country-holidays": "/assets/projects/mobile/tea-country-holidays.webp",
+  "iq-iron-fitness": "/assets/projects/mobile/iq-iron-fitness.webp",
+  "clash-bazar": "/assets/projects/mobile/clash-bazar.webp",
+  "personal-portfolio-v2": "/assets/projects/mobile/personal-portfolio-v2.webp",
+};
+
+const host = (href: string) => {
+  try {
+    return new URL(href).hostname.replace(/^www\./, "");
+  } catch {
+    return undefined;
+  }
+};
+
+const ENTRIES: Entry[] = [
+  ...commissions.map((p) => ({
+    key: p.slug,
+    title: p.title,
+    description: p.description,
+    kind: "website" as const,
+    discipline: p.status === "Live" ? "Client build, live" : "Client build, in progress",
+    image: p.images[0],
+    phone: PHONES[p.slug],
+    href: `/projects/${p.slug}`,
+    internal: true,
+    cta: "Case study",
+  })),
+  ...otherWork
+    .filter((w) => w.preview && w.id !== "job-tracker-and-email-tracker" && w.id !== "gym-crm")
+    .map((w) => ({
+      key: w.id,
+      title: w.title,
+      description: w.description,
+      kind: "website" as const,
+      discipline: "Design and build",
+      image: w.preview,
+      phone: PHONES[w.id],
+      href: w.href,
+      internal: false,
+      cta: w.href.includes("github.com") ? "Read the code" : "Visit site",
+    })),
+  {
+    key: "job-tracker",
+    title: "Job tracker",
+    description: "Runs a job hunt on its own: scores listings from 54 platforms, tracks the inbox and tailors the résumé, truthfully.",
+    kind: "product",
+    discipline: "AI agent",
+    image: "/assets/projects/job-tracker-full.png",
+    href: "https://github.com/rishav00roy-web/JOB-TRACKER-AND-EMAIL-TRACKER",
+    internal: false,
+    cta: "Read the code",
+  },
+  {
+    key: "support-agent",
+    title: "Support agent",
+    description: "Answers a business's customers from its own information, any hour, and hands over to a person when it should.",
+    kind: "product",
+    discipline: "AI agent, live on this site",
+    stage: "support",
+    href: "#chat",
+    internal: false,
+    cta: "Try it now",
+  },
+  {
+    key: "invoice-reader",
+    title: "Invoice reader",
+    description: "Reads invoices and receipts and pulls out the vendor, date and amounts, so nobody types them in by hand.",
+    kind: "product",
+    discipline: "AI tool, demos on request",
+    stage: "invoice",
+    href: "#contact",
+    internal: false,
+    cta: "Book a demo",
+  },
+  ...otherWork
+    .filter((w) => w.id === "gym-crm")
+    .map((w) => ({
+      key: w.id,
+      title: "Gym CRM",
+      description: w.description,
+      kind: "product" as const,
+      discipline: "Offline-first tool",
+      image: w.preview,
+      href: w.href,
+      internal: false,
+      cta: "Read the code",
+    })),
+];
+
+const FILTERS: { id: "all" | Kind; label: string }[] = [
+  { id: "all", label: "All" },
+  { id: "website", label: "Websites" },
+  { id: "product", label: "AI and products" },
+];
+
+const openChat = () => document.querySelector<HTMLButtonElement>('[aria-label="Open Psunk AI Chat"]')?.click();
+
+/** The lit stage a project stands on: spotlight, the mark's construction circles, the devices. */
+function Stage({ e }: { e: Entry }) {
+  return (
+    <div className="relative overflow-hidden rounded-2xl bg-[radial-gradient(70%_60%_at_50%_0%,rgba(232,235,228,0.07),transparent_70%)] bg-paper-2/60">
+      <span aria-hidden="true" className="absolute left-1/2 top-1/2 h-[120%] aspect-square -translate-x-1/2 -translate-y-1/2 rounded-full border border-ink/[0.06]" />
+      <span aria-hidden="true" className="absolute left-1/2 top-1/2 h-[80%] aspect-square -translate-x-1/2 -translate-y-1/2 rounded-full border border-ink/[0.06]" />
+      {e.stage ? (
+        <div className="relative p-4 sm:p-8">
+          <div className="mx-auto max-w-xl">{e.stage === "support" ? <SupportStage /> : <InvoiceStage />}</div>
+        </div>
+      ) : (
+        <div className="relative px-5 pt-8 pb-8 sm:px-10 sm:pt-12 sm:pb-12">
+          {/* Browser frame */}
+          <div className={`overflow-hidden rounded-lg border border-ink/15 bg-paper shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)] transition-transform duration-700 ease-out-expo group-hover:-translate-y-1 ${e.phone ? "mr-[18%]" : ""}`}>
+            <div className="flex h-6 items-center gap-1.5 border-b border-ink/10 px-3" aria-hidden="true">
+              <span className="h-1.5 w-1.5 rounded-full bg-ink/25" />
+              <span className="h-1.5 w-1.5 rounded-full bg-ink/25" />
+              <span className="h-1.5 w-1.5 rounded-full bg-ink/25" />
+            </div>
+            <div className="relative aspect-[16/10]">
+              <Image src={e.image!} alt={`${e.title}, desktop`} fill sizes="(max-width: 1023px) 90vw, 40vw" className="object-cover object-top" />
+            </div>
+          </div>
+          {/* Phone, leaning in front, taken from the live site */}
+          {e.phone && (
+            <div className="absolute bottom-5 right-5 w-[26%] overflow-hidden rounded-[1.1rem] border-[3px] border-[#2a3233] bg-paper shadow-[0_30px_60px_-20px_rgba(0,0,0,0.95)] transition-transform duration-700 ease-out-expo group-hover:-translate-y-2 sm:bottom-8 sm:right-10">
+              <div className="relative aspect-[390/844]">
+                <Image src={e.phone} alt={`${e.title}, on a phone`} fill sizes="(max-width: 1023px) 26vw, 12vw" className="object-cover object-top" />
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function Action({ e, className, children }: { e: Entry; className: string; children: React.ReactNode }) {
+  if (e.internal) return <Link href={e.href} className={className}>{children}</Link>;
+  if (e.href === "#chat")
+    return (
+      <button type="button" onClick={openChat} className={className}>
+        {children}
+      </button>
+    );
+  if (e.href.startsWith("#")) return <a href={e.href} className={className}>{children}</a>;
+  return (
+    <a href={e.href} target="_blank" rel="noopener noreferrer" className={className}>
+      {children}
+    </a>
+  );
+}
+
+export default function Showcase() {
+  const root = useRef<HTMLDivElement>(null);
+  const [filter, setFilter] = useState<"all" | Kind>("all");
+  const [view, setView] = useState<"stage" | "list">("stage");
+  const shown = useMemo(() => ENTRIES.filter((e) => filter === "all" || e.kind === filter), [filter]);
+  const count = (id: "all" | Kind) => (id === "all" ? ENTRIES.length : ENTRIES.filter((e) => e.kind === id).length);
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.from("[data-intro]", { y: 24, opacity: 0, duration: 1.2, stagger: 0.08, ease: "expo.out", delay: 0.1 });
+        gsap.set("[data-rise]", { y: 36, opacity: 0 });
+        ScrollTrigger.batch("[data-rise]", {
+          start: "top 90%",
+          once: true,
+          onEnter: (els) => gsap.to(els, { y: 0, opacity: 1, duration: 1.1, stagger: 0.08, ease: "expo.out" }),
+        });
+      });
+      return () => mm.revert();
+    },
+    { scope: root, dependencies: [filter, view], revertOnUpdate: true },
+  );
+
+  return (
+    <div ref={root} className="studio-dots">
+      <section id="projects" aria-labelledby="work-title" className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-16 sm:pt-28">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end">
+          <h1 id="work-title" data-intro className="font-display text-[18vw] sm:text-[8.5rem] leading-[0.85]">
+            Work<span className="text-rust">.</span>
+          </h1>
+          <p data-intro className="max-w-md text-xl leading-snug text-ink/75 lg:pb-4">
+            Websites, automation and AI products by Atelier Systems, the studio Rishav Roy runs. Each one designed and built end to end.
+          </p>
+        </div>
+
+        {/* Filters with counts, and the view toggle */}
+        <div data-intro className="mt-14 flex flex-wrap items-center justify-between gap-4 border-b border-ink/10 pb-6">
+          <div role="group" aria-label="Filter the work" className="flex flex-wrap gap-2">
+            {FILTERS.map((f) => {
+              const on = filter === f.id;
+              return (
+                <button
+                  key={f.id}
+                  type="button"
+                  aria-pressed={on}
+                  onClick={() => setFilter(f.id)}
+                  className={`inline-flex min-h-11 items-center gap-2 rounded-full px-5 text-base transition-colors ${
+                    on ? "bg-ink text-paper" : "border border-ink/20 text-ink/75 hover:border-ink/50 hover:text-ink"
+                  }`}
+                >
+                  {f.label}
+                  <span className={`text-sm tabular-nums ${on ? "text-paper/60" : "text-ink/40"}`}>{count(f.id)}</span>
+                </button>
+              );
+            })}
+          </div>
+          <div role="group" aria-label="Layout" className="flex rounded-full border border-ink/15 p-1">
+            {(
+              [
+                ["stage", "Stages", LayoutGrid],
+                ["list", "List", Rows3],
+              ] as const
+            ).map(([id, label, Icon]) => (
+              <button
+                key={id}
+                type="button"
+                aria-pressed={view === id}
+                onClick={() => setView(id)}
+                className={`inline-flex min-h-10 items-center gap-2 rounded-full px-4 text-base transition-colors ${
+                  view === id ? "bg-ink/10 text-ink" : "text-ink/55 hover:text-ink"
+                }`}
+              >
+                <Icon className="h-4 w-4" aria-hidden="true" />
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {view === "stage" ? (
+          <ul className="mt-12 grid gap-6 lg:grid-cols-2">
+            {shown.map((e, i) => (
+              <li key={e.key} data-rise className="group flex flex-col rounded-3xl border border-ink/10 bg-paper/80 p-3 sm:p-4 transition-colors duration-500 hover:border-ink/25">
+                <div className="flex items-baseline justify-between px-2 pb-3 pt-1 text-base">
+                  <span className="tabular-nums">
+                    <span className="text-rust">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="text-ink/35"> / {String(shown.length).padStart(2, "0")}</span>
+                  </span>
+                  <span className="text-ink/50">{e.kind === "website" ? "Website" : "Product"}</span>
+                </div>
+                <Stage e={e} />
+                <div className="flex flex-1 flex-col px-2 pt-6 pb-2">
+                  <h2 className="text-3xl font-medium tracking-[-0.01em]">{e.title}</h2>
+                  <p className="mt-3 text-lg leading-relaxed text-ink/60 line-clamp-3">{e.description}</p>
+                  <div className="mt-auto flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-ink/10 pt-5 mt-6 text-base">
+                    <span className="text-ink/50">{e.discipline}</span>
+                    {!e.internal && host(e.href) && <span className="hidden text-ink/40 sm:inline">{host(e.href)}</span>}
+                    <Action e={e} className="inline-flex min-h-11 items-center gap-2 text-rust hover:opacity-80">
+                      {e.cta} <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
+                    </Action>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <ol className="mt-6">
+            {shown.map((e, i) => (
+              <li key={e.key} data-rise className="group grid grid-cols-[3rem_minmax(0,1fr)] items-center gap-4 border-b border-ink/10 py-5 sm:grid-cols-[3rem_9rem_minmax(0,1fr)_auto] sm:gap-8">
+                <span className="text-base tabular-nums text-rust">{String(i + 1).padStart(2, "0")}</span>
+                <span className="relative hidden aspect-[16/10] overflow-hidden rounded-md border border-ink/10 bg-paper-2 sm:block">
+                  {e.image && <Image src={e.image} alt="" fill sizes="9rem" className="object-cover object-top" />}
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-2xl font-medium">{e.title}</span>
+                  <span className="mt-1 block text-base text-ink/50">{e.discipline}</span>
+                </span>
+                <Action e={e} className="col-start-2 inline-flex min-h-11 items-center gap-2 text-base text-rust hover:opacity-80 sm:col-start-auto">
+                  {e.cta} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Action>
+              </li>
+            ))}
+          </ol>
+        )}
+      </section>
+
+      {/* What the studio does, and how a project runs: two quiet columns */}
+      <section id="process" aria-labelledby="services-title" className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-32 sm:pt-44 pb-24">
+        <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
+          <div>
+            <h2 id="services-title" data-rise className="font-display text-5xl sm:text-6xl leading-[0.95]">What the studio does</h2>
+            <ul className="mt-10">
+              {SERVICES.map((sv) => (
+                <li key={sv.name} data-rise className="border-t border-ink/10 py-5">
+                  <span className="block text-xl text-ink/90">{sv.name}</span>
+                  <span className="mt-1 block text-lg leading-relaxed text-ink/55">{sv.detail}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h2 data-rise className="font-display text-5xl sm:text-6xl leading-[0.95]">How a project runs</h2>
+            <ol className="mt-10">
+              {PROCESS.map((p, i) => (
+                <li key={p.name} data-rise className="grid grid-cols-[3rem_minmax(0,1fr)] border-t border-ink/10 py-5">
+                  <span className="text-base tabular-nums text-rust">{String(i + 1).padStart(2, "0")}</span>
+                  <span>
+                    <span className="block text-xl text-ink/90">{p.name}</span>
+                    <span className="mt-1 block text-lg leading-relaxed text-ink/55">{p.detail}</span>
+                  </span>
+                </li>
+              ))}
+            </ol>
+            <a data-rise href="#contact" className="mt-10 inline-flex min-h-12 items-center gap-2 rounded-full bg-rust px-7 py-3.5 text-base font-semibold text-paper hover:opacity-90 transition-opacity">
+              Start a project <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}

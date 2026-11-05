@@ -65,7 +65,7 @@ function TrackerStage() {
   );
 }
 
-function SupportStage() {
+export function SupportStage() {
   const turns = [
     { me: false, text: "Hi! Ask me anything about our packages or prices." },
     { me: true, text: "Do you have a 5-day Kerala trip in December?" },
@@ -96,7 +96,7 @@ function SupportStage() {
   );
 }
 
-function InvoiceStage() {
+export function InvoiceStage() {
   const lines = [
     ["Printer paper, 20 reams", "6,200.00"],
     ["Toner cartridges", "9,800.00"],
