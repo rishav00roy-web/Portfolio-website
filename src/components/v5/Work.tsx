@@ -21,6 +21,29 @@ const ai = otherWork.find((w) => w.id === AI_ID)!;
 const tools = otherWork.filter((w) => w.id === "gym-crm");
 const sites = otherWork.filter((w) => w.id !== AI_ID && w.id !== "gym-crm");
 
+/*
+ * The two other AI products alongside the job tracker. The support agent is
+ * the chat running on this site, so the card opens it; the invoice reader
+ * is being set up, so it offers a demo rather than a link.
+ */
+const AI_PRODUCTS = [
+  {
+    name: "Support agent",
+    detail:
+      "A chat assistant that answers a business's customers from its own information, any hour of the day. The one on this site is it.",
+    action: "chat" as const,
+  },
+  {
+    name: "Invoice reader",
+    detail:
+      "Reads invoices and receipts and pulls out the vendor, date and amounts, so nobody types them into a spreadsheet by hand.",
+    action: "demo" as const,
+  },
+];
+
+const openChat = () =>
+  document.querySelector<HTMLButtonElement>('[aria-label="Open Psunk AI Chat"]')?.click();
+
 const AI_STAGES = [
   { name: "Ingest and score", detail: "Pulls listings from 54 job platforms and scores each one." },
   { name: "Track the inbox", detail: "Moves each Kanban card on an interview or a rejection email, on its own." },
@@ -268,7 +291,7 @@ export default function Work({ layout = "rows" }: { layout?: WorkLayout }) {
             AI &amp; Agents
           </h2>
           <p data-rise className="mt-6 max-w-xl text-lg leading-relaxed text-ink/65">
-            Not websites: systems that do the work themselves. Shown as what they run.
+            Not websites: three AI products that do the work themselves.
           </p>
 
           <article className="mt-16 sm:mt-24">
@@ -308,6 +331,34 @@ export default function Work({ layout = "rows" }: { layout?: WorkLayout }) {
               </figure>
             )}
           </article>
+
+          {/* The other two AI products */}
+          <ul data-rise className="mt-20 grid gap-5 md:grid-cols-2">
+            {AI_PRODUCTS.map((a) => (
+              <li key={a.name} className="flex flex-col rounded-3xl border border-moon/25 bg-[rgba(159,194,214,0.04)] p-7 sm:p-9">
+                <h3 className="font-display uppercase text-4xl leading-[0.9]">{a.name}</h3>
+                <p className="mt-4 flex-1 text-[15px] leading-relaxed text-ink/65">{a.detail}</p>
+                {a.action === "chat" ? (
+                  <button
+                    type="button"
+                    onClick={openChat}
+                    className="mt-8 inline-flex items-center gap-1.5 self-start rounded-full bg-moon px-5 py-3 text-sm font-semibold text-paper hover:opacity-90 transition-opacity"
+                  >
+                    Try it now
+                    <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                  </button>
+                ) : (
+                  <a
+                    href="#contact"
+                    className="mt-8 inline-flex items-center gap-1.5 self-start rounded-full border border-moon/50 px-5 py-3 text-sm font-semibold text-moon hover:border-moon transition-colors"
+                  >
+                    Book a demo
+                    <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
 
           {tools.map((w) => (
             <a
