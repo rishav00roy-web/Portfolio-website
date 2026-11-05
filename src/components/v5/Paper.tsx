@@ -45,23 +45,22 @@ export function PaperAbout() {
   return (
     <section ref={root} id="about" aria-labelledby="v5-about" className="relative z-10 bg-paper">
       <div className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-28 sm:pt-40 pb-24 sm:pb-32">
-        {/* Epigraph */}
-        <figure data-rise className="mx-auto max-w-3xl text-center">
-          <blockquote className="font-display text-3xl sm:text-5xl leading-[1.08] tracking-[-0.01em]">
-            &ldquo;I can do all things through Christ which strengtheneth me.&rdquo;
-          </blockquote>
-          <figcaption className="mt-4 text-sm font-medium text-rust">Philippians 4:13</figcaption>
-        </figure>
-
-        <div className="mt-28 sm:mt-40 grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
           <div className="min-w-0">
             <p data-rise className="text-sm text-rust">Part three</p>
-            <h2 id="v5-about" data-rise className="mt-2 font-display uppercase text-[19vw] sm:text-[12vw] lg:text-[9vw] leading-[0.8] tracking-[-0.03em] lg:sticky lg:top-24">
-              About
-            </h2>
+            <div className="lg:sticky lg:top-24">
+              <h2 id="v5-about" data-rise className="mt-2 font-display uppercase text-[14vw] sm:text-7xl xl:text-8xl leading-[0.85] tracking-[-0.02em]">
+                About
+              </h2>
+              {/* Quiet, like a note in the margin */}
+              <p data-rise className="mt-6 max-w-xs text-sm leading-relaxed text-ink/40">
+                I can do all things through Christ which strengtheneth me.
+                <span className="block mt-1 text-ink/55">Philippians 4:13</span>
+              </p>
+            </div>
           </div>
           <div className="min-w-0">
-            <p data-rise className="font-display text-3xl sm:text-4xl xl:text-5xl leading-[1.08] tracking-[-0.01em]">
+            <p data-rise className="font-display text-3xl sm:text-4xl leading-[1.1] tracking-[-0.01em]">
               {bio[0]}
             </p>
             <div data-rise className="mt-10 space-y-5 text-lg leading-relaxed text-ink/70 max-w-[62ch]">
@@ -106,7 +105,7 @@ export function PaperAbout() {
 
         {/* Experience */}
         <div className="mt-32 sm:mt-40">
-          <h3 data-rise className="font-display uppercase text-5xl sm:text-7xl leading-[0.85]">Experience</h3>
+          <h3 data-rise className="font-display uppercase text-4xl sm:text-5xl leading-[0.9]">Experience</h3>
           <ol className="mt-10 border-t border-ink/15">
             {experience.map((job, i) => (
               <li key={job.company} data-rise className="border-b border-ink/15">
@@ -140,7 +139,7 @@ export function PaperAbout() {
         {/* Toolkit, studies and credentials */}
         <div className="mt-32 sm:mt-40 grid gap-16 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
           <div data-rise className="min-w-0">
-            <h3 className="font-display uppercase text-5xl sm:text-7xl leading-[0.85]">Toolkit</h3>
+            <h3 className="font-display uppercase text-4xl sm:text-5xl leading-[0.9]">Toolkit</h3>
             <div className="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2">
               {skills.map((g) => (
                 <div key={g.category}>
@@ -162,7 +161,7 @@ export function PaperAbout() {
             </div>
           </div>
           <div id="certificates" data-rise className="min-w-0">
-            <h3 className="font-display uppercase text-5xl sm:text-7xl leading-[0.85]">Credentials</h3>
+            <h3 className="font-display uppercase text-4xl sm:text-5xl leading-[0.9]">Credentials</h3>
             <ul className="mt-10 grid grid-cols-2 gap-5">
               {certificates.map((c, i) => (
                 <li key={c.title}>
@@ -205,7 +204,7 @@ export function PaperContact() {
       <div className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-32 sm:pt-44 pb-10">
         <div className="text-center">
           <p data-rise className="text-sm text-accent">Part four</p>
-          <h2 data-rise className="mt-3 font-display uppercase text-[15vw] sm:text-[11vw] xl:text-[9.5vw] leading-[0.82] tracking-[-0.03em]">
+          <h2 data-rise className="mt-3 font-display uppercase text-[13vw] sm:text-7xl xl:text-8xl leading-[0.86] tracking-[-0.02em]">
             Let&apos;s build
             <br />
             something
@@ -215,7 +214,7 @@ export function PaperContact() {
           <a
             data-rise
             href={`mailto:${PROFILE.email}`}
-            className="mt-14 inline-block break-all font-display text-3xl sm:text-6xl underline decoration-white/20 decoration-1 underline-offset-[0.18em] hover:text-accent hover:decoration-accent transition-colors"
+            className="mt-14 inline-block break-all font-display text-2xl sm:text-4xl underline decoration-white/20 decoration-1 underline-offset-[0.18em] hover:text-accent hover:decoration-accent transition-colors"
           >
             {PROFILE.email}
           </a>

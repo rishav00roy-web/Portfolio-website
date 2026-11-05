@@ -42,10 +42,6 @@ export default function Work() {
           once: true,
           onEnter: (els) => gsap.to(els, { y: 0, opacity: 1, duration: 1, stagger: 0.08, ease: "expo.out" }),
         });
-        // Each panel's picture settles from a slight zoom as the panel arrives.
-        gsap.utils.toArray<HTMLElement>("[data-panel-img]").forEach((img) => {
-          gsap.fromTo(img, { scale: 1.12 }, { scale: 1, ease: "none", scrollTrigger: { trigger: img, start: "top bottom", end: "top top", scrub: true } });
-        });
       });
       return () => mm.revert();
     },
@@ -73,68 +69,54 @@ export default function Work() {
       <section id="projects" aria-labelledby="w-sites">
         <header className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-28 sm:pt-40 pb-14 sm:pb-20">
           <p data-rise className="text-sm text-rust">Part one</p>
-          <h2 id="w-sites" data-rise className="mt-2 font-display uppercase text-[19vw] sm:text-[13vw] xl:text-[11vw] leading-[0.8] tracking-[-0.03em]">
+          <h2 id="w-sites" data-rise className="mt-2 font-display uppercase text-[14vw] sm:text-7xl xl:text-8xl leading-[0.85] tracking-[-0.02em]">
             Websites
           </h2>
           <p data-rise className="mt-6 max-w-xl text-lg leading-relaxed text-ink/65">
-            Built for real businesses. Three paid client builds first, each with a full case study, then everything else.
+            Built for real businesses. Three paid client builds first, each with a full case study, then the rest.
           </p>
         </header>
 
-        {/* Paid builds: full-screen panels that stack as you scroll */}
-        <ol>
+        {/* Paid builds: calm rows, picture and words side by side */}
+        <ol className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20">
           {commissions.map((p, i) => (
-            <li key={p.id} className="sticky top-0 h-[100svh] overflow-hidden border-t border-white/10 bg-paper" style={{ zIndex: i + 1 }}>
-              <article className="relative h-full">
-                <div className="absolute inset-0 overflow-hidden">
-                  <Image
-                    data-panel-img
-                    src={p.images[0]}
-                    alt={`${p.title}, home page`}
-                    fill
-                    sizes="100vw"
-                    className="object-cover object-top will-change-transform"
-                  />
-                  <span className="absolute inset-0 bg-gradient-to-t from-paper via-paper/80 to-paper/10" />
-                  <span className="absolute inset-0 bg-gradient-to-r from-paper/70 to-transparent" />
-                </div>
-
-                <div className="relative mx-auto flex h-full max-w-[1440px] flex-col justify-end px-6 sm:px-12 xl:px-20 pb-14 sm:pb-20">
-                  <p className="font-mono text-sm text-rust">
-                    0{i + 1} / 0{commissions.length}
+            <li key={p.id} data-rise className="border-t border-ink/10 py-14 sm:py-20">
+              <article className="grid gap-8 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:items-center lg:gap-16">
+                <Link href={`/projects/${p.slug}`} className="group block overflow-hidden rounded-2xl ring-1 ring-ink/10">
+                  <span className="relative block aspect-[16/10]">
+                    <Image
+                      src={p.images[0]}
+                      alt={`${p.title}, home page`}
+                      fill
+                      sizes="(max-width: 1023px) 100vw, 700px"
+                      className="object-cover object-top opacity-90 transition-[opacity,transform] duration-700 ease-out-expo group-hover:opacity-100 group-hover:scale-[1.02]"
+                    />
+                  </span>
+                </Link>
+                <div className="min-w-0">
+                  <p className="text-sm text-ink/50">
+                    {String(i + 1).padStart(2, "0")}, paid client build, {p.status.toLowerCase()}
                   </p>
-                  <h3 className="mt-3 font-display uppercase text-[15vw] sm:text-[10vw] xl:text-[8.5vw] leading-[0.82] tracking-[-0.02em] [overflow-wrap:break-word] min-w-0">
+                  <h3 className="mt-2 font-display uppercase text-4xl sm:text-5xl leading-[0.92] [overflow-wrap:break-word]">
                     <Link href={`/projects/${p.slug}`} className="hover:text-rust transition-colors">
                       {p.title}
                     </Link>
                   </h3>
-                  <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
-                    <div className="max-w-2xl">
-                      <p className="text-base sm:text-lg leading-relaxed text-ink/80">{p.description}</p>
-                      <p className="mt-3 text-sm text-ink/55">
-                        Paid client build, {p.status.toLowerCase()}. {p.client}, {p.period}.
-                      </p>
-                    </div>
-                    <div className="flex flex-wrap gap-3">
-                      <Link
-                        href={`/projects/${p.slug}`}
-                        className="inline-flex items-center gap-2 rounded-full bg-rust px-6 py-3.5 text-sm font-semibold text-paper hover:opacity-90 transition-opacity"
-                      >
-                        Read the case study
+                  <p className="mt-4 text-[15px] sm:text-base leading-relaxed text-ink/70">{p.description}</p>
+                  <p className="mt-3 text-sm text-ink/45">
+                    {p.client}, {p.period}
+                  </p>
+                  <div className="mt-6 flex flex-wrap items-center gap-5 text-sm">
+                    <Link href={`/projects/${p.slug}`} className="inline-flex items-center gap-1.5 font-medium text-rust hover:opacity-80 transition-opacity">
+                      Read the case study
+                      <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                    </Link>
+                    {p.live && (
+                      <a href={p.live} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-ink/70 hover:text-ink transition-colors">
+                        Visit the site
                         <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                      </Link>
-                      {p.live && (
-                        <a
-                          href={p.live}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 rounded-full border border-ink/30 bg-paper/50 px-6 py-3.5 text-sm text-ink hover:border-ink transition-colors"
-                        >
-                          Visit the site
-                          <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                        </a>
-                      )}
-                    </div>
+                      </a>
+                    )}
                   </div>
                 </div>
               </article>
@@ -143,9 +125,9 @@ export default function Work() {
         </ol>
 
         {/* Everything else: a swipeable strip */}
-        <div className="relative z-10 bg-paper pt-24 sm:pt-32">
+        <div className="relative z-10 bg-paper pt-16 sm:pt-24">
           <header className="mx-auto flex max-w-[1440px] items-end justify-between gap-6 px-6 sm:px-12 xl:px-20">
-            <h3 data-rise className="font-display uppercase text-5xl sm:text-7xl leading-[0.88]">More sites</h3>
+            <h3 data-rise className="font-display uppercase text-3xl sm:text-5xl leading-[0.9]">More sites</h3>
             <div className="flex shrink-0 gap-2">
               <button type="button" onClick={() => nudge(-1)} aria-label="Previous site" className="grid h-12 w-12 place-items-center rounded-full border border-ink/20 hover:border-rust hover:text-rust transition-colors">
                 <ArrowLeft className="h-5 w-5" aria-hidden="true" />
@@ -197,7 +179,7 @@ export default function Work() {
       >
         <div className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-24 sm:pt-32 pb-24">
           <p data-rise className="text-sm text-moon">Part two</p>
-          <h2 id="w-ai" data-rise className="mt-2 font-display uppercase text-[19vw] sm:text-[13vw] xl:text-[11vw] leading-[0.8] tracking-[-0.03em] text-moon">
+          <h2 id="w-ai" data-rise className="mt-2 font-display uppercase text-[14vw] sm:text-7xl xl:text-8xl leading-[0.85] tracking-[-0.02em] text-moon">
             AI &amp; Agents
           </h2>
           <p data-rise className="mt-6 max-w-xl text-lg leading-relaxed text-ink/65">
@@ -206,7 +188,7 @@ export default function Work() {
 
           <article className="mt-16 sm:mt-24">
             <div data-rise className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:items-end">
-              <h3 className="font-display uppercase text-6xl sm:text-8xl leading-[0.85]">{ai.title}</h3>
+              <h3 className="font-display uppercase text-4xl sm:text-6xl leading-[0.9]">{ai.title}</h3>
               <p className="text-base sm:text-lg leading-relaxed text-ink/70">{ai.description}</p>
             </div>
 
