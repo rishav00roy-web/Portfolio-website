@@ -63,6 +63,18 @@ const ENTRIES: Entry[] = [
     internal: true,
     cta: "Case study",
   })),
+  {
+    key: "pheonix",
+    title: "Pheonix",
+    description: "A streetwear shop from Jorhat, Assam, with pieces picked in the style of rapper AJ Shield. Fill a bag, then order it on WhatsApp.",
+    kind: "website",
+    discipline: "Design and build, live",
+    image: "/assets/projects/pheonix-full.webp",
+    phone: "/assets/projects/mobile/pheonix.webp",
+    href: "https://pheonix-ashy.vercel.app",
+    internal: false,
+    cta: "Visit site",
+  },
   ...otherWork
     .filter((w) => w.preview && w.id !== "job-tracker-and-email-tracker" && w.id !== "gym-crm")
     .map((w) => ({
