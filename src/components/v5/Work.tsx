@@ -27,7 +27,31 @@ const AI_STAGES = [
   { name: "Tailor, truthfully", detail: "Tailors the résumé per role and rejects any claim it cannot back up." },
 ];
 
-export default function Work() {
+export type WorkLayout = "rows" | "index" | "grid";
+
+// Every website as one list, paid builds first: used by the index and grid layouts.
+const indexRows = [
+  ...commissions.map((p) => ({
+    key: p.slug,
+    title: p.title,
+    description: p.description,
+    note: `Paid client build, ${p.status.toLowerCase()}`,
+    image: p.images[0],
+    href: `/projects/${p.slug}`,
+    internal: true,
+  })),
+  ...sites.map((w) => ({
+    key: w.id,
+    title: w.title,
+    description: w.description,
+    note: w.badge,
+    image: w.preview,
+    href: w.href,
+    internal: false,
+  })),
+];
+
+export default function Work({ layout = "rows" }: { layout?: WorkLayout }) {
   const root = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLUListElement>(null);
   const progress = useRef<HTMLSpanElement>(null);
@@ -77,6 +101,8 @@ export default function Work() {
           </p>
         </header>
 
+        {layout === "rows" && (
+          <>
         {/* Paid builds: calm rows, picture and words side by side */}
         <ol className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20">
           {commissions.map((p, i) => (
@@ -169,6 +195,67 @@ export default function Work() {
             <span ref={progress} className="block h-px origin-left scale-x-[0.08] bg-rust transition-transform duration-200 ease-out" />
           </div>
         </div>
+          </>
+        )}
+        {layout === "index" && (
+          /* v6: one quiet index. Every site is a row with a small picture,
+             paid builds first and marked, so the list reads top to bottom. */
+          <ol className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 border-t border-ink/10">
+            {indexRows.map((r, i) => (
+              <li key={r.key} data-rise className="border-b border-ink/10">
+                <a
+                  href={r.href}
+                  {...(r.internal ? {} : { target: "_blank", rel: "noopener noreferrer" })}
+                  className="group grid grid-cols-[5.5rem_minmax(0,1fr)_auto] items-center gap-5 py-5 sm:grid-cols-[2.5rem_9rem_minmax(0,1fr)_minmax(0,14rem)_auto] sm:gap-8 sm:py-6"
+                >
+                  <span className="hidden font-mono text-sm text-ink/40 sm:block">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="relative block aspect-[16/10] overflow-hidden rounded-md bg-paper-2 ring-1 ring-ink/10">
+                    {r.image && <Image src={r.image} alt="" fill sizes="9rem" className="object-cover object-top" />}
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block font-display uppercase text-2xl sm:text-3xl leading-[0.95] group-hover:text-rust transition-colors">{r.title}</span>
+                    <span className="mt-1 text-sm text-ink/55 line-clamp-2 sm:line-clamp-1">{r.description}</span>
+                  </span>
+                  <span className="hidden text-sm text-ink/50 sm:block">{r.note}</span>
+                  <ArrowUpRight className="h-5 w-5 text-ink/35 transition-colors group-hover:text-rust" aria-hidden="true" />
+                </a>
+              </li>
+            ))}
+          </ol>
+        )}
+
+        {layout === "grid" && (
+          /* v7: an even, calm grid. Paid builds carry a small case-study tag. */
+          <ul className="mx-auto grid max-w-[1440px] gap-x-8 gap-y-14 px-6 sm:px-12 xl:px-20 md:grid-cols-2">
+            {indexRows.map((r) => (
+              <li key={r.key} data-rise>
+                <a
+                  href={r.href}
+                  {...(r.internal ? {} : { target: "_blank", rel: "noopener noreferrer" })}
+                  className="group block"
+                >
+                  <span className="relative block aspect-[16/10] overflow-hidden rounded-2xl bg-paper-2 ring-1 ring-ink/10">
+                    {r.image ? (
+                      <Image src={r.image} alt={`${r.title} screenshot`} fill sizes="(max-width: 767px) 100vw, 45vw" className="object-cover object-top opacity-90 transition-opacity duration-500 group-hover:opacity-100" />
+                    ) : (
+                      <span className="absolute inset-0 grid place-items-center font-display uppercase text-3xl text-ink/25">{r.title}</span>
+                    )}
+                    {r.internal && (
+                      <span className="absolute left-4 top-4 rounded-full bg-paper/85 px-3 py-1 text-xs text-rust">Case study</span>
+                    )}
+                  </span>
+                  <span className="mt-5 flex items-start justify-between gap-4">
+                    <span className="min-w-0">
+                      <span className="block font-display uppercase text-3xl leading-[0.95] group-hover:text-rust transition-colors">{r.title}</span>
+                      <span className="mt-2 text-[15px] leading-relaxed text-ink/60 line-clamp-2">{r.description}</span>
+                    </span>
+                    <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-ink/35 transition-colors group-hover:text-rust" aria-hidden="true" />
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
       </section>
 
       {/* ─────────── AI & Agents ─────────── */}

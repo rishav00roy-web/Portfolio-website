@@ -6,7 +6,7 @@ import { ReactLenis, type LenisRef } from "lenis/react";
 import dynamic from "next/dynamic";
 import { gsap, ScrollTrigger } from "./lib/gsap";
 import Hero from "./components/Hero";
-import Work from "./components/v5/Work";
+import Work, { type WorkLayout } from "./components/v5/Work";
 import { PaperAbout, PaperContact } from "./components/v5/Paper";
 
 const CommandMenu = dynamic(() => import("./components/CommandMenu"), { ssr: false });
@@ -17,7 +17,7 @@ const CommandMenu = dynamic(() => import("./components/CommandMenu"), { ssr: fal
  * behind "two doors" with their own light (amber vs moonlight). Motion below
  * the hero is limited to batched transform/opacity entrances.
  */
-export default function AppV5() {
+export default function AppV5({ layout = "rows" }: { layout?: WorkLayout }) {
   const prefersReduced = useReducedMotion();
   const lenisRef = useRef<LenisRef>(null);
 
@@ -39,7 +39,7 @@ export default function AppV5() {
     <main className="relative min-h-screen text-white">
       <Hero />
       <div className="night afterglow relative z-20 bg-paper text-ink">
-        <Work />
+        <Work layout={layout} />
         <PaperAbout />
       </div>
       <PaperContact />

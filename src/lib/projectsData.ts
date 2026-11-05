@@ -342,16 +342,6 @@ export const categorizedProjects: {
         badge: "FinTech Funnel",
       },
       {
-        id: "dr-laara-dutta-portfolio",
-        title: "Dr. Laara Dutta Portfolio",
-        githubRepoName: "Dr.laara-dutta-portfolio",
-        category: "Client Websites",
-        description: "Client-acquisition site for a veterinarian-consultant, styled as an authoritative 'technical data sheet' for animal-health buyers. Mathematically modeled torn-paper edge, industry-sourced color system.",
-        tags: ["Next.js 16", "React 19", "Motion", "Tailwind CSS"],
-        githubUrl: "https://github.com/rishav00roy-web/Dr.laara-dutta-portfolio",
-        badge: "Consultant Portal",
-      },
-      {
         id: "clashvault",
         title: "ClashVault (Clash Bazar)",
         githubRepoName: "ClashVault",
