@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useRef } from "react";
-import { useReducedMotion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { useLenis } from "lenis/react";
 import { gsap, SplitText, useGSAP } from "@/lib/gsap";
@@ -20,7 +19,6 @@ import { gsap, SplitText, useGSAP } from "@/lib/gsap";
 const PLATE_POSITION = "50% 38%";
 
 export default function Hero() {
-  const still = useReducedMotion();
   const lenis = useLenis();
   const outerRef = useRef<HTMLDivElement>(null);
 
@@ -118,9 +116,8 @@ export default function Hero() {
         <div data-hero-chrome className="will-change-[transform,opacity] absolute inset-x-0 bottom-0 z-20">
           <div className="mx-auto grid max-w-[1440px] gap-8 px-6 sm:px-12 xl:px-20 pb-24 sm:pb-16 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
             <div className="min-w-0">
-              <p data-hero-line className="font-coffekan text-3xl sm:text-4xl text-accent">Operations &amp; Automation</p>
               {/* LCP text: visible from the first frame, it only slides. */}
-              <p data-hero-line className="mt-2 max-w-3xl text-2xl sm:text-4xl xl:text-5xl font-medium leading-[1.12] tracking-[-0.02em] text-white text-balance">
+              <p data-hero-line className="max-w-3xl text-2xl sm:text-4xl xl:text-5xl font-medium leading-[1.12] tracking-[-0.02em] text-white text-balance">
                 Ex-ops guy who got tired of manual work. Now I build tools so nobody else has to.
               </p>
             </div>
@@ -144,11 +141,9 @@ export default function Hero() {
           </div>
 
           {/* Scroll cue: a thin line that drips down, nothing more */}
-          {!still && (
-            <span aria-hidden="true" className="absolute bottom-5 left-1/2 hidden h-10 w-px -translate-x-1/2 overflow-hidden bg-white/15 sm:block">
-              <span className="block h-1/2 w-px animate-[drip_2.2s_cubic-bezier(0.65,0,0.35,1)_infinite] bg-accent" />
-            </span>
-          )}
+          <span aria-hidden="true" className="absolute bottom-5 left-1/2 hidden h-10 w-px -translate-x-1/2 overflow-hidden bg-white/15 sm:block motion-reduce:hidden">
+            <span className="block h-1/2 w-px animate-[drip_2.2s_cubic-bezier(0.65,0,0.35,1)_infinite] bg-accent" />
+          </span>
         </div>
       </section>
     </div>

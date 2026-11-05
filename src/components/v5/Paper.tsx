@@ -47,9 +47,8 @@ export function PaperAbout() {
       <div className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-28 sm:pt-40 pb-24 sm:pb-32">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
           <div className="min-w-0">
-            <p data-rise className="text-sm text-rust">Part three</p>
             <div className="lg:sticky lg:top-24">
-              <h2 id="v5-about" data-rise className="mt-2 font-display uppercase text-[14vw] sm:text-7xl xl:text-8xl leading-[0.85] tracking-[-0.02em]">
+              <h2 id="v5-about" data-rise className="font-display uppercase text-[14vw] sm:text-7xl xl:text-8xl leading-[0.85] tracking-[-0.02em]">
                 About
               </h2>
               {/* Quiet, like a note in the margin */}
@@ -63,11 +62,18 @@ export function PaperAbout() {
             <p data-rise className="font-display text-3xl sm:text-4xl leading-[1.1] tracking-[-0.01em]">
               {bio[0]}
             </p>
-            <div data-rise className="mt-10 space-y-5 text-lg leading-relaxed text-ink/70 max-w-[62ch]">
-              {bio.slice(1).map((p) => (
-                <p key={p.slice(0, 24)}>{p}</p>
-              ))}
-            </div>
+            <details data-rise className="group mt-8 max-w-[62ch]">
+              <summary className="inline-flex cursor-pointer list-none items-center gap-2 text-sm font-medium text-rust [&::-webkit-details-marker]:hidden">
+                <span className="group-open:hidden">Read the rest</span>
+                <span className="hidden group-open:inline">Show less</span>
+                <span aria-hidden="true" className="transition-transform duration-300 group-open:rotate-45">+</span>
+              </summary>
+              <div className="mt-6 space-y-5 text-lg leading-relaxed text-ink/70">
+                {bio.slice(1).map((p) => (
+                  <p key={p.slice(0, 24)}>{p}</p>
+                ))}
+              </div>
+            </details>
           </div>
         </div>
 
@@ -95,7 +101,7 @@ export function PaperAbout() {
           <div className="bg-paper p-6 sm:p-8">
             <dt className="text-sm text-rust">Résumé</dt>
             <dd className="mt-3">
-              <a href={PROFILE.resume} download className="inline-flex items-center gap-2 rounded-full bg-rust px-5 py-3 text-sm font-semibold text-paper hover:opacity-90 transition-opacity">
+              <a href={PROFILE.resume} download className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-rust px-5 py-3 text-sm font-semibold text-paper hover:opacity-90 transition-opacity">
                 Download PDF <Download className="h-4 w-4" aria-hidden="true" />
               </a>
             </dd>
@@ -106,10 +112,10 @@ export function PaperAbout() {
         {/* Experience */}
         <div className="mt-32 sm:mt-40">
           <h3 data-rise className="font-display uppercase text-4xl sm:text-5xl leading-[0.9]">Experience</h3>
-          <ol className="mt-10 border-t border-ink/15">
-            {experience.map((job, i) => (
+          <ol className="mt-6 border-t border-ink/15">
+            {experience.map((job) => (
               <li key={job.company} data-rise className="border-b border-ink/15">
-                <details className="group" open={i === 0}>
+                <details className="group">
                   <summary className="grid cursor-pointer list-none grid-cols-[minmax(0,1fr)_auto] items-center gap-x-6 gap-y-2 py-7 sm:grid-cols-[13rem_minmax(0,1fr)_auto] [&::-webkit-details-marker]:hidden">
                     <span className="whitespace-nowrap font-display text-4xl sm:text-5xl leading-none text-rust">{span(job.period)}</span>
                     <span className="col-span-2 row-start-2 min-w-0 sm:col-span-1 sm:row-start-auto">
@@ -140,12 +146,19 @@ export function PaperAbout() {
         <div className="mt-32 sm:mt-40 grid gap-16 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
           <div data-rise className="min-w-0">
             <h3 className="font-display uppercase text-4xl sm:text-5xl leading-[0.9]">Toolkit</h3>
-            <div className="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2">
+            <div className="mt-6 grid gap-x-10 gap-y-8 sm:grid-cols-2">
+              {/* Each group opens on demand: a full wall of skill names is noise. */}
               {skills.map((g) => (
-                <div key={g.category}>
-                  <h4 className="text-sm text-rust">{g.category}</h4>
-                  <p className="mt-2 leading-relaxed text-ink/80">{g.items.join(", ")}</p>
-                </div>
+                <details key={g.category} className="group border-b border-ink/10 pb-4">
+                  <summary className="flex cursor-pointer list-none items-baseline justify-between gap-4 [&::-webkit-details-marker]:hidden">
+                    <span className="text-ink/85">{g.category}</span>
+                    <span className="shrink-0 text-sm text-rust">
+                      {g.items.length}
+                      <span aria-hidden="true" className="ml-2 inline-block transition-transform duration-300 group-open:rotate-45">+</span>
+                    </span>
+                  </summary>
+                  <p className="mt-3 leading-relaxed text-ink/65">{g.items.join(", ")}</p>
+                </details>
               ))}
               <div>
                 <h4 className="text-sm text-rust">Studies</h4>
@@ -162,7 +175,7 @@ export function PaperAbout() {
           </div>
           <div id="certificates" data-rise className="min-w-0">
             <h3 className="font-display uppercase text-4xl sm:text-5xl leading-[0.9]">Credentials</h3>
-            <ul className="mt-10 grid grid-cols-2 gap-5">
+            <ul className="mt-6 grid grid-cols-2 gap-5">
               {certificates.map((c, i) => (
                 <li key={c.title}>
                   <a
@@ -203,8 +216,7 @@ export function PaperContact() {
     >
       <div className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-32 sm:pt-44 pb-10">
         <div className="text-center">
-          <p data-rise className="text-sm text-accent">Part four</p>
-          <h2 data-rise className="mt-3 font-display uppercase text-[13vw] sm:text-7xl xl:text-8xl leading-[0.86] tracking-[-0.02em]">
+          <h2 data-rise className="font-display uppercase text-[13vw] sm:text-7xl xl:text-8xl leading-[0.86] tracking-[-0.02em]">
             Let&apos;s build
             <br />
             something

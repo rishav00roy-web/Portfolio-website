@@ -92,8 +92,7 @@ export default function Work({ layout = "rows" }: { layout?: WorkLayout }) {
       {/* ─────────── Websites ─────────── */}
       <section id="projects" aria-labelledby="w-sites">
         <header className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-28 sm:pt-40 pb-14 sm:pb-20">
-          <p data-rise className="text-sm text-rust">Part one</p>
-          <h2 id="w-sites" data-rise className="mt-2 font-display uppercase text-[14vw] sm:text-7xl xl:text-8xl leading-[0.85] tracking-[-0.02em]">
+          <h2 id="w-sites" data-rise className="font-display uppercase text-[14vw] sm:text-7xl xl:text-8xl leading-[0.85] tracking-[-0.02em]">
             Websites
           </h2>
           <p data-rise className="mt-6 max-w-xl text-lg leading-relaxed text-ink/65">
@@ -265,8 +264,7 @@ export default function Work({ layout = "rows" }: { layout?: WorkLayout }) {
         className="relative z-10 mt-32 sm:mt-44 bg-[radial-gradient(70%_45%_at_50%_0%,rgba(159,194,214,0.12),transparent_70%)]"
       >
         <div className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-24 sm:pt-32 pb-24">
-          <p data-rise className="text-sm text-moon">Part two</p>
-          <h2 id="w-ai" data-rise className="mt-2 font-display uppercase text-[14vw] sm:text-7xl xl:text-8xl leading-[0.85] tracking-[-0.02em] text-moon">
+          <h2 id="w-ai" data-rise className="font-display uppercase text-[14vw] sm:text-7xl xl:text-8xl leading-[0.85] tracking-[-0.02em] text-moon">
             AI &amp; Agents
           </h2>
           <p data-rise className="mt-6 max-w-xl text-lg leading-relaxed text-ink/65">

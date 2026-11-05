@@ -106,7 +106,7 @@ export default function ContactForm() {
                 if (errors.name) setErrors({ ...errors, name: "" });
               }}
               className={`w-full bg-surface-2 border ${
-                errors.name ? "border-rose-500/50 focus:border-rose-500" : "border-white/10 focus:border-accent"
+                errors.name ? "border-rose-500/50 focus:border-rose-500" : "border-white/45 focus:border-accent"
               } rounded-xl px-4 py-3 text-white outline-none transition-colors text-base sm:text-sm font-sans`}
               placeholder="e.g. Jane Doe"
             />
@@ -135,7 +135,7 @@ export default function ContactForm() {
                 if (errors.email) setErrors({ ...errors, email: "" });
               }}
               className={`w-full bg-surface-2 border ${
-                errors.email ? "border-rose-500/50 focus:border-rose-500" : "border-white/10 focus:border-accent"
+                errors.email ? "border-rose-500/50 focus:border-rose-500" : "border-white/45 focus:border-accent"
               } rounded-xl px-4 py-3 text-white outline-none transition-colors text-base sm:text-sm font-sans`}
               placeholder="jane@company.com"
             />
@@ -156,7 +156,7 @@ export default function ContactForm() {
               id="form-type"
               value={formData.type}
               onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-              className="w-full bg-surface-2 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-accent transition-colors text-base sm:text-sm font-sans"
+              className="w-full bg-surface-2 border border-white/45 rounded-xl px-4 py-3 text-white outline-none focus:border-accent transition-colors text-base sm:text-sm font-sans"
             >
               <option value="contract">Freelance Contract / Project</option>
               <option value="recruit">Full-time Recruitment Opportunity</option>
@@ -182,7 +182,7 @@ export default function ContactForm() {
               }}
               rows={4}
               className={`w-full bg-surface-2 border ${
-                errors.message ? "border-rose-500/50 focus:border-rose-500" : "border-white/10 focus:border-accent"
+                errors.message ? "border-rose-500/50 focus:border-rose-500" : "border-white/45 focus:border-accent"
               } rounded-xl px-4 py-3 text-white outline-none transition-colors text-base sm:text-sm font-sans resize-none`}
               placeholder="Outline your project scope or job description..."
             />
