@@ -93,7 +93,7 @@ export default function About() {
                 <span key={e.degree} className="block">
                   {e.degree}
                   <span className="block text-sm text-white/55">
-                    {e.school} · {e.period}
+                    {e.school}{"period" in e && e.period ? `, ${e.period}` : ""}
                   </span>
                 </span>
               ))}

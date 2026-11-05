@@ -182,7 +182,7 @@ export default function Journal() {
               <p key={e.degree} className="mt-4 text-lg leading-relaxed text-ink/80">
                 {e.degree}
                 <span className="block text-base text-ink/50">
-                  {e.school}, {e.period}
+                  {e.school}{"period" in e && e.period ? `, ${e.period}` : ""}
                 </span>
               </p>
             ))}

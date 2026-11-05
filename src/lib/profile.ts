@@ -118,7 +118,6 @@ export const education = [
   {
     degree: "Bachelor of Computer Applications (BCA), Semester II",
     school: "Manipal University, Jaipur",
-    period: "Currently pursuing",
   },
   {
     degree: "Senior Secondary (Arts)",

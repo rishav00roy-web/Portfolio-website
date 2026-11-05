@@ -56,8 +56,8 @@ export default function AppV5({
       <div className="night afterglow relative z-20 bg-paper text-ink">
         {journal ? (
           <>
-            <Journal />
             <StudioLink href="/atelier-2" />
+            <Journal />
           </>
         ) : (
           <>

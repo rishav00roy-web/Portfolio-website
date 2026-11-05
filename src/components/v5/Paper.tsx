@@ -140,7 +140,7 @@ export function PaperAbout() {
                   <p key={e.degree} className="mt-2 text-lg leading-relaxed text-ink/80">
                     {e.degree}
                     <span className="block text-base text-ink/50">
-                      {e.school}, {e.period}
+                      {e.school}{"period" in e && e.period ? `, ${e.period}` : ""}
                     </span>
                   </p>
                 ))}
