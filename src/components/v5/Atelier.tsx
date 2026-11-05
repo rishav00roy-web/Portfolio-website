@@ -30,7 +30,9 @@ const PROCESS = [
   { name: "Handover", detail: "Once paid in full, the code and access are yours." },
 ];
 
-export default function Atelier() {
+/** `asPage`: the studio's own page (/atelier), where its name is the page's h1. */
+export default function Atelier({ asPage = false }: { asPage?: boolean }) {
+  const Title = asPage ? "h1" : "h2";
   const root = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -59,7 +61,7 @@ export default function Atelier() {
   return (
     <div ref={root} id="atelier">
       {/* The studio */}
-      <section aria-labelledby="atelier-title" className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-28 sm:pt-40">
+      <section aria-labelledby="atelier-title" className={`mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 ${asPage ? "pt-16 sm:pt-24" : "pt-28 sm:pt-40"}`}>
         <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-end">
           <div className="min-w-0">
             <Image
@@ -70,15 +72,23 @@ export default function Atelier() {
               height={292}
               className="h-auto w-28 sm:w-36 opacity-90"
             />
-            <h2 id="atelier-title" data-at-rise className="mt-8 font-display uppercase text-[13vw] sm:text-7xl xl:text-8xl leading-[0.85] tracking-[-0.02em]">
+            <Title id="atelier-title" data-at-rise className="mt-8 font-display uppercase text-[13vw] sm:text-7xl xl:text-8xl leading-[0.85] tracking-[-0.02em]">
               Atelier Systems
-            </h2>
+            </Title>
           </div>
           <div data-at-rise className="min-w-0 lg:pb-3">
             <p className="text-xl sm:text-2xl leading-snug text-ink/85">
-              My studio. Websites, automation and AI agents for small businesses, built end to end by me.
+              {asPage
+                ? "Websites, automation and AI agents for small businesses. A one-person studio run by Rishav Roy, built end to end."
+                : "My studio. Websites, automation and AI agents for small businesses, built end to end by me."}
             </p>
             <p className="mt-4 text-[15px] leading-relaxed text-ink/55">Every project below was made under Atelier Systems.</p>
+            {asPage && (
+              <a href="#contact" className="mt-8 inline-flex items-center gap-2 rounded-full bg-rust px-6 py-3.5 text-sm font-semibold text-paper hover:opacity-90 transition-opacity">
+                Start a project
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </a>
+            )}
           </div>
         </div>
 
