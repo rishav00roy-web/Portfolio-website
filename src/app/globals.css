@@ -204,3 +204,9 @@ body {
   background-repeat: no-repeat;
 }
 
+
+/* Hero scroll cue: a short amber line dripping down a hairline. */
+@keyframes drip {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(200%); }
+}

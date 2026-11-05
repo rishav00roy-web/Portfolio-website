@@ -6,7 +6,7 @@ import { ReactLenis, type LenisRef } from "lenis/react";
 import dynamic from "next/dynamic";
 import { gsap, ScrollTrigger } from "./lib/gsap";
 import Hero from "./components/Hero";
-import WorkDoors from "./components/v5/WorkDoors";
+import Work from "./components/v5/Work";
 import { PaperAbout, PaperContact } from "./components/v5/Paper";
 
 const CommandMenu = dynamic(() => import("./components/CommandMenu"), { ssr: false });
@@ -39,7 +39,7 @@ export default function AppV5() {
     <main className="relative min-h-screen text-white">
       <Hero />
       <div className="night afterglow relative z-20 bg-paper text-ink">
-        <WorkDoors />
+        <Work />
         <PaperAbout />
       </div>
       <PaperContact />
