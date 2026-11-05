@@ -45,7 +45,7 @@ export function PaperAbout() {
                 About
               </h2>
               {/* Quiet, like a note in the margin */}
-              <p data-rise className="mt-6 max-w-xs text-sm leading-relaxed text-ink/40">
+              <p data-rise className="mt-6 max-w-xs text-base leading-relaxed text-ink/45">
                 I can do all things through Christ which strengtheneth me.
                 <span className="block mt-1 text-ink/55">Philippians 4:13</span>
               </p>
@@ -68,7 +68,7 @@ export function PaperAbout() {
               </div>
             </details>
 
-            <dl data-rise className="mt-12 grid gap-x-8 gap-y-3 border-t border-ink/10 pt-8 text-[15px] leading-relaxed sm:grid-cols-[8rem_minmax(0,1fr)]">
+            <dl data-rise className="mt-12 grid gap-x-8 gap-y-3 border-t border-ink/10 pt-8 text-lg leading-relaxed sm:grid-cols-[9.5rem_minmax(0,1fr)]">
               <dt className="text-ink/45">Based in</dt>
               <dd className="text-ink/80">{PROFILE.location}, originally from {PROFILE.hometown}</dd>
               <dt className="text-ink/45">Runs</dt>
@@ -92,20 +92,20 @@ export function PaperAbout() {
 
         {/* Experience: quiet rows, everything readable without a click */}
         <div className="mt-28 sm:mt-36 grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
-          <h3 data-rise className="text-2xl sm:text-3xl font-medium tracking-[-0.01em]">Experience</h3>
+          <h3 data-rise className="text-3xl sm:text-4xl font-medium tracking-[-0.01em]">Experience</h3>
           <ol className="space-y-12">
             {experience.map((job) => (
-              <li key={job.company} data-rise className="grid gap-x-8 gap-y-2 border-t border-ink/10 pt-8 sm:grid-cols-[10.5rem_minmax(0,1fr)]">
-                <p className="whitespace-nowrap text-sm text-ink/45">{job.period}</p>
+              <li key={job.company} data-rise className="grid gap-x-8 gap-y-2 border-t border-ink/10 pt-8 sm:grid-cols-[12rem_minmax(0,1fr)]">
+                <p className="whitespace-nowrap text-base text-ink/50 sm:pt-1.5">{job.period}</p>
                 <div className="min-w-0">
-                  <h4 className="text-xl font-medium leading-snug text-ink/90">{job.role}</h4>
-                  <p className="mt-1 text-sm text-ink/55">
+                  <h4 className="text-2xl sm:text-[1.75rem] font-medium leading-snug text-ink/90">{job.role}</h4>
+                  <p className="mt-1 text-base text-ink/55">
                     {job.company}
                     {"remote" in job && job.remote && ", remote"}
                   </p>
-                  <ul className="mt-4 space-y-2 text-[15px] leading-relaxed text-ink/65">
+                  <ul className="mt-5 space-y-3 text-lg leading-relaxed text-ink/70">
                     {job.bullets.map((b) => (
-                      <li key={b} className="relative pl-4 before:absolute before:left-0 before:top-[0.7em] before:h-px before:w-2 before:bg-ink/30">
+                      <li key={b} className="relative pl-4 before:absolute before:left-0 before:top-[0.75em] before:h-px before:w-2 before:bg-ink/30">
                         {b}
                       </li>
                     ))}
@@ -119,27 +119,27 @@ export function PaperAbout() {
         {/* Toolkit, studies and credentials */}
         <div className="mt-28 sm:mt-36 grid gap-16 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
           <div data-rise className="min-w-0">
-            <h3 className="text-2xl sm:text-3xl font-medium tracking-[-0.01em]">Toolkit</h3>
+            <h3 className="text-3xl sm:text-4xl font-medium tracking-[-0.01em]">Toolkit</h3>
             <div className="mt-6 grid gap-x-10 gap-y-8 sm:grid-cols-2">
               {/* Each group opens on demand: a full wall of skill names is noise. */}
               {skills.map((g) => (
                 <details key={g.category} className="group border-b border-ink/10 pb-4">
                   <summary className="flex cursor-pointer list-none items-baseline justify-between gap-4 [&::-webkit-details-marker]:hidden">
-                    <span className="text-ink/85">{g.category}</span>
-                    <span className="shrink-0 text-sm text-rust">
+                    <span className="text-lg text-ink/85">{g.category}</span>
+                    <span className="shrink-0 text-base text-rust">
                       {g.items.length}
                       <span aria-hidden="true" className="ml-2 inline-block transition-transform duration-300 group-open:rotate-45">+</span>
                     </span>
                   </summary>
-                  <p className="mt-3 leading-relaxed text-ink/65">{g.items.join(", ")}</p>
+                  <p className="mt-3 text-lg leading-relaxed text-ink/70">{g.items.join(", ")}</p>
                 </details>
               ))}
               <div>
-                <h4 className="text-sm text-rust">Studies</h4>
+                <h4 className="text-base text-rust">Studies</h4>
                 {education.map((e) => (
-                  <p key={e.degree} className="mt-2 leading-relaxed text-ink/80">
+                  <p key={e.degree} className="mt-2 text-lg leading-relaxed text-ink/80">
                     {e.degree}
-                    <span className="block text-sm text-ink/50">
+                    <span className="block text-base text-ink/50">
                       {e.school}, {e.period}
                     </span>
                   </p>
@@ -148,7 +148,7 @@ export function PaperAbout() {
             </div>
           </div>
           <div id="certificates" data-rise className="min-w-0">
-            <h3 className="text-2xl sm:text-3xl font-medium tracking-[-0.01em]">Credentials</h3>
+            <h3 className="text-3xl sm:text-4xl font-medium tracking-[-0.01em]">Credentials</h3>
             <ul className="mt-6 grid grid-cols-2 gap-5">
               {certificates.map((c, i) => (
                 <li key={c.title}>
@@ -163,8 +163,8 @@ export function PaperAbout() {
                         <Image src={c.image} alt={`${c.title} certificate, ${c.issuer}`} fill sizes="(max-width: 1023px) 45vw, 20vw" className="object-contain" />
                       </span>
                     </span>
-                    <span className="mt-4 block text-sm leading-snug group-hover:text-rust transition-colors">{c.title}</span>
-                    <span className="block text-xs text-ink/50">{c.issuer}</span>
+                    <span className="mt-4 block text-base leading-snug group-hover:text-rust transition-colors">{c.title}</span>
+                    <span className="block text-sm text-ink/50">{c.issuer}</span>
                   </a>
                 </li>
               ))}
