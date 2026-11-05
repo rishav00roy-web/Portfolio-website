@@ -33,6 +33,8 @@ type Entry = {
   href: string;
   internal: boolean;
   cta: string;
+  /** The flagship: double width, a second screen on its stage. */
+  featured?: { second: string; label: string };
 };
 
 const PHONES: Record<string, string> = {
@@ -51,6 +53,19 @@ const host = (href: string) => {
 };
 
 const ENTRIES: Entry[] = [
+  {
+    key: "pheonix",
+    title: "Pheonix",
+    description: "The latest and most worked-on build: a streetwear shop from Jorhat in AJ Shield's style, with 3D models, a playable 3D cassette player for her songs, product dossiers, and orders on WhatsApp.",
+    kind: "website",
+    discipline: "Design and build, live",
+    image: "/assets/projects/pheonix-full.webp",
+    phone: "/assets/projects/mobile/pheonix.webp",
+    href: "https://pheonix-ashy.vercel.app",
+    internal: false,
+    cta: "Visit site",
+    featured: { second: "/assets/projects/pheonix-cassette.webp", label: "Latest build" },
+  },
   ...commissions.map((p) => ({
     key: p.slug,
     title: p.title,
@@ -63,18 +78,6 @@ const ENTRIES: Entry[] = [
     internal: true,
     cta: "Case study",
   })),
-  {
-    key: "pheonix",
-    title: "Pheonix",
-    description: "A streetwear shop from Jorhat, Assam, with pieces picked in the style of rapper AJ Shield. Fill a bag, then order it on WhatsApp.",
-    kind: "website",
-    discipline: "Design and build, live",
-    image: "/assets/projects/pheonix-full.webp",
-    phone: "/assets/projects/mobile/pheonix.webp",
-    href: "https://pheonix-ashy.vercel.app",
-    internal: false,
-    cta: "Visit site",
-  },
   ...otherWork
     .filter((w) => w.preview && w.id !== "job-tracker-and-email-tracker" && w.id !== "gym-crm")
     .map((w) => ({
@@ -156,6 +159,36 @@ function Stage({ e }: { e: Entry }) {
       {e.stage ? (
         <div className="relative p-4 sm:p-8">
           <div className="mx-auto max-w-xl">{e.stage === "support" ? <SupportStage /> : <InvoiceStage />}</div>
+        </div>
+      ) : e.featured ? (
+        <div className="relative px-5 pt-8 pb-10 sm:px-10 sm:pt-12 sm:pb-14">
+          <div className="grid items-center gap-5 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+            <div className="-rotate-1 overflow-hidden rounded-xl border border-ink/15 bg-paper shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)] transition-transform duration-300 ease-out-expo group-hover:-translate-y-1">
+              <div className="flex h-7 items-center gap-1.5 border-b border-ink/10 px-3" aria-hidden="true">
+                <span className="h-1.5 w-1.5 rounded-full bg-ink/25" />
+                <span className="h-1.5 w-1.5 rounded-full bg-ink/25" />
+                <span className="h-1.5 w-1.5 rounded-full bg-ink/25" />
+              </div>
+              <div className="relative aspect-[16/10]">
+                <Image src={e.image!} alt={`${e.title}, the home page`} fill sizes="(max-width: 1023px) 90vw, 50vw" className="object-cover object-top" />
+              </div>
+            </div>
+            <div className="relative mx-auto w-4/5 lg:mx-0 lg:w-full">
+              <div className="rotate-2 transition-transform duration-300 ease-out-expo group-hover:-translate-y-2">
+                <div className="relative aspect-[1100/897]">
+                  <Image src={e.featured.second} alt={`${e.title}, the 3D cassette player`} fill sizes="30vw" className="object-contain drop-shadow-[0_30px_40px_rgba(0,0,0,0.6)]" />
+                </div>
+              </div>
+              <p className="mt-2 text-center font-mono text-sm text-ink/55">The 3D cassette player</p>
+            </div>
+          </div>
+          {e.phone && (
+            <div className="absolute bottom-6 right-6 hidden w-[17%] rotate-[4deg] lg:block overflow-hidden rounded-[1.3rem] border-[3px] border-[#2a3233] bg-paper shadow-[0_30px_60px_-20px_rgba(0,0,0,0.95)] transition-transform duration-300 ease-out-expo group-hover:-translate-y-2 lg:right-[38%] lg:w-[11%]">
+              <div className="relative aspect-[390/844]">
+                <Image src={e.phone} alt={`${e.title}, on a phone`} fill sizes="12vw" className="object-cover object-top" />
+              </div>
+            </div>
+          )}
         </div>
       ) : (
         <div className="relative px-5 pt-8 pb-8 sm:px-10 sm:pt-12 sm:pb-12">
@@ -307,13 +340,13 @@ export default function Showcase() {
         {view === "stage" ? (
           <ul className="mt-12 grid gap-6 lg:grid-cols-2">
             {shown.map((e, i) => (
-              <li key={e.key} data-rise className="group flex flex-col rounded-[28px] border border-ink/10 bg-paper/80 p-3 sm:rounded-[32px] sm:p-4 transition-colors duration-300 hover:border-ink/25">
+              <li key={e.key} data-rise className={`${e.featured ? "lg:col-span-2" : ""} group flex flex-col rounded-[28px] border border-ink/10 bg-paper/80 p-3 sm:rounded-[32px] sm:p-4 transition-colors duration-300 hover:border-ink/25`}>
                 <div className="flex items-baseline justify-between px-2 pb-3 pt-1 font-mono text-sm">
                   <span className="tabular-nums">
                     <span className="text-rust">{String(i + 1).padStart(2, "0")}</span>
                     <span className="text-ink/55"> / {String(shown.length).padStart(2, "0")}</span>
                   </span>
-                  <span className="text-ink/55">{e.kind === "website" ? "Website" : "Product"}</span>
+                  <span className={e.featured ? "text-rust" : "text-ink/55"}>{e.featured ? e.featured.label : e.kind === "website" ? "Website" : "Product"}</span>
                 </div>
                 <Stage e={e} />
                 <div className="flex flex-1 flex-col px-2 pt-6 pb-2">
@@ -329,7 +362,7 @@ export default function Showcase() {
                 </div>
               </li>
             ))}
-            {shown.length % 2 === 1 && (
+            {(shown.length + (shown.some((x) => x.featured) ? 1 : 0)) % 2 === 1 && (
               <li data-rise className="hidden lg:flex">
                 <a href="#contact" className="group flex w-full flex-col justify-end rounded-[32px] border border-dashed border-ink/20 p-10 transition-colors duration-300 hover:border-rust">
                   <span className="font-display text-5xl leading-[0.95] group-hover:text-rust transition-colors">Yours could be next</span>

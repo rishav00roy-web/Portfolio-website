@@ -8,8 +8,8 @@ import { gsap, useGSAP } from "@/lib/gsap";
 /*
  * The studio's opening screen. Left: the name, set big, one line, two
  * actions. Right: a soft pool of light with the AS mark's S swash drawn
- * loose behind real work, set at easy angles: a client site in a
- * browser, another on a phone, and the support agent mid-answer. The
+ * loose behind real work, set at easy angles: Pheonix, the latest
+ * build, in a browser and on a phone, and the support agent mid-answer. The
  * devices rise in one after another, then drift apart slightly as you
  * scroll away (transform only).
  */
@@ -86,10 +86,10 @@ export default function StudioHero() {
                 <span className="h-2 w-2 rounded-full bg-ink/25" />
                 <span className="h-2 w-2 rounded-full bg-ink/25" />
                 <span className="h-2 w-2 rounded-full bg-ink/25" />
-                <span className="ml-3 hidden truncate whitespace-nowrap rounded-full bg-ink/[0.06] px-3 py-0.5 font-mono text-[11px] text-ink/55 sm:inline">tea-country-holidays.vercel.app</span>
+                <span className="ml-3 hidden truncate whitespace-nowrap rounded-full bg-ink/[0.06] px-3 py-0.5 font-mono text-[11px] text-ink/55 sm:inline">pheonix-ashy.vercel.app</span>
               </div>
               <div className="relative aspect-[16/10]">
-                <Image src="/assets/projects/tea-1.jpg" alt="" fill priority sizes="(max-width: 1023px) 80vw, 36vw" className="object-cover object-top" />
+                <Image src="/assets/projects/pheonix-full.webp" alt="" fill priority sizes="(max-width: 1023px) 80vw, 36vw" className="object-cover object-top" />
               </div>
             </div>
           </div>
@@ -98,7 +98,7 @@ export default function StudioHero() {
           <div data-h-device className="absolute right-[4%] top-[34%] w-[25%]">
             <div data-h-phone className="rotate-[5deg] overflow-hidden rounded-[1.6rem] border-4 border-[#2a3233] bg-paper shadow-[0_40px_80px_-20px_rgba(0,0,0,0.95)]">
               <div className="relative aspect-[390/844]">
-                <Image src="/assets/projects/mobile/clash-bazar.webp" alt="" fill sizes="(max-width: 1023px) 25vw, 12vw" className="object-cover object-top" />
+                <Image src="/assets/projects/mobile/pheonix.webp" alt="" fill sizes="(max-width: 1023px) 25vw, 12vw" className="object-cover object-top" />
               </div>
             </div>
           </div>
@@ -106,9 +106,9 @@ export default function StudioHero() {
           {/* The support agent, mid-answer */}
           <div data-h-device className="absolute bottom-[8%] left-[10%] hidden w-[52%] sm:block">
             <div data-h-chat className="-rotate-2 rounded-3xl border border-moon/25 bg-paper-2/95 p-4 shadow-[0_30px_70px_-25px_rgba(0,0,0,0.95)]">
-              <p className="ml-auto w-fit max-w-[85%] rounded-2xl rounded-br-md bg-moon px-3.5 py-2 text-sm text-paper">5-day Kerala trip in December?</p>
+              <p className="ml-auto w-fit max-w-[85%] rounded-2xl rounded-br-md bg-moon px-3.5 py-2 text-sm text-paper">Got the Phoenix Rise Tee in XL?</p>
               <p className="mt-2 w-fit max-w-[90%] rounded-2xl rounded-bl-md bg-ink/[0.07] px-3.5 py-2 text-sm leading-snug text-ink/85">
-                Yes, the Backwaters and Hills package. Shall I send the itinerary?
+                It comes in S to XXL. Want me to add XL to your bag?
               </p>
               <p className="mt-3 text-sm text-ink/55">Support agent, sample</p>
             </div>
