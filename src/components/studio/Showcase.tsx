@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, LayoutGrid, Rows3 } from "lucide-react";
 import { SupportStage, InvoiceStage } from "../v5/AIStage";
+import StudioHero from "./StudioHero";
 import { SERVICES, PROCESS } from "./Sheet";
 import { commissions, otherWork } from "@/lib/work";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
@@ -210,8 +211,7 @@ export default function Showcase() {
     () => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap.from("[data-intro]", { y: 24, opacity: 0, duration: 1.2, stagger: 0.05, ease: "expo.out", delay: 0.1 });
-        gsap.set("[data-rise]", { y: 36, opacity: 0 });
+                gsap.set("[data-rise]", { y: 36, opacity: 0 });
         ScrollTrigger.batch("[data-rise]", {
           start: "top 90%",
           once: true,
@@ -225,20 +225,24 @@ export default function Showcase() {
 
   return (
     <div ref={root} className="studio-dots">
-      <header className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-16 sm:pt-28">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end">
-          <h1 id="work-title" data-intro className="font-display text-[18vw] sm:text-[8.5rem] leading-[0.85]">
+      <StudioHero
+        projects={ENTRIES.length}
+        live={commissions.filter((c) => c.status === "Live").length}
+        products={ENTRIES.filter((e) => e.kind === "product").length}
+      />
+
+      <section id="projects" aria-labelledby="work-title" className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-20 sm:pt-28">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end">
+          <h2 id="work-title" data-rise className="font-display text-7xl leading-[0.85] sm:text-8xl">
             Work<span className="text-rust">.</span>
-          </h1>
-          <p data-intro className="max-w-md text-xl leading-snug text-ink/75 lg:pb-4">
-            Websites, automation and AI products by Atelier Systems, the studio Rishav Roy runs. Each one designed and built end to end.
+          </h2>
+          <p data-rise className="max-w-md text-xl leading-snug text-ink/75 lg:pb-3">
+            Every project the studio has built. Pick a kind, or switch to a list.
           </p>
         </div>
-      </header>
 
-      <section id="projects" aria-labelledby="work-title" className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20">
         {/* Filters with counts, and the view toggle */}
-        <div data-intro className="mt-14 flex flex-wrap items-center justify-between gap-4 border-b border-ink/10 pb-6">
+        <div data-rise className="mt-12 flex flex-wrap items-center justify-between gap-4 border-b border-ink/10 pb-6">
           <div role="group" aria-label="Filter the work" className="flex flex-wrap gap-2">
             {FILTERS.map((f) => {
               const on = filter === f.id;
@@ -290,7 +294,7 @@ export default function Showcase() {
           <ul className="mt-12 grid gap-6 lg:grid-cols-2">
             {shown.map((e, i) => (
               <li key={e.key} data-rise className="group flex flex-col rounded-[28px] border border-ink/10 bg-paper/80 p-3 sm:rounded-[32px] sm:p-4 transition-colors duration-300 hover:border-ink/25">
-                <div className="flex items-baseline justify-between px-2 pb-3 pt-1 text-base">
+                <div className="flex items-baseline justify-between px-2 pb-3 pt-1 font-mono text-sm">
                   <span className="tabular-nums">
                     <span className="text-rust">{String(i + 1).padStart(2, "0")}</span>
                     <span className="text-ink/55"> / {String(shown.length).padStart(2, "0")}</span>
@@ -299,9 +303,9 @@ export default function Showcase() {
                 </div>
                 <Stage e={e} />
                 <div className="flex flex-1 flex-col px-2 pt-6 pb-2">
-                  <h2 className="text-3xl font-medium tracking-[-0.01em]">{e.title}</h2>
-                  <p className="mt-3 mb-6 text-lg leading-relaxed text-ink/60 line-clamp-3">{e.description}</p>
-                  <div className="mt-auto flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-ink/10 pt-5 text-base">
+                  <h3 className="text-3xl font-medium tracking-[-0.01em]">{e.title}</h3>
+                  <p className="mt-3 mb-6 font-mono text-base leading-relaxed text-ink/65 line-clamp-3">{e.description}</p>
+                  <div className="mt-auto flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-ink/10 pt-5 font-mono text-sm">
                     <span className="text-ink/55">{e.discipline}</span>
                     {!e.internal && host(e.href) && <span className="hidden text-ink/55 sm:inline">{host(e.href)}</span>}
                     <Action e={e} className="inline-flex min-h-11 items-center gap-2 text-rust hover:opacity-80">
