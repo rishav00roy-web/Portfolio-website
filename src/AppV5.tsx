@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import { gsap, ScrollTrigger } from "./lib/gsap";
 import Hero from "./components/Hero";
 import Work, { type WorkLayout } from "./components/v5/Work";
+import Atelier from "./components/v5/Atelier";
 import { PaperAbout, PaperContact } from "./components/v5/Paper";
 
 const CommandMenu = dynamic(() => import("./components/CommandMenu"), { ssr: false });
@@ -17,7 +18,7 @@ const CommandMenu = dynamic(() => import("./components/CommandMenu"), { ssr: fal
  * behind "two doors" with their own light (amber vs moonlight). Motion below
  * the hero is limited to batched transform/opacity entrances.
  */
-export default function AppV5({ layout = "rows" }: { layout?: WorkLayout }) {
+export default function AppV5({ layout = "rows", atelier = false }: { layout?: WorkLayout; atelier?: boolean }) {
   const prefersReduced = useReducedMotion();
   const lenisRef = useRef<LenisRef>(null);
 
@@ -39,7 +40,7 @@ export default function AppV5({ layout = "rows" }: { layout?: WorkLayout }) {
     <main className="relative min-h-screen text-white">
       <Hero />
       <div className="night afterglow relative z-20 bg-paper text-ink">
-        <Work layout={layout} />
+        {atelier ? <Atelier /> : <Work layout={layout} />}
         <PaperAbout />
       </div>
       <PaperContact />

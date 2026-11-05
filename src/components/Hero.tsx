@@ -23,7 +23,8 @@ export default function Hero() {
   const outerRef = useRef<HTMLDivElement>(null);
 
   const goTo = (id: string) => (e: React.MouseEvent) => {
-    const el = document.getElementById(id);
+    // On pages with the studio section, "See my work" lands on Atelier Systems.
+    const el = (id === "projects" && document.getElementById("atelier")) || document.getElementById(id);
     if (!el) return;
     e.preventDefault();
     if (lenis) lenis.scrollTo(el, { duration: 1.4 });

@@ -85,7 +85,9 @@ export function PaperAbout() {
             <dd className="mt-2 text-sm text-ink/55">originally from {PROFILE.hometown}</dd>
           </div>
           <div className="bg-paper p-6 sm:p-8">
-            <dt className="text-sm text-rust">Working with</dt>
+            <dt className="text-sm text-rust">Runs</dt>
+            <dd className="mt-2 text-ink/85">Atelier Systems, my studio</dd>
+            <dt className="mt-4 text-sm text-rust">Working with</dt>
             {PROFILE.currently.map((c) => (
               <dd key={c} className="mt-2 text-ink/85">{c}</dd>
             ))}
