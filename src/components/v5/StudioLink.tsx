@@ -11,11 +11,11 @@ import { studioFont } from "@/lib/studioFont";
  * Atelier Systems page. The card already wears the studio's own identity
  * (graphite, lime, Jost), so it reads as a door into somewhere else.
  */
-export default function StudioLink() {
+export default function StudioLink({ href = "/atelier" }: { href?: string }) {
   return (
     <section id="projects" aria-labelledby="studio-link-title" className="relative z-10 mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-28 sm:pt-40">
       <Link
-        href="/atelier"
+        href={href}
         className={`studio ${studioFont.variable} group relative grid gap-10 overflow-hidden rounded-3xl border border-white/10 p-8 sm:p-12 transition-colors duration-500 hover:border-accent/50 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center`}
       >
         <div className="min-w-0">

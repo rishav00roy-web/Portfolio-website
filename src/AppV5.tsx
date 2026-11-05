@@ -10,6 +10,7 @@ import Work, { type WorkLayout } from "./components/v5/Work";
 import Atelier from "./components/v5/Atelier";
 import StudioLink from "./components/v5/StudioLink";
 import { PaperAbout, PaperContact } from "./components/v5/Paper";
+import Journal from "./components/v10/Journal";
 
 const CommandMenu = dynamic(() => import("./components/CommandMenu"), { ssr: false });
 
@@ -23,11 +24,14 @@ export default function AppV5({
   layout = "rows",
   atelier = false,
   portfolio = false,
+  journal = false,
 }: {
   layout?: WorkLayout;
   atelier?: boolean;
   /** Personal portfolio: the work lives on /atelier, linked from one card. */
   portfolio?: boolean;
+  /** v10: the portfolio as an evening walk (story, trail, pack). */
+  journal?: boolean;
 }) {
   const prefersReduced = useReducedMotion();
   const lenisRef = useRef<LenisRef>(null);
@@ -50,8 +54,17 @@ export default function AppV5({
     <main className="relative min-h-screen text-white">
       <Hero />
       <div className="night afterglow relative z-20 bg-paper text-ink">
-        {portfolio ? <StudioLink /> : atelier ? <Atelier /> : <Work layout={layout} />}
-        <PaperAbout />
+        {journal ? (
+          <>
+            <Journal />
+            <StudioLink href="/atelier-2" />
+          </>
+        ) : (
+          <>
+            {portfolio ? <StudioLink /> : atelier ? <Atelier /> : <Work layout={layout} />}
+            <PaperAbout />
+          </>
+        )}
       </div>
       <PaperContact />
       <CommandMenu />
