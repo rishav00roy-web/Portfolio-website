@@ -16,7 +16,7 @@ export default function StudioLink({ href = "/atelier" }: { href?: string }) {
     <section id="projects" aria-labelledby="studio-link-title" className="relative z-10 mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-28 sm:pt-40">
       <Link
         href={href}
-        className={`studio ${studioFont.variable} group relative grid gap-10 overflow-hidden rounded-3xl border border-white/10 p-8 sm:p-12 transition-colors duration-500 hover:border-accent/50 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center`}
+        className={`studio ${studioFont.variable} group relative grid gap-10 overflow-hidden rounded-3xl border border-white/10 p-8 sm:p-12 transition-colors duration-300 hover:border-accent/50 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center`}
       >
         <div className="min-w-0">
           <Image src="/brand/atelier-monogram.webp" alt="" width={357} height={292} className="h-auto w-20 opacity-90" />
@@ -36,7 +36,7 @@ export default function StudioLink({ href = "/atelier" }: { href?: string }) {
           {commissions.map((p, i) => (
             <span
               key={p.slug}
-              className={`relative block aspect-[3/4] overflow-hidden rounded-xl ring-1 ring-ink/10 transition-transform duration-700 ease-out-expo ${
+              className={`relative block aspect-[3/4] overflow-hidden rounded-xl ring-1 ring-ink/10 transition-transform duration-300 ease-out-expo ${
                 i === 1 ? "translate-y-6 group-hover:translate-y-3" : "group-hover:-translate-y-2"
               }`}
             >

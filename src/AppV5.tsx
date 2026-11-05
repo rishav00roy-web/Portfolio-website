@@ -51,7 +51,10 @@ export default function AppV5({
   }, [prefersReduced]);
 
   const content = (
-    <main className="relative min-h-screen text-white">
+    <main id="main" className="relative min-h-screen text-white">
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-accent focus:px-5 focus:py-3 focus:text-background">
+        Skip to content
+      </a>
       <Hero />
       <div className="night afterglow relative z-20 bg-paper text-ink">
         {journal ? (

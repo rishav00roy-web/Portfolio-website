@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, LayoutGrid, Rows3 } from "lucide-react";
@@ -144,7 +144,7 @@ function Stage({ e }: { e: Entry }) {
       ) : (
         <div className="relative px-5 pt-8 pb-8 sm:px-10 sm:pt-12 sm:pb-12">
           {/* Browser frame */}
-          <div className={`overflow-hidden rounded-lg border border-ink/15 bg-paper shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)] transition-transform duration-700 ease-out-expo group-hover:-translate-y-1 ${e.phone ? "mr-[18%]" : ""}`}>
+          <div className={`overflow-hidden rounded-lg border border-ink/15 bg-paper shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)] transition-transform duration-300 ease-out-expo group-hover:-translate-y-1 ${e.phone ? "mr-[18%]" : ""}`}>
             <div className="flex h-6 items-center gap-1.5 border-b border-ink/10 px-3" aria-hidden="true">
               <span className="h-1.5 w-1.5 rounded-full bg-ink/25" />
               <span className="h-1.5 w-1.5 rounded-full bg-ink/25" />
@@ -156,7 +156,7 @@ function Stage({ e }: { e: Entry }) {
           </div>
           {/* Phone, leaning in front, taken from the live site */}
           {e.phone && (
-            <div className="absolute bottom-5 right-5 w-[26%] overflow-hidden rounded-[1.1rem] border-[3px] border-[#2a3233] bg-paper shadow-[0_30px_60px_-20px_rgba(0,0,0,0.95)] transition-transform duration-700 ease-out-expo group-hover:-translate-y-2 sm:bottom-8 sm:right-10">
+            <div className="absolute bottom-5 right-5 w-[26%] overflow-hidden rounded-[1.1rem] border-[3px] border-[#2a3233] bg-paper shadow-[0_30px_60px_-20px_rgba(0,0,0,0.95)] transition-transform duration-300 ease-out-expo group-hover:-translate-y-2 sm:bottom-8 sm:right-10">
               <div className="relative aspect-[390/844]">
                 <Image src={e.phone} alt={`${e.title}, on a phone`} fill sizes="(max-width: 1023px) 26vw, 12vw" className="object-cover object-top" />
               </div>
@@ -186,8 +186,23 @@ function Action({ e, className, children }: { e: Entry; className: string; child
 
 export default function Showcase() {
   const root = useRef<HTMLDivElement>(null);
-  const [filter, setFilter] = useState<"all" | Kind>("all");
+  // The filter lives in the URL (?show=websites|products), so a filtered view can be shared.
+  // Read without an effect: the server renders "all", the client reads the URL.
+  const fromUrl = useSyncExternalStore(
+    () => () => {},
+    () => new URLSearchParams(window.location.search).get("show") ?? "",
+    () => "",
+  );
+  const [picked, setPicked] = useState<"all" | Kind | null>(null);
+  const filter: "all" | Kind = picked ?? (fromUrl === "websites" ? "website" : fromUrl === "products" ? "product" : "all");
   const [view, setView] = useState<"stage" | "list">("stage");
+  const choose = (id: "all" | Kind) => {
+    setPicked(id);
+    const url = new URL(window.location.href);
+    if (id === "all") url.searchParams.delete("show");
+    else url.searchParams.set("show", id === "website" ? "websites" : "products");
+    window.history.replaceState(null, "", url);
+  };
   const shown = useMemo(() => ENTRIES.filter((e) => filter === "all" || e.kind === filter), [filter]);
   const count = (id: "all" | Kind) => (id === "all" ? ENTRIES.length : ENTRIES.filter((e) => e.kind === id).length);
 
@@ -195,12 +210,12 @@ export default function Showcase() {
     () => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap.from("[data-intro]", { y: 24, opacity: 0, duration: 1.2, stagger: 0.08, ease: "expo.out", delay: 0.1 });
+        gsap.from("[data-intro]", { y: 24, opacity: 0, duration: 1.2, stagger: 0.05, ease: "expo.out", delay: 0.1 });
         gsap.set("[data-rise]", { y: 36, opacity: 0 });
         ScrollTrigger.batch("[data-rise]", {
           start: "top 90%",
           once: true,
-          onEnter: (els) => gsap.to(els, { y: 0, opacity: 1, duration: 1.1, stagger: 0.08, ease: "expo.out" }),
+          onEnter: (els) => gsap.to(els, { y: 0, opacity: 1, duration: 1.1, stagger: 0.05, ease: "expo.out" }),
         });
       });
       return () => mm.revert();
@@ -210,7 +225,7 @@ export default function Showcase() {
 
   return (
     <div ref={root} className="studio-dots">
-      <section id="projects" aria-labelledby="work-title" className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-16 sm:pt-28">
+      <header className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-16 sm:pt-28">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end">
           <h1 id="work-title" data-intro className="font-display text-[18vw] sm:text-[8.5rem] leading-[0.85]">
             Work<span className="text-rust">.</span>
@@ -219,7 +234,9 @@ export default function Showcase() {
             Websites, automation and AI products by Atelier Systems, the studio Rishav Roy runs. Each one designed and built end to end.
           </p>
         </div>
+      </header>
 
+      <section id="projects" aria-labelledby="work-title" className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20">
         {/* Filters with counts, and the view toggle */}
         <div data-intro className="mt-14 flex flex-wrap items-center justify-between gap-4 border-b border-ink/10 pb-6">
           <div role="group" aria-label="Filter the work" className="flex flex-wrap gap-2">
@@ -230,13 +247,13 @@ export default function Showcase() {
                   key={f.id}
                   type="button"
                   aria-pressed={on}
-                  onClick={() => setFilter(f.id)}
+                  onClick={() => choose(f.id)}
                   className={`inline-flex min-h-11 items-center gap-2 rounded-full px-5 text-base transition-colors ${
                     on ? "bg-ink text-paper" : "border border-ink/20 text-ink/75 hover:border-ink/50 hover:text-ink"
                   }`}
                 >
                   {f.label}
-                  <span className={`text-sm tabular-nums ${on ? "text-paper/60" : "text-ink/40"}`}>{count(f.id)}</span>
+                  <span className={`text-sm tabular-nums ${on ? "text-paper/75" : "text-ink/55"}`}>{count(f.id)}</span>
                 </button>
               );
             })}
@@ -253,7 +270,7 @@ export default function Showcase() {
                 type="button"
                 aria-pressed={view === id}
                 onClick={() => setView(id)}
-                className={`inline-flex min-h-10 items-center gap-2 rounded-full px-4 text-base transition-colors ${
+                className={`inline-flex min-h-11 items-center gap-2 rounded-full px-4 text-base transition-colors ${
                   view === id ? "bg-ink/10 text-ink" : "text-ink/55 hover:text-ink"
                 }`}
               >
@@ -264,24 +281,29 @@ export default function Showcase() {
           </div>
         </div>
 
+        {/* Tells screen-reader users what the filter did */}
+        <p role="status" className="sr-only">
+          Showing {shown.length} {shown.length === 1 ? "project" : "projects"}
+        </p>
+
         {view === "stage" ? (
           <ul className="mt-12 grid gap-6 lg:grid-cols-2">
             {shown.map((e, i) => (
-              <li key={e.key} data-rise className="group flex flex-col rounded-3xl border border-ink/10 bg-paper/80 p-3 sm:p-4 transition-colors duration-500 hover:border-ink/25">
+              <li key={e.key} data-rise className="group flex flex-col rounded-[28px] border border-ink/10 bg-paper/80 p-3 sm:rounded-[32px] sm:p-4 transition-colors duration-300 hover:border-ink/25">
                 <div className="flex items-baseline justify-between px-2 pb-3 pt-1 text-base">
                   <span className="tabular-nums">
                     <span className="text-rust">{String(i + 1).padStart(2, "0")}</span>
-                    <span className="text-ink/35"> / {String(shown.length).padStart(2, "0")}</span>
+                    <span className="text-ink/55"> / {String(shown.length).padStart(2, "0")}</span>
                   </span>
-                  <span className="text-ink/50">{e.kind === "website" ? "Website" : "Product"}</span>
+                  <span className="text-ink/55">{e.kind === "website" ? "Website" : "Product"}</span>
                 </div>
                 <Stage e={e} />
                 <div className="flex flex-1 flex-col px-2 pt-6 pb-2">
                   <h2 className="text-3xl font-medium tracking-[-0.01em]">{e.title}</h2>
-                  <p className="mt-3 text-lg leading-relaxed text-ink/60 line-clamp-3">{e.description}</p>
-                  <div className="mt-auto flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-ink/10 pt-5 mt-6 text-base">
-                    <span className="text-ink/50">{e.discipline}</span>
-                    {!e.internal && host(e.href) && <span className="hidden text-ink/40 sm:inline">{host(e.href)}</span>}
+                  <p className="mt-3 mb-6 text-lg leading-relaxed text-ink/60 line-clamp-3">{e.description}</p>
+                  <div className="mt-auto flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-ink/10 pt-5 text-base">
+                    <span className="text-ink/55">{e.discipline}</span>
+                    {!e.internal && host(e.href) && <span className="hidden text-ink/55 sm:inline">{host(e.href)}</span>}
                     <Action e={e} className="inline-flex min-h-11 items-center gap-2 text-rust hover:opacity-80">
                       {e.cta} <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
                     </Action>
@@ -289,6 +311,17 @@ export default function Showcase() {
                 </div>
               </li>
             ))}
+            {shown.length % 2 === 1 && (
+              <li data-rise className="hidden lg:flex">
+                <a href="#contact" className="group flex w-full flex-col justify-end rounded-[32px] border border-dashed border-ink/20 p-10 transition-colors duration-300 hover:border-rust">
+                  <span className="font-display text-5xl leading-[0.95] group-hover:text-rust transition-colors">Yours could be next</span>
+                  <span className="mt-4 max-w-sm text-lg leading-relaxed text-ink/60">Tell me what the business needs. You get a written, fixed-scope quote before any work starts.</span>
+                  <span className="mt-8 inline-flex items-center gap-2 text-base text-rust">
+                    Start a project <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
+                  </span>
+                </a>
+              </li>
+            )}
           </ul>
         ) : (
           <ol className="mt-6">
@@ -300,7 +333,7 @@ export default function Showcase() {
                 </span>
                 <span className="min-w-0">
                   <span className="block text-2xl font-medium">{e.title}</span>
-                  <span className="mt-1 block text-base text-ink/50">{e.discipline}</span>
+                  <span className="mt-1 block text-base text-ink/55">{e.discipline}</span>
                 </span>
                 <Action e={e} className="col-start-2 inline-flex min-h-11 items-center gap-2 text-base text-rust hover:opacity-80 sm:col-start-auto">
                   {e.cta} <ArrowRight className="h-4 w-4" aria-hidden="true" />

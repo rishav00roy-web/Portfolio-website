@@ -69,13 +69,13 @@ export default function Sheet() {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         gsap.from("[data-mark]", { opacity: 0, scale: 0.94, duration: 1.8, ease: "expo.out", delay: 0.1 });
-        gsap.from("[data-sheet-in]", { y: 24, opacity: 0, duration: 1.2, stagger: 0.08, ease: "expo.out", delay: 0.2 });
+        gsap.from("[data-sheet-in]", { y: 24, opacity: 0, duration: 1.2, stagger: 0.05, ease: "expo.out", delay: 0.2 });
 
         gsap.set("[data-rise]", { y: 30, opacity: 0 });
         ScrollTrigger.batch("[data-rise]", {
           start: "top 88%",
           once: true,
-          onEnter: (els) => gsap.to(els, { y: 0, opacity: 1, duration: 1.1, stagger: 0.08, ease: "expo.out" }),
+          onEnter: (els) => gsap.to(els, { y: 0, opacity: 1, duration: 1.1, stagger: 0.05, ease: "expo.out" }),
         });
 
         // The dimension line extends across the process as it arrives.
@@ -148,7 +148,7 @@ export default function Sheet() {
               ["Disciplines", "Web, automation, AI"],
             ].map(([k, v]) => (
               <div key={k} className="border-b border-ink/15 px-4 py-3 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0">
-                <dt className="text-sm text-ink/50">{k}</dt>
+                <dt className="text-sm text-ink/55">{k}</dt>
                 <dd className="mt-0.5 text-ink/90">{v}</dd>
               </div>
             ))}
@@ -173,7 +173,7 @@ export default function Sheet() {
       </section>
 
       {/* ─────────── The plan chest ─────────── */}
-      <section id="projects" aria-labelledby="work-title" data-chest className="relative mt-24 sm:mt-36 lg:flex lg:h-screen lg:flex-col lg:justify-center lg:overflow-hidden">
+      <section id="projects" aria-labelledby="work-title" data-chest className="relative mt-24 sm:mt-36 lg:flex lg:h-dvh lg:flex-col lg:justify-center lg:overflow-hidden">
         <div className="mx-auto w-full max-w-[1440px] px-6 sm:px-12 xl:px-20">
           <h2 id="work-title" data-rise className="font-display text-5xl sm:text-6xl leading-[0.95]">The work</h2>
           <p data-rise className="mt-4 max-w-xl text-lg leading-relaxed text-ink/60">
@@ -185,14 +185,14 @@ export default function Sheet() {
             const body = (
               <>
                 <span className="relative block aspect-[16/10] overflow-hidden border border-ink/15 bg-paper-2">
-                  <Image src={d.image} alt={`${d.title} screenshot`} fill sizes="(max-width: 1023px) 100vw, 34rem" className="object-cover object-top opacity-90 transition-opacity duration-500 group-hover:opacity-100" />
+                  <Image src={d.image} alt={`${d.title} screenshot`} fill sizes="(max-width: 1023px) 100vw, 34rem" className="object-cover object-top opacity-90 transition-opacity duration-300 group-hover:opacity-100" />
                 </span>
                 <span className="mt-4 flex items-baseline justify-between gap-4 border-b border-ink/15 pb-4">
                   <span className="min-w-0">
                     <span className="block text-2xl font-medium leading-tight group-hover:text-rust transition-colors">{d.title}</span>
-                    <span className="mt-1 block text-base text-ink/50">{d.note}</span>
+                    <span className="mt-1 block text-base text-ink/55">{d.note}</span>
                   </span>
-                  <span className="shrink-0 text-sm tabular-nums text-ink/40">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="shrink-0 text-sm tabular-nums text-ink/55">{String(i + 1).padStart(2, "0")}</span>
                 </span>
                 <span className="mt-3 block text-lg leading-relaxed text-ink/60 line-clamp-2">{d.description}</span>
               </>

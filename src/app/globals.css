@@ -212,7 +212,7 @@ body {
 }
 
 /* AI stage: the new tab's copy and stage rise in */
-.stage-in { animation: stage-in 0.6s var(--ease-out-expo) both; }
+.stage-in { animation: stage-in 0.3s var(--ease-out-expo) both; }
 @keyframes stage-in { from { opacity: 0; transform: translateY(14px); } }
 @media (prefers-reduced-motion: reduce) { .stage-in { animation: none; } }
 
@@ -281,3 +281,16 @@ body:has(.studio) { background-color: #0d1112; }
   background-image: radial-gradient(rgba(232, 235, 228, 0.07) 1px, transparent 1px);
   background-size: 28px 28px;
 }
+
+/* A pressed state for every button and pill link: a small, quick give. */
+button:not(:disabled), a.rounded-full { transition-property: color, background-color, border-color, opacity, transform; }
+button:not(:disabled):active, a.rounded-full:active { transform: scale(0.96); transition-duration: 120ms; }
+@media (prefers-reduced-motion: reduce) { button:active, a.rounded-full:active { transform: none; } }
+
+/* Even heading wraps, and no single orphaned word at the end of a paragraph. */
+h1, h2, h3, h4 { text-wrap: balance; }
+p, li, dd { text-wrap: pretty; }
+
+/* Anchored sections clear the sticky bar; taps act without the double-tap zoom wait. */
+section[id], footer[id], [id].scroll-target { scroll-margin-top: 6rem; }
+a, button { touch-action: manipulation; }

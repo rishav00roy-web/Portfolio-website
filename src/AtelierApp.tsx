@@ -36,11 +36,14 @@ export default function AtelierApp({ sheet = false, showcase = false }: { sheet?
   }, [prefersReduced]);
 
   const content = (
-    <main className={`studio ${studioFont.variable} relative min-h-screen`}>
+    <main id="main" className={`studio ${studioFont.variable} relative min-h-screen`}>
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-accent focus:px-5 focus:py-3 focus:text-background">
+        Skip to content
+      </a>
       <div className="relative z-20 bg-paper text-ink">
         {showcase ? (
           /* Floating pill bar, centred */
-          <header className="sticky top-4 z-40 mx-auto flex w-fit max-w-[calc(100%-2rem)] items-center gap-1 rounded-full border border-ink/10 bg-paper/80 py-1.5 pl-4 pr-1.5 backdrop-blur-md sm:gap-3">
+          <header className="sticky top-4 z-40 mx-auto flex w-fit max-w-[calc(100%-2rem)] items-center gap-1 rounded-full border border-ink/10 bg-paper/95 py-1.5 pl-4 pr-1.5 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.8)] sm:gap-3">
             <Link href="/atelier-3" aria-label="Atelier Systems, home" className="mr-2 flex items-center">
               <Image src="/brand/atelier-monogram.webp" alt="" width={357} height={292} className="h-auto w-8" priority />
             </Link>
@@ -48,7 +51,7 @@ export default function AtelierApp({ sheet = false, showcase = false }: { sheet?
               <a href="#projects" className="hidden rounded-full px-3 py-2 text-ink/70 hover:text-ink sm:inline">Work</a>
               <a href="#process" className="hidden rounded-full px-3 py-2 text-ink/70 hover:text-ink sm:inline">Studio</a>
               <Link href="/v10" className="whitespace-nowrap rounded-full px-3 py-2 text-ink/70 hover:text-ink">Rishav Roy</Link>
-              <a href="#contact" className="ml-1 inline-flex min-h-10 items-center gap-1.5 rounded-full bg-rust px-4 font-semibold text-paper hover:opacity-90 transition-opacity">
+              <a href="#contact" className="ml-1 inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap rounded-full bg-rust px-4 font-semibold text-paper hover:opacity-90 transition-opacity">
                 Start a project
               </a>
             </nav>

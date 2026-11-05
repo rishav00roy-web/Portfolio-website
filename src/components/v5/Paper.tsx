@@ -45,7 +45,7 @@ export function PaperAbout() {
                 About
               </h2>
               {/* Quiet, like a note in the margin */}
-              <p data-rise className="mt-6 max-w-xs text-base leading-relaxed text-ink/45">
+              <p data-rise className="mt-6 max-w-xs text-base leading-relaxed text-ink/55">
                 I can do all things through Christ which strengtheneth me.
                 <span className="block mt-1 text-ink/55">Philippians 4:13</span>
               </p>
@@ -69,22 +69,22 @@ export function PaperAbout() {
             </details>
 
             <dl data-rise className="mt-12 grid gap-x-8 gap-y-3 border-t border-ink/10 pt-8 text-lg leading-relaxed sm:grid-cols-[9.5rem_minmax(0,1fr)]">
-              <dt className="text-ink/45">Based in</dt>
+              <dt className="text-ink/55">Based in</dt>
               <dd className="text-ink/80">{PROFILE.location}, originally from {PROFILE.hometown}</dd>
-              <dt className="text-ink/45">Runs</dt>
+              <dt className="text-ink/55">Runs</dt>
               <dd className="text-ink/80">
                 <a href="/atelier" className="underline decoration-ink/25 underline-offset-4 hover:text-rust hover:decoration-rust">Atelier Systems</a>, my studio
               </dd>
-              <dt className="text-ink/45">Working with</dt>
+              <dt className="text-ink/55">Working with</dt>
               <dd className="text-ink/80">{PROFILE.currently.join(", ")}</dd>
-              <dt className="text-ink/45">Speaks</dt>
+              <dt className="text-ink/55">Speaks</dt>
               <dd className="text-ink/80">{languages.map((l) => `${l.name} (${l.level.toLowerCase()})`).join(", ")}</dd>
-              <dt className="text-ink/45">Résumé</dt>
+              <dt className="text-ink/55">Résumé</dt>
               <dd className="text-ink/80">
                 <a href={PROFILE.resume} download className="inline-flex items-center gap-1.5 underline decoration-ink/25 underline-offset-4 hover:text-rust hover:decoration-rust">
                   Download the PDF <Download className="h-3.5 w-3.5" aria-hidden="true" />
                 </a>
-                <span className="text-ink/45">, updated {PROFILE.resumeUpdated}</span>
+                <span className="text-ink/55">, updated {PROFILE.resumeUpdated}</span>
               </dd>
             </dl>
           </div>
@@ -96,7 +96,7 @@ export function PaperAbout() {
           <ol className="space-y-12">
             {experience.map((job) => (
               <li key={job.company} data-rise className="grid gap-x-8 gap-y-2 border-t border-ink/10 pt-8 sm:grid-cols-[12rem_minmax(0,1fr)]">
-                <p className="whitespace-nowrap text-base text-ink/50 sm:pt-1.5">{job.period}</p>
+                <p className="whitespace-nowrap text-base text-ink/55 sm:pt-1.5">{job.period}</p>
                 <div className="min-w-0">
                   <h4 className="text-2xl sm:text-[1.75rem] font-medium leading-snug text-ink/90">{job.role}</h4>
                   <p className="mt-1 text-base text-ink/55">
@@ -139,7 +139,7 @@ export function PaperAbout() {
                 {education.map((e) => (
                   <p key={e.degree} className="mt-2 text-lg leading-relaxed text-ink/80">
                     {e.degree}
-                    <span className="block text-base text-ink/50">
+                    <span className="block text-base text-ink/55">
                       {e.school}{"period" in e && e.period ? `, ${e.period}` : ""}
                     </span>
                   </p>
@@ -164,7 +164,7 @@ export function PaperAbout() {
                       </span>
                     </span>
                     <span className="mt-4 block text-base leading-snug group-hover:text-rust transition-colors">{c.title}</span>
-                    <span className="block text-sm text-ink/50">{c.issuer}</span>
+                    <span className="block text-sm text-ink/55">{c.issuer}</span>
                   </a>
                 </li>
               ))}
@@ -247,7 +247,7 @@ export function PaperContact({ studio = false }: { studio?: boolean }) {
           <ContactForm />
         </div>
 
-        <p className="mt-24 border-t border-white/10 pt-8 text-center text-sm text-white/50">
+        <p className="mt-24 border-t border-white/10 pt-8 text-center text-sm text-white/60">
           &copy; {new Date().getFullYear()} {studio ? "Atelier Systems, run by " + PROFILE.name : PROFILE.name}. Designed and built by me.
         </p>
       </div>

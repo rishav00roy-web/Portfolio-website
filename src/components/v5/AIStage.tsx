@@ -75,7 +75,7 @@ export function SupportStage() {
     <div className="flex h-full flex-col rounded-2xl border border-moon/20 bg-paper-2/80 p-5 sm:p-7">
       <div className="flex items-center justify-between border-b border-ink/10 pb-4">
         <span className="text-base text-ink/85">Support agent</span>
-        <span className="text-sm text-ink/50">Sample conversation</span>
+        <span className="text-sm text-ink/55">Sample conversation</span>
       </div>
       <ol className="flex flex-1 flex-col justify-end gap-3 py-6">
         {turns.map((t) => (
@@ -89,7 +89,7 @@ export function SupportStage() {
           </li>
         ))}
       </ol>
-      <div aria-hidden="true" className="rounded-full border border-ink/15 px-5 py-3 text-base text-ink/40">
+      <div aria-hidden="true" className="rounded-full border border-ink/15 px-5 py-3 text-base text-ink/55">
         Type a question
       </div>
     </div>
@@ -132,7 +132,7 @@ export function InvoiceStage() {
         </p>
       </div>
       <div className="flex flex-col rounded-2xl border border-moon/20 bg-paper-2/80 p-6">
-        <span className="text-sm text-ink/50">Read from the sample</span>
+        <span className="text-sm text-ink/55">Read from the sample</span>
         <dl className="mt-4 flex-1 space-y-4">
           {fields.map((f) => (
             <div key={f.label} className="border-b border-ink/10 pb-3">
@@ -155,12 +155,13 @@ export default function AIStage() {
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const product = PRODUCTS.find((p) => p.id === active)!;
 
-  // Arrow keys move between tabs, as screen-reader users expect.
+  // Arrow keys, Home and End move between tabs, as screen-reader users expect.
   const onKey = (e: React.KeyboardEvent, i: number) => {
-    const step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
-    if (!step) return;
+    const n = PRODUCTS.length;
+    const map: Record<string, number> = { ArrowRight: (i + 1) % n, ArrowLeft: (i - 1 + n) % n, Home: 0, End: n - 1 };
+    if (!(e.key in map)) return;
     e.preventDefault();
-    const next = (i + step + PRODUCTS.length) % PRODUCTS.length;
+    const next = map[e.key];
     setActive(PRODUCTS[next].id);
     tabs.current[next]?.focus();
   };
