@@ -188,7 +188,7 @@ export function PaperContact({ studio = false }: { studio?: boolean }) {
       id="contact"
       className={`relative overflow-hidden bg-background text-white ${
         studio
-          ? "border-t border-white/10 bg-[radial-gradient(55%_45%_at_50%_100%,rgba(207,224,122,0.08),transparent_70%)]"
+          ? "bg-[radial-gradient(50%_40%_at_30%_100%,rgba(207,224,122,0.09),transparent_70%),radial-gradient(40%_35%_at_80%_90%,rgba(159,194,214,0.07),transparent_70%)]"
           : "bg-[radial-gradient(60%_50%_at_50%_100%,rgba(224,121,31,0.2),transparent_70%)]"
       }`}
     >
@@ -197,8 +197,12 @@ export function PaperContact({ studio = false }: { studio?: boolean }) {
           {studio ? (
             <>
               <h2 data-rise className="font-display text-[11vw] sm:text-7xl leading-[0.95]">
-                Start a project
+                Start a project<span className="text-accent">.</span>
               </h2>
+              {/* The AS mark's swash, underlining the invitation */}
+              <svg data-rise aria-hidden="true" viewBox="0 0 420 40" fill="none" className="mx-auto mt-3 h-auto w-64 sm:w-80">
+                <path d="M4 26 C 70 6, 130 38, 210 20 S 340 6, 416 18" stroke="rgba(207,224,122,0.75)" strokeWidth="2" strokeLinecap="round" />
+              </svg>
               <p data-rise className="mx-auto mt-5 max-w-lg text-lg leading-relaxed text-white/65">
                 Tell me what the business needs. You get a written, fixed-scope quote before any work starts.
               </p>

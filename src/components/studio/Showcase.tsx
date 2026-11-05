@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowRight, LayoutGrid, Rows3 } from "lucide-react";
 import { SupportStage, InvoiceStage } from "../v5/AIStage";
 import StudioHero from "./StudioHero";
+import { ProcessPath, Swash } from "./Organic";
 import { SERVICES, PROCESS } from "./Sheet";
 import { commissions, otherWork } from "@/lib/work";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
@@ -132,12 +133,14 @@ const FILTERS: { id: "all" | Kind; label: string }[] = [
 
 const openChat = () => document.querySelector<HTMLButtonElement>('[aria-label="Open Psunk AI Chat"]')?.click();
 
-/** The lit stage a project stands on: spotlight, the mark's construction circles, the devices. */
+/** The lit stage a project stands on: a soft pool of light, a loose swash, the devices. */
 function Stage({ e }: { e: Entry }) {
   return (
-    <div className="relative overflow-hidden rounded-2xl bg-[radial-gradient(70%_60%_at_50%_0%,rgba(232,235,228,0.07),transparent_70%)] bg-paper-2/60">
-      <span aria-hidden="true" className="absolute left-1/2 top-1/2 h-[120%] aspect-square -translate-x-1/2 -translate-y-1/2 rounded-full border border-ink/[0.06]" />
-      <span aria-hidden="true" className="absolute left-1/2 top-1/2 h-[80%] aspect-square -translate-x-1/2 -translate-y-1/2 rounded-full border border-ink/[0.06]" />
+    <div className="relative overflow-hidden rounded-2xl bg-paper-2/60">
+      <span aria-hidden="true" className="absolute inset-[10%_8%_0_14%] rounded-[58%_42%_55%_45%/48%_58%_42%_52%] bg-[radial-gradient(closest-side,rgba(207,224,122,0.09),transparent)]" />
+      <svg aria-hidden="true" viewBox="0 0 400 250" fill="none" className="absolute inset-0 h-full w-full">
+        <path d="M-10 210 C 70 150, 140 250, 220 190 S 340 90, 410 120" stroke="rgba(232,235,228,0.10)" strokeWidth="1.2" strokeLinecap="round" />
+      </svg>
       {e.stage ? (
         <div className="relative p-4 sm:p-8">
           <div className="mx-auto max-w-xl">{e.stage === "support" ? <SupportStage /> : <InvoiceStage />}</div>
@@ -157,7 +160,7 @@ function Stage({ e }: { e: Entry }) {
           </div>
           {/* Phone, leaning in front, taken from the live site */}
           {e.phone && (
-            <div className="absolute bottom-5 right-5 w-[26%] overflow-hidden rounded-[1.1rem] border-[3px] border-[#2a3233] bg-paper shadow-[0_30px_60px_-20px_rgba(0,0,0,0.95)] transition-transform duration-300 ease-out-expo group-hover:-translate-y-2 sm:bottom-8 sm:right-10">
+            <div className="absolute bottom-5 right-5 w-[26%] rotate-[3deg] overflow-hidden rounded-[1.3rem] border-[3px] border-[#2a3233] bg-paper shadow-[0_30px_60px_-20px_rgba(0,0,0,0.95)] transition-transform duration-300 ease-out-expo group-hover:-translate-y-2 sm:bottom-8 sm:right-10">
               <div className="relative aspect-[390/844]">
                 <Image src={e.phone} alt={`${e.title}, on a phone`} fill sizes="(max-width: 1023px) 26vw, 12vw" className="object-cover object-top" />
               </div>
@@ -224,7 +227,10 @@ export default function Showcase() {
   );
 
   return (
-    <div ref={root} className="studio-dots">
+    <div ref={root} className="relative overflow-x-clip">
+      {/* Ambient light drifting down the page, loosely shaped */}
+      <span aria-hidden="true" className="pointer-events-none absolute right-[-10%] top-[90vh] h-[60rem] w-[50rem] rounded-[58%_42%_55%_45%/48%_58%_42%_52%] bg-[radial-gradient(closest-side,rgba(207,224,122,0.06),transparent)]" />
+      <span aria-hidden="true" className="pointer-events-none absolute left-[-15%] bottom-[10%] h-[50rem] w-[50rem] rounded-[45%_55%_40%_60%/55%_45%_60%_40%] bg-[radial-gradient(closest-side,rgba(159,194,214,0.06),transparent)]" />
       <StudioHero />
 
       <section id="projects" aria-labelledby="work-title" className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-20 sm:pt-28">
@@ -344,36 +350,32 @@ export default function Showcase() {
         )}
       </section>
 
-      {/* What the studio does, and how a project runs: two quiet columns */}
-      <section id="process" aria-labelledby="services-title" className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-32 sm:pt-44 pb-24">
+      <div className="pt-24 sm:pt-36">
+        <Swash />
+      </div>
+
+      {/* What the studio does, and how a project runs */}
+      <section id="process" aria-labelledby="services-title" className="relative mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-16 sm:pt-24 pb-24">
         <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
           <div>
             <h2 id="services-title" data-rise className="font-display text-5xl sm:text-6xl leading-[0.95]">What the studio does</h2>
             <ul className="mt-10">
               {SERVICES.map((sv) => (
-                <li key={sv.name} data-rise className="border-t border-ink/10 py-5">
+                <li key={sv.name} data-rise className="grid grid-cols-[2.25rem_minmax(0,1fr)] py-4">
+                  <svg aria-hidden="true" viewBox="0 0 28 14" fill="none" className="mt-2 h-3.5 w-7">
+                    <path d="M1 9 C 6 2, 11 13, 16 6 S 24 3, 27 6" stroke="rgba(207,224,122,0.8)" strokeWidth="1.6" strokeLinecap="round" />
+                  </svg>
+                  <span>
                   <span className="block text-xl text-ink/90">{sv.name}</span>
                   <span className="mt-1 block text-lg leading-relaxed text-ink/55">{sv.detail}</span>
+                  </span>
                 </li>
               ))}
             </ul>
           </div>
           <div>
             <h2 data-rise className="font-display text-5xl sm:text-6xl leading-[0.95]">How a project runs</h2>
-            <ol className="mt-10">
-              {PROCESS.map((p, i) => (
-                <li key={p.name} data-rise className="grid grid-cols-[3rem_minmax(0,1fr)] border-t border-ink/10 py-5">
-                  <span className="text-base tabular-nums text-rust">{String(i + 1).padStart(2, "0")}</span>
-                  <span>
-                    <span className="block text-xl text-ink/90">{p.name}</span>
-                    <span className="mt-1 block text-lg leading-relaxed text-ink/55">{p.detail}</span>
-                  </span>
-                </li>
-              ))}
-            </ol>
-            <a data-rise href="#contact" className="mt-10 inline-flex min-h-12 items-center gap-2 rounded-full bg-rust px-7 py-3.5 text-base font-semibold text-paper hover:opacity-90 transition-opacity">
-              Start a project <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </a>
+            <ProcessPath steps={PROCESS} />
           </div>
         </div>
       </section>

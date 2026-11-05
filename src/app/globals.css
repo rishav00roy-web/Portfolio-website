@@ -294,3 +294,8 @@ p, li, dd { text-wrap: pretty; }
 /* Anchored sections clear the sticky bar; taps act without the double-tap zoom wait. */
 section[id], footer[id], [id].scroll-target { scroll-margin-top: 6rem; }
 a, button { touch-action: manipulation; }
+
+/* /atelier-3 process path: a step's lamp lights when you reach it. */
+.process-lamp { transition: background-color 0.5s, border-color 0.5s, box-shadow 0.5s; }
+.process-step.is-lit .process-lamp { background-color: #cfe07a; border-color: #cfe07a; box-shadow: 0 0 18px rgba(207, 224, 122, 0.5); }
+@media (prefers-reduced-motion: reduce) { .process-lamp { background-color: #cfe07a; border-color: #cfe07a; } }
