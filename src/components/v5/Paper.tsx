@@ -4,6 +4,7 @@ import { useRef, type ReactNode } from "react";
 import Image from "next/image";
 import { ArrowUpRight, Download } from "lucide-react";
 import ContactForm from "../ContactForm";
+import Verse from "./Verse";
 import { bio, certificates, education, experience, languages, PROFILE, skills } from "@/lib/profile";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
@@ -40,7 +41,7 @@ function SectionTitle({ id, children, note }: { id: string; children: ReactNode;
       <h2 id={id} className="font-display uppercase text-[13vw] sm:text-7xl xl:text-8xl leading-[0.86] tracking-[-0.02em] text-ink">
         {children}
       </h2>
-      {note && <p className="max-w-xs text-sm leading-relaxed text-ink/60 sm:text-right">{note}</p>}
+      {note && <div className="max-w-xs text-sm leading-relaxed text-ink/60 sm:text-right">{note}</div>}
     </header>
   );
 }
@@ -53,7 +54,7 @@ export function PaperAbout() {
 
   return (
     <section ref={root} id="about" aria-labelledby="v5-about" className="px-6 sm:px-12 xl:px-24 pt-24 sm:pt-32 pb-24 sm:pb-32">
-      <SectionTitle id="v5-about">About</SectionTitle>
+      <SectionTitle id="v5-about" note={<Verse text="I can do all things through Christ which strengtheneth me." reference="Philippians 4:13" className="sm:ml-auto sm:text-right" />}>About</SectionTitle>
 
       <div className="mt-12 grid gap-12 lg:grid-cols-12">
         <blockquote data-rise className="lg:col-span-7 font-display text-4xl sm:text-5xl xl:text-6xl leading-[1.02] tracking-[-0.01em]">
@@ -196,7 +197,8 @@ export function PaperContact() {
         </div>
       </div>
       <p className="mt-24 border-t border-white/10 pt-8 text-sm text-white/50">
-        &copy; {new Date().getFullYear()} {PROFILE.name}. Designed and built by me.
+        &copy; {new Date().getFullYear()} {PROFILE.name}. Designed and built by me, for the glory of Jesus Christ.
+        <span className="ml-1 font-medium text-accent">Psalm 90:17</span>
       </p>
     </footer>
   );

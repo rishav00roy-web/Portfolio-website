@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { commissions, otherWork } from "@/lib/work";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
+import Verse from "./Verse";
 
 /*
  * v5: two doors. Straight after the hero the visitor chooses a kind of work.
@@ -124,6 +125,7 @@ export default function WorkDoors() {
               Websites
             </h2>
             <p className="mt-4 max-w-md text-[15px] leading-relaxed text-ink/65">Swipe through, or use the arrows. Paid client builds come first.</p>
+            <Verse className="mt-6" text="And whatsoever ye do, do it heartily, as to the Lord, and not unto men." reference="Colossians 3:23" />
           </div>
           <div className="hidden shrink-0 gap-2 sm:flex">
             <button type="button" onClick={() => nudge(-1)} aria-label="Previous site" className="grid h-12 w-12 place-items-center rounded-full border border-ink/20 hover:border-rust hover:text-rust transition-colors">
@@ -185,6 +187,7 @@ export default function WorkDoors() {
               AI &amp; Agents
             </h2>
             <p className="mt-4 max-w-md text-[15px] leading-relaxed text-ink/65">Systems that do the work themselves. Shown as what they run.</p>
+            <Verse className="mt-6" tone="moon" text="Commit thy works unto the LORD, and thy thoughts shall be established." reference="Proverbs 16:3" />
           </header>
 
           <article className="mt-14">
