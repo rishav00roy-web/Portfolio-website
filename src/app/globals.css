@@ -223,42 +223,42 @@ body {
  * the logo's wordmark is set. The AI work keeps its moonlight blue.
  */
 .studio {
-  --background: #0d1112;
-  --surface: #141a1b;
-  --surface-2: #1a2223;
-  --foreground: #e8ebe4;
-  --muted: rgba(232, 235, 228, 0.66);
-  --border: rgba(232, 235, 228, 0.1);
-  --accent: #cfe07a;
-  --accent-rgb: 207, 224, 122;
-  --color-white: #e8ebe4;
-  --color-black: #0d1112;
-  --color-paper: #0d1112;
-  --color-paper-2: #151c1d;
-  --color-ink: #e8ebe4;
-  --color-rust: #cfe07a;
+  --background: #110d14;
+  --surface: #1a1520;
+  --surface-2: #221b2a;
+  --foreground: #efe9f3;
+  --muted: rgba(239, 233, 243, 0.66);
+  --border: rgba(239, 233, 243, 0.1);
+  --accent: #c6b3ff;
+  --accent-rgb: 198, 179, 255;
+  --color-white: #efe9f3;
+  --color-black: #110d14;
+  --color-paper: #110d14;
+  --color-paper-2: #1c1622;
+  --color-ink: #efe9f3;
+  --color-rust: #c6b3ff;
   /* Theme tokens resolve at :root, so remap the resolved ones too. */
-  --color-background: #0d1112;
-  --color-foreground: #e8ebe4;
-  --color-surface: #141a1b;
-  --color-surface-2: #1a2223;
-  --color-accent: #cfe07a;
-  --color-border-muted: rgba(232, 235, 228, 0.1);
+  --color-background: #110d14;
+  --color-foreground: #efe9f3;
+  --color-surface: #1a1520;
+  --color-surface-2: #221b2a;
+  --color-accent: #c6b3ff;
+  --color-border-muted: rgba(239, 233, 243, 0.1);
   --font-sans: var(--font-studio), sans-serif;
   --font-display: var(--font-studio), sans-serif;
   font-family: var(--font-studio), sans-serif;
   background-color: var(--background);
   color: var(--foreground);
 }
-body:has(.studio) { background-color: #0d1112; }
+body:has(main.studio) { background-color: #110d14; }
 /* The studio sets headings the way the mark's wordmark is drawn: no shouting. */
 .studio .font-display { text-transform: none; font-weight: 500; letter-spacing: -0.03em; }
-.studio ::selection { background-color: #cfe07a; color: #0d1112; }
+.studio ::selection { background-color: #c6b3ff; color: #110d14; }
 /* Drafting-table grid behind the studio's opening, fading out downward. */
 .studio-grid {
   background-image:
-    linear-gradient(rgba(232, 235, 228, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(232, 235, 228, 0.045) 1px, transparent 1px);
+    linear-gradient(rgba(239, 233, 243, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(239, 233, 243, 0.045) 1px, transparent 1px);
   background-size: 72px 72px;
   mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
 }
@@ -270,15 +270,15 @@ body:has(.studio) { background-color: #0d1112; }
 /* /atelier-2 drawing sheet: an even grid across the whole frame. */
 .studio-grid-full {
   background-image:
-    linear-gradient(rgba(232, 235, 228, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(232, 235, 228, 0.04) 1px, transparent 1px);
+    linear-gradient(rgba(239, 233, 243, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(239, 233, 243, 0.04) 1px, transparent 1px);
   background-size: 48px 48px;
   background-position: -1px -1px;
 }
 
 /* /atelier-3 showroom: a faint dot grid under the stages. */
 .studio-dots {
-  background-image: radial-gradient(rgba(232, 235, 228, 0.07) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(239, 233, 243, 0.07) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
@@ -297,8 +297,8 @@ a, button { touch-action: manipulation; }
 
 /* /atelier-3 process path: a step's lamp lights when you reach it. */
 .process-lamp { transition: background-color 0.5s, border-color 0.5s, box-shadow 0.5s; }
-.process-step.is-lit .process-lamp { background-color: #cfe07a; border-color: #cfe07a; box-shadow: 0 0 18px rgba(207, 224, 122, 0.5); }
-@media (prefers-reduced-motion: reduce) { .process-lamp { background-color: #cfe07a; border-color: #cfe07a; } }
+.process-step.is-lit .process-lamp { background-color: #c6b3ff; border-color: #c6b3ff; box-shadow: 0 0 18px rgba(198, 179, 255, 0.5); }
+@media (prefers-reduced-motion: reduce) { .process-lamp { background-color: #c6b3ff; border-color: #c6b3ff; } }
 
 /* ── /atelier-3 micro-motion: slow, small, transform and opacity only ── */
 .typing span:nth-child(2) { animation-delay: 0.15s; }
@@ -315,3 +315,81 @@ a, button { touch-action: manipulation; }
   .doodle { animation: breathe 9s ease-in-out infinite alternate; }
 }
 @keyframes breathe { to { translate: 0 -6px; } }
+
+/* SocialIcon layered deck animation */
+.social-icon-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.social-icon-wrapper .icon {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  position: relative;
+  width: 44px;
+  height: 44px;
+}
+@media (min-width: 640px) {
+  .social-icon-wrapper .icon {
+    width: 55px;
+    height: 55px;
+  }
+}
+
+.social-icon-wrapper .layer {
+  width: 44px;
+  height: 44px;
+  transition: transform 0.3s;
+}
+@media (min-width: 640px) {
+  .social-icon-wrapper .layer {
+    width: 55px;
+    height: 55px;
+  }
+}
+
+.social-icon-wrapper .icon:hover .layer {
+  transform: rotate(-35deg) skew(20deg);
+}
+
+.social-icon-wrapper .layer span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.social-icon-wrapper .icon:hover .layer span {
+  border-color: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.social-icon-wrapper .icon:hover .layer span:nth-child(1) { opacity: 0.2; }
+.social-icon-wrapper .icon:hover .layer span:nth-child(2) { opacity: 0.4; transform: translate(5px, -5px); }
+.social-icon-wrapper .icon:hover .layer span:nth-child(3) { opacity: 0.6; transform: translate(10px, -10px); }
+.social-icon-wrapper .icon:hover .layer span:nth-child(4) { opacity: 0.8; transform: translate(15px, -15px); }
+
+.social-icon-wrapper .layer span.fab {
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.3s, transform 0.3s, filter 0.3s;
+}
+
+.social-icon-wrapper .icon:hover .layer span.fab {
+  color: #ffffff;
+  transform: translate(15px, -15px);
+  filter: drop-shadow(0 0 2px var(--accent)) drop-shadow(0 0 8px var(--accent));
+}
+
+@media (prefers-reduced-motion: reduce) { .social-icon-wrapper .layer, .social-icon-wrapper .layer span { transition: none; } }

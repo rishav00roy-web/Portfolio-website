@@ -11,6 +11,7 @@ import Atelier from "./components/v5/Atelier";
 import StudioLink from "./components/v5/StudioLink";
 import { PaperAbout, PaperContact } from "./components/v5/Paper";
 import Journal from "./components/v10/Journal";
+import KineticGrid from "./components/KineticGrid";
 
 const CommandMenu = dynamic(() => import("./components/CommandMenu"), { ssr: false });
 
@@ -56,7 +57,9 @@ export default function AppV5({
         Skip to content
       </a>
       <Hero />
-      <div className="night afterglow relative z-20 bg-paper text-ink">
+      {/* v10: the live site's cursor-reactive mesh shows through behind the content */}
+      {journal && <KineticGrid />}
+      <div className={`night afterglow relative z-20 text-ink ${journal ? "bg-transparent" : "bg-paper"}`}>
         {journal ? (
           <>
             <StudioLink href="/atelier-2" />

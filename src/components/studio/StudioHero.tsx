@@ -70,10 +70,10 @@ export default function StudioHero() {
         <div aria-hidden="true" className="relative mx-auto aspect-[5/4] w-full max-w-[40rem] sm:aspect-square lg:max-w-none">
           {/* The S swash from the AS mark, drawn loose and large behind the work */}
           <svg viewBox="0 0 600 600" fill="none" className="absolute inset-0 h-full w-full overflow-visible">
-            <path data-h-swash pathLength={1} strokeDasharray="1" d="M30 470 C 120 360, 230 560, 320 420 S 430 120, 560 170 C 610 190, 600 260, 540 270" stroke="rgba(207,224,122,0.7)" strokeWidth="2" strokeLinecap="round" />
-            <path data-h-swash pathLength={1} strokeDasharray="1" d="M70 520 C 170 420, 270 600, 360 460 S 470 180, 590 230" stroke="rgba(232,235,228,0.22)" strokeWidth="1.2" strokeLinecap="round" />
-            <path data-h-swash pathLength={1} strokeDasharray="1" d="M10 600 C 170 680, 360 520, 470 615 S 620 650, 650 560" stroke="rgba(207,224,122,0.45)" strokeWidth="1.6" strokeLinecap="round" />
-            <path data-h-swash pathLength={1} strokeDasharray="1" d="M120 120 C 220 40, 360 90, 420 40" stroke="rgba(232,235,228,0.2)" strokeWidth="1.2" strokeLinecap="round" />
+            <path data-h-swash pathLength={1} strokeDasharray="1" d="M30 470 C 120 360, 230 560, 320 420 S 430 120, 560 170 C 610 190, 600 260, 540 270" stroke="rgba(198, 179, 255,0.7)" strokeWidth="2" strokeLinecap="round" />
+            <path data-h-swash pathLength={1} strokeDasharray="1" d="M70 520 C 170 420, 270 600, 360 460 S 470 180, 590 230" stroke="rgba(239, 233, 243,0.22)" strokeWidth="1.2" strokeLinecap="round" />
+            <path data-h-swash pathLength={1} strokeDasharray="1" d="M10 600 C 170 680, 360 520, 470 615 S 620 650, 650 560" stroke="rgba(198, 179, 255,0.45)" strokeWidth="1.6" strokeLinecap="round" />
+            <path data-h-swash pathLength={1} strokeDasharray="1" d="M120 120 C 220 40, 360 90, 420 40" stroke="rgba(239, 233, 243,0.2)" strokeWidth="1.2" strokeLinecap="round" />
           </svg>
 
           {/* Browser */}
@@ -93,7 +93,7 @@ export default function StudioHero() {
 
           {/* Phone */}
           <div data-h-device className="absolute right-[4%] top-[34%] w-[25%]">
-            <div data-h-phone className="rotate-[5deg] overflow-hidden rounded-[1.6rem] border-4 border-[#2a3233] bg-paper shadow-[0_40px_80px_-20px_rgba(0,0,0,0.95)]">
+            <div data-h-phone className="rotate-[5deg] overflow-hidden rounded-[1.6rem] border-4 border-[#2d2536] bg-paper shadow-[0_40px_80px_-20px_rgba(0,0,0,0.95)]">
               <div className="relative aspect-[390/844]">
                 <Image src="/assets/projects/mobile/pheonix.webp" alt="" fill sizes="(max-width: 1023px) 25vw, 12vw" className="object-cover object-top" />
               </div>

@@ -2,8 +2,9 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { ArrowUpRight, Download } from "lucide-react";
+import { Download } from "lucide-react";
 import ContactForm from "../ContactForm";
+import SocialRow from "./SocialRow";
 import { Doodle } from "../studio/Organic";
 import { bio, certificates, education, experience, languages, PROFILE, skills } from "@/lib/profile";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
@@ -208,7 +209,7 @@ export function PaperContact({ studio = false }: { studio?: boolean }) {
               </h2>
               {/* The AS mark's swash, underlining the invitation */}
               <svg data-rise aria-hidden="true" viewBox="0 0 420 40" fill="none" className="mx-auto mt-3 h-auto w-64 sm:w-80">
-                <path d="M4 26 C 70 6, 130 38, 210 20 S 340 6, 416 18" stroke="rgba(207,224,122,0.75)" strokeWidth="2" strokeLinecap="round" />
+                <path d="M4 26 C 70 6, 130 38, 210 20 S 340 6, 416 18" stroke="rgba(198, 179, 255,0.75)" strokeWidth="2" strokeLinecap="round" />
               </svg>
               <p data-rise className="mx-auto mt-5 max-w-lg text-lg leading-relaxed text-white/65">
                 Tell me what the business needs. You get a written, fixed-scope quote before any work starts.
@@ -238,20 +239,9 @@ export function PaperContact({ studio = false }: { studio?: boolean }) {
             </a>
           </p>
 
-          <ul data-rise className="mt-10 flex flex-wrap justify-center gap-2">
-            {PROFILE.socials.map((s) => (
-              <li key={s.label}>
-                <a href={s.url} target="_blank" rel="me noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-white/20 px-5 py-2.5 text-sm hover:border-accent hover:text-accent transition-colors">
-                  {s.label} <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
-                </a>
-              </li>
-            ))}
-            <li>
-              <a href={PROFILE.resume} download className="inline-flex items-center gap-1.5 rounded-full border border-white/20 px-5 py-2.5 text-sm hover:border-accent hover:text-accent transition-colors">
-                Résumé <Download className="h-3.5 w-3.5" aria-hidden="true" />
-              </a>
-            </li>
-          </ul>
+          <div data-rise className="mt-14">
+            <SocialRow />
+          </div>
         </div>
 
         <div data-rise className="mx-auto mt-20 max-w-2xl">

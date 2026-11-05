@@ -32,8 +32,8 @@ export function Swash({ flip = false }: { flip?: boolean }) {
   return (
     <div ref={root} aria-hidden="true" className={`mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 ${flip ? "-scale-x-100" : ""}`}>
       <svg viewBox="0 0 1200 160" fill="none" className="h-auto w-full overflow-visible">
-        <path pathLength={1} strokeDasharray="1" d="M0 120 C 180 40, 320 160, 520 90 S 860 10, 1010 80 C 1090 118, 1160 70, 1200 40" stroke="rgba(207,224,122,0.6)" strokeWidth="2" strokeLinecap="round" />
-        <path pathLength={1} strokeDasharray="1" d="M40 140 C 220 70, 360 170, 560 110 S 900 40, 1200 90" stroke="rgba(232,235,228,0.18)" strokeWidth="1.2" strokeLinecap="round" />
+        <path pathLength={1} strokeDasharray="1" d="M0 120 C 180 40, 320 160, 520 90 S 860 10, 1010 80 C 1090 118, 1160 70, 1200 40" stroke="rgba(198, 179, 255,0.6)" strokeWidth="2" strokeLinecap="round" />
+        <path pathLength={1} strokeDasharray="1" d="M40 140 C 220 70, 360 170, 560 110 S 900 40, 1200 90" stroke="rgba(239, 233, 243,0.18)" strokeWidth="1.2" strokeLinecap="round" />
       </svg>
     </div>
   );
@@ -69,8 +69,8 @@ export function ProcessPath({ steps }: { steps: { name: string; detail: string }
   return (
     <div ref={root} className="relative mt-12 pl-16">
       <svg aria-hidden="true" viewBox="0 0 48 760" preserveAspectRatio="none" fill="none" className="absolute left-0 top-0 h-full w-12 overflow-visible">
-        <path d={PATH} stroke="rgba(232,235,228,0.16)" strokeWidth="1.2" strokeDasharray="3 8" strokeLinecap="round" />
-        <path data-p-line d={PATH} pathLength={1} strokeDasharray="1" stroke="rgba(207,224,122,0.85)" strokeWidth="2" strokeLinecap="round" />
+        <path d={PATH} stroke="rgba(239, 233, 243,0.16)" strokeWidth="1.2" strokeDasharray="3 8" strokeLinecap="round" />
+        <path data-p-line d={PATH} pathLength={1} strokeDasharray="1" stroke="rgba(198, 179, 255,0.85)" strokeWidth="2" strokeLinecap="round" />
       </svg>
       <ol className="space-y-12">
         {steps.map((p) => (
