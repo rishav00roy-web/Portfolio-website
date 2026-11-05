@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 
 import { useEffect, useState, useRef } from "react";
 import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
@@ -224,18 +223,25 @@ export default function Hero() {
                 transition={still ? { duration: 0 } : { duration: 1, delay: 0.35, ease: [0.16, 1, 0.3, 1] as const }}
                 className="flex flex-wrap gap-3 shrink-0"
               >
-                <Link
-                  href="/projects"
+                <a
+                  href="#projects"
+                  onClick={(e) => {
+                    const el = document.getElementById("projects");
+                    if (!el) return;
+                    e.preventDefault();
+                    if (lenis) lenis.scrollTo(el, { duration: 1.4 });
+                    else el.scrollIntoView({ behavior: "smooth" });
+                  }}
                   className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-accent text-background font-semibold text-sm hover:bg-[#ffc72c] transition-colors cursor-pointer"
                 >
-                  Case Studies
-                  <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-out-expo group-hover:translate-x-0.5" aria-hidden="true" />
-                </Link>
+                  See my work
+                  <ArrowRight className="w-4 h-4 rotate-90 transition-transform duration-300 ease-out-expo group-hover:translate-y-0.5" aria-hidden="true" />
+                </a>
                 <button
                   onClick={scrollToContact}
                   className="px-6 py-3.5 rounded-full border border-white/25 bg-black/45 text-white hover:border-white/50 transition-colors font-semibold text-sm cursor-pointer"
                 >
-                  Get in Touch
+                  Get in touch
                 </button>
               </motion.div>
             </div>
@@ -245,10 +251,10 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={still ? { duration: 0 } : { duration: 1, delay: 0.5 }}
-              className="mt-8 sm:mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 border-t border-accent/25"
+              className="mt-8 sm:mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-y-1 border-t border-white/15"
             >
               <div className="pt-4 pr-4">
-                <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent/80 mb-1.5">Currently</dt>
+                <dt className="text-xs text-white/55 mb-1">Currently</dt>
                 <dd className="relative h-[2.6em] overflow-hidden text-sm text-white/90">
                   <AnimatePresence mode="wait">
                     <motion.span
@@ -265,14 +271,14 @@ export default function Hero() {
                 </dd>
               </div>
               <div className="pt-4 pr-4">
-                <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent/80 mb-1.5">Based in</dt>
+                <dt className="text-xs text-white/55 mb-1">Based in</dt>
                 <dd className="text-sm text-white/90">
                   Kolkata, India
                   <span className="block text-xs text-white/55">from Jorhat, Assam</span>
                 </dd>
               </div>
               <div className="pt-4 pr-4">
-                <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent/80 mb-1.5">Resume</dt>
+                <dt className="text-xs text-white/55 mb-1">Résumé</dt>
                 <dd className="text-sm">
                   <a
                     href="/Rishav-Roy-CV.pdf"
@@ -286,13 +292,13 @@ export default function Hero() {
                 </dd>
               </div>
               <div className="pt-4 pr-4">
-                <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent/80 mb-1.5">Commits</dt>
+                <dt className="text-xs text-white/55 mb-1">Commits</dt>
                 <dd className="text-sm text-white/90">
                   {commitCount !== null ? `${commitCount} on GitHub` : "… on GitHub"}
                 </dd>
               </div>
               <div className="pt-4 pr-4 hidden sm:block">
-                <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent/80 mb-1.5">Credentials</dt>
+                <dt className="text-xs text-white/55 mb-1">Credentials</dt>
                 <dd className="text-sm">
                   <a
                     href="#certificates"
@@ -307,7 +313,7 @@ export default function Hero() {
                     className="inline-flex items-center gap-1.5 text-white/90 hover:text-accent transition-colors"
                   >
                     <Award className="w-3.5 h-3.5" aria-hidden="true" />
-                    Google · Coursera
+                    Google, via Coursera
                   </a>
                 </dd>
               </div>

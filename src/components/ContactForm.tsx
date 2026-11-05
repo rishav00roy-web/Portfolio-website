@@ -64,7 +64,7 @@ export default function ContactForm() {
 
   return (
     <div className="w-full max-w-xl bg-surface border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl relative">
-      <h3 className="font-display text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-white mb-2">
+      <h3 className="font-display text-3xl sm:text-4xl uppercase tracking-[-0.01em] text-white mb-2">
         Send a Message
       </h3>
       <p className="text-white/50 text-xs sm:text-sm font-sans mb-8">
@@ -74,7 +74,7 @@ export default function ContactForm() {
       {status === "success" ? (
         <div className="py-10 flex flex-col items-center justify-center text-center space-y-4">
           <CheckCircle2 className="w-16 h-16 text-emerald-400" />
-          <h4 className="text-xl font-bold text-white uppercase tracking-tight font-display">
+          <h4 className="text-2xl text-white uppercase font-display">
             WhatsApp Opened!
           </h4>
           <p className="text-white/60 text-sm max-w-sm leading-relaxed font-sans">
@@ -82,7 +82,7 @@ export default function ContactForm() {
           </p>
           <button
             onClick={() => setStatus("idle")}
-            className="mt-4 px-5 py-2.5 rounded-full border border-white/15 hover:border-white/35 text-white/80 hover:text-white transition-colors text-xs font-mono uppercase tracking-widest"
+            className="mt-4 px-5 py-2.5 rounded-full border border-white/15 hover:border-white/35 text-white/80 hover:text-white transition-colors text-sm"
           >
             Send Another Message
           </button>
@@ -91,7 +91,7 @@ export default function ContactForm() {
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Name Field */}
           <div>
-            <label htmlFor="form-name" className="block font-mono text-[10px] uppercase tracking-widest text-white/55 mb-2">
+            <label htmlFor="form-name" className="block text-sm text-white/70 mb-2">
               Name
             </label>
             <input
@@ -120,8 +120,8 @@ export default function ContactForm() {
 
           {/* Email Field */}
           <div>
-            <label htmlFor="form-email" className="block font-mono text-[10px] uppercase tracking-widest text-white/55 mb-2">
-              Email Address
+            <label htmlFor="form-email" className="block text-sm text-white/70 mb-2">
+              Email
             </label>
             <input
               id="form-email"
@@ -149,8 +149,8 @@ export default function ContactForm() {
 
           {/* Inquiry Type */}
           <div>
-            <label htmlFor="form-type" className="block font-mono text-[10px] uppercase tracking-widest text-white/55 mb-2">
-              Project Type
+            <label htmlFor="form-type" className="block text-sm text-white/70 mb-2">
+              What is it about?
             </label>
             <select
               id="form-type"
@@ -167,8 +167,8 @@ export default function ContactForm() {
 
           {/* Message Field */}
           <div>
-            <label htmlFor="form-message" className="block font-mono text-[10px] uppercase tracking-widest text-white/55 mb-2">
-              Message / Project Description
+            <label htmlFor="form-message" className="block text-sm text-white/70 mb-2">
+              Message
             </label>
             <textarea
               id="form-message"
@@ -195,9 +195,9 @@ export default function ContactForm() {
           </div>
 
           {/* Expected Response Info */}
-          <div className="flex items-center gap-2 text-white/55 font-mono text-[10px] uppercase tracking-widest">
+          <div className="flex items-center gap-2 text-white/55 text-sm">
             <Clock className="w-3.5 h-3.5" />
-            <span>Typical response time: 12 to 24 hours</span>
+            <span>I usually reply within a day.</span>
           </div>
 
           {/* Form CTAs */}

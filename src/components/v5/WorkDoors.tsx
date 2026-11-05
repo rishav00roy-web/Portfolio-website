@@ -6,7 +6,6 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { commissions, otherWork } from "@/lib/work";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
-import Verse from "./Verse";
 
 /*
  * v5: two doors. Straight after the hero the visitor chooses a kind of work.
@@ -54,6 +53,18 @@ const AI_STAGES = [
 export default function WorkDoors() {
   const root = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLUListElement>(null);
+  const progress = useRef<HTMLSpanElement>(null);
+
+  // A thin line under the strip shows how far through the sites you are.
+  // Written straight to the style on scroll, so no re-render per frame.
+  const onStripScroll = () => {
+    const el = track.current;
+    const bar = progress.current;
+    if (!el || !bar) return;
+    const max = el.scrollWidth - el.clientWidth;
+    const done = max > 0 ? el.scrollLeft / max : 1;
+    bar.style.transform = `scaleX(${0.08 + done * 0.92})`;
+  };
 
   useGSAP(
     () => {
@@ -125,7 +136,6 @@ export default function WorkDoors() {
               Websites
             </h2>
             <p className="mt-4 max-w-md text-[15px] leading-relaxed text-ink/65">Swipe through, or use the arrows. Paid client builds come first.</p>
-            <Verse className="mt-6" text="And whatsoever ye do, do it heartily, as to the Lord, and not unto men." reference="Colossians 3:23" />
           </div>
           <div className="hidden shrink-0 gap-2 sm:flex">
             <button type="button" onClick={() => nudge(-1)} aria-label="Previous site" className="grid h-12 w-12 place-items-center rounded-full border border-ink/20 hover:border-rust hover:text-rust transition-colors">
@@ -139,6 +149,7 @@ export default function WorkDoors() {
 
         <ul
           ref={track}
+          onScroll={onStripScroll}
           data-lenis-prevent
           className="mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto overscroll-x-contain px-6 sm:px-12 xl:px-20 pb-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden scroll-px-6 sm:scroll-px-12 xl:scroll-px-20"
         >
@@ -173,6 +184,9 @@ export default function WorkDoors() {
             );
           })}
         </ul>
+        <div aria-hidden="true" className="mx-6 sm:mx-12 xl:mx-20 mt-2 h-px bg-ink/10">
+          <span ref={progress} className="block h-px origin-left scale-x-[0.08] bg-rust transition-transform duration-200 ease-out" />
+        </div>
       </section>
 
       {/* ─────────── AI: moonlit flow ─────────── */}
@@ -187,7 +201,6 @@ export default function WorkDoors() {
               AI &amp; Agents
             </h2>
             <p className="mt-4 max-w-md text-[15px] leading-relaxed text-ink/65">Systems that do the work themselves. Shown as what they run.</p>
-            <Verse className="mt-6" tone="moon" text="Commit thy works unto the LORD, and thy thoughts shall be established." reference="Proverbs 16:3" />
           </header>
 
           <article className="mt-14">

@@ -198,7 +198,6 @@ export function PaperContact() {
       </div>
       <p className="mt-24 border-t border-white/10 pt-8 text-sm text-white/50">
         &copy; {new Date().getFullYear()} {PROFILE.name}. Designed and built by me, for the glory of Jesus Christ.
-        <span className="ml-1 font-medium text-accent">Psalm 90:17</span>
       </p>
     </footer>
   );
