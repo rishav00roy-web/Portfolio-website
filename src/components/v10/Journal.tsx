@@ -101,7 +101,7 @@ export default function Journal() {
               <dd className="text-ink/85">{PROFILE.location}, from {PROFILE.hometown}</dd>
               <dt className="text-ink/55">Runs</dt>
               <dd className="text-ink/85">
-                <a href="/atelier-2" className="underline decoration-ink/25 underline-offset-4 hover:text-rust hover:decoration-rust">Atelier Systems</a>, my studio
+                <a href="/atelier" className="underline decoration-ink/25 underline-offset-4 hover:text-rust hover:decoration-rust">Atelier Systems</a>, my studio
               </dd>
               <dt className="text-ink/55">Speaks</dt>
               <dd className="text-ink/85">{languages.map((l) => `${l.name} (${l.level.toLowerCase()})`).join(", ")}</dd>

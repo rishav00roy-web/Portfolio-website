@@ -254,33 +254,12 @@ body:has(main.studio) { background-color: #110d14; }
 /* The studio sets headings the way the mark's wordmark is drawn: no shouting. */
 .studio .font-display { text-transform: none; font-weight: 500; letter-spacing: -0.03em; }
 .studio ::selection { background-color: #c6b3ff; color: #110d14; }
-/* Drafting-table grid behind the studio's opening, fading out downward. */
-.studio-grid {
-  background-image:
-    linear-gradient(rgba(239, 233, 243, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(239, 233, 243, 0.045) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
-}
 
 /* v10 trail: a station's lamp lights when the walker reaches it. */
 .trail-lamp { transition: background-color 0.6s, border-color 0.6s, box-shadow 0.6s; }
 .trail-station.is-lit .trail-lamp { background-color: var(--color-rust); border-color: var(--color-rust); box-shadow: 0 0 22px rgba(245, 179, 1, 0.55); }
 @media (prefers-reduced-motion: reduce) { .trail-lamp { background-color: var(--color-rust); border-color: var(--color-rust); } }
-/* /atelier-2 drawing sheet: an even grid across the whole frame. */
-.studio-grid-full {
-  background-image:
-    linear-gradient(rgba(239, 233, 243, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(239, 233, 243, 0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
-  background-position: -1px -1px;
-}
 
-/* /atelier-3 showroom: a faint dot grid under the stages. */
-.studio-dots {
-  background-image: radial-gradient(rgba(239, 233, 243, 0.07) 1px, transparent 1px);
-  background-size: 28px 28px;
-}
 
 /* A pressed state for every button and pill link: a small, quick give. */
 button:not(:disabled), a.rounded-full { transition-property: color, background-color, border-color, opacity, transform; }
@@ -295,12 +274,12 @@ p, li, dd { text-wrap: pretty; }
 section[id], footer[id], [id].scroll-target { scroll-margin-top: 6rem; }
 a, button { touch-action: manipulation; }
 
-/* /atelier-3 process path: a step's lamp lights when you reach it. */
+/* /atelier process path: a step's lamp lights when you reach it. */
 .process-lamp { transition: background-color 0.5s, border-color 0.5s, box-shadow 0.5s; }
 .process-step.is-lit .process-lamp { background-color: #c6b3ff; border-color: #c6b3ff; box-shadow: 0 0 18px rgba(198, 179, 255, 0.5); }
 @media (prefers-reduced-motion: reduce) { .process-lamp { background-color: #c6b3ff; border-color: #c6b3ff; } }
 
-/* ── /atelier-3 micro-motion: slow, small, transform and opacity only ── */
+/* ── /atelier micro-motion: slow, small, transform and opacity only ── */
 .typing span:nth-child(2) { animation-delay: 0.15s; }
 .typing span:nth-child(3) { animation-delay: 0.3s; }
 @media (prefers-reduced-motion: no-preference) {

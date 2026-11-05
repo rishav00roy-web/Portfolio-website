@@ -6,7 +6,7 @@ const DESCRIPTION =
 
 // Kept out of search while the redesign is a preview; drop `robots` and add
 // the route to the sitemap when the two-page site goes live.
-// Browser chrome matches the studio's graphite, not the portfolio's dusk.
+// Browser chrome matches the studio's aubergine, not the portfolio's dusk.
 export const viewport: Viewport = { themeColor: "#110d14" };
 
 export const metadata: Metadata = {

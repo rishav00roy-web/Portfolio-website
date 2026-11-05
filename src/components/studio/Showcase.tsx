@@ -7,12 +7,12 @@ import { ArrowRight, Bot, Globe, HeartHandshake, LayoutDashboard, LayoutGrid, Mo
 import { SupportStage, InvoiceStage } from "../v5/AIStage";
 import StudioHero from "./StudioHero";
 import { Doodle, ProcessPath, Swash } from "./Organic";
-import { SERVICES, PROCESS } from "./Sheet";
+import { SERVICES, PROCESS } from "@/lib/studio";
 import { commissions, otherWork } from "@/lib/work";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
 /*
- * /atelier-3: the studio's work as a showroom. Each project sits on its own
+ * /atelier: the studio's work as a showroom. Each project sits on its own
  * lit stage, the desktop build in a browser frame with the real phone view
  * (captured from the live site) leaning in front. Filters with counts split
  * websites from products; a toggle swaps the stages for a compact list.
@@ -208,7 +208,7 @@ function Stage({ e }: { e: Entry }) {
           </div>
           {/* Phone, leaning in front, taken from the live site */}
           {e.phone && (
-            <div className="absolute bottom-5 right-5 w-[26%] rotate-[3deg] overflow-hidden rounded-[1.3rem] border-[3px] border-[#2d2536] bg-paper shadow-[0_30px_60px_-20px_rgba(0,0,0,0.95)] transition-transform duration-300 ease-out-expo group-hover:-translate-y-2 sm:bottom-8 sm:right-10">
+            <div className="absolute bottom-5 right-5 w-[26%] rotate-2 overflow-hidden rounded-[1.3rem] border-[3px] border-[#2d2536] bg-paper shadow-[0_30px_60px_-20px_rgba(0,0,0,0.95)] transition-transform duration-300 ease-out-expo group-hover:-translate-y-2 sm:bottom-8 sm:right-10">
               <div className="relative aspect-[390/844]">
                 <Image src={e.phone} alt={`${e.title}, on a phone`} fill sizes="(max-width: 1023px) 26vw, 12vw" className="object-cover object-top" />
               </div>

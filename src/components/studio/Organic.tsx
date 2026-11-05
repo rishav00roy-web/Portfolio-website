@@ -73,10 +73,11 @@ export function ProcessPath({ steps }: { steps: { name: string; detail: string }
         <path data-p-line d={PATH} pathLength={1} strokeDasharray="1" stroke="rgba(198, 179, 255,0.85)" strokeWidth="2" strokeLinecap="round" />
       </svg>
       <ol className="space-y-12">
-        {steps.map((p) => (
+        {steps.map((p, i) => (
           <li key={p.name} data-p-step className="process-step relative">
             <span aria-hidden="true" className="process-lamp absolute -left-[2.85rem] top-2 size-3.5 rounded-full border border-ink/40 bg-paper" />
-            <span className="block text-2xl text-ink/90">{p.name}</span>
+            <span className="block font-mono text-sm tabular-nums text-rust">Step {String(i + 1).padStart(2, "0")}</span>
+            <span className="mt-1 block text-2xl text-ink/90">{p.name}</span>
             <span className="mt-1.5 block text-lg leading-relaxed text-ink/60">{p.detail}</span>
           </li>
         ))}
@@ -149,7 +150,7 @@ export function Doodle({ kind, className = "" }: { kind: DoodleKind; className?:
     { scope: root },
   );
   return (
-    <svg ref={root} aria-hidden="true" viewBox="0 0 120 120" fill="none" className={`doodle pointer-events-none absolute text-ink/[0.14] ${className}`}>
+    <svg ref={root} aria-hidden="true" viewBox="0 0 120 120" fill="none" className={`doodle pointer-events-none absolute text-ink/[0.10] ${className}`}>
       {DOODLES[kind].map((d) => (
         <path key={d} d={d} pathLength={1} strokeDasharray="1" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
       ))}

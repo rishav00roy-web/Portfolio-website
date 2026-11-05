@@ -14,6 +14,13 @@ import { gsap, useGSAP } from "@/lib/gsap";
  * scroll away (transform only).
  */
 
+const RECENT = [
+  ["Pheonix", "https://pheonix-ashy.vercel.app"],
+  ["Tea Country Holidays", "/projects/tea-country-holidays"],
+  ["IQ Iron Fitness", "/projects/iq-iron-fitness"],
+  ["Clash Bazar", "/projects/clash-bazar"],
+] as const;
+
 export default function StudioHero() {
   const root = useRef<HTMLElement>(null);
 
@@ -54,7 +61,7 @@ export default function StudioHero() {
             </span>
           </h1>
           <p data-h-copy className="mt-8 max-w-lg text-xl leading-snug text-ink/80 sm:text-2xl">
-            Websites, automation and AI products for small businesses. Designed and built end to end by Rishav Roy.
+            A small studio building websites, automation and AI products for growing businesses. Led by Rishav Roy, built end to end.
           </p>
           <div data-h-copy className="mt-10 flex flex-wrap gap-3">
             <a href="#contact" className="inline-flex min-h-12 items-center gap-2 rounded-full bg-rust px-7 text-base font-semibold text-paper hover:opacity-90">
@@ -64,6 +71,18 @@ export default function StudioHero() {
               See the work
             </a>
           </div>
+          {/* Recent clients, linking straight to the work */}
+          <p data-h-copy className="mt-12 max-w-lg text-base leading-relaxed text-ink/55">
+            Recent work for{" "}
+            {RECENT.map(([name, href], i) => (
+              <span key={name}>
+                <a href={href} className="text-ink/85 underline decoration-ink/25 underline-offset-4 transition-colors hover:text-rust hover:decoration-rust">
+                  {name}
+                </a>
+                {i < RECENT.length - 2 ? ", " : i === RECENT.length - 2 ? " and " : "."}
+              </span>
+            ))}
+          </p>
         </div>
 
         {/* The stage */}
@@ -78,7 +97,7 @@ export default function StudioHero() {
 
           {/* Browser */}
           <div data-h-device className="absolute left-[2%] top-[24%] w-[78%]">
-            <div data-h-browser className="-rotate-3 overflow-hidden rounded-2xl border border-ink/15 bg-paper shadow-[0_40px_100px_-30px_rgba(0,0,0,0.95)]">
+            <div data-h-browser className="-rotate-[1.5deg] overflow-hidden rounded-2xl border border-ink/15 bg-paper shadow-[0_40px_100px_-30px_rgba(0,0,0,0.95)]">
               <div className="flex h-7 items-center gap-1.5 border-b border-ink/10 px-3">
                 <span className="h-2 w-2 rounded-full bg-ink/25" />
                 <span className="h-2 w-2 rounded-full bg-ink/25" />
@@ -93,7 +112,7 @@ export default function StudioHero() {
 
           {/* Phone */}
           <div data-h-device className="absolute right-[4%] top-[34%] w-[25%]">
-            <div data-h-phone className="rotate-[5deg] overflow-hidden rounded-[1.6rem] border-4 border-[#2d2536] bg-paper shadow-[0_40px_80px_-20px_rgba(0,0,0,0.95)]">
+            <div data-h-phone className="rotate-[3deg] overflow-hidden rounded-[1.6rem] border-4 border-[#2d2536] bg-paper shadow-[0_40px_80px_-20px_rgba(0,0,0,0.95)]">
               <div className="relative aspect-[390/844]">
                 <Image src="/assets/projects/mobile/pheonix.webp" alt="" fill sizes="(max-width: 1023px) 25vw, 12vw" className="object-cover object-top" />
               </div>
@@ -102,7 +121,7 @@ export default function StudioHero() {
 
           {/* The support agent, mid-answer */}
           <div data-h-device className="absolute bottom-[8%] left-[10%] hidden w-[52%] sm:block">
-            <div data-h-chat className="-rotate-2 rounded-3xl border border-moon/25 bg-paper-2/95 p-4 shadow-[0_30px_70px_-25px_rgba(0,0,0,0.95)]">
+            <div data-h-chat className="-rotate-1 rounded-3xl border border-moon/25 bg-paper-2/95 p-4 shadow-[0_30px_70px_-25px_rgba(0,0,0,0.95)]">
               <p className="ml-auto w-fit max-w-[85%] rounded-2xl rounded-br-md bg-moon px-3.5 py-2 text-sm text-paper">Got the Phoenix Rise Tee in XL?</p>
               <p className="mt-2 w-fit max-w-[90%] rounded-2xl rounded-bl-md bg-ink/[0.07] px-3.5 py-2 text-sm leading-snug text-ink/85">
                 It comes in S to XXL. Want me to add XL to your bag?

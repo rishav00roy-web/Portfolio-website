@@ -248,9 +248,40 @@ export function PaperContact({ studio = false }: { studio?: boolean }) {
           <ContactForm />
         </div>
 
-        <p className="mt-24 border-t border-white/10 pt-8 text-center text-sm text-white/60">
-          &copy; {new Date().getFullYear()} {studio ? "Atelier Systems, run by " + PROFILE.name : PROFILE.name}. Designed and built by me.
-        </p>
+        {studio ? (
+          <div className="mt-24 grid gap-10 border-t border-white/10 pt-12 text-base sm:grid-cols-2 lg:grid-cols-[minmax(0,2fr)_repeat(3,minmax(0,1fr))]">
+            <div>
+              <Image src="/brand/atelier-monogram.webp" alt="" width={357} height={292} className="h-auto w-12" />
+              <p className="mt-4 text-lg text-white/90">Atelier Systems</p>
+              <p className="mt-1 max-w-xs leading-relaxed text-white/60">Websites, automation and AI products for growing businesses.</p>
+            </div>
+            <div>
+              <p className="text-sm text-white/55">Studio</p>
+              <ul className="mt-3 space-y-2">
+                <li><a href="#projects" className="text-white/85 hover:text-accent">Work</a></li>
+                <li><a href="#process" className="text-white/85 hover:text-accent">Services and process</a></li>
+                <li><a href="/v10" className="text-white/85 hover:text-accent">About Rishav Roy</a></li>
+              </ul>
+            </div>
+            <div>
+              <p className="text-sm text-white/55">Contact</p>
+              <ul className="mt-3 space-y-2">
+                <li><a href={`mailto:${PROFILE.email}`} className="break-all text-white/85 hover:text-accent">{PROFILE.email}</a></li>
+                <li><a href={PROFILE.phoneHref} className="text-white/85 hover:text-accent">{PROFILE.phone}</a></li>
+              </ul>
+            </div>
+            <div>
+              <p className="text-sm text-white/55">Based in</p>
+              <p className="mt-3 text-white/85">{PROFILE.location}</p>
+              <p className="mt-1 text-white/60">Working with clients remotely</p>
+            </div>
+            <p className="text-sm text-white/55 sm:col-span-2 lg:col-span-4">&copy; {new Date().getFullYear()} Atelier Systems. All rights reserved.</p>
+          </div>
+        ) : (
+          <p className="mt-24 border-t border-white/10 pt-8 text-center text-sm text-white/60">
+            &copy; {new Date().getFullYear()} {PROFILE.name}. Designed and built by me.
+          </p>
+        )}
       </div>
     </footer>
   );

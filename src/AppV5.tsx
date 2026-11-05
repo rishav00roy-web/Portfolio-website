@@ -7,7 +7,6 @@ import dynamic from "next/dynamic";
 import { gsap, ScrollTrigger } from "./lib/gsap";
 import Hero from "./components/Hero";
 import Work, { type WorkLayout } from "./components/v5/Work";
-import Atelier from "./components/v5/Atelier";
 import StudioLink from "./components/v5/StudioLink";
 import { PaperAbout, PaperContact } from "./components/v5/Paper";
 import Journal from "./components/v10/Journal";
@@ -23,12 +22,10 @@ const CommandMenu = dynamic(() => import("./components/CommandMenu"), { ssr: fal
  */
 export default function AppV5({
   layout = "rows",
-  atelier = false,
   portfolio = false,
   journal = false,
 }: {
   layout?: WorkLayout;
-  atelier?: boolean;
   /** Personal portfolio: the work lives on /atelier, linked from one card. */
   portfolio?: boolean;
   /** v10: the portfolio as an evening walk (story, trail, pack). */
@@ -62,12 +59,12 @@ export default function AppV5({
       <div className={`night afterglow relative z-20 text-ink ${journal ? "bg-transparent" : "bg-paper"}`}>
         {journal ? (
           <>
-            <StudioLink href="/atelier-2" />
+            <StudioLink />
             <Journal />
           </>
         ) : (
           <>
-            {portfolio ? <StudioLink /> : atelier ? <Atelier /> : <Work layout={layout} />}
+            {portfolio ? <StudioLink /> : <Work layout={layout} />}
             <PaperAbout />
           </>
         )}
