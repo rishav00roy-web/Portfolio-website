@@ -6,49 +6,20 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { commissions, otherWork } from "@/lib/work";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
+import AIStage from "./AIStage";
 
 /*
  * The work, in two kinds:
  * - Paid client websites, each a full-screen panel that the next one slides
  *   over (CSS sticky, no scroll scripting), then every other site in a
  *   swipeable strip.
- * - The AI work, lit by moonlight instead of the sun's amber, laid out as
- *   a circuit of the stages the agent runs.
+ * - The AI work, lit by moonlight instead of the sun's amber: three
+ *   products on one tabbed stage (AIStage).
  */
 
 const AI_ID = "job-tracker-and-email-tracker";
-const ai = otherWork.find((w) => w.id === AI_ID)!;
 const tools = otherWork.filter((w) => w.id === "gym-crm");
 const sites = otherWork.filter((w) => w.id !== AI_ID && w.id !== "gym-crm");
-
-/*
- * The two other AI products alongside the job tracker. The support agent is
- * the chat running on this site, so the card opens it; the invoice reader
- * is being set up, so it offers a demo rather than a link.
- */
-const AI_PRODUCTS = [
-  {
-    name: "Support agent",
-    detail:
-      "A chat assistant that answers a business's customers from its own information, any hour of the day. The one on this site is it.",
-    action: "chat" as const,
-  },
-  {
-    name: "Invoice reader",
-    detail:
-      "Reads invoices and receipts and pulls out the vendor, date and amounts, so nobody types them into a spreadsheet by hand.",
-    action: "demo" as const,
-  },
-];
-
-const openChat = () =>
-  document.querySelector<HTMLButtonElement>('[aria-label="Open Psunk AI Chat"]')?.click();
-
-const AI_STAGES = [
-  { name: "Ingest and score", detail: "Pulls listings from 54 job platforms and scores each one." },
-  { name: "Track the inbox", detail: "Moves each Kanban card on an interview or a rejection email, on its own." },
-  { name: "Tailor, truthfully", detail: "Tailors the résumé per role and rejects any claim it cannot back up." },
-];
 
 export type WorkLayout = "rows" | "index" | "grid";
 
@@ -291,74 +262,10 @@ export default function Work({ layout = "rows" }: { layout?: WorkLayout }) {
             AI &amp; Agents
           </h2>
           <p data-rise className="mt-6 max-w-xl text-lg leading-relaxed text-ink/65">
-            Not websites: three AI products that do the work themselves.
+            Not websites: three AI products that do the work themselves. Pick one to see it at work.
           </p>
 
-          <article className="mt-16 sm:mt-24">
-            <div data-rise className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:items-end">
-              <h3 className="font-display uppercase text-4xl sm:text-6xl leading-[0.9]">{ai.title}</h3>
-              <p className="text-base sm:text-lg leading-relaxed text-ink/70">{ai.description}</p>
-            </div>
-
-            {/* The circuit: three nodes on one moonlit wire */}
-            <ol data-rise className="relative mt-16 grid gap-10 md:grid-cols-3 md:gap-8">
-              <span aria-hidden="true" className="absolute left-[1.4rem] top-0 bottom-0 w-px bg-gradient-to-b from-moon/60 to-moon/0 md:left-0 md:right-0 md:top-[1.4rem] md:bottom-auto md:h-px md:w-auto md:bg-gradient-to-r" />
-              {AI_STAGES.map((s, i) => (
-                <li key={s.name} className="relative grid grid-cols-[2.8rem_minmax(0,1fr)] gap-5 md:block">
-                  <span className="relative z-10 grid h-11 w-11 place-items-center rounded-full border border-moon/70 bg-paper font-display text-xl text-moon shadow-[0_0_30px_rgba(159,194,214,0.25)]">
-                    {i + 1}
-                  </span>
-                  <span className="md:mt-6 block">
-                    <span className="block font-display uppercase text-3xl leading-[0.95]">{s.name}</span>
-                    <span className="mt-3 block text-[15px] leading-relaxed text-ink/65">{s.detail}</span>
-                  </span>
-                </li>
-              ))}
-            </ol>
-
-            {ai.preview && (
-              <figure data-rise className="mt-16 overflow-hidden rounded-3xl border border-moon/25 shadow-[0_40px_120px_-40px_rgba(159,194,214,0.25)]">
-                <span className="relative block aspect-[16/9]">
-                  <Image src={ai.preview} alt={`${ai.title}: the board the agent keeps up to date`} fill sizes="(max-width: 1439px) 100vw, 1300px" className="object-cover object-top" />
-                </span>
-                <figcaption className="flex flex-wrap items-center justify-between gap-4 border-t border-moon/15 px-6 py-4 text-sm text-ink/60">
-                  <span>{ai.tags.join(", ")}</span>
-                  <a href={ai.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full bg-moon px-5 py-2.5 font-semibold text-paper hover:opacity-90 transition-opacity">
-                    Read the code
-                    <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                  </a>
-                </figcaption>
-              </figure>
-            )}
-          </article>
-
-          {/* The other two AI products */}
-          <ul data-rise className="mt-20 grid gap-5 md:grid-cols-2">
-            {AI_PRODUCTS.map((a) => (
-              <li key={a.name} className="flex flex-col rounded-3xl border border-moon/25 bg-[rgba(159,194,214,0.04)] p-7 sm:p-9">
-                <h3 className="font-display uppercase text-4xl leading-[0.9]">{a.name}</h3>
-                <p className="mt-4 flex-1 text-[15px] leading-relaxed text-ink/65">{a.detail}</p>
-                {a.action === "chat" ? (
-                  <button
-                    type="button"
-                    onClick={openChat}
-                    className="mt-8 inline-flex items-center gap-1.5 self-start rounded-full bg-moon px-5 py-3 text-sm font-semibold text-paper hover:opacity-90 transition-opacity"
-                  >
-                    Try it now
-                    <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                  </button>
-                ) : (
-                  <a
-                    href="#contact"
-                    className="mt-8 inline-flex items-center gap-1.5 self-start rounded-full border border-moon/50 px-5 py-3 text-sm font-semibold text-moon hover:border-moon transition-colors"
-                  >
-                    Book a demo
-                    <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                  </a>
-                )}
-              </li>
-            ))}
-          </ul>
+          <AIStage />
 
           {tools.map((w) => (
             <a

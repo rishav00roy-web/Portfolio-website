@@ -210,3 +210,8 @@ body {
   from { transform: translateY(-100%); }
   to { transform: translateY(200%); }
 }
+
+/* AI stage: the new tab's copy and stage rise in */
+.stage-in { animation: stage-in 0.6s var(--ease-out-expo) both; }
+@keyframes stage-in { from { opacity: 0; transform: translateY(14px); } }
+@media (prefers-reduced-motion: reduce) { .stage-in { animation: none; } }
