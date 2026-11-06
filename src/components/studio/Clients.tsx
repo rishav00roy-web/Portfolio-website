@@ -25,7 +25,7 @@ const CLIENTS = [
     realName: null,
     who: "Clash of Clans YouTuber",
     photo: "/assets/clients/v7clash.webp",
-    alt: "V7 CLASH channel picture: a purple Legend League shield with the number 119",
+    alt: "The creator behind V7 CLASH, in a grey t-shirt",
     built: "Clash Bazar, the channel's store for clan services, with payments held until each order is done.",
     links: [
       { label: "Case study", href: "/projects/clash-bazar" },
