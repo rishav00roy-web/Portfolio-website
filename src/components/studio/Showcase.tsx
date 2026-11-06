@@ -16,8 +16,8 @@ import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
  * lit stage, the desktop build in a browser frame with the real phone view
  * (captured from the live site) leaning in front. Filters with counts split
  * websites from products; a toggle swaps the stages for a compact list.
- * Behind the stages: the AS mark's construction circles, in Atelier's
- * graphite and lime.
+ * Each stage is a soft panel with a loose swash, in Atelier's navy and
+ * brass.
  */
 
 type Kind = "website" | "product";
