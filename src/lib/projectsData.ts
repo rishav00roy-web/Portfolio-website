@@ -7,8 +7,8 @@ export const projects = [
     tags: ["Next.js", "Supabase", "PostgreSQL", "Tailwind CSS", "Custom CMS", "PKCE OAuth"],
     link: "https://tea-country-holidays.vercel.app",
     images: [
-      "/assets/projects/tea-1.jpg",
-      "/assets/projects/tea-2.jpg",
+      "/assets/projects/tea-1.webp",
+      "/assets/projects/tea-2.webp",
       "/assets/projects/tea-3.jpg",
     ],
   },
@@ -20,9 +20,9 @@ export const projects = [
     tags: ["Next.js", "Supabase", "PostgreSQL", "Tailwind CSS", "TypeScript", "Billing Engine"],
     link: "https://iq-iron-fitness-online-crm.vercel.app",
     images: [
-      "/assets/projects/gym-online-1.png",
-      "/assets/projects/gym-online-2.png",
-      "/assets/projects/gym-online-3.png",
+      "/assets/projects/gym-online-1.webp",
+      "/assets/projects/gym-online-2.webp",
+      "/assets/projects/gym-online-3.webp",
     ],
   },
   {
@@ -33,22 +33,21 @@ export const projects = [
     tags: ["Next.js", "Supabase", "Stripe", "PayPal", "Transaction Security", "Discord API"],
     link: "https://clash-bazar.vercel.app",
     images: [
-      "/assets/projects/clash-1.png",
-      "/assets/projects/clash-2.png",
-      "/assets/projects/clash-3.png",
+      "/assets/projects/clash-1.webp",
+      "/assets/projects/clash-2.webp",
+      "/assets/projects/clash-3.webp",
     ],
   },
   {
     id: 4,
-    title: "Personal Portfolio V2",
+    title: "byrishav.online",
     description:
-      "An immersive, animation-driven developer portfolio built with Next.js App Router and Framer Motion. Features complex scroll-linked animations, a custom command palette, and a localized case-study viewing experience.",
-    tags: ["Next.js 14", "Framer Motion", "Tailwind CSS", "TypeScript", "React"],
-    link: "https://github.com/rishav00roy-web/Portfolio-website",
+      "This site: Rishav Roy's portfolio and the Atelier Systems studio page in one Next.js app, with an AI assistant trained on both and local SEO.",
+    tags: ["Next.js 16", "GSAP", "Tailwind CSS v4", "TypeScript", "Groq AI"],
+    link: "https://byrishav.online",
     images: [
-      "/assets/projects/portfolio-1.jpg",
-      "/assets/projects/portfolio-2.jpg",
-      "/assets/projects/portfolio-3.jpg",
+      "/assets/projects/shots/desktop/personal-portfolio-v2.webp",
+      "/assets/projects/shots/mobile/personal-portfolio-v2.webp",
     ],
   },
 ];

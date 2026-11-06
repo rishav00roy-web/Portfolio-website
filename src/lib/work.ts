@@ -24,11 +24,11 @@ export const commissions = projects
 const PREVIEWS: Record<string, string> = {
   "job-tracker-and-email-tracker": "/assets/projects/job-tracker-board.webp",
   "microgreens-site": "/assets/projects/microgreens-full.webp",
-  "gym-crm": "/assets/projects/gym-crm-full.png",
+  "gym-crm": "/assets/projects/gym-crm-full.webp",
   "personal-portfolio-v2": "/assets/projects/shots/desktop/personal-portfolio-v2.webp",
   "truwest-company-page": "/assets/projects/truwest-full.png",
-  chriskennelsite: "/assets/projects/willchris-full.png",
-  "roy-and-co-website": "/assets/projects/roy-group-full.jpg",
+  chriskennelsite: "/assets/projects/willchris-full.webp",
+  "roy-and-co-website": "/assets/projects/roy-group-full.webp",
 };
 
 /** Everything else: tools, showcases and client sites without a case study. */

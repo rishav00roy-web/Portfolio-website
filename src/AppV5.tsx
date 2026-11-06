@@ -6,31 +6,19 @@ import { ReactLenis, type LenisRef } from "lenis/react";
 import dynamic from "next/dynamic";
 import { gsap, ScrollTrigger } from "./lib/gsap";
 import Hero from "./components/Hero";
-import Work, { type WorkLayout } from "./components/v5/Work";
 import StudioLink from "./components/v5/StudioLink";
-import { PaperAbout, PaperContact } from "./components/v5/Paper";
+import { PaperContact } from "./components/v5/Paper";
 import Journal from "./components/v10/Journal";
 import KineticGrid from "./components/KineticGrid";
 
 const CommandMenu = dynamic(() => import("./components/CommandMenu"), { ssr: false });
 
 /**
- * v5, the chosen direction (in progress, served at /v5): the same hero, then
- * everything stays in the hero's night palette. Websites and the AI work sit
- * behind "two doors" with their own light (amber vs moonlight). Motion below
- * the hero is limited to batched transform/opacity entrances.
+ * The portfolio (homepage): the sunset hero, then midnight, ivory and lime.
+ * The studio band leads to /atelier; the journal tells the story, the trail
+ * of experience and what Rishav carries; then the contact.
  */
-export default function AppV5({
-  layout = "rows",
-  portfolio = false,
-  journal = false,
-}: {
-  layout?: WorkLayout;
-  /** Personal portfolio: the work lives on /atelier, linked from one card. */
-  portfolio?: boolean;
-  /** v10: the portfolio as an evening walk (story, trail, pack). */
-  journal?: boolean;
-}) {
+export default function AppV5() {
   const prefersReduced = useReducedMotion();
   const lenisRef = useRef<LenisRef>(null);
 
@@ -49,25 +37,16 @@ export default function AppV5({
   }, [prefersReduced]);
 
   const content = (
-    <main id="main" className={`relative min-h-dvh text-white ${journal ? "palette-ivory" : ""}`}>
+    <main id="main" className="palette-ivory relative min-h-dvh text-white">
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-accent focus:px-5 focus:py-3 focus:text-background">
         Skip to content
       </a>
       <Hero />
-      {/* v10: the live site's cursor-reactive mesh shows through behind the content */}
-      {journal && <KineticGrid color="#CDF22B" baseOpacity={0.03} boost={0.22} className="mesh-quiet-left" />}
-      <div className={`night afterglow relative z-20 text-ink ${journal ? "bg-transparent" : "bg-paper"}`}>
-        {journal ? (
-          <>
-            <StudioLink />
-            <Journal />
-          </>
-        ) : (
-          <>
-            {portfolio ? <StudioLink /> : <Work layout={layout} />}
-            <PaperAbout />
-          </>
-        )}
+      {/* The cursor-reactive mesh shows through behind the content */}
+      <KineticGrid color="#CDF22B" baseOpacity={0.03} boost={0.22} className="mesh-quiet-left" />
+      <div className="night afterglow relative z-20 bg-transparent text-ink">
+        <StudioLink />
+        <Journal />
       </div>
       <PaperContact />
       <CommandMenu />

@@ -130,13 +130,9 @@ export const certificates = [
   {
     title: "Introduction to AI",
     issuer: "Google, via Coursera",
-    pdf: "/certificates/Coursera-Certificate-1.pdf",
-    image: "/certificates/Coursera-Certificate-1.png",
   },
   {
     title: "Maximize Productivity With AI Tools",
     issuer: "Google, via Coursera",
-    pdf: "/certificates/Coursera-Certificate-2.pdf",
-    image: "/certificates/Coursera-Certificate-2.png",
   },
 ];

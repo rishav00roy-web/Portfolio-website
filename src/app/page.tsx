@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(profilePageSchema())} />
-      <AppV5 portfolio journal />
+      <AppV5 />
     </>
   );
 }

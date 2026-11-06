@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import Image from "next/image";
 import { Download } from "lucide-react";
 import { bio, certificates, education, experience, languages, PROFILE, skills } from "@/lib/profile";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
@@ -198,21 +197,17 @@ export default function Journal() {
           </div>
         </div>
 
-        <ul id="certificates" className="mt-20 grid gap-8 sm:grid-cols-2 lg:max-w-4xl">
-          {certificates.map((c) => (
-            <li key={c.title} data-rise>
-              <a href={c.pdf} target="_blank" rel="noopener noreferrer" className="group grid grid-cols-[7rem_minmax(0,1fr)] items-center gap-5">
-                <span className="relative block aspect-[4/3] overflow-hidden rounded-md bg-[#f4ede3] ring-1 ring-ink/10">
-                  <Image src={c.image} alt={`${c.title} certificate, ${c.issuer}`} fill sizes="7rem" className="object-contain p-1" />
-                </span>
-                <span>
-                  <span className="block text-lg leading-snug group-hover:text-rust transition-colors">{c.title}</span>
-                  <span className="block text-base text-ink/55">{c.issuer}</span>
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
+        <div id="certificates" className="mt-20 lg:max-w-4xl">
+          <h3 data-rise className="text-2xl font-medium">Certificates</h3>
+          <ul className="mt-5 grid gap-4 sm:grid-cols-2">
+            {certificates.map((c) => (
+              <li key={c.title} data-rise>
+                <span className="block text-lg leading-snug">{c.title}</span>
+                <span className="block text-base text-ink/55">{c.issuer}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
     </div>
   );
