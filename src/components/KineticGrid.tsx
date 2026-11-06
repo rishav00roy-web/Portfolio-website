@@ -40,6 +40,8 @@ interface KineticGridProps {
   color?: string;
   /** How much lines brighten near the cursor (added to baseOpacity at full proximity). */
   boost?: number;
+  /** Extra classes on the fixed host (e.g. a mask). */
+  className?: string;
 }
 
 const DOT_COLOR = "#F4EDE3";
@@ -53,6 +55,7 @@ export default function KineticGrid({
   baseOpacity = 0.05,
   color = LINE_COLOR_DEFAULT,
   boost = 0.5,
+  className = "",
 }: KineticGridProps) {
   const LINE_COLOR = color;
   const TRAIL_COLOR = color;
@@ -378,7 +381,7 @@ export default function KineticGrid({
     <motion.div
       ref={hostRef}
       aria-hidden="true"
-      className="fixed inset-0 z-0 pointer-events-auto"
+      className={`fixed inset-0 z-0 pointer-events-auto ${className}`}
       style={{ overflow: "hidden", opacity }}
     >
       <canvas

@@ -152,11 +152,15 @@ export default function Journal() {
                 <li key={job.company} data-station className="trail-station relative">
                   <span aria-hidden="true" className="trail-lamp absolute -left-[3.15rem] top-2 h-3 w-3 rounded-full border border-ink/40 bg-paper sm:-left-[4.4rem]" />
                   <p className="text-base text-ink/55">{job.period}</p>
-                  <h3 className="mt-2 text-3xl sm:text-4xl font-medium leading-tight tracking-[-0.01em]">{job.role}</h3>
-                  <p className="mt-2 text-lg text-ink/60">
-                    {job.company}
-                    {"remote" in job && job.remote && ", remote"}
-                  </p>
+                  <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2">
+                    <h3 className="text-3xl sm:text-4xl font-medium leading-tight tracking-[-0.01em]">{job.role}</h3>
+                    {"remote" in job && job.remote && (
+                      <span className="rounded-md border border-[#22c55e]/45 bg-[#22c55e]/10 px-2.5 py-1 font-mono text-sm font-medium uppercase tracking-[0.18em] text-[#4ade80]">
+                        Remote
+                      </span>
+                    )}
+                  </div>
+                  <p className="mt-2 text-lg text-ink/60">{job.company}</p>
                   <ul className="mt-6 space-y-3 text-lg leading-relaxed text-ink/70">
                     {job.bullets.map((b) => (
                       <li key={b}>{b}</li>
