@@ -5,17 +5,17 @@
  */
 
 export const SERVICES = [
-  { name: "Websites and migrations", detail: "New builds, or an existing HTML site moved to Next.js and React." },
-  { name: "Search-ready structure", detail: "Titles, meta, canonical URLs and location pages for local search." },
-  { name: "Owner-run admin", detail: "A CMS or dashboard the owner updates without calling a developer." },
-  { name: "Integrations", detail: "Maps, payments, booking and the tools a business already uses." },
-  { name: "AI agents and automation", detail: "Systems that take repetitive work off a team's plate." },
-  { name: "Monthly care", detail: "Updates, fixes and uptime checks after launch, month to month." },
+  { name: "Websites and migrations", detail: "New sites, or an old HTML site rebuilt in Next.js and React." },
+  { name: "Built to be found", detail: "Clean titles, descriptions and city pages, so local customers can find you." },
+  { name: "An admin you run", detail: "Change prices, packages and content yourself, without calling a developer." },
+  { name: "Integrations", detail: "Maps, payments, bookings and the tools you already use." },
+  { name: "AI agents and automation", detail: "Agents and automations that take repetitive work off your team." },
+  { name: "Monthly care", detail: "Updates, fixes and uptime checks after launch, billed month to month." },
 ];
 
 export const PROCESS = [
-  { name: "A fixed scope", detail: "A written quote listing exactly what gets built." },
-  { name: "Half to start", detail: "50% up front, the rest on delivery." },
-  { name: "Two rounds of revisions", detail: "Each round is one consolidated list of changes." },
-  { name: "Handover", detail: "Once paid in full, the code and access are yours." },
+  { name: "A fixed scope", detail: "A written quote that lists exactly what you'll get." },
+  { name: "Half to start", detail: "50% to begin, the rest on delivery." },
+  { name: "Two rounds of revisions", detail: "Send each round as one list of changes." },
+  { name: "Handover", detail: "Once the final payment is in, the code and every login are yours." },
 ];

@@ -61,6 +61,45 @@ const DESKTOPS: Record<string, string> = Object.fromEntries(
   SHOT_KEYS.filter((k) => k !== "iq-iron-fitness").map((k) => [k, `/assets/projects/shots/desktop/${k}.webp`]),
 );
 
+/*
+ * Card copy written for the studio page (plain words, the studio's voice).
+ * The project data keeps its fuller, more technical descriptions for the
+ * case studies and the portfolio.
+ */
+const COPY: Record<string, { title?: string; description: string }> = {
+  "tea-country-holidays": {
+    description: "A travel site for an agency owner who isn't technical. She runs 34 packages across 24 destinations, changes prices and posts offers herself, with no developer needed.",
+  },
+  "iq-iron-fitness": {
+    description: "A membership system for a gym: billing, salary slips and a daily dashboard, built to run well on the owner's older laptop and phone.",
+  },
+  "clash-bazar": {
+    description: "A shop for a gaming YouTuber with over 12K subscribers. Stripe and PayPal payments are held until the order is done and a 7-day window has passed.",
+  },
+  "microgreens-site": {
+    title: "Infinity Greens",
+    description: "A site for a vertical microgreens farm in Surrey, BC, with its products, recipes and story, and gentle motion throughout.",
+  },
+  "truwest-company-page": {
+    description: "A lead site for a mortgage broker in BC and Alberta: borrower guides, mortgage calculators, 30+ city pages for local search and a step-by-step pre-qualification form.",
+  },
+  "roy-and-co-website": {
+    description: "A marketing site for a weddings and events brand, with smooth scrolling and a header that changes colour as you move down the page.",
+  },
+  chriskennelsite: {
+    title: "Willchris Kennels",
+    description: "A site for a dog boarding, daycare and grooming business, with its own page for each service and for trail walks.",
+  },
+  "personal-portfolio-v2": {
+    title: "Portfolio, version 2",
+    description: "Rishav's previous portfolio: scroll-driven animation throughout and a command menu you can open with ⌘K.",
+  },
+  "gym-crm": {
+    title: "Gym CRM",
+    description: "A member system for gyms in basements with no signal. It reads sign-up forms with the camera and keeps everything on the device until the connection comes back.",
+  },
+};
+
 const host = (href: string) => {
   try {
     return new URL(href).hostname.replace(/^www\./, "");
@@ -73,7 +112,7 @@ const ENTRIES: Entry[] = [
   {
     key: "pheonix",
     title: "Pheonix",
-    description: "The latest and most worked-on build: a streetwear shop from Jorhat in AJ Shield's style, with 3D models, a playable 3D cassette player for her songs, product dossiers, and orders on WhatsApp.",
+    description: "A streetwear shop from Jorhat, styled after the rapper AJ Shield. It has 3D models, a cassette player that plays her songs, and orders go straight to WhatsApp. Our most detailed build so far.",
     kind: "website",
     discipline: "Design and build, live",
     image: DESKTOPS.pheonix,
@@ -86,7 +125,7 @@ const ENTRIES: Entry[] = [
   {
     key: "invoice-reader",
     title: "Invoice reader",
-    description: "Reads invoices and receipts and pulls out the vendor, date and amounts, so nobody types them in by hand.",
+    description: "Reads invoices and receipts and pulls out the vendor, date and amounts, so nobody has to type them in.",
     kind: "product",
     discipline: "AI tool, demos on request",
     stage: "invoice",
@@ -97,7 +136,7 @@ const ENTRIES: Entry[] = [
   {
     key: "support-agent",
     title: "Support agent",
-    description: "Answers a business's customers from its own information, any hour, and hands over to a person when it should.",
+    description: "Answers your customers from your own information, day or night, and hands over to a person when it should.",
     kind: "product",
     discipline: "AI agent, live on this site",
     stage: "support",
@@ -107,8 +146,8 @@ const ENTRIES: Entry[] = [
   },
   ...commissions.map((p) => ({
     key: p.slug,
-    title: p.title,
-    description: p.description,
+    title: COPY[p.slug]?.title ?? p.title,
+    description: COPY[p.slug]?.description ?? p.description,
     kind: "website" as const,
     discipline: p.status === "Live" ? "Client build, live" : "Client build, in progress",
     image: DESKTOPS[p.slug] ?? p.images[0],
@@ -122,8 +161,8 @@ const ENTRIES: Entry[] = [
     .filter((w) => w.preview && w.id !== "job-tracker-and-email-tracker" && w.id !== "gym-crm")
     .map((w) => ({
       key: w.id,
-      title: w.title,
-      description: w.description,
+      title: COPY[w.id]?.title ?? w.title,
+      description: COPY[w.id]?.description ?? w.description,
       kind: "website" as const,
       discipline: "Design and build",
       image: DESKTOPS[w.id] ?? w.preview,
@@ -135,7 +174,7 @@ const ENTRIES: Entry[] = [
   {
     key: "job-tracker",
     title: "Job tracker",
-    description: "Runs a job hunt on its own: scores listings from 54 platforms, tracks the inbox and tailors the résumé, truthfully.",
+    description: "Runs a job hunt on its own. It scores listings from 54 sites, moves each application when an email arrives, and tailors the résumé without inventing anything.",
     kind: "product",
     discipline: "AI agent",
     image: "/assets/projects/job-tracker-board.webp",
@@ -147,8 +186,8 @@ const ENTRIES: Entry[] = [
     .filter((w) => w.id === "gym-crm")
     .map((w) => ({
       key: w.id,
-      title: "Gym CRM",
-      description: w.description,
+      title: COPY["gym-crm"].title!,
+      description: COPY["gym-crm"].description,
       kind: "product" as const,
       discipline: "Offline-first tool",
       image: w.preview,
@@ -304,7 +343,7 @@ export default function Showcase() {
             Work<span className="text-rust">.</span>
           </h2>
           <p data-rise className="max-w-md text-xl leading-snug text-ink/75 lg:pb-3">
-            Every project the studio has built. Pick a kind, or switch to a list.
+            Everything we&apos;ve built. Filter by type, or switch to a list.
           </p>
         </div>
 
@@ -401,7 +440,7 @@ export default function Showcase() {
               <li data-rise className="hidden lg:flex">
                 <a href="#contact" className="group flex w-full flex-col justify-end rounded-[32px] border border-dashed border-ink/20 p-10 transition-colors duration-300 hover:border-rust">
                   <span className="font-display text-5xl leading-[0.95] group-hover:text-rust transition-colors">Yours could be next</span>
-                  <span className="mt-4 max-w-sm text-lg leading-relaxed text-ink/60">Tell me what the business needs. You get a written, fixed-scope quote before any work starts.</span>
+                  <span className="mt-4 max-w-sm text-lg leading-relaxed text-ink/60">Tell us what your business needs. You&apos;ll get a written, fixed-scope quote before any work starts.</span>
                   <span className="mt-8 inline-flex items-center gap-2 text-base text-rust">
                     Start a project <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
                   </span>
@@ -438,7 +477,7 @@ export default function Showcase() {
       <section id="process" aria-labelledby="services-title" className="relative mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-16 sm:pt-24 pb-24">
         <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
           <div>
-            <h2 id="services-title" data-rise className="font-display text-5xl sm:text-6xl leading-[0.95]">What the studio does</h2>
+            <h2 id="services-title" data-rise className="font-display text-5xl sm:text-6xl leading-[0.95]">What we build</h2>
             <ul className="mt-10">
               {SERVICES.map((sv, i) => {
                 const Icon = SERVICE_ICONS[i];
@@ -457,7 +496,7 @@ export default function Showcase() {
             </ul>
           </div>
           <div>
-            <h2 data-rise className="font-display text-5xl sm:text-6xl leading-[0.95]">How a project runs</h2>
+            <h2 data-rise className="font-display text-5xl sm:text-6xl leading-[0.95]">How we work</h2>
             <ProcessPath steps={PROCESS} />
           </div>
         </div>

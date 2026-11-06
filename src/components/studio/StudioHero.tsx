@@ -54,7 +54,7 @@ export default function StudioHero() {
             </span>
           </h1>
           <p data-h-copy className="mt-8 max-w-lg text-xl leading-snug text-ink/80 sm:text-2xl">
-            A small studio building websites, automation and AI products for growing businesses. Led by Rishav Roy, built end to end.
+            A small studio that designs and builds websites, automations and AI tools for growing businesses. Rishav Roy runs it and builds every project himself.
           </p>
           <div data-h-copy className="mt-10 flex flex-wrap gap-3">
             <a href="#contact" className="inline-flex min-h-12 items-center gap-2 rounded-full bg-rust px-7 text-base font-semibold text-paper hover:opacity-90">

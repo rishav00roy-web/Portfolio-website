@@ -212,7 +212,7 @@ export function PaperContact({ studio = false }: { studio?: boolean }) {
                 <path d="M4 26 C 70 6, 130 38, 210 20 S 340 6, 416 18" style={{ stroke: "rgba(var(--s-accent-rgb), 0.75)" }} strokeWidth="2" strokeLinecap="round" />
               </svg>
               <p data-rise className="mx-auto mt-5 max-w-lg text-lg leading-relaxed text-white/65">
-                Tell me what the business needs. You get a written, fixed-scope quote before any work starts.
+                Tell us what your business needs. You&apos;ll get a written, fixed-scope quote before any work starts.
               </p>
             </>
           ) : (

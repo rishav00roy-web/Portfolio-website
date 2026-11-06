@@ -68,7 +68,7 @@ export default function ContactForm() {
         Send a Message
       </h3>
       <p className="text-white/50 text-xs sm:text-sm font-sans mb-8">
-        Have a new project or an open role to discuss? Get in touch and let&apos;s explore the possibilities.
+        A project, a role or a quick question: write it here and it comes straight to my WhatsApp.
       </p>
 
       {status === "success" ? (
