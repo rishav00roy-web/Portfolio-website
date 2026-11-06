@@ -15,7 +15,8 @@ export const commissions = projects
       client: cs.client,
       period: cs.period,
       live: cs.links.find((l) => l.icon === "live")?.url,
-      status: p.id === 3 ? "In progress" : "Live",
+      // Rishav is still working on every client site: none is called finished.
+      status: "In progress" as "In progress" | "Live",
     };
   });
 

@@ -16,7 +16,7 @@ const CLIENTS = [
     alt: "AJ Shield in a silver wig and a pink graffiti-print dress",
     built: "Pheonix, her streetwear shop, with a page on her music and a cassette player that plays her songs.",
     links: [
-      { label: "Visit Pheonix", href: "https://pheonix-ashy.vercel.app" },
+      { label: "Pheonix preview", href: "https://pheonix-ashy.vercel.app" },
       { label: "Her page", href: "https://pheonix-ashy.vercel.app/aj-shield" },
     ],
   },

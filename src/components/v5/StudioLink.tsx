@@ -7,9 +7,9 @@ import { studioFont } from "@/lib/studioFont";
 
 /** Sharp phone screen grabs from the studio page: the flagship and two client sites. */
 const PREVIEWS = [
-  { key: "pheonix", title: "Pheonix" },
-  { key: "tea-country-holidays", title: "Tea Country Holidays" },
-  { key: "clash-bazar", title: "Clash Bazar" },
+  { key: "pheonix", src: "/assets/projects/pheonix-cassette.webp", alt: "Pheonix's 3D cassette player" },
+  { key: "tea-country-holidays", src: "/assets/projects/shots/mobile/tea-country-holidays.webp", alt: "Tea Country Holidays on a phone" },
+  { key: "clash-bazar", src: "/assets/projects/shots/mobile/clash-bazar.webp", alt: "Clash Bazar on a phone" },
 ] as const;
 
 /**
@@ -33,10 +33,10 @@ export default function StudioLink({ href = "/atelier" }: { href?: string }) {
           <p className="mt-4 max-w-md text-lg leading-relaxed text-ink/65">
             Websites, automation and AI agents for small businesses. Every project I have built, with case studies.
           </p>
-          <span className="mt-8 inline-flex items-center gap-4 rounded-full border border-ink/15 bg-paper py-2 pl-6 pr-2 text-lg font-medium text-ink shadow-[0_1px_0_rgba(15,53,50,0.06)] transition-colors duration-300 group-hover:border-ink/30">
+          <span className="mt-8 inline-flex items-center gap-3 rounded-full bg-[var(--s-ink)] py-2 pl-6 pr-2 text-lg font-medium text-[var(--s-bg)] transition-colors duration-300 group-hover:bg-[var(--s-teal)]">
             See the studio&apos;s work
-            <span className="grid h-11 w-11 place-items-center rounded-full bg-rust transition-transform duration-300 ease-out-expo group-hover:rotate-45">
-              <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
+            <span className="grid h-10 w-10 place-items-center rounded-full bg-rust transition-transform duration-300 ease-out-expo group-hover:rotate-45">
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </span>
           </span>
         </div>
@@ -44,11 +44,10 @@ export default function StudioLink({ href = "/atelier" }: { href?: string }) {
           {PREVIEWS.map((p, i) => (
             <span
               key={p.key}
-              className={`relative block aspect-[3/4] overflow-hidden rounded-xl ring-1 ring-ink/10 transition-transform duration-300 ease-out-expo ${
-                i === 1 ? "translate-y-6 group-hover:translate-y-3" : "group-hover:-translate-y-2"
-              }`}
+              style={{ transitionDelay: `${i * 40}ms` }}
+              className="relative block aspect-[3/4] overflow-hidden rounded-xl ring-1 ring-ink/10 transition-transform duration-300 ease-out-expo group-hover:-translate-y-1.5"
             >
-              <Image src={`/assets/projects/shots/mobile/${p.key}.webp`} alt={`${p.title} on a phone`} fill sizes="(max-width: 1023px) 30vw, 240px" className="object-cover object-top" />
+              <Image src={p.src} alt={p.alt} fill sizes="(max-width: 1023px) 30vw, 240px" className={`object-cover ${p.key === "pheonix" ? "object-center" : "object-top"}`} />
             </span>
           ))}
         </div>

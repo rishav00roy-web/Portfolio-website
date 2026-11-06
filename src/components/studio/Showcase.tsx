@@ -116,12 +116,12 @@ const ENTRIES: Entry[] = [
     title: "Pheonix",
     description: "A streetwear shop from Jorhat, styled after the rapper AJ Shield. It has 3D models, a cassette player that plays her songs, and orders go straight to WhatsApp. Our most detailed build so far.",
     kind: "website",
-    discipline: "Design and build, live",
+    discipline: "Design and build, in progress",
     image: DESKTOPS.pheonix,
     phone: PHONES.pheonix,
     href: "https://pheonix-ashy.vercel.app",
     internal: false,
-    cta: "Visit site",
+    cta: "See the preview",
     featured: { second: "/assets/projects/pheonix-cassette.webp", label: "Latest build" },
   },
   {
@@ -428,7 +428,7 @@ export default function Showcase() {
                     {!e.internal && host(e.href) && <span className="hidden text-ink/55 sm:inline">{host(e.href)}</span>}
                     {e.internal && e.live && (
                       <a href={e.live} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-ink/70 underline decoration-ink/25 underline-offset-4 hover:text-ink">
-                        {host(e.live)}
+                        Preview: {host(e.live)}
                       </a>
                     )}
                     <Action e={e} className="inline-flex min-h-11 items-center gap-2 text-rust hover:opacity-80">
