@@ -30,13 +30,6 @@ export const bio = [
   "I use AI heavily as a development and productivity tool. It accelerates architecture decisions, debugging, testing, and routine work. But I don't treat it as a substitute for engineering judgment. I architect the systems, review every critical line of code, validate the outcomes, and take full responsibility for the final product. I'm also actively deepening my understanding of AI systems, exploring areas like retrieval-augmented generation and model evaluation, while continuing to ship production software for real clients.",
 ];
 
-export const highlights = [
-  { value: "6+", label: "Years in operations" },
-  { value: "1,500+", label: "FOIA requests filed" },
-  { value: "INR 3.5 Cr", label: "Turnover as founder" },
-  { value: "110+", label: "Gym members on my CRM" },
-];
-
 export const experience = [
   {
     role: "FOIA Specialist",

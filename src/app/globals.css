@@ -296,7 +296,7 @@ h1, h2, h3, h4 { text-wrap: balance; }
 p, li, dd { text-wrap: pretty; }
 
 /* Anchored sections clear the sticky bar; taps act without the double-tap zoom wait. */
-section[id], footer[id], [id].scroll-target { scroll-margin-top: 6rem; }
+section[id], footer[id] { scroll-margin-top: 6rem; }
 a, button { touch-action: manipulation; }
 
 /* /atelier process path: a step's lamp lights when you reach it. */
