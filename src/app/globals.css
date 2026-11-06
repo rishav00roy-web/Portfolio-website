@@ -453,3 +453,35 @@ body:has(main.palette-ivory) { background-color: #08090b; }
 .route-passage.is-leaving { opacity: 0; }
 @keyframes route-passage-in { from { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .route-passage { animation: none; transition: none; } }
+
+/* ScrollShadow: edges fade where more content hides beyond them. */
+.scroll-shadow[data-orientation="vertical"] {
+  --ss-top: 0px;
+  --ss-bottom: 0px;
+  mask-image: linear-gradient(to bottom, transparent 0, #000 var(--ss-top), #000 calc(100% - var(--ss-bottom)), transparent 100%);
+}
+.scroll-shadow[data-orientation="vertical"][data-start="true"] { --ss-top: var(--scroll-shadow-size); }
+.scroll-shadow[data-orientation="vertical"][data-end="true"] { --ss-bottom: var(--scroll-shadow-size); }
+.scroll-shadow[data-orientation="horizontal"] {
+  --ss-left: 0px;
+  --ss-right: 0px;
+  mask-image: linear-gradient(to right, transparent 0, #000 var(--ss-left), #000 calc(100% - var(--ss-right)), transparent 100%);
+}
+.scroll-shadow[data-orientation="horizontal"][data-start="true"] { --ss-left: var(--scroll-shadow-size); }
+.scroll-shadow[data-orientation="horizontal"][data-end="true"] { --ss-right: var(--scroll-shadow-size); }
+.scroll-shadow-hide-bar { scrollbar-width: none; }
+.scroll-shadow-hide-bar::-webkit-scrollbar { display: none; }
+
+/* Skeleton: a placeholder with a soft shimmer (transform only). */
+.skeleton { position: relative; overflow: hidden; background-color: color-mix(in oklab, currentColor 16%, transparent); }
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, color-mix(in oklab, currentColor 18%, transparent), transparent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .skeleton::after { animation: skeleton-shimmer 1.4s ease-in-out infinite; }
+}
+@keyframes skeleton-shimmer { to { transform: translateX(100%); } }

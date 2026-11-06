@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { ArrowUp, MessageCircle, X } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import ScrollShadow from "./ScrollShadow";
+import { Skeleton } from "./Skeleton";
 
 /*
  * Psunk, the site chat. One component, dressed for whichever site it is on:
@@ -137,7 +139,7 @@ export default function ChatBot() {
             </header>
 
             {/* Messages */}
-            <div className="flex-1 space-y-3 overflow-y-auto overscroll-contain px-5 py-5" aria-live="polite">
+            <ScrollShadow size={48} hideScrollBar className="flex-1 space-y-3 overscroll-contain px-5 py-5" aria-live="polite">
               <p className="max-w-[85%] rounded-2xl rounded-bl-md bg-[var(--c-bot)] px-4 py-3 text-[15px] leading-relaxed">{copy.hello}</p>
 
               {messages.length === 0 && (
@@ -171,14 +173,14 @@ export default function ChatBot() {
               })}
 
               {isLoading && messages[messages.length - 1]?.role === "user" && (
-                <p className="typing flex w-fit gap-1 rounded-2xl rounded-bl-md bg-[var(--c-bot)] px-4 py-4" aria-label="Psunk is typing">
-                  <span className="size-1.5 rounded-full bg-current opacity-60" />
-                  <span className="size-1.5 rounded-full bg-current opacity-60" />
-                  <span className="size-1.5 rounded-full bg-current opacity-60" />
-                </p>
+                <div role="status" aria-label="Psunk is writing" className="w-3/4 space-y-2.5 rounded-2xl rounded-bl-md bg-[var(--c-bot)] px-4 py-4">
+                  <Skeleton className="h-3 w-4/5" />
+                  <Skeleton className="h-3 w-3/5" />
+                  <Skeleton className="h-3 w-2/5" />
+                </div>
               )}
               <div ref={endRef} />
-            </div>
+            </ScrollShadow>
 
             {/* Input */}
             <form
