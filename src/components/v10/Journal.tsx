@@ -116,7 +116,7 @@ export default function Journal() {
       </section>
 
       {/* ─────────── The trail ─────────── */}
-      <section aria-labelledby="j-trail" className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-36 sm:pt-52">
+      <section id="experience" aria-labelledby="j-trail" className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-36 sm:pt-52">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
           <div>
             <div className="lg:sticky lg:top-28">
@@ -173,7 +173,7 @@ export default function Journal() {
       </section>
 
       {/* ─────────── The pack ─────────── */}
-      <section aria-labelledby="j-pack" className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-36 sm:pt-52 pb-28 sm:pb-40">
+      <section id="skills" aria-labelledby="j-pack" className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-36 sm:pt-52 pb-28 sm:pb-40">
         <h2 id="j-pack" data-rise className="font-display text-5xl sm:text-6xl leading-[0.95] tracking-[-0.015em]">
           What I carry
         </h2>
