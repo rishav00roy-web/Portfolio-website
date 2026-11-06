@@ -118,7 +118,7 @@ export default function Hero() {
           <div className="mx-auto grid max-w-[1440px] gap-8 px-6 sm:px-12 xl:px-20 pb-24 sm:pb-16 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
             <div className="min-w-0">
               {/* LCP text: visible from the first frame, it only slides. */}
-              <p data-hero-line className="max-w-3xl text-2xl sm:text-4xl xl:text-5xl font-medium leading-[1.12] tracking-[-0.02em] text-white text-balance">
+              <p data-hero-line className="max-w-2xl text-xl sm:text-2xl xl:text-3xl font-medium leading-[1.2] tracking-[-0.015em] text-white text-balance">
                 Ex-ops guy who got tired of manual work. Now I build tools so nobody else has to.
               </p>
             </div>
