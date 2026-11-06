@@ -218,24 +218,28 @@ body {
 
 /*
  * Atelier Systems: the studio's own identity, taken from its line-drawn AS
- * mark. Deep teal instead of the portfolio's night, warm ivory text,
- * one coral accent, and a geometric sans (Jost) for everything, the way
+ * mark. A warm ivory page instead of the portfolio's night, deep teal
+ * type, one coral accent, and a geometric sans (Jost) for everything, the way
  * the logo's wordmark is set. The AI work keeps its moonlight blue.
  */
 .studio {
   /* The one place the studio palette lives: change these to re-theme it. */
-  /* Rishav's palette, kept dark: deep teal (#17645F) night, warm ivory
-     (#F3EEE8) text, coral (#FF6845) accent. */
-  --s-bg: #0a1d1b;
-  --s-surface: #0f2825;
-  --s-surface-2: #14332f;
-  --s-paper-2: #10302c;
-  --s-ink: #f3eee8;
-  --s-ink-rgb: 243, 238, 232;
+  /* Rishav's palette: warm ivory (#F3EEE8) page, deep teal (#17645F)
+     headlines over a darker teal for text, coral (#FF6845) accent. */
+  --s-bg: #f3eee8;
+  --s-surface: #ebe4da;
+  --s-surface-2: #e4dccf;
+  --s-paper-2: #ebe4da;
+  --s-ink: #0f3532;
+  --s-ink-rgb: 15, 53, 50;
   --s-accent: #ff6845;
   --s-accent-rgb: 255, 104, 69;
   --s-teal: #17645f;
-  --s-bezel: #1d3d39;
+  --s-on-accent: #0f3532;
+  --s-accent-text: #c2401d;
+  --s-bezel: #0f3532;
+  --color-moon: var(--s-teal);
+  color-scheme: light;
   --background: var(--s-bg);
   --surface: var(--s-surface);
   --surface-2: var(--s-surface-2);
@@ -263,7 +267,7 @@ body {
   background-color: var(--background);
   color: var(--foreground);
 }
-body:has(main.studio) { background-color: #0a1d1b; }
+body:has(main.studio) { background-color: #f3eee8; }
 /* The studio sets headings the way the mark's wordmark is drawn: no shouting. */
 .studio .font-display { text-transform: none; font-weight: 500; letter-spacing: -0.03em; }
 .studio ::selection { background-color: var(--s-accent); color: var(--s-bg); }
@@ -412,3 +416,20 @@ a, button { touch-action: manipulation; }
 .palette-ivory .night ::selection,
 .palette-ivory #contact ::selection { background-color: #cdf22b; color: #08090b; }
 body:has(main.palette-ivory) { background-color: #08090b; }
+
+/* The studio is the one light page: adjust what was drawn for dark. */
+.studio .font-display { color: var(--s-teal); }
+.studio .font-display .text-rust, .studio .font-display .text-accent { color: var(--s-accent); }
+/* Coral fills carry dark teal text; coral as small text is deepened to read on ivory. */
+.studio .bg-rust, .studio .bg-accent { color: var(--s-on-accent); }
+.studio .text-rust { color: var(--s-accent-text); }
+.studio ::placeholder { color: rgba(var(--s-ink-rgb), 0.45); }
+.studio .social-icon-wrapper .icon { color: var(--s-ink); }
+.studio .social-icon-wrapper .layer span { border-color: rgba(var(--s-ink-rgb), 0.45); }
+.studio .social-icon-wrapper .layer span.fab { color: rgba(var(--s-ink-rgb), 0.8); }
+.studio .social-icon-wrapper .icon:hover .layer span.fab { color: var(--s-ink); }
+
+/* The AS mark is a cream line drawing; on ivory it is tinted to the deep teal. */
+.studio img[src*="atelier-monogram"] { filter: brightness(0.32) sepia(1) hue-rotate(125deg) saturate(2.6); }
+/* The icon row's hover card stays dark, so its text stays light. */
+.studio .social-icon-wrapper > div:first-child { --color-white: #f3eee8; }

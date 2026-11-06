@@ -6,8 +6,8 @@ const DESCRIPTION =
 
 // Kept out of search while the redesign is a preview; drop `robots` and add
 // the route to the sitemap when the two-page site goes live.
-// Browser chrome matches the studio's deep teal, not the portfolio's dusk.
-export const viewport: Viewport = { themeColor: "#0a1d1b" };
+// Browser chrome matches the studio's ivory, not the portfolio's dusk.
+export const viewport: Viewport = { themeColor: "#f3eee8" };
 
 export const metadata: Metadata = {
   title: { absolute: "Atelier Systems | Websites, automation and AI agents" },
