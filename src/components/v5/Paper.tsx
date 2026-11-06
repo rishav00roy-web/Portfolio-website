@@ -224,12 +224,12 @@ export function PaperContact({ studio = false }: { studio?: boolean }) {
           <a
             data-rise
             href={`mailto:${PROFILE.email}`}
-            className="mt-14 inline-block break-all font-display text-2xl sm:text-4xl underline decoration-white/20 decoration-1 underline-offset-[0.18em] hover:text-accent hover:decoration-accent transition-colors"
+            className="mt-14 inline-block break-all font-sans font-medium text-2xl sm:text-4xl underline decoration-white/20 decoration-1 underline-offset-[0.18em] hover:text-accent hover:decoration-accent transition-colors"
           >
             {PROFILE.email}
           </a>
           <p data-rise className="mt-4">
-            <a href={PROFILE.phoneHref} className="font-display text-2xl sm:text-3xl text-white/80 hover:text-accent transition-colors">
+            <a href={PROFILE.phoneHref} className="font-sans text-2xl sm:text-3xl text-white/80 tabular-nums hover:text-accent transition-colors">
               {PROFILE.phone}
             </a>
           </p>

@@ -50,18 +50,22 @@ const THEME: Record<Site, Record<string, string>> = {
   },
 };
 
-const COPY: Record<Site, { subtitle: string; hello: string; prompts: string[] }> = {
+const COPY: Record<Site, { subtitle: string; hello: string; prompts: string[]; nudge: string }> = {
   atelier: {
+    nudge: "Try Psunk, our AI assistant",
     subtitle: "Atelier Systems' assistant",
     hello: "Hi, I'm Psunk. Ask about our work, what we build, or starting a project.",
     prompts: ["What do you build?", "How does a project work?", "Tell me about Pheonix"],
   },
   portfolio: {
+    nudge: "Try Psunk, my AI assistant",
     subtitle: "Ask me anything about Rishav",
     hello: "Hi, I'm Psunk. I can tell you about Rishav's experience, skills and what he's built.",
     prompts: ["What's his experience?", "What can he build?", "How do I contact him?"],
   },
 };
+
+const NUDGE_KEY = "psunk-nudge-dismissed";
 
 export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -76,6 +80,31 @@ export default function ChatBot() {
   const inputRef = useRef<HTMLInputElement>(null);
   const launcherRef = useRef<HTMLButtonElement>(null);
   const wasOpen = useRef(false);
+  const [nudge, setNudge] = useState(false);
+
+  // A small "Try Psunk" note beside the launcher, a few seconds after the page
+  // settles. Once closed or once the chat is opened, it stays away.
+  useEffect(() => {
+    let dismissed = false;
+    try {
+      dismissed = localStorage.getItem(NUDGE_KEY) === "1";
+    } catch {}
+    if (dismissed) return;
+    const t = window.setTimeout(() => setNudge(true), 5000);
+    return () => window.clearTimeout(t);
+  }, []);
+
+  const dismissNudge = () => {
+    setNudge(false);
+    try {
+      localStorage.setItem(NUDGE_KEY, "1");
+    } catch {}
+  };
+
+  const openChat = () => {
+    dismissNudge();
+    setIsOpen(true);
+  };
 
   // The command-menu trigger is fixed bottom-left. On phones the chat panel
   // spans nearly the full width, so publish open state and let CSS hide it.
@@ -107,7 +136,7 @@ export default function ChatBot() {
       <button
         ref={launcherRef}
         type="button"
-        onClick={() => setIsOpen(true)}
+        onClick={openChat}
         aria-label="Open Psunk AI Chat"
         aria-expanded={isOpen}
         tabIndex={isOpen ? -1 : 0}
@@ -117,6 +146,32 @@ export default function ChatBot() {
       >
         <MessageCircle className="size-6" strokeWidth={1.75} aria-hidden="true" />
       </button>
+
+      <AnimatePresence>
+        {nudge && !isOpen && (
+          <motion.div
+            initial={reduce ? false : { opacity: 0, x: 8 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
+            className="fixed bottom-[calc(5.75rem+env(safe-area-inset-bottom))] right-6 z-50 flex h-14 items-center sm:bottom-[calc(1.5rem+env(safe-area-inset-bottom))] sm:right-[5.25rem]"
+          >
+            <div className="flex items-center gap-1 rounded-full border border-[var(--c-line)] bg-[var(--c-panel)] py-1.5 pl-5 pr-1.5 text-[var(--c-ink)] shadow-[0_10px_24px_-12px_rgba(0,0,0,0.4)]">
+              <button type="button" onClick={openChat} className="whitespace-nowrap text-base font-medium hover:opacity-80 focus-visible:outline-none focus-visible:underline">
+                {copy.nudge}
+              </button>
+              <button
+                type="button"
+                onClick={dismissNudge}
+                aria-label="Dismiss"
+                className="grid size-9 place-items-center rounded-full text-[var(--c-muted)] hover:bg-[var(--c-bot)] hover:text-[var(--c-ink)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-accent)]"
+              >
+                <X className="size-4" aria-hidden="true" />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <AnimatePresence>
         {isOpen && (

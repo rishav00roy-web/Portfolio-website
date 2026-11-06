@@ -17,6 +17,32 @@
   font-display: swap;
 }
 
+/* Portfolio (/v10) below the hero: Bespoke Stencil headings, Supreme text.
+   Fontshare, ITF Free Font License (free for commercial use; licenses/Fontshare-FFL.txt). */
+@font-face {
+  font-family: 'Bespoke Stencil';
+  src: url('/fonts/BespokeStencil-Variable.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Supreme';
+  src: url('/fonts/Supreme-Variable.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Supreme';
+  src: url('/fonts/Supreme-VariableItalic.woff2') format('woff2');
+  font-style: italic;
+  font-weight: 100 800;
+  font-display: swap;
+}
+
 @font-face {
   font-family: 'Coffekan';
   src: url('/fonts/CoffekanRegular.woff2') format('woff2'),
@@ -419,6 +445,15 @@ a, button { touch-action: manipulation; }
 .palette-ivory .night ::selection,
 .palette-ivory #contact ::selection { background-color: #cdf22b; color: #08090b; }
 body:has(main.palette-ivory) { background-color: #08090b; }
+/* v10 type: the studio band keeps its own fonts (.studio sets them again inside). */
+.palette-ivory .night,
+.palette-ivory #contact {
+  --font-display: "Bespoke Stencil", sans-serif;
+  --font-sans: "Supreme", sans-serif;
+  font-family: "Supreme", sans-serif;
+  /* Bespoke Stencil defaults to old-style figures; keep phone numbers and dates even. */
+  font-variant-numeric: lining-nums;
+}
 /* v10: the mesh fades out across the left of the page, where the words sit. */
 .mesh-quiet-left {
   -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.18) 55%, #000 90%);
