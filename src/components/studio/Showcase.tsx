@@ -43,6 +43,9 @@ const PHONES: Record<string, string> = {
   "iq-iron-fitness": "/assets/projects/mobile/iq-iron-fitness.webp",
   "clash-bazar": "/assets/projects/mobile/clash-bazar.webp",
   "personal-portfolio-v2": "/assets/projects/mobile/personal-portfolio-v2.webp",
+  "truwest-company-page": "/assets/projects/mobile/truwest-company-page.webp",
+  "roy-and-co-website": "/assets/projects/mobile/roy-and-co-website.webp",
+  chriskennelsite: "/assets/projects/mobile/chriskennelsite.webp",
 };
 
 const host = (href: string) => {
