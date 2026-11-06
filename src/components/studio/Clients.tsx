@@ -36,7 +36,7 @@ const CLIENTS = [
 
 export default function Clients() {
   return (
-    <section id="clients" aria-labelledby="clients-title" className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-28 sm:pt-36">
+    <section aria-labelledby="clients-title" className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-28 sm:pt-36">
       <h2 id="clients-title" data-rise className="font-display text-5xl sm:text-6xl leading-[0.95]">
         Who we&apos;ve built for
       </h2>
