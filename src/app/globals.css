@@ -10,6 +10,14 @@
 }
 
 @font-face {
+  font-family: 'Ambon';
+  src: url('/fonts/Ambon.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Coffekan';
   src: url('/fonts/CoffekanRegular.woff2') format('woff2'),
        url('/fonts/CoffekanRegular.ttf') format('truetype');
@@ -433,3 +441,6 @@ body:has(main.palette-ivory) { background-color: #08090b; }
 .studio img[src*="atelier-monogram"] { filter: brightness(0.32) sepia(1) hue-rotate(125deg) saturate(2.6); }
 /* The icon row's hover card stays dark, so its text stays light. */
 .studio .social-icon-wrapper > div:first-child { --color-white: #f3eee8; }
+
+/* Atelier headings in Ambon (Rishav's pick); body text stays in Jost. */
+.studio h1, .studio h2, .studio h3 { font-family: "Ambon", Georgia, serif; font-weight: 400; letter-spacing: -0.01em; }
