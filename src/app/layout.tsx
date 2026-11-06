@@ -4,6 +4,7 @@ import "./globals.css";
 import FontPreloader from "@/components/FontPreloader";
 import { Analytics } from "@vercel/analytics/next";
 import ChatBotLoader from "@/components/ChatBotLoader";
+import RouteTransition from "@/components/RouteTransition";
 import { PROFILE } from "@/lib/profile";
 import { SITE_URL, personSchema, websiteSchema, jsonLd } from "@/lib/schema";
 
@@ -102,6 +103,7 @@ export default function RootLayout({
         </noscript>
         {children}
         <ChatBotLoader />
+        <RouteTransition />
         <Analytics />
       </body>
     </html>

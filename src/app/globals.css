@@ -444,3 +444,17 @@ body:has(main.palette-ivory) { background-color: #08090b; }
 
 /* Atelier headings in Ambon (Rishav's pick); body text stays in Jost. */
 .studio h1, .studio h2, .studio h3 { font-family: "Ambon", Georgia, serif; font-weight: 400; letter-spacing: -0.01em; }
+
+/* LogoTraceLoader */
+@keyframes logo-trace-loader-loop { to { stroke-dashoffset: -1; } }
+@keyframes logo-trace-loader-close { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes logo-trace-loader-fade { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .logo-trace-loader-loop, .logo-trace-loader-close, .logo-trace-loader-fill { animation: none !important; }
+}
+
+/* The passage between the portfolio and Atelier (RouteTransition) */
+.route-passage { animation: route-passage-in 0.25s ease-out both; transition: opacity 0.45s ease; }
+.route-passage.is-leaving { opacity: 0; }
+@keyframes route-passage-in { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .route-passage { animation: none; transition: none; } }
