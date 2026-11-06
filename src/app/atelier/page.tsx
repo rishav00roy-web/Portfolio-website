@@ -4,7 +4,7 @@ import { faqSchema, jsonLd, studioSchema } from "@/lib/schema";
 import { FAQ, SERVICES } from "@/lib/studio";
 
 const DESCRIPTION =
-  "A small studio that designs and builds websites, automations and AI tools for growing businesses. Run by Rishav Roy in Kolkata.";
+  "A Kolkata studio that designs and builds websites, web apps, automations and AI tools for growing businesses. Run by Rishav Roy, working with clients across India and abroad.";
 
 // Kept out of search while the redesign is a preview; drop `robots` and add
 // the route to the sitemap when the two-page site goes live.
@@ -12,7 +12,7 @@ const DESCRIPTION =
 export const viewport: Viewport = { themeColor: "#f3eee8" };
 
 export const metadata: Metadata = {
-  title: { absolute: "Atelier Systems | Websites, automation and AI agents" },
+  title: { absolute: "Atelier Systems | Website and app developers in Kolkata" },
   description: DESCRIPTION,
   robots: { index: false, follow: false },
   alternates: { canonical: "/atelier" },

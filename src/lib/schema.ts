@@ -157,7 +157,14 @@ export function studioSchema(services: { name: string; detail: string }[]) {
     email: `mailto:${PROFILE.email}`,
     telephone: "+91-60019-14771",
     address: { "@type": "PostalAddress", addressLocality: "Kolkata", addressRegion: "West Bengal", addressCountry: "IN" },
-    areaServed: "Worldwide",
+    // Local first (for "developer near me" searches in Kolkata), then everywhere else.
+    areaServed: [
+      { "@type": "City", name: "Kolkata" },
+      { "@type": "State", name: "West Bengal" },
+      { "@type": "Country", name: "India" },
+      "Worldwide",
+    ],
+    knowsAbout: ["Website development", "Web app development", "Next.js", "SEO", "AI agents", "Business automation"],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Services",
