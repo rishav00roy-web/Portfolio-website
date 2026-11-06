@@ -14,7 +14,7 @@ import LogoTraceLoader from "./LogoTraceLoader";
 /** Routes that get the passage, and the colours of the side being entered. */
 const DESTINATIONS: Record<string, { bg: string; fg: string; label: string }> = {
   "/atelier": { bg: "#f3eee8", fg: "#17645f", label: "Opening Atelier Systems" },
-  "/v10": { bg: "#08090b", fg: "#faf8f3", label: "Opening Rishav Roy's portfolio" },
+  "/": { bg: "#08090b", fg: "#faf8f3", label: "Opening Rishav Roy's portfolio" },
 };
 
 /** If the new page never reports in, finish anyway after this long. */

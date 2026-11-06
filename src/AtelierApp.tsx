@@ -48,7 +48,7 @@ export default function AtelierApp() {
           <nav aria-label="Studio" className="flex items-center gap-1 text-base">
             <a href="#projects" className="hidden rounded-full px-3 py-2 text-ink/70 hover:text-ink sm:inline">Work</a>
             <a href="#process" className="hidden rounded-full px-3 py-2 text-ink/70 hover:text-ink sm:inline">Services</a>
-            <Link href="/v10" className="whitespace-nowrap rounded-full px-3 py-2 text-ink/70 hover:text-ink">Rishav Roy</Link>
+            <Link href="/" className="whitespace-nowrap rounded-full px-3 py-2 text-ink/70 hover:text-ink">Rishav Roy</Link>
             <a href="#contact" className="ml-1 inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap rounded-full bg-rust px-4 font-semibold text-paper transition-opacity hover:opacity-90">
               Start a project
             </a>

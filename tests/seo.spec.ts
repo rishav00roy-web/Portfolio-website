@@ -21,12 +21,14 @@ test.describe('SEO', () => {
     expect(profile?.mainEntity?.['@id']).toBe(person?.['@id']);
   });
 
-  test('project cards are crawlable links to case study pages', async ({ page }) => {
-    await page.goto('/');
-    const hrefs = await page
-      .locator('#projects a[href^="/projects/"]')
-      .evaluateAll((els) => els.map((e) => e.getAttribute('href')));
-    expect(new Set(hrefs).size).toBeGreaterThanOrEqual(3);
+  test('Atelier is indexable and carries its studio and FAQ schema', async ({ page }) => {
+    await page.goto('/atelier');
+    await expect(page.locator('meta[name="robots"]')).not.toHaveAttribute('content', /noindex/);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://byrishav.online/atelier');
+    const types = await page
+      .locator('script[type="application/ld+json"]')
+      .evaluateAll((els) => els.flatMap((e) => [JSON.parse(e.textContent || '[]')].flat().map((b) => b['@type'])));
+    expect(types).toEqual(expect.arrayContaining(['ProfessionalService', 'FAQPage']));
   });
 
   test('case study page has its own title and OG image', async ({ page }) => {
@@ -42,6 +44,7 @@ test.describe('SEO', () => {
     const sitemap = await request.get('/sitemap.xml');
     expect(sitemap.ok()).toBeTruthy();
     expect(await sitemap.text()).toContain('/projects/clash-bazar');
+    expect(await sitemap.text()).toContain('https://byrishav.online/atelier');
     const robots = await request.get('/robots.txt');
     expect(await robots.text()).toContain('Disallow: /api/');
   });

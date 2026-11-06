@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  redirects: async () =>
+    ["/v5", "/v6", "/v7", "/v9", "/v10"].map((source) => ({ source, destination: "/", permanent: true })),
   images: {
     formats: ["image/avif", "image/webp"],
   },

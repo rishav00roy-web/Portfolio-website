@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Download } from "lucide-react";
 import ContactForm from "../ContactForm";
 import SocialRow from "./SocialRow";
@@ -261,7 +262,7 @@ export function PaperContact({ studio = false }: { studio?: boolean }) {
               <ul className="mt-3 space-y-2">
                 <li><a href="#projects" className="text-white/85 hover:text-accent">Work</a></li>
                 <li><a href="#process" className="text-white/85 hover:text-accent">Services and process</a></li>
-                <li><a href="/v10" className="text-white/85 hover:text-accent">About Rishav Roy</a></li>
+                <li><Link href="/" className="text-white/85 hover:text-accent">About Rishav Roy</Link></li>
               </ul>
             </div>
             <div>
