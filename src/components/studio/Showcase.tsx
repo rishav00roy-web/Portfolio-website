@@ -40,16 +40,26 @@ type Entry = {
   featured?: { second: string; label: string };
 };
 
-const PHONES: Record<string, string> = {
-  "tea-country-holidays": "/assets/projects/mobile/tea-country-holidays.webp",
-  "iq-iron-fitness": "/assets/projects/mobile/iq-iron-fitness.webp",
-  "clash-bazar": "/assets/projects/mobile/clash-bazar.webp",
-  "personal-portfolio-v2": "/assets/projects/mobile/personal-portfolio-v2.webp",
-  "truwest-company-page": "/assets/projects/mobile/truwest-company-page.webp",
-  "roy-and-co-website": "/assets/projects/mobile/roy-and-co-website.webp",
-  chriskennelsite: "/assets/projects/mobile/chriskennelsite.webp",
-  "microgreens-site": "/assets/projects/mobile/microgreens-site.webp",
-};
+/*
+ * Screen grabs of each live site, taken with Playwright (desktop 1440x900 at
+ * 2x, phone 390x844 at 3x, after fonts and reveals settle). IQ Iron Fitness
+ * keeps its earlier desktop shot: the live CRM shows an empty demo account.
+ */
+const SHOT_KEYS = [
+  "pheonix",
+  "tea-country-holidays",
+  "iq-iron-fitness",
+  "clash-bazar",
+  "microgreens-site",
+  "truwest-company-page",
+  "roy-and-co-website",
+  "chriskennelsite",
+  "personal-portfolio-v2",
+] as const;
+const PHONES: Record<string, string> = Object.fromEntries(SHOT_KEYS.map((k) => [k, `/assets/projects/shots/mobile/${k}.webp`]));
+const DESKTOPS: Record<string, string> = Object.fromEntries(
+  SHOT_KEYS.filter((k) => k !== "iq-iron-fitness").map((k) => [k, `/assets/projects/shots/desktop/${k}.webp`]),
+);
 
 const host = (href: string) => {
   try {
@@ -66,8 +76,8 @@ const ENTRIES: Entry[] = [
     description: "The latest and most worked-on build: a streetwear shop from Jorhat in AJ Shield's style, with 3D models, a playable 3D cassette player for her songs, product dossiers, and orders on WhatsApp.",
     kind: "website",
     discipline: "Design and build, live",
-    image: "/assets/projects/pheonix-full.webp",
-    phone: "/assets/projects/mobile/pheonix.webp",
+    image: DESKTOPS.pheonix,
+    phone: PHONES.pheonix,
     href: "https://pheonix-ashy.vercel.app",
     internal: false,
     cta: "Visit site",
@@ -101,7 +111,7 @@ const ENTRIES: Entry[] = [
     description: p.description,
     kind: "website" as const,
     discipline: p.status === "Live" ? "Client build, live" : "Client build, in progress",
-    image: p.images[0],
+    image: DESKTOPS[p.slug] ?? p.images[0],
     phone: PHONES[p.slug],
     href: `/projects/${p.slug}`,
     internal: true,
@@ -116,7 +126,7 @@ const ENTRIES: Entry[] = [
       description: w.description,
       kind: "website" as const,
       discipline: "Design and build",
-      image: w.preview,
+      image: DESKTOPS[w.id] ?? w.preview,
       phone: PHONES[w.id],
       href: w.href,
       internal: false,
