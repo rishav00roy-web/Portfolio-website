@@ -13,7 +13,7 @@ const CLIENTS = [
     realName: "Anjali Ojha",
     who: "Assamese rapper from Jorhat, Assam",
     photo: "/assets/clients/aj-shield.webp",
-    alt: "AJ Shield in a grey wig crowned with baby's breath and a leopard-print dress",
+    alt: "AJ Shield in a silver wig and a pink graffiti-print dress",
     built: "Pheonix, her streetwear shop, with a page on her music and a cassette player that plays her songs.",
     links: [
       { label: "Visit Pheonix", href: "https://pheonix-ashy.vercel.app" },
