@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   redirects: async () =>
     ["/v5", "/v6", "/v7", "/v9", "/v10"].map((source) => ({ source, destination: "/", permanent: true })),
   images: {
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     formats: ["image/avif", "image/webp"],
   },
   headers: async () => [

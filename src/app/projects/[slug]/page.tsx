@@ -7,11 +7,6 @@ import CaseStudyArticle from "../../../components/CaseStudyArticle";
 import { allCaseStudies, getCaseStudyBySlug } from "../../../lib/projectsData";
 import { caseStudySchema, breadcrumbSchema, jsonLd } from "../../../lib/schema";
 
-function clip(text: string, max: number) {
-  if (text.length <= max) return text;
-  return text.slice(0, text.lastIndexOf(" ", max - 1)).replace(/[,.;:]$/, "") + "…";
-}
-
 export async function generateStaticParams() {
   return allCaseStudies.map((c) => ({ slug: c.slug }));
 }
@@ -30,9 +25,8 @@ export async function generateMetadata({
   if (!caseStudy) return {};
 
   const title = `${caseStudy.title} Case Study`;
-  // Taglines alone run ~45 characters; pad with the problem statement so the
-  // snippet uses the space search results give it (~155 characters).
-  const description = clip(`${caseStudy.tagline}. ${caseStudy.problem}`, 155);
+  // A complete sentence written for search results (no mid-sentence cut).
+  const description = caseStudy.summary;
 
   return {
     title: { absolute: `${title} | Rishav Roy` },
@@ -119,6 +113,13 @@ export default async function CaseStudyPage({
           <div className="max-w-3xl mb-16">
             <h1 className="text-4xl sm:text-6xl font-sans tracking-tight mb-6">{caseStudy.title}</h1>
             <p className="text-lg sm:text-xl text-white/50 leading-relaxed font-sans">{caseStudy.tagline}</p>
+            <p className="mt-4 text-base text-white/60">
+              Built by{" "}
+              <Link href="/atelier" className="text-white underline decoration-white/30 underline-offset-4 hover:decoration-white">
+                Atelier Systems
+              </Link>
+              , Rishav Roy&apos;s studio.
+            </p>
           </div>
 
           <CaseStudyArticle caseStudy={caseStudy} />

@@ -17,7 +17,7 @@ export default function CaseStudyArticle({ caseStudy }: { caseStudy: CaseStudyWi
         {/* Left Column: Context & Metadata */}
         <div className="lg:col-span-4 space-y-8">
           <div>
-            <h2 className="text-3xl font-semibold mb-3">{caseStudy.title}</h2>
+            <h2 className="text-3xl font-semibold mb-3">The project at a glance</h2>
             <p className="text-white/50 text-sm font-medium">{caseStudy.tagline}</p>
           </div>
 

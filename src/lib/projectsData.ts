@@ -29,7 +29,7 @@ export const projects = [
     id: 3,
     title: "Clash Bazar",
     description:
-      "An e-commerce platform for a gaming YouTuber with 12K+ subscribers. Payments via Stripe and PayPal are held through a secure transaction workflow until order completion and a 7-day security window expires.",
+      "An e-commerce platform for the V7 CLASH gaming channel. Payments via Stripe and PayPal are held through a secure transaction workflow until order completion and a 7-day security window expires.",
     tags: ["Next.js", "Supabase", "Stripe", "PayPal", "Transaction Security", "Discord API"],
     link: "https://clash-bazar.vercel.app",
     images: [
@@ -56,6 +56,8 @@ export const projects = [
 export interface CaseStudy {
   title: string;
   tagline: string;
+  /** One complete sentence for search results, under 155 characters. */
+  summary: string;
   client: string;
   period: string;
   color: string;
@@ -78,6 +80,7 @@ export const caseStudiesData: Record<number, CaseStudy> = {
   1: {
     title: "Tea Country Holidays",
     tagline: "Custom travel platform and owner-managed CMS",
+    summary: "How we built Tea Country Holidays a travel site with its own admin, so the owner updates 34 packages and her prices without a developer.",
     client: "Tea Country Holidays Travel Agency",
     period: "Jan 2026 \u2013 Apr 2026",
     metrics: [
@@ -90,8 +93,8 @@ export const caseStudiesData: Record<number, CaseStudy> = {
     links: [
       { label: "Live Site", url: "https://tea-country-holidays.vercel.app", icon: "live" }
     ],
-    problem: "The client was running her travel business on Excel sheets, static Word files, and Gemini-assisted itinerary drafts. She had previously paid good money for a website that underdelivered. She had no way to update package information, pricing, or offers without depending on a developer for every small change.",
-    solution: "Built a custom travel platform from scratch with a bespoke admin dashboard. The non-technical owner can now add and edit packages, update fixed pricing, manage destination content, and post promotional offers, all through the CMS without writing code.",
+    problem: "The owner ran her travel business from Excel sheets and Word files. An earlier website had cost her a lot and did little. She could not change a price or add an offer without paying a developer.",
+    solution: "We built her a new travel site with its own admin. She adds packages, changes prices, edits destinations and posts offers herself, with no code.",
     architecture: {
       description: "A database-driven content platform with a custom admin layer designed for a non-technical operator.",
       steps: [
@@ -113,14 +116,15 @@ export const caseStudiesData: Record<number, CaseStudy> = {
         fix: "Designed the data model around the owner\u2019s mental model of her business rather than abstract relational purity, keeping the admin interface intuitive."
       }
     ],
-    businessValue: "Transformed the client\u2019s operation from a scattered mix of Excel and Word documents into a centralized platform she fully controls. She no longer depends on a developer for routine updates: pricing changes, new packages, and promotional offers are all self-service.",
-    lessons: "When building for a non-technical owner, the admin interface and data model matter just as much as the public-facing website. The CMS has to match how the client actually thinks about her business.",
+    businessValue: "Her business now runs from one site she controls. Price changes, new packages and offers no longer need a developer.",
+    lessons: "For an owner who isn't technical, the admin matters as much as the public site. It has to match how she thinks about her business.",
     futureImprovements: "Integration with direct flight APIs and an automated CRM payment gateway link.",
     color: "#F5B301"
   },
   2: {
     title: "IQ Iron Fitness",
     tagline: "Cloud-hosted gym management platform and billing engine",
+    summary: "How we built IQ Iron Fitness a cloud gym system: 110+ members, automatic invoices and trainer pay, fast on an old laptop and a phone.",
     client: "IQ Iron Fitness Gym Owner",
     period: "Oct 2025 \u2013 Jan 2026 (Online Overhaul)",
     metrics: [
@@ -134,8 +138,8 @@ export const caseStudiesData: Record<number, CaseStudy> = {
       { label: "Live Demo", url: "https://iq-iron-fitness-online-crm.vercel.app", icon: "live" },
       { label: "GitHub Code", url: "https://github.com/rishav00roy-web/IQ-iron-fitness-online-crm", icon: "github" }
     ],
-    problem: "The gym owner needed to track 110+ active members, handle billing, and calculate trainer pay. The system had to run smoothly on an older laptop and provide a usable mobile experience on an iPhone 15 Pro Max. There was no room for a heavy, sluggish UI.",
-    solution: "Built a Next.js + Supabase cloud platform with real-time sync, a custom billing engine that generates membership invoices, and a salary-slip builder that computes trainer commissions. The dashboard gives the owner an immediate operational snapshot: pending memberships, expiring memberships, expired memberships, today\u2019s birthdays, outstanding payments, and monthly collection totals.",
+    problem: "The gym owner had 110+ members to track, bills to send and trainer pay to work out. It all had to run well on an old laptop and on his phone.",
+    solution: "We built a cloud system that keeps every device in sync. It writes membership invoices, works out trainer salary slips, and shows the day at a glance: pending, expiring and expired memberships, birthdays, money owed and the month's takings.",
     architecture: {
       description: "A cloud-hosted architecture with real-time data sync, automated billing, and a hardware-conscious UI layer.",
       steps: [
@@ -157,18 +161,19 @@ export const caseStudiesData: Record<number, CaseStudy> = {
         fix: "Configured optimistic UI updates via React hooks alongside Supabase real-time replication broadcasts, keeping the interface responsive while maintaining data integrity."
       }
     ],
-    businessValue: "Replaced manual record-keeping with a cloud platform that gives the owner instant operational visibility. Billing and payroll are automated, and the system is built to scale comfortably as the gym grows toward 500+ members.",
-    lessons: "Designing for real-world hardware constraints, like the owner\u2019s specific older laptop, shapes performance and UI decisions more than abstract benchmarks ever will.",
+    businessValue: "Paper records are gone. The owner sees the whole gym at a glance, billing and pay are automatic, and the system can grow with the gym.",
+    lessons: "Building for the owner's real laptop shaped the design more than any benchmark would have.",
     futureImprovements: "Full SMS gateway integration and biometric scanner API sync.",
     color: "#10B981"
   },
   3: {
     title: "Clash Bazar",
     tagline: "Secure transaction platform for gaming services",
+    summary: "How we built Clash Bazar for V7 CLASH: a gaming store that holds payments until each order is checked, so buyers and sellers are safe.",
     client: "YouTube Gaming Community Creator",
     period: "May 2026 \u2013 Ongoing",
     metrics: [
-      { label: "Community", value: "12K+" },
+      { label: "Payment hold", value: "7 days" },
       { label: "Security Window", value: "7 Days" },
       { label: "Payments", value: "Stripe + PayPal" },
       { label: "Status Polling", value: "5 Min" }
@@ -178,8 +183,8 @@ export const caseStudiesData: Record<number, CaseStudy> = {
       { label: "Live Demo", url: "https://clash-bazar.vercel.app", icon: "live" },
       { label: "GitHub Code", url: "https://github.com/rishav00roy-web/ClashVault", icon: "github" }
     ],
-    problem: "High-value gaming trades are riddled with scams: buyers commit chargeback fraud, and sellers reclaim accounts after getting paid. The creator needed a structured platform to protect both sides of every transaction within their 12K+ subscriber community.",
-    solution: "Built a secure e-commerce platform with an application-managed escrow-style workflow. Payments via Stripe and PayPal are held securely until the order is verified and a 7-day security window expires. Created a custom admin dashboard so the non-technical owner can manage orders, monitor operations, and maintain a financial ledger without writing code. Connected the platform to Discord for community giveaways and free item distribution.",
+    problem: "Trading game accounts is full of scams. Buyers reverse payments, and sellers take accounts back after being paid. The V7 CLASH channel needed a safe way to trade for its community.",
+    solution: "We built a store that holds each payment until the order is checked and a 7-day safety window passes. Payments go through Stripe and PayPal. The owner runs orders, checks activity and keeps the books from his own admin, with no code.",
     architecture: {
       description: "An application-managed transaction pipeline with secure payment handling and automated status verification.",
       steps: [
@@ -201,54 +206,56 @@ export const caseStudiesData: Record<number, CaseStudy> = {
         fix: "Implemented a mandatory 7-day security window during which the account\u2019s credentials must be fully transferred and locked before funds are released."
       }
     ],
-    businessValue: "Gave the creator a secure middleman platform that protects their 12K+ subscriber community from fraud, complete with the admin tools a non-technical owner needs to run the operation independently.",
-    lessons: "Financial workflows require defensive engineering. Every payment state transition needs an idempotent fallback, and you cannot rely solely on webhooks for critical transaction confirmation.",
+    businessValue: "The channel now has a safe middleman for its community, with the admin tools to run it alone.",
+    lessons: "Money needs careful handling. Every payment step needs a backup check, because payment notifications can go missing.",
     futureImprovements: "Full automation of game account checking using Supercell API integrations.",
     color: "#8B5CF6"
   },
   4: {
-    title: "Personal Portfolio V2",
-    tagline: "A meticulously crafted developer portfolio demonstrating high-end animation and UI/UX design",
-    client: "Personal Project",
-    period: "July 2026",
+    title: "byrishav.online",
+    tagline: "Rishav Roy's portfolio and the Atelier Systems studio page: two sites, one codebase",
+    summary: "How Rishav Roy rebuilt byrishav.online: a portfolio for recruiters and a studio page for clients, with an AI assistant, fast pages and local SEO.",
+    client: "Personal project",
+    period: "Nov 2026",
     metrics: [
-      { label: "Performance", value: "98" },
-      { label: "Animations", value: "60 FPS" },
-      { label: "SEO", value: "Optimized" },
-      { label: "Design", value: "Responsive" }
+      { label: "Pages", value: "2 sites" },
+      { label: "Layout shift", value: "0.01" },
+      { label: "AI assistant", value: "Psunk" },
+      { label: "Tests", value: "15 passing" }
     ],
-    tags: ["Next.js 14", "Framer Motion", "Tailwind CSS", "React 19", "Vercel"],
+    tags: ["Next.js 16", "React 19", "Tailwind CSS v4", "GSAP", "Lenis", "Groq AI", "Schema.org"],
     links: [
       { label: "Live Site", url: "https://byrishav.online", icon: "live" },
+      { label: "Atelier Systems", url: "https://byrishav.online/atelier", icon: "live" },
       { label: "GitHub Code", url: "https://github.com/rishav00roy-web/Portfolio-website", icon: "github" }
     ],
-    problem: "Traditional developer portfolios often lack character and fail to demonstrate actual front-end engineering skills. I needed a platform that not only lists my projects but serves as a living, interactive proof of my ability to build polished, performant UIs.",
-    solution: "Developed an immersive portfolio experience using Next.js App Router and Framer Motion. Implemented scroll-linked animations, a custom command menu (Ctrl+K), and a highly optimized rendering strategy to maintain 60fps animations across devices.",
+    problem: "One site had to do two jobs. Recruiters want to read about Rishav quickly. Clients want to see work and start a project. Mixing both on one page served neither.",
+    solution: "We split it into two sites that share one codebase. The portfolio has a sunset hero, a story of his path and his experience. Atelier Systems, the studio page, has its own ivory and teal look, the client work, a clients section and a contact form. Psunk, an AI assistant, answers questions on both, trained on each site's own content.",
     architecture: {
-      description: "A modern React application structured for optimal client-side interactivity and fast static delivery.",
+      description: "One Next.js app serving two identities, with shared data so the pages, the assistant and the search data never disagree.",
       steps: [
-        { title: "Scroll Orchestration", desc: "Framer Motion\u2019s `useScroll` and `useTransform` map scroll position directly to element styles." },
-        { title: "Component Architecture", desc: "Strict separation of Server and Client components ensures minimum JS bundle size while preserving rich interactions." },
-        { title: "Global Command Palette", desc: "A custom-built `CommandMenu` provides fast, keyboard-first navigation globally." },
-        { title: "Responsive Layouts", desc: "Tailwind CSS manages complex grid structures that elegantly collapse on mobile devices without layout shifting." }
+        { title: "Two identities", desc: "Each site has its own colours and fonts, scoped in CSS, and an animated logo trace carries you from one to the other." },
+        { title: "One source of facts", desc: "Profile, services, work and FAQ live in shared data files that feed the pages, the AI assistant, llms.txt and the search schema." },
+        { title: "AI assistant", desc: "Psunk runs on Groq and answers from each site's facts only, with no prices or private client details." },
+        { title: "Found by people and AI", desc: "Structured data, an FAQ written answer-first, llms.txt and a robots.txt that welcomes AI search and answer engines." }
       ]
     },
     challenges: [
       {
-        title: "Animation Jitter on Mobile Safari",
-        description: "Complex scroll-linked transforms were causing layout recalculations and dropped frames on older iOS devices.",
-        fix: "Delegated heavy animations to the GPU by forcing `will-change: transform` and using spring physics (`useSpring`) over raw scroll values to smooth out sudden user scrolls."
+        title: "Smooth on slow phones",
+        description: "A moving background grid, screenshots and animations made the page stutter on slower phones.",
+        fix: "The grid sleeps when nothing moves, screenshots are plain images, and text effects that cost a repaint were removed. Dropped frames fell from 78% to 6% in a slowed-down test."
       },
       {
-        title: "Accessibility with Motion",
-        description: "Heavy animations can trigger motion sickness and reduce screen reader accessibility.",
-        fix: "Implemented `useReducedMotion` hooks to respect OS-level accessibility settings, gracefully degrading animations to simple opacity fades."
+        title: "Two looks without two codebases",
+        description: "The studio needed a light ivory look while the portfolio stays dark, on the same components.",
+        fix: "Each site sets its own colour and font variables in one scope, so shared parts like the contact form and chat dress themselves for the site they're on."
       }
     ],
-    businessValue: "Acts as a primary lead generation tool for freelance clients and a technical showcase for employment opportunities.",
-    lessons: "Animation must serve a purpose and never block the main thread. Prioritizing CSS transforms over layout-triggering properties is essential for 60fps experiences.",
-    futureImprovements: "Implementing an interactive 3D WebGL hero background using Three.js.",
-    color: "#3B82F6"
+    businessValue: "Recruiters get a clear story and a CV in a few seconds. Clients get the studio, its work and a quote request, and the studio can be found when someone asks a search engine or an AI assistant for a developer in Jorhat.",
+    lessons: "Plain words and fast pages beat effects. Every animation has to earn its place, and every claim on the page has to be true.",
+    futureImprovements: "Add Chennai to the studio's local pages after the move, and a short video demo of the invoice reader.",
+    color: "#CDF22B"
   }
 };
 
@@ -348,7 +355,7 @@ export const categorizedProjects: {
         title: "ClashVault (Clash Bazar)",
         githubRepoName: "ClashVault",
         category: "Client Websites",
-        description: "E-commerce and services marketplace for a gaming YouTuber with 12K+ subscribers. Payments held through a secure transaction workflow until order completion and a 7-day security window expires. Dispute resolution admin panel, dual buyer/seller dashboards.",
+        description: "E-commerce and services store for the V7 CLASH gaming channel. Payments held through a secure transaction workflow until order completion and a 7-day security window expires. Dispute resolution admin panel, dual buyer/seller dashboards.",
         tags: ["Next.js", "Supabase", "Stripe", "PayPal", "Discord API"],
         caseStudySlug: "clash-bazar",
         liveUrl: "https://clash-bazar.vercel.app",
@@ -412,11 +419,11 @@ export const categorizedProjects: {
       },
       {
         id: "personal-portfolio-v2",
-        title: "Personal Portfolio V2",
+        title: "byrishav.online",
         githubRepoName: "Portfolio-website",
         category: "Web Apps / Tools",
-        description: "An immersive, animation-driven developer portfolio built with Next.js App Router and Framer Motion. Features complex scroll-linked animations, a custom command palette (⌘K), and 100/100 Lighthouse performance across categories.",
-        tags: ["Next.js 16", "Framer Motion", "Tailwind CSS v4", "React 19"],
+        description: "This site: Rishav Roy's portfolio and the Atelier Systems studio page in one Next.js app, with an AI assistant trained on both and local SEO.",
+        tags: ["Next.js 16", "GSAP", "Tailwind CSS v4", "React 19", "Groq AI"],
         caseStudySlug: "personal-portfolio-v2",
         liveUrl: "https://byrishav.online",
         githubUrl: "https://github.com/rishav00roy-web/Portfolio-website",

@@ -83,6 +83,15 @@ export default function CommandMenu() {
     },
     {
       category: "Navigation",
+      label: "Atelier Systems (studio and client work)",
+      icon: <Laptop className="w-4 h-4" />,
+      action: () => {
+        setIsOpen(false);
+        router.push("/atelier");
+      },
+    },
+    {
+      category: "Navigation",
       label: "View Case Studies",
       icon: <Laptop className="w-4 h-4" />,
       action: () => {

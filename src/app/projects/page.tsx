@@ -7,13 +7,13 @@ import { caseStudyIndexSchema, breadcrumbSchema, jsonLd } from "../../lib/schema
 
 export const metadata: Metadata = {
   title: "Case Studies & Project Directory",
-  description: "Comprehensive catalog of commercial client platforms, design showcases, and web automation tools engineered by Rishav Roy.",
+  description: "Every site and tool Rishav Roy has built: client websites, design builds and web apps, with case studies on how each one works.",
   alternates: {
     canonical: "/projects",
   },
   openGraph: {
     title: "Case Studies & Project Directory | Rishav Roy",
-    description: "Comprehensive catalog of commercial client platforms, design showcases, and web automation tools engineered by Rishav Roy.",
+    description: "Every site and tool Rishav Roy has built: client websites, design builds and web apps, with case studies on how each one works.",
     url: "/projects",
     siteName: "Rishav Roy Portfolio",
     type: "website",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Case Studies & Project Directory | Rishav Roy",
-    description: "Comprehensive catalog of commercial client platforms, design showcases, and web automation tools engineered by Rishav Roy.",
+    description: "Every site and tool Rishav Roy has built: client websites, design builds and web apps, with case studies on how each one works.",
   },
 };
 
@@ -104,7 +104,11 @@ export default function ProjectsPage() {
               Detailed Case Studies
             </h1>
             <p className="text-base sm:text-lg text-white/60 leading-relaxed font-sans">
-              A categorized index of production client platforms, design showcases, and web automation tools engineered by Rishav Roy. Every system was built to remove manual operational overhead so non-technical stakeholders can operate autonomously.
+              Every site and tool Rishav Roy has built, sorted by kind. Each one was made so its owner can run it without calling a developer. For the client work and how a project runs, visit{" "}
+              <Link href="/atelier" className="text-white underline decoration-white/30 underline-offset-4 hover:decoration-white">
+                Atelier Systems
+              </Link>
+              .
             </p>
           </div>
 

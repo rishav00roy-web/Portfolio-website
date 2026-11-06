@@ -91,8 +91,8 @@ const COPY: Record<string, { title?: string; description: string }> = {
     description: "A site for a dog boarding, daycare and grooming business, with its own page for each service and for trail walks.",
   },
   "personal-portfolio-v2": {
-    title: "Portfolio, version 2",
-    description: "Rishav's previous portfolio: scroll-driven animation throughout and a command menu you can open with ⌘K.",
+    title: "byrishav.online",
+    description: "Rishav's own site: a portfolio for recruiters and this studio page, with Psunk, an AI assistant trained on both.",
   },
   "gym-crm": {
     title: "Gym CRM",

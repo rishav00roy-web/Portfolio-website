@@ -32,31 +32,16 @@ export const metadata: Metadata = {
   applicationName: `${PROFILE.name} Portfolio`,
   authors: [{ name: PROFILE.name, url: SITE_URL }],
   creator: PROFILE.name,
-  keywords: [
-    "Rishav Roy",
-    "Operations Specialist",
-    "Automation Specialist",
-    "Business Automation",
-    "Remote Operations",
-    "FOIA Specialist",
-    "Custom CRM",
-    "Next.js Developer",
-    "Jorhat",
-    "Assam",
-  ],
   alternates: {
     canonical: "/",
   },
+  // One robots tag for every crawler (a separate googlebot tag duplicated it).
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
+    "max-image-preview": "large",
+    "max-snippet": -1,
+    "max-video-preview": -1,
   },
   openGraph: {
     title: TITLE,

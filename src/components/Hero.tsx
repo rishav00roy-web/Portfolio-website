@@ -87,12 +87,12 @@ export default function Hero() {
           data-hero-name-wrap
           className="will-change-transform absolute inset-x-0 top-[13%] sm:top-[16%] lg:top-[12%] z-[2] flex justify-center pointer-events-none select-none"
         >
-          <h1 className="font-display uppercase text-center leading-[0.78] tracking-[-0.02em]">
-            <span className="sr-only">Rishav Roy, Operations &amp; Automation Specialist</span>
-            <span aria-hidden="true" data-hero-name className="block text-[24vw] lg:text-[17.5vw] text-[#fbf3e6] [text-shadow:0_8px_40px_rgba(224,121,31,0.35)]">
+          <h1 className="sr-only font-display">Rishav Roy, Operations &amp; Automation Specialist</h1>
+          <p aria-hidden="true" className="font-display uppercase text-center leading-[0.78] tracking-[-0.02em]">
+            <span data-hero-name className="block text-[24vw] lg:text-[17.5vw] text-[#fbf3e6] [text-shadow:0_8px_40px_rgba(224,121,31,0.35)]">
               Rishav
             </span>
-          </h1>
+          </p>
         </div>
 
         {/* Plate 2: the ridge, cut from the same photo */}
