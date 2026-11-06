@@ -6,15 +6,16 @@ import { studioFont } from "@/lib/studioFont";
 /*
  * The portfolio's one door to the studio. The dark page opens onto a band of
  * the studio's own ivory paper, edged with a soft wave, so it reads as
- * stepping into another room. Three arched windows show what is inside.
+ * stepping into another room. Three phones show whole screens of sites the
+ * studio built, uncropped, each with its name and what it is.
  * Static on purpose: plain images, no scroll or cursor work, so it costs
  * nothing while you scroll past.
  */
 
-const WINDOWS = [
-  { name: "Pheonix", src: "/assets/projects/pheonix-cassette.webp", alt: "Pheonix's 3D cassette player", position: "object-center" },
-  { name: "Tea Country Holidays", src: "/assets/projects/shots/mobile/tea-country-holidays.webp", alt: "Tea Country Holidays on a phone", position: "object-top" },
-  { name: "Clash Bazar", src: "/assets/projects/shots/mobile/clash-bazar.webp", alt: "Clash Bazar on a phone", position: "object-top" },
+const PHONES = [
+  { key: "pheonix", name: "Pheonix", kind: "Streetwear shop" },
+  { key: "tea-country-holidays", name: "Tea Country Holidays", kind: "Travel agency" },
+  { key: "clash-bazar", name: "Clash Bazar", kind: "Gaming store" },
 ] as const;
 
 /** A gentle wave the width of the page, filled with the studio's ivory. */
@@ -60,13 +61,17 @@ export default function StudioLink({ href = "/atelier" }: { href?: string }) {
             </span>
           </div>
 
-          <ul className="grid grid-cols-3 gap-3 sm:gap-6">
-            {WINDOWS.map((w) => (
-              <li key={w.name} className="min-w-0">
-                <div className="relative aspect-[3/4.4] overflow-hidden rounded-t-full rounded-b-2xl bg-[var(--s-surface)] ring-1 ring-[var(--s-ink)]/10">
-                  <Image src={w.src} alt={w.alt} fill sizes="(max-width: 1023px) 30vw, 260px" className={`object-cover ${w.position}`} />
+          <ul className="grid grid-cols-3 gap-4 sm:gap-8">
+            {PHONES.map((p) => (
+              <li key={p.key} className="min-w-0">
+                {/* A plain phone: dark bezel, the whole screen, a soft shadow on the paper */}
+                <div className="rounded-[calc(1.2rem+3px)] bg-[#101615] p-[3px] shadow-[0_1px_2px_rgba(15,53,50,0.14),0_12px_24px_-12px_rgba(15,53,50,0.28),0_32px_56px_-28px_rgba(15,53,50,0.4)] sm:rounded-[calc(1.7rem+6px)] sm:p-[6px]">
+                  <div className="relative aspect-[390/844] overflow-hidden rounded-[1.2rem] sm:rounded-[1.7rem]">
+                    <Image src={`/assets/projects/shots/mobile/${p.key}.webp`} alt={`${p.name} on a phone`} fill sizes="(max-width: 1023px) 30vw, 230px" className="object-cover object-top" />
+                  </div>
                 </div>
-                <p className="mt-3 text-base leading-snug text-[var(--s-ink)]/70 sm:text-lg">{w.name}</p>
+                <p className="mt-4 text-base font-medium leading-snug text-[var(--s-ink)] sm:text-lg">{p.name}</p>
+                <p className="text-base leading-snug text-[var(--s-ink)]/60">{p.kind}</p>
               </li>
             ))}
           </ul>
