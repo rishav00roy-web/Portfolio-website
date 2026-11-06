@@ -3,8 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { commissions } from "@/lib/work";
 import { studioFont } from "@/lib/studioFont";
+
+/** Sharp phone screen grabs from the studio page: the flagship and two client sites. */
+const PREVIEWS = [
+  { key: "pheonix", title: "Pheonix" },
+  { key: "tea-country-holidays", title: "Tea Country Holidays" },
+  { key: "clash-bazar", title: "Clash Bazar" },
+] as const;
 
 /**
  * The portfolio's one door to the studio. All client work lives on the
@@ -27,20 +33,22 @@ export default function StudioLink({ href = "/atelier" }: { href?: string }) {
           <p className="mt-4 max-w-md text-lg leading-relaxed text-ink/65">
             Websites, automation and AI agents for small businesses. Every project I have built, with case studies.
           </p>
-          <span className="mt-8 inline-flex items-center gap-2 rounded-full bg-rust px-6 py-3.5 text-base font-semibold text-paper">
+          <span className="mt-8 inline-flex items-center gap-4 rounded-full border border-ink/15 bg-paper py-2 pl-6 pr-2 text-lg font-medium text-ink shadow-[0_1px_0_rgba(15,53,50,0.06)] transition-colors duration-300 group-hover:border-ink/30">
             See the studio&apos;s work
-            <ArrowUpRight className="h-4 w-4 transition-transform duration-300 ease-out-expo group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
+            <span className="grid h-11 w-11 place-items-center rounded-full bg-rust transition-transform duration-300 ease-out-expo group-hover:rotate-45">
+              <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
+            </span>
           </span>
         </div>
         <div className="grid grid-cols-3 gap-3 sm:gap-4">
-          {commissions.map((p, i) => (
+          {PREVIEWS.map((p, i) => (
             <span
-              key={p.slug}
+              key={p.key}
               className={`relative block aspect-[3/4] overflow-hidden rounded-xl ring-1 ring-ink/10 transition-transform duration-300 ease-out-expo ${
                 i === 1 ? "translate-y-6 group-hover:translate-y-3" : "group-hover:-translate-y-2"
               }`}
             >
-              <Image src={p.images[0]} alt={`${p.title} screenshot`} fill sizes="(max-width: 1023px) 30vw, 220px" className="object-cover object-top" />
+              <Image src={`/assets/projects/shots/mobile/${p.key}.webp`} alt={`${p.title} on a phone`} fill sizes="(max-width: 1023px) 30vw, 240px" className="object-cover object-top" />
             </span>
           ))}
         </div>

@@ -195,7 +195,9 @@ export function PaperContact({ studio = false }: { studio?: boolean }) {
       }`}
     >
       <div className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-32 sm:pt-44 pb-10">
-        <div className="relative text-center">
+        {/* Portfolio: details left, form right on large screens. Studio stays centred. */}
+        <div className={studio ? "" : "lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-16 xl:gap-24"}>
+        <div className={`relative text-center ${studio ? "" : "lg:text-left"}`}>
           {studio && (
             <>
               <Doodle kind="pencil" className="left-[6%] top-4 hidden w-32 -rotate-6 lg:block" />
@@ -240,12 +242,13 @@ export function PaperContact({ studio = false }: { studio?: boolean }) {
           </p>
 
           <div data-rise className="mt-14">
-            <SocialRow />
+            <SocialRow className={studio ? "" : "lg:justify-start"} />
           </div>
         </div>
 
-        <div data-rise className="mx-auto mt-20 max-w-2xl">
+        <div data-rise className={`mx-auto mt-20 max-w-2xl ${studio ? "" : "lg:mt-0 lg:w-full"}`}>
           <ContactForm />
+        </div>
         </div>
 
         {studio ? (
