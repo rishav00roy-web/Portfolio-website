@@ -154,11 +154,13 @@ export default function ChatBot() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
-            className="fixed bottom-[calc(5.75rem+env(safe-area-inset-bottom))] right-6 z-50 flex h-14 items-center sm:bottom-[calc(1.5rem+env(safe-area-inset-bottom))] sm:right-[5.25rem]"
+            className="fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] right-[5.25rem] z-50 flex h-14 items-center"
           >
             <div className="flex items-center gap-1 rounded-full border border-[var(--c-line)] bg-[var(--c-panel)] py-1.5 pl-5 pr-1.5 text-[var(--c-ink)] shadow-[0_10px_24px_-12px_rgba(0,0,0,0.4)]">
               <button type="button" onClick={openChat} className="whitespace-nowrap text-base font-medium hover:opacity-80 focus-visible:outline-none focus-visible:underline">
-                {copy.nudge}
+                {/* Short on phones so it fits between the menu pill and the chat button */}
+                <span className="sm:hidden">Try Psunk</span>
+                <span className="hidden sm:inline">{copy.nudge}</span>
               </button>
               <button
                 type="button"

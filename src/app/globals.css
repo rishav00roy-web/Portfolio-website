@@ -28,6 +28,14 @@
 }
 
 @font-face {
+  font-family: 'Bespoke Stencil';
+  src: url('/fonts/BespokeStencil-VariableItalic.woff2') format('woff2');
+  font-style: italic;
+  font-weight: 300 800;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Supreme';
   src: url('/fonts/Supreme-Variable.woff2') format('woff2');
   font-style: normal;
@@ -445,10 +453,13 @@ a, button { touch-action: manipulation; }
 .palette-ivory .night ::selection,
 .palette-ivory #contact ::selection { background-color: #cdf22b; color: #08090b; }
 body:has(main.palette-ivory) { background-color: #08090b; }
-/* v10 type: the studio band keeps its own fonts (.studio sets them again inside). */
-.palette-ivory .night,
-.palette-ivory #contact {
+/* v10: the script accents ("Roy", "before the sun sets") become Bespoke Stencil italic. */
+body:has(main.palette-ivory) .font-coffekan { font-style: italic; font-weight: 600; }
+/* v10 type, hero included (the "Roy" script keeps Coffekan); the chat and menu
+   follow too. The studio band keeps its own fonts (.studio sets them again inside). */
+body:has(main.palette-ivory) {
   --font-display: "Bespoke Stencil", sans-serif;
+  --font-coffekan: "Bespoke Stencil", sans-serif;
   --font-sans: "Supreme", sans-serif;
   font-family: "Supreme", sans-serif;
   /* Bespoke Stencil defaults to old-style figures; keep phone numbers and dates even. */

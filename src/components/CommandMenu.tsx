@@ -231,7 +231,7 @@ export default function CommandMenu() {
         <button
           onClick={() => setIsOpen(true)}
           data-command-menu-trigger
-          className="fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] left-6 z-50 pointer-events-auto flex min-h-11 items-center gap-2 px-4 py-2.5 rounded-full border border-white/10 bg-[#0f0f0f]/90 backdrop-blur-md text-white/70 hover:text-white hover:border-white/30 hover:bg-white/5 transition-colors font-mono text-sm uppercase tracking-widest shadow-2xl focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 cursor-pointer"
+          className="fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] left-6 z-50 pointer-events-auto flex min-h-11 items-center gap-2 px-4 py-2.5 rounded-full border border-white/10 bg-[#0f0f0f]/90 backdrop-blur-md text-white/70 hover:text-white hover:border-white/30 hover:bg-white/5 transition-colors font-sans font-medium text-sm uppercase tracking-widest shadow-2xl focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 cursor-pointer"
         >
           <Search className="w-3.5 h-3.5" aria-hidden="true" />
           <span>Menu</span>
