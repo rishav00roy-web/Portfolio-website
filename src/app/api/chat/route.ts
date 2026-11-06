@@ -1,5 +1,6 @@
 import { groq } from '@ai-sdk/groq';
 import { streamText } from 'ai';
+import { assistantSystemPrompt, type ChatSite } from "@/lib/assistantKnowledge";
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
@@ -28,7 +29,9 @@ export async function POST(req: Request) {
       );
     }
 
-    const { messages }: { messages: UIMessage[] } = await req.json();
+    const { messages, site }: { messages: UIMessage[]; site?: unknown } = await req.json();
+    // Which page the chat is on; anything unexpected falls back to the portfolio.
+    const chatSite: ChatSite = site === "atelier" ? "atelier" : "portfolio";
 
     // Map UIMessages (which use 'parts') to CoreMessages (which use 'content' or array content)
     // Roles arrive over the wire, so drop anything outside the union the
@@ -48,23 +51,8 @@ export async function POST(req: Request) {
       // Groq retired the Llama 3.3 endpoint; this key has no Llama access at all.
       model: groq('openai/gpt-oss-120b'),
       maxRetries: 5, // Automatically retry requests on rate limits (429) or transient API failures
-      system: `You are Psunk, a casual, friendly, and extremely concise assistant for Rishav's portfolio website.
-      CRITICAL RULES:
-      1. DO NOT sound like an AI. Use a natural, conversational, and confident tone.
-      2. Keep responses EXTREMELY short, usually just 1 to 3 short sentences.
-      2b. Never use em dashes. Use commas, colons or full stops instead. 
-      3. Never write long paragraphs. Never list his skills unless explicitly asked.
-      4. If someone asks if he can build a site or do a job, give a punchy "Yes, absolutely!" style answer and briefly mention a relevant project.
-      
-      Rishav's Info:
-      - Skills: Next.js, React, Tailwind CSS, Supabase, PostgreSQL, AI-Orchestrated Development, SEO.
-      - Background: Former Founder/COO and HR/Admin professional with 6+ years of operational experience. He builds software that solves real business problems, not just for practice.
-      - Projects: 
-        * Tea Country Holidays (Travel platform with custom CMS & PDF generation)
-        * IQ Iron Fitness (Gym CRM with billing)
-        * Clash Bazar (Marketplace with escrow)
-      
-      If you don't know something, just say "I'm not sure about that, but you should reach out to him directly!"`,
+      // Built from the same data the pages render (src/lib/assistantKnowledge.ts).
+      system: assistantSystemPrompt(chatSite),
       messages: coreMessages,
     });
 

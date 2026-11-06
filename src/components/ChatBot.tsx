@@ -2,6 +2,7 @@
 
 import { useChat } from '@ai-sdk/react';
 import { useState, useRef, useEffect } from 'react';
+import { usePathname } from "next/navigation";
 import { X, Send, Bot, User, Loader2 } from 'lucide-react';
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
@@ -9,6 +10,8 @@ export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
   const { messages, status, sendMessage } = useChat();
+  // The agent answers for whichever site it is on: the studio or the portfolio.
+  const site = usePathname()?.startsWith("/atelier") ? "atelier" : "portfolio";
 
   // The command-menu trigger is fixed bottom-left at z-9999. On phones the chat
   // panel spans nearly the full width, so that pill paints on top of the chat
@@ -60,7 +63,7 @@ export default function ChatBot() {
     if (!input.trim() || isLoading) return;
     
     if (sendMessage) {
-      sendMessage({ text: input });
+      sendMessage({ text: input }, { body: { site } });
     }
     setInput('');
   };
@@ -218,7 +221,9 @@ export default function ChatBot() {
                 <div className="flex flex-col items-center justify-center h-full text-center space-y-4 opacity-70">
                   <Bot className="w-12 h-12 text-white/50" />
                   <p className="text-sm text-white/60 px-4">
-                    Hi there! I&apos;m Psunk, an AI assistant trained on Rishav&apos;s portfolio. How can I help you today?
+                    {site === "atelier"
+                      ? "Hi! I'm Psunk, Atelier Systems' assistant. Ask about our work, services, or starting a project."
+                      : "Hi there! I'm Psunk, an AI assistant trained on Rishav's portfolio. How can I help you today?"}
                   </p>
                 </div>
               )}
