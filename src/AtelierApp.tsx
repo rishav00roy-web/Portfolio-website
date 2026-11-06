@@ -12,7 +12,7 @@ import { PaperContact } from "./components/v5/Paper";
 
 /**
  * Atelier Systems, the studio's own page (/atelier). Its own identity, not
- * the portfolio's: deep navy, cool porcelain text and a brass accent with
+ * the portfolio's: deep teal, warm ivory text and a coral accent with
  * a geometric sans (see .studio in globals.css). A floating bar, the work as
  * a showroom, what the studio does and how a project runs, then contact.
  */

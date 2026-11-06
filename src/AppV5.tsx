@@ -49,13 +49,13 @@ export default function AppV5({
   }, [prefersReduced]);
 
   const content = (
-    <main id="main" className="relative min-h-screen text-white">
+    <main id="main" className={`relative min-h-screen text-white ${journal ? "palette-ivory" : ""}`}>
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-accent focus:px-5 focus:py-3 focus:text-background">
         Skip to content
       </a>
       <Hero />
       {/* v10: the live site's cursor-reactive mesh shows through behind the content */}
-      {journal && <KineticGrid />}
+      {journal && <KineticGrid color="#CDF22B" />}
       <div className={`night afterglow relative z-20 text-ink ${journal ? "bg-transparent" : "bg-paper"}`}>
         {journal ? (
           <>

@@ -218,22 +218,24 @@ body {
 
 /*
  * Atelier Systems: the studio's own identity, taken from its line-drawn AS
- * mark. Deep navy instead of the portfolio's warm dusk, cool porcelain text,
- * one brass accent, and a geometric sans (Jost) for everything, the way
+ * mark. Deep teal instead of the portfolio's night, warm ivory text,
+ * one coral accent, and a geometric sans (Jost) for everything, the way
  * the logo's wordmark is set. The AI work keeps its moonlight blue.
  */
 .studio {
   /* The one place the studio palette lives: change these to re-theme it. */
-  /* Navy and brass */
-  --s-bg: #0b111c;
-  --s-surface: #121a28;
-  --s-surface-2: #182234;
-  --s-paper-2: #131c2b;
-  --s-ink: #e9edf4;
-  --s-ink-rgb: 233, 237, 244;
-  --s-accent: #d8b878;
-  --s-accent-rgb: 216, 184, 120;
-  --s-bezel: #243045;
+  /* Rishav's palette, kept dark: deep teal (#17645F) night, warm ivory
+     (#F3EEE8) text, coral (#FF6845) accent. */
+  --s-bg: #0a1d1b;
+  --s-surface: #0f2825;
+  --s-surface-2: #14332f;
+  --s-paper-2: #10302c;
+  --s-ink: #f3eee8;
+  --s-ink-rgb: 243, 238, 232;
+  --s-accent: #ff6845;
+  --s-accent-rgb: 255, 104, 69;
+  --s-teal: #17645f;
+  --s-bezel: #1d3d39;
   --background: var(--s-bg);
   --surface: var(--s-surface);
   --surface-2: var(--s-surface-2);
@@ -261,14 +263,14 @@ body {
   background-color: var(--background);
   color: var(--foreground);
 }
-body:has(main.studio) { background-color: #0b111c; }
+body:has(main.studio) { background-color: #0a1d1b; }
 /* The studio sets headings the way the mark's wordmark is drawn: no shouting. */
 .studio .font-display { text-transform: none; font-weight: 500; letter-spacing: -0.03em; }
 .studio ::selection { background-color: var(--s-accent); color: var(--s-bg); }
 
 /* v10 trail: a station's lamp lights when the walker reaches it. */
 .trail-lamp { transition: background-color 0.6s, border-color 0.6s, box-shadow 0.6s; }
-.trail-station.is-lit .trail-lamp { background-color: var(--color-rust); border-color: var(--color-rust); box-shadow: 0 0 22px rgba(245, 179, 1, 0.55); }
+.trail-station.is-lit .trail-lamp { background-color: var(--color-rust); border-color: var(--color-rust); box-shadow: 0 0 22px rgba(var(--accent-rgb), 0.55); }
 @media (prefers-reduced-motion: reduce) { .trail-lamp { background-color: var(--color-rust); border-color: var(--color-rust); } }
 
 
@@ -383,3 +385,30 @@ a, button { touch-action: manipulation; }
 }
 
 @media (prefers-reduced-motion: reduce) { .social-icon-wrapper .layer, .social-icon-wrapper .layer span { transition: none; } }
+
+/*
+ * Portfolio palette (v10), from Rishav's swatches: Midnight Black #08090B,
+ * Soft Ivory #FAF8F3, Neon Lime #CDF22B. The hero keeps its sunset; the
+ * sections below it and the contact take the new palette, kept dark.
+ */
+.palette-ivory .night,
+.palette-ivory #contact {
+  --background: #08090b;
+  --foreground: #faf8f3;
+  --accent: #cdf22b;
+  --accent-rgb: 205, 242, 43;
+  --color-background: #08090b;
+  --color-foreground: #faf8f3;
+  --color-accent: #cdf22b;
+  --color-white: #faf8f3;
+  --color-black: #08090b;
+  --color-surface: #111214;
+  --color-surface-2: #17181b;
+  --color-paper: #08090b;
+  --color-paper-2: #111214;
+  --color-ink: #faf8f3;
+  --color-rust: #cdf22b;
+}
+.palette-ivory .night ::selection,
+.palette-ivory #contact ::selection { background-color: #cdf22b; color: #08090b; }
+body:has(main.palette-ivory) { background-color: #08090b; }

@@ -36,11 +36,12 @@ interface KineticGridProps {
   trail?: boolean;
   /** Base opacity for dots/lines at rest (before cursor proximity boost). */
   baseOpacity?: number;
+  /** Line and trail colour (hex). */
+  color?: string;
 }
 
 const DOT_COLOR = "#F4EDE3";
-const LINE_COLOR = "#F5B301";
-const TRAIL_COLOR = "rgba(245,179,1,0.85)";
+const LINE_COLOR_DEFAULT = "#F5B301";
 
 export default function KineticGrid({
   spacing = 44,
@@ -48,7 +49,10 @@ export default function KineticGrid({
   strength = 4,
   trail = true,
   baseOpacity = 0.05,
+  color = LINE_COLOR_DEFAULT,
 }: KineticGridProps) {
+  const LINE_COLOR = color;
+  const TRAIL_COLOR = color;
   const hostRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: -9999, y: -9999, active: false });
@@ -318,7 +322,7 @@ export default function KineticGrid({
       window.removeEventListener("touchmove", onTouch);
       window.removeEventListener("touchend", onLeave);
     };
-  }, [spacing, radius, strength, trail, baseOpacity, prefersReducedMotion]);
+  }, [spacing, radius, strength, trail, baseOpacity, prefersReducedMotion, LINE_COLOR, TRAIL_COLOR]);
 
   return (
     <motion.div
