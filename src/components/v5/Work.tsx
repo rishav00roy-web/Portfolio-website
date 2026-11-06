@@ -58,7 +58,7 @@ export default function Work({ layout = "rows" }: { layout?: WorkLayout }) {
         ScrollTrigger.batch("[data-rise]", {
           start: "top 90%",
           once: true,
-          onEnter: (els) => gsap.to(els, { y: 0, opacity: 1, duration: 1, stagger: 0.08, ease: "expo.out" }),
+          onEnter: (els) => gsap.to(els, { y: 0, opacity: 1, duration: 1, stagger: 0.08, ease: "expo.out", clearProps: "transform,opacity" }),
         });
       });
       return () => mm.revert();

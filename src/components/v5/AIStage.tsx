@@ -110,7 +110,7 @@ export function InvoiceStage() {
   const mark = "rounded bg-moon/35 px-1 ring-2 ring-moon";
   return (
     <div className="grid h-full gap-4 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
-      <div className="rounded-2xl bg-[#f4ede3] p-6 text-[#1b140d] shadow-[0_30px_60px_-30px_rgba(0,0,0,0.9)]">
+      <div className="rounded-2xl bg-[#f4ede3] p-6 text-[#1b140d] shadow-[0_14px_28px_-12px_rgba(0,0,0,0.5)]">
         <div className="flex items-start justify-between gap-4">
           <span className={`${mark} font-semibold`}>Sample Supplies Co.</span>
           <span className="text-sm opacity-60">Invoice</span>

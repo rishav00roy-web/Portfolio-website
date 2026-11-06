@@ -223,7 +223,7 @@ function Stage({ e }: { e: Entry }) {
       ) : e.featured ? (
         <div className="relative px-5 pt-8 pb-10 sm:px-10 sm:pt-12 sm:pb-14">
           <div className="grid items-center gap-5 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
-            <div className="-rotate-1 overflow-hidden rounded-xl border border-ink/15 bg-paper shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)] transition-transform duration-300 ease-out-expo group-hover:-translate-y-1">
+            <div className="-rotate-1 overflow-hidden rounded-xl border border-ink/15 bg-paper shadow-[0_16px_32px_-14px_rgba(0,0,0,0.5)] transition-transform duration-300 ease-out-expo group-hover:-translate-y-1">
               <div className="flex h-7 items-center gap-1.5 border-b border-ink/10 px-3" aria-hidden="true">
                 <span className="h-1.5 w-1.5 rounded-full bg-ink/25" />
                 <span className="h-1.5 w-1.5 rounded-full bg-ink/25" />
@@ -236,14 +236,14 @@ function Stage({ e }: { e: Entry }) {
             <div className="relative mx-auto w-4/5 lg:mx-0 lg:w-full">
               <div className="rotate-2 transition-transform duration-300 ease-out-expo group-hover:-translate-y-2">
                 <div className="relative aspect-[1100/897]">
-                  <Image src={e.featured.second} alt={`${e.title}, the 3D cassette player`} fill sizes="30vw" className="object-contain drop-shadow-[0_30px_40px_rgba(0,0,0,0.6)]" />
+                  <Image src={e.featured.second} alt={`${e.title}, the 3D cassette player`} fill sizes="30vw" className="object-contain" />
                 </div>
               </div>
               <p className="mt-2 text-center font-mono text-sm text-ink/55">The 3D cassette player</p>
             </div>
           </div>
           {e.phone && (
-            <div className="absolute bottom-6 right-6 hidden w-[17%] rotate-[4deg] lg:block overflow-hidden rounded-[1.3rem] border-[3px] border-[var(--s-bezel)] bg-paper shadow-[0_30px_60px_-20px_rgba(0,0,0,0.95)] transition-transform duration-300 ease-out-expo group-hover:-translate-y-2 lg:right-[38%] lg:w-[11%]">
+            <div className="absolute bottom-6 right-6 hidden w-[17%] rotate-[4deg] lg:block overflow-hidden rounded-[1.3rem] border-[3px] border-[var(--s-bezel)] bg-paper shadow-[0_14px_28px_-10px_rgba(0,0,0,0.55)] transition-transform duration-300 ease-out-expo group-hover:-translate-y-2 lg:right-[38%] lg:w-[11%]">
               <div className="relative aspect-[390/844]">
                 <Image src={e.phone} alt={`${e.title}, on a phone`} fill sizes="12vw" className="object-cover object-top" />
               </div>
@@ -253,7 +253,7 @@ function Stage({ e }: { e: Entry }) {
       ) : (
         <div className="relative px-5 pt-8 pb-8 sm:px-10 sm:pt-12 sm:pb-12">
           {/* Browser frame */}
-          <div className={`overflow-hidden rounded-lg border border-ink/15 bg-paper shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)] transition-transform duration-300 ease-out-expo group-hover:-translate-y-1 ${e.phone ? "mr-[18%]" : ""}`}>
+          <div className={`overflow-hidden rounded-lg border border-ink/15 bg-paper shadow-[0_16px_32px_-14px_rgba(0,0,0,0.5)] transition-transform duration-300 ease-out-expo group-hover:-translate-y-1 ${e.phone ? "mr-[18%]" : ""}`}>
             <div className="flex h-6 items-center gap-1.5 border-b border-ink/10 px-3" aria-hidden="true">
               <span className="h-1.5 w-1.5 rounded-full bg-ink/25" />
               <span className="h-1.5 w-1.5 rounded-full bg-ink/25" />
@@ -265,7 +265,7 @@ function Stage({ e }: { e: Entry }) {
           </div>
           {/* Phone, leaning in front, taken from the live site */}
           {e.phone && (
-            <div className="absolute bottom-5 right-5 w-[26%] rotate-2 overflow-hidden rounded-[1.3rem] border-[3px] border-[var(--s-bezel)] bg-paper shadow-[0_30px_60px_-20px_rgba(0,0,0,0.95)] transition-transform duration-300 ease-out-expo group-hover:-translate-y-2 sm:bottom-8 sm:right-10">
+            <div className="absolute bottom-5 right-5 w-[26%] rotate-2 overflow-hidden rounded-[1.3rem] border-[3px] border-[var(--s-bezel)] bg-paper shadow-[0_14px_28px_-10px_rgba(0,0,0,0.55)] transition-transform duration-300 ease-out-expo group-hover:-translate-y-2 sm:bottom-8 sm:right-10">
               <div className="relative aspect-[390/844]">
                 <Image src={e.phone} alt={`${e.title}, on a phone`} fill sizes="(max-width: 1023px) 26vw, 12vw" className="object-cover object-top" />
               </div>
@@ -323,7 +323,7 @@ export default function Showcase() {
         ScrollTrigger.batch("[data-rise]", {
           start: "top 90%",
           once: true,
-          onEnter: (els) => gsap.to(els, { y: 0, opacity: 1, duration: 1.1, stagger: 0.05, ease: "expo.out" }),
+          onEnter: (els) => gsap.to(els, { y: 0, opacity: 1, duration: 1.1, stagger: 0.05, ease: "expo.out", clearProps: "transform,opacity" }),
         });
       });
       return () => mm.revert();

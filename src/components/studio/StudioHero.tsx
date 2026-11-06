@@ -7,11 +7,10 @@ import { gsap, useGSAP } from "@/lib/gsap";
 
 /*
  * The studio's opening screen. Left: the name, set big, one line, two
- * actions. Right: a soft pool of light with the AS mark's S swash drawn
+ * actions. Right: the AS mark's S swash drawn
  * loose behind real work, set at easy angles: Pheonix, the latest
  * build, in a browser and on a phone, and the support agent mid-answer. The
- * devices rise in one after another, then drift apart slightly as you
- * scroll away (transform only).
+ * devices rise in one after another.
  */
 
 export default function StudioHero() {
@@ -27,11 +26,6 @@ export default function StudioHero() {
           .fromTo("[data-h-swash]", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 2.4, ease: "power2.inOut", stagger: 0.05 }, 0)
           .from("[data-h-device]", { y: 60, opacity: 0, duration: 1.4, stagger: 0.05 }, 0.3);
 
-        // Leaving the hero: the devices part a little, at different speeds.
-        const st = { trigger: root.current, start: "top top", end: "bottom top", scrub: true };
-        gsap.to("[data-h-browser]", { yPercent: -6, ease: "none", scrollTrigger: st });
-        gsap.to("[data-h-phone]", { yPercent: -18, ease: "none", scrollTrigger: st });
-        gsap.to("[data-h-chat]", { yPercent: -30, ease: "none", scrollTrigger: st });
       });
       return () => mm.revert();
     },
@@ -78,7 +72,7 @@ export default function StudioHero() {
 
           {/* Browser */}
           <div data-h-device className="absolute left-[2%] top-[24%] w-[78%]">
-            <div data-h-browser className="-rotate-[1.5deg] overflow-hidden rounded-2xl border border-ink/15 bg-paper shadow-[0_40px_100px_-30px_rgba(0,0,0,0.95)]">
+            <div data-h-browser className="-rotate-[1.5deg] overflow-hidden rounded-2xl border border-ink/15 bg-paper shadow-[0_18px_36px_-14px_rgba(0,0,0,0.55)]">
               <div className="flex h-7 items-center gap-1.5 border-b border-ink/10 px-3">
                 <span className="h-2 w-2 rounded-full bg-ink/25" />
                 <span className="h-2 w-2 rounded-full bg-ink/25" />
@@ -93,7 +87,7 @@ export default function StudioHero() {
 
           {/* Phone */}
           <div data-h-device className="absolute right-[4%] top-[34%] w-[25%]">
-            <div data-h-phone className="rotate-[3deg] overflow-hidden rounded-[1.6rem] border-4 border-[var(--s-bezel)] bg-paper shadow-[0_40px_80px_-20px_rgba(0,0,0,0.95)]">
+            <div data-h-phone className="rotate-[3deg] overflow-hidden rounded-[1.6rem] border-4 border-[var(--s-bezel)] bg-paper shadow-[0_16px_32px_-12px_rgba(0,0,0,0.55)]">
               <div className="relative aspect-[390/844]">
                 <Image src="/assets/projects/shots/mobile/pheonix.webp" alt="" fill sizes="(max-width: 1023px) 25vw, 12vw" className="object-cover object-top" />
               </div>
@@ -102,7 +96,7 @@ export default function StudioHero() {
 
           {/* The support agent, mid-answer */}
           <div data-h-device className="absolute bottom-[8%] left-[10%] hidden w-[52%] sm:block">
-            <div data-h-chat className="-rotate-1 rounded-3xl border border-moon/25 bg-paper-2/95 p-4 shadow-[0_30px_70px_-25px_rgba(0,0,0,0.95)]">
+            <div data-h-chat className="-rotate-1 rounded-3xl border border-moon/25 bg-paper-2/95 p-4 shadow-[0_14px_28px_-12px_rgba(0,0,0,0.5)]">
               <p className="ml-auto w-fit max-w-[85%] rounded-2xl rounded-br-md bg-moon px-3.5 py-2 text-sm text-paper">Got the Phoenix Rise Tee in XL?</p>
               <p className="mt-2 w-fit max-w-[90%] rounded-2xl rounded-bl-md bg-ink/[0.07] px-3.5 py-2 text-sm leading-snug text-ink/85">
                 It comes in S to XXL. Want me to add XL to your bag?

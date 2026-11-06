@@ -314,11 +314,6 @@ a, button { touch-action: manipulation; }
 @keyframes typing { 0%, 100% { opacity: 0.35; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-3px); } }
 @keyframes wiggle { 30% { transform: rotate(-10deg); } 60% { transform: rotate(6deg); } }
 
-/* Sketchbook doodles breathe, very slowly, once drawn. */
-@media (prefers-reduced-motion: no-preference) {
-  .doodle { animation: breathe 9s ease-in-out infinite alternate; }
-}
-@keyframes breathe { to { translate: 0 -6px; } }
 
 /* SocialIcon layered deck animation */
 .social-icon-wrapper {

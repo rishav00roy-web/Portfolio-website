@@ -236,7 +236,7 @@ function ReceiptPrinterOutput({ children, className, ...props }: ReceiptPrinterO
   return (
     <div className={cn("relative z-50 -mt-4 h-[32rem] w-[calc(80%+3rem)] max-w-full overflow-hidden px-6", className)} {...props}>
       {isReceiptVisible ? (
-        <div aria-hidden="true" className="pointer-events-none absolute inset-x-6 -top-1 z-20 h-2 bg-black/60 blur-[6px]" />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-6 -top-1 z-20 h-2 bg-gradient-to-b from-black/50 to-transparent" />
       ) : null}
 
       <motion.div
@@ -252,7 +252,7 @@ function ReceiptPrinterOutput({ children, className, ...props }: ReceiptPrinterO
                 : "translateY(calc(-100% + 2px))",
         }}
         aria-hidden={stage !== "complete"}
-        className="relative isolate before:pointer-events-none before:absolute before:inset-x-3 before:top-3 before:bottom-4 before:z-0 before:rounded-sm before:shadow-[0_8px_24px_rgba(0,0,0,0.24)] before:content-[''] after:pointer-events-none after:absolute after:right-[8%] after:bottom-0 after:left-[8%] after:z-0 after:h-3 after:translate-y-1.5 after:rounded-full after:bg-black/10 after:blur-lg after:content-['']"
+        className="relative isolate will-change-transform"
         initial={false}
         transition={{
           opacity: { duration: animate ? 0.16 : 0, ease: easeOut },

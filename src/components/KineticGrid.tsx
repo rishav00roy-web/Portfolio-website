@@ -174,7 +174,10 @@ export default function KineticGrid({
       if (t.length > 80) t.shift();
     };
 
-    const onMove = (e: MouseEvent) => setMouse(e.clientX, e.clientY);
+    const onMove = (e: MouseEvent) => {
+      setMouse(e.clientX, e.clientY);
+      wake();
+    };
     const onLeave = () => {
       mouseRef.current.active = false;
       mouseRef.current.x = -9999;
@@ -183,6 +186,7 @@ export default function KineticGrid({
     const onTouch = (e: TouchEvent) => {
       const t = e.touches[0];
       if (t) setMouse(t.clientX, t.clientY);
+      wake();
     };
 
     window.addEventListener("mousemove", onMove);
@@ -203,6 +207,7 @@ export default function KineticGrid({
       const next = tabVisible && !heroCovering;
       if (next && !running) {
         running = true;
+        asleep = false;
         raf = requestAnimationFrame(frame);
       }
       running = next;
@@ -223,10 +228,22 @@ export default function KineticGrid({
     if (hero) heroWatch?.observe(hero);
 
     let raf = 0;
+    // Sleep once the mesh has settled and the pointer is still, so an idle
+    // page costs nothing; the next pointer move wakes it.
+    let asleep = false;
+    let lastPointer = performance.now();
+    function wake() {
+      lastPointer = performance.now();
+      if (asleep && running) {
+        asleep = false;
+        raf = requestAnimationFrame(frame);
+      }
+    }
     const frame = () => {
       if (!running) return;
       const m = mouseRef.current;
       ctx.clearRect(0, 0, W, H);
+      let maxV = 0;
 
       for (const d of dots) {
         let ax = (d.hx - d.x) * 0.08;
@@ -245,8 +262,16 @@ export default function KineticGrid({
         d.vy = (d.vy + ay) * 0.82;
         d.x += d.vx;
         d.y += d.vy;
+        if (Math.abs(d.vx) + Math.abs(d.vy) > maxV) maxV = Math.abs(d.vx) + Math.abs(d.vy);
       }
 
+      // Lines far from the pointer share one path (one stroke call); only the
+      // few near it are drawn one by one with their brighter, thicker style.
+      ctx.globalAlpha = baseOpacity;
+      ctx.strokeStyle = LINE_COLOR;
+      ctx.lineWidth = 0.5;
+      ctx.beginPath();
+      const near: { d: Dot; prox: number; right?: Dot; down?: Dot }[] = [];
       for (let c = 0; c < cols.length; c++) {
         for (let rIdx = 0; rIdx < cols[c].length; rIdx++) {
           const d = cols[c][rIdx];
@@ -255,6 +280,23 @@ export default function KineticGrid({
           const prox = m.active
             ? Math.max(0, 1 - Math.sqrt((m.x - d.x) ** 2 + (m.y - d.y) ** 2) / R)
             : 0;
+          if (prox > 0) {
+            near.push({ d, prox, right, down });
+            continue;
+          }
+          if (right) {
+            ctx.moveTo(d.x, d.y);
+            ctx.lineTo(right.x, right.y);
+          }
+          if (down) {
+            ctx.moveTo(d.x, d.y);
+            ctx.lineTo(down.x, down.y);
+          }
+        }
+      }
+      ctx.stroke();
+      for (const { d, prox, right, down } of near) {
+        {
           if (right) {
             ctx.globalAlpha = baseOpacity + prox * 0.5;
             ctx.strokeStyle = LINE_COLOR;
@@ -308,6 +350,11 @@ export default function KineticGrid({
       }
 
       ctx.globalAlpha = 1;
+      // Settled and the pointer has been still for a moment (trail faded): sleep.
+      if (maxV < 0.02 && performance.now() - lastPointer > 400) {
+        asleep = true;
+        return;
+      }
       raf = requestAnimationFrame(frame);
     };
     raf = requestAnimationFrame(frame);

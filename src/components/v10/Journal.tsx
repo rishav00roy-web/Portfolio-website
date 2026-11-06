@@ -64,7 +64,7 @@ export default function Journal() {
         ScrollTrigger.batch("[data-rise]", {
           start: "top 88%",
           once: true,
-          onEnter: (els) => gsap.to(els, { y: 0, opacity: 1, duration: 1.1, stagger: 0.05, ease: "expo.out" }),
+          onEnter: (els) => gsap.to(els, { y: 0, opacity: 1, duration: 1.1, stagger: 0.05, ease: "expo.out", clearProps: "transform,opacity" }),
         });
       });
       return () => mm.revert();

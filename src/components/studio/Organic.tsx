@@ -8,8 +8,8 @@ import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
  * Softer pieces for the studio page, all taken from the S swash in the AS
  * mark: a loose line that draws itself between sections, and the process
  * as a path that winds past each step, lighting it as you arrive.
- * Stroke dashes on a viewBox that keeps its aspect, so pathLength works;
- * motion is scrubbed to the scroll and skipped for reduced motion.
+ * Each line draws once when it scrolls in (not tied to every scroll frame,
+ * which kept the page repainting); skipped for reduced motion.
  */
 
 /** A loose, hand-drawn line between two sections. */
@@ -22,7 +22,7 @@ export function Swash({ flip = false }: { flip?: boolean }) {
         gsap.fromTo(
           "path",
           { strokeDashoffset: 1 },
-          { strokeDashoffset: 0, ease: "none", stagger: 0.05, scrollTrigger: { trigger: root.current, start: "top 85%", end: "bottom 45%", scrub: true } },
+          { strokeDashoffset: 0, duration: 1.8, ease: "power2.inOut", stagger: 0.05, scrollTrigger: { trigger: root.current, start: "top 85%", once: true } },
         );
       });
       return () => mm.revert();
@@ -51,7 +51,7 @@ export function ProcessPath({ steps }: { steps: { name: string; detail: string }
         gsap.fromTo(
           "[data-p-line]",
           { strokeDashoffset: 1 },
-          { strokeDashoffset: 0, ease: "none", scrollTrigger: { trigger: root.current, start: "top 75%", end: "bottom 60%", scrub: true } },
+          { strokeDashoffset: 0, duration: 2.2, ease: "power2.inOut", scrollTrigger: { trigger: root.current, start: "top 75%", once: true } },
         );
         gsap.utils.toArray<HTMLElement>("[data-p-step]").forEach((el) => {
           ScrollTrigger.create({
@@ -92,8 +92,8 @@ export function ProcessPath({ steps }: { steps: { name: string; detail: string }
 /*
  * Doodles from a studio sketchbook: loose, single-line drawings of the
  * things the studio makes (a browser, a phone, a chat, code, a cursor, a
- * pencil). Each draws itself once when it scrolls in, then breathes very
- * slowly. Faint ink, decorative only.
+ * pencil). Each draws itself once when it scrolls in. Faint ink,
+ * decorative only.
  */
 const DOODLES = {
   browser: [
