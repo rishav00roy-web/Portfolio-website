@@ -55,7 +55,7 @@ export default function AppV5({
       </a>
       <Hero />
       {/* v10: the live site's cursor-reactive mesh shows through behind the content */}
-      {journal && <KineticGrid color="#CDF22B" />}
+      {journal && <KineticGrid color="#CDF22B" baseOpacity={0.03} boost={0.22} />}
       <div className={`night afterglow relative z-20 text-ink ${journal ? "bg-transparent" : "bg-paper"}`}>
         {journal ? (
           <>

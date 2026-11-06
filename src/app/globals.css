@@ -419,6 +419,10 @@ a, button { touch-action: manipulation; }
 .palette-ivory .night ::selection,
 .palette-ivory #contact ::selection { background-color: #cdf22b; color: #08090b; }
 body:has(main.palette-ivory) { background-color: #08090b; }
+/* v10: a soft halo in the page colour clears the mesh right around the words. */
+.palette-ivory .night :is(h1, h2, h3, p, li, blockquote, figcaption) {
+  text-shadow: 0 0 10px #08090b, 0 0 22px #08090b, 0 0 36px rgba(8, 9, 11, 0.9);
+}
 
 /* The studio is the one light page: adjust what was drawn for dark. */
 .studio .font-display { color: var(--s-teal); }

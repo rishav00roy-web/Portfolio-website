@@ -77,7 +77,7 @@ export function PaperAbout() {
               <dd className="text-ink/80">
                 <a href="/atelier" className="underline decoration-ink/25 underline-offset-4 hover:text-rust hover:decoration-rust">Atelier Systems</a>, my studio
               </dd>
-              <dt className="text-ink/55">Working with</dt>
+              <dt className="text-ink/55">Client sites</dt>
               <dd className="text-ink/80">{PROFILE.currently.join(", ")}</dd>
               <dt className="text-ink/55">Speaks</dt>
               <dd className="text-ink/80">{languages.map((l) => `${l.name} (${l.level.toLowerCase()})`).join(", ")}</dd>

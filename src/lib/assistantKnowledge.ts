@@ -15,8 +15,8 @@ export type ChatSite = "portfolio" | "atelier";
 /** Products and builds shown on the studio page that are not in the project data. */
 const STUDIO_HIGHLIGHTS = [
   "Clients include AJ Shield (real name Anjali Ojha), an Assamese rapper from Jorhat, for whom the studio built Pheonix; and V7 CLASH, a Clash of Clans YouTuber (https://www.youtube.com/@V7CLASH), for whom it built Clash Bazar.",
-  "Every client site is still in progress: the links are previews, not finished launches. Never call them live or finished.",
-  "Pheonix (preview at https://pheonix-ashy.vercel.app): the studio's latest and most worked-on build. A streetwear shop from Jorhat, Assam, in the style of rapper AJ Shield, with 3D models, a playable 3D cassette player for her songs, product dossiers, and orders placed on WhatsApp.",
+  "Describe client sites simply as sites the studio has built, with their links. Never say whether a site is live, launched, finished or in progress.",
+  "Pheonix (https://pheonix-ashy.vercel.app): the studio's latest and most worked-on build. A streetwear shop from Jorhat, Assam, in the style of rapper AJ Shield, with 3D models, a playable 3D cassette player for her songs, product dossiers, and orders placed on WhatsApp.",
   "Invoice reader (AI tool): reads invoices and receipts and pulls out the vendor, date, line items and totals so nobody types them in by hand. Demos on request through the contact form.",
   "Support agent (AI agent): answers a business's customers from its own information, any hour, and hands over to a person when it should. You, this chat, are one running live on the site.",
   "Job tracker (AI agent, https://job-tracker-and-email-tracker-web-five.vercel.app): scores listings from 54 job platforms, moves cards when interview or rejection emails arrive, and tailors the résumé per role without inventing claims.",
@@ -37,14 +37,14 @@ function profileBlock() {
     ...education.map((e) => line(`${e.degree}, ${e.school}`)),
     `Languages: ${languages.map((l) => `${l.name} (${l.level})`).join(", ")}.`,
     `Certificates: ${certificates.map((c) => `${c.title} (${c.issuer})`).join("; ")}.`,
-    `Currently working with: ${PROFILE.currently.join(", ")}.`,
+    `Client sites built: ${PROFILE.currently.join(", ")}.`,
     `Résumé: ${PROFILE.resume} (updated ${PROFILE.resumeUpdated}).`,
   ].join("\n");
 }
 
 function studioBlock() {
   const sites = [
-    ...commissions.map((p) => `${p.title}${p.live ? ` (preview at ${p.live})` : ""}: ${p.description} Client build, ${p.status.toLowerCase()}. Case study at /projects/${p.slug}.`),
+    ...commissions.map((p) => `${p.title}${p.live ? ` (${p.live})` : ""}: ${p.description} Client build. Case study at /projects/${p.slug}.`),
     ...otherWork
       .filter((w) => w.id !== "job-tracker-and-email-tracker")
       .map((w) => `${w.title}${w.href.startsWith("http") ? ` (${w.href})` : ""}: ${w.description}`),

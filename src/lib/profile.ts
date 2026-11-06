@@ -16,7 +16,7 @@ export const PROFILE = {
   phoneHref: "tel:+916001914771",
   resume: "/Rishav-Roy-CV.pdf",
   resumeUpdated: "July 2026",
-  currently: ["Tea Country Holidays", "IQ Iron Fitness", "Clash Bazar (in progress)"],
+  currently: ["Tea Country Holidays", "IQ Iron Fitness", "Clash Bazar"],
   socials: [
     { label: "GitHub", handle: "@rishav00roy-web", url: "https://github.com/rishav00roy-web" },
     { label: "LinkedIn", handle: "Rishav Roy", url: "https://www.linkedin.com/in/rishav-the-roy/" },

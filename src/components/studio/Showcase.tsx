@@ -36,8 +36,6 @@ type Entry = {
   href: string;
   internal: boolean;
   cta: string;
-  /** The live site, for cards whose main action is a case study. */
-  live?: string;
   /** The flagship: double width, a second screen on its stage. */
   featured?: { second: string; label: string };
 };
@@ -116,12 +114,12 @@ const ENTRIES: Entry[] = [
     title: "Pheonix",
     description: "A streetwear shop from Jorhat, styled after the rapper AJ Shield. It has 3D models, a cassette player that plays her songs, and orders go straight to WhatsApp. Our most detailed build so far.",
     kind: "website",
-    discipline: "Design and build, in progress",
+    discipline: "Design and build",
     image: DESKTOPS.pheonix,
     phone: PHONES.pheonix,
     href: "https://pheonix-ashy.vercel.app",
     internal: false,
-    cta: "See the preview",
+    cta: "Visit site",
     featured: { second: "/assets/projects/pheonix-cassette.webp", label: "Latest build" },
   },
   {
@@ -151,13 +149,13 @@ const ENTRIES: Entry[] = [
     title: COPY[p.slug]?.title ?? p.title,
     description: COPY[p.slug]?.description ?? p.description,
     kind: "website" as const,
-    discipline: p.status === "Live" ? "Client build, live" : "Client build, in progress",
+    discipline: "Client build",
     image: DESKTOPS[p.slug] ?? p.images[0],
     phone: PHONES[p.slug],
-    href: `/projects/${p.slug}`,
-    internal: true,
-    cta: "Case study",
-    live: p.live,
+    // Just the way to the site itself: no status, no extra links.
+    href: p.live ?? `/projects/${p.slug}`,
+    internal: !p.live,
+    cta: p.live ? "Visit site" : "Case study",
   })),
   ...otherWork
     .filter((w) => w.preview && w.id !== "job-tracker-and-email-tracker" && w.id !== "gym-crm")
@@ -426,11 +424,6 @@ export default function Showcase() {
                   <div className="mt-auto flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-ink/10 pt-5 font-mono text-sm">
                     <span className="text-ink/55">{e.discipline}</span>
                     {!e.internal && host(e.href) && <span className="hidden text-ink/55 sm:inline">{host(e.href)}</span>}
-                    {e.internal && e.live && (
-                      <a href={e.live} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-ink/70 underline decoration-ink/25 underline-offset-4 hover:text-ink">
-                        Preview: {host(e.live)}
-                      </a>
-                    )}
                     <Action e={e} className="inline-flex min-h-11 items-center gap-2 text-rust hover:opacity-80">
                       {e.cta} <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
                     </Action>

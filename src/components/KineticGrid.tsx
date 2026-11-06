@@ -38,6 +38,8 @@ interface KineticGridProps {
   baseOpacity?: number;
   /** Line and trail colour (hex). */
   color?: string;
+  /** How much lines brighten near the cursor (added to baseOpacity at full proximity). */
+  boost?: number;
 }
 
 const DOT_COLOR = "#F4EDE3";
@@ -50,6 +52,7 @@ export default function KineticGrid({
   trail = true,
   baseOpacity = 0.05,
   color = LINE_COLOR_DEFAULT,
+  boost = 0.5,
 }: KineticGridProps) {
   const LINE_COLOR = color;
   const TRAIL_COLOR = color;
@@ -298,7 +301,7 @@ export default function KineticGrid({
       for (const { d, prox, right, down } of near) {
         {
           if (right) {
-            ctx.globalAlpha = baseOpacity + prox * 0.5;
+            ctx.globalAlpha = baseOpacity + prox * boost;
             ctx.strokeStyle = LINE_COLOR;
             ctx.lineWidth = 0.5 + prox * 1.5;
             ctx.beginPath();
@@ -307,7 +310,7 @@ export default function KineticGrid({
             ctx.stroke();
           }
           if (down) {
-            ctx.globalAlpha = baseOpacity + prox * 0.5;
+            ctx.globalAlpha = baseOpacity + prox * boost;
             ctx.strokeStyle = LINE_COLOR;
             ctx.lineWidth = 0.5 + prox * 1.5;
             ctx.beginPath();
@@ -322,7 +325,7 @@ export default function KineticGrid({
         const prox = m.active
           ? Math.max(0, 1 - Math.sqrt((m.x - d.x) ** 2 + (m.y - d.y) ** 2) / R)
           : 0;
-        ctx.globalAlpha = baseOpacity * 4 + prox * 0.6;
+        ctx.globalAlpha = baseOpacity * 4 + prox * boost * 1.2;
         ctx.fillStyle = DOT_COLOR;
         ctx.beginPath();
         ctx.arc(d.x, d.y, 0.8 + prox * 2.2, 0, 2 * Math.PI);
@@ -369,7 +372,7 @@ export default function KineticGrid({
       window.removeEventListener("touchmove", onTouch);
       window.removeEventListener("touchend", onLeave);
     };
-  }, [spacing, radius, strength, trail, baseOpacity, prefersReducedMotion, LINE_COLOR, TRAIL_COLOR]);
+  }, [spacing, radius, strength, trail, baseOpacity, boost, prefersReducedMotion, LINE_COLOR, TRAIL_COLOR]);
 
   return (
     <motion.div
