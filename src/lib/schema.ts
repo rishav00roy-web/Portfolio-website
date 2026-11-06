@@ -138,6 +138,37 @@ export function caseStudyIndexSchema(caseStudies: CaseStudyWithSlug[]) {
   };
 }
 
+/**
+ * Atelier Systems, the studio, as a ProfessionalService founded by the one
+ * Person entity. Services come from the studio page; no prices.
+ */
+export function studioSchema(services: { name: string; detail: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": `${SITE_URL}/atelier#studio`,
+    name: "Atelier Systems",
+    url: `${SITE_URL}/atelier`,
+    logo: `${SITE_URL}/brand/atelier-logo.webp`,
+    image: `${SITE_URL}/atelier/opengraph-image`,
+    description:
+      "A small studio that designs and builds websites, automations and AI tools for growing businesses.",
+    founder: { "@id": PERSON_ID },
+    email: `mailto:${PROFILE.email}`,
+    telephone: "+91-60019-14771",
+    address: { "@type": "PostalAddress", addressLocality: "Kolkata", addressRegion: "West Bengal", addressCountry: "IN" },
+    areaServed: "Worldwide",
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Services",
+      itemListElement: services.map((s) => ({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name: s.name, description: s.detail },
+      })),
+    },
+  };
+}
+
 /** Render a JSON-LD block. */
 export function jsonLd(data: object | object[]) {
   return { __html: JSON.stringify(data) };

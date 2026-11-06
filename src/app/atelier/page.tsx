@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import AtelierApp from "../../AtelierApp";
+import { jsonLd, studioSchema } from "@/lib/schema";
+import { SERVICES } from "@/lib/studio";
 
 const DESCRIPTION =
-  "Websites, automation and AI agents for small businesses. A one-person studio run by Rishav Roy.";
+  "A small studio that designs and builds websites, automations and AI tools for growing businesses. Run by Rishav Roy in Kolkata.";
 
 // Kept out of search while the redesign is a preview; drop `robots` and add
 // the route to the sitemap when the two-page site goes live.
@@ -18,5 +20,10 @@ export const metadata: Metadata = {
 };
 
 export default function AtelierPage() {
-  return <AtelierApp />;
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(studioSchema(SERVICES))} />
+      <AtelierApp />
+    </>
+  );
 }

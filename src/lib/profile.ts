@@ -8,7 +8,7 @@ export const PROFILE = {
   role: "Operations & Automation Specialist",
   tagline: "Ex-ops guy who got tired of manual work. Now I build tools so nobody else has to.",
   summary:
-    "Six years running operations, HR and procurement, now building the software that removes the manual work. FOIA processing at scale, custom CRMs, and business automation.",
+    "Six years in operations, HR and procurement, now building software that removes manual work: FOIA processing at scale, custom CRMs and automation.",
   location: "Kolkata, India",
   hometown: "Jorhat, Assam",
   email: "rishav2000roy@gmail.com",
