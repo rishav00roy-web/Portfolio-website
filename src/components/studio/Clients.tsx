@@ -12,7 +12,7 @@ const CLIENTS = [
     name: "AJ Shield",
     realName: "Anjali Ojha",
     who: "Assamese rapper from Jorhat, Assam",
-    photo: "/assets/clients/aj-shield.webp",
+    photo: "/assets/clients/aj-shield-portrait.webp",
     alt: "AJ Shield in a silver wig and a pink graffiti-print dress",
     built: "Pheonix, her streetwear shop, with a page on her music and a cassette player that plays her songs.",
     links: [
@@ -24,7 +24,7 @@ const CLIENTS = [
     name: "V7 CLASH",
     realName: null,
     who: "Clash of Clans YouTuber",
-    photo: "/assets/clients/v7clash.webp",
+    photo: "/assets/clients/v7clash-owner.webp",
     alt: "The creator behind V7 CLASH, in a grey t-shirt",
     built: "Clash Bazar, the channel's store for clan services, with payments held until each order is done.",
     links: [
