@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import AtelierApp from "../../AtelierApp";
-import { jsonLd, studioSchema } from "@/lib/schema";
-import { SERVICES } from "@/lib/studio";
+import { faqSchema, jsonLd, studioSchema } from "@/lib/schema";
+import { FAQ, SERVICES } from "@/lib/studio";
 
 const DESCRIPTION =
   "A small studio that designs and builds websites, automations and AI tools for growing businesses. Run by Rishav Roy in Kolkata.";
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 export default function AtelierPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(studioSchema(SERVICES))} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd([studioSchema(SERVICES), faqSchema(FAQ)])} />
       <AtelierApp />
     </>
   );

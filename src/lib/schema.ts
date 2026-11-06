@@ -169,6 +169,20 @@ export function studioSchema(services: { name: string; detail: string }[]) {
   };
 }
 
+/** FAQPage for the questions shown on /atelier (same data, so they always match). */
+export function faqSchema(faq: { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${SITE_URL}/atelier#faq`,
+    mainEntity: faq.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+}
+
 /** Render a JSON-LD block. */
 export function jsonLd(data: object | object[]) {
   return { __html: JSON.stringify(data) };

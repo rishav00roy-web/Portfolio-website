@@ -1,5 +1,6 @@
 import { categorizedProjects } from "../../lib/projectsData";
 import { SITE_URL } from "../../lib/schema";
+import { FAQ, PROCESS, SERVICES } from "../../lib/studio";
 
 /**
  * llms.txt — a curated map of this site for AI crawlers and answer engines.
@@ -29,6 +30,25 @@ export function GET() {
 > Operations and automation specialist in Kolkata, India. Six years running HR, procurement, logistics, and compliance alongside building production web software and local-first automation tools. Every system is engineered so a non-technical owner can run operations without ongoing developer dependency.
 
 ${categoriesMarkdown}
+
+## Atelier Systems (studio)
+
+> Rishav Roy's studio. It designs and builds websites, automations and AI tools for small and growing businesses. Every project on this site was made under Atelier Systems.
+
+- [Atelier Systems](${SITE_URL}/atelier): Studio page with the work, services, clients and how a project runs.
+- Clients include AJ Shield, an Assamese rapper from Jorhat (Pheonix, her streetwear shop: https://pheonix-ashy.vercel.app), and V7 CLASH, a Clash of Clans YouTuber (Clash Bazar, the channel's store).
+
+### Services
+
+${SERVICES.map((s) => `- ${s.name}: ${s.detail}`).join("\n")}
+
+### How a project runs
+
+${PROCESS.map((p, i) => `${i + 1}. ${p.name}: ${p.detail}`).join("\n")}
+
+### Questions
+
+${FAQ.map((f) => `- ${f.q} ${f.a}`).join("\n")}
 
 ## Profiles & Contact
 

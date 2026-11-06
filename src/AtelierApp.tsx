@@ -7,6 +7,7 @@ import { useReducedMotion } from "framer-motion";
 import { ReactLenis, type LenisRef } from "lenis/react";
 import { gsap, ScrollTrigger } from "./lib/gsap";
 import Showcase from "./components/studio/Showcase";
+import Faq from "./components/studio/Faq";
 import { studioFont } from "./lib/studioFont";
 import { PaperContact } from "./components/v5/Paper";
 
@@ -54,6 +55,7 @@ export default function AtelierApp() {
           </nav>
         </header>
         <Showcase />
+        <Faq />
       </div>
       <PaperContact studio />
     </main>
