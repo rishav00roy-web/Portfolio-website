@@ -34,6 +34,8 @@ type Entry = {
   href: string;
   internal: boolean;
   cta: string;
+  /** The live site, for cards whose main action is a case study. */
+  live?: string;
   /** The flagship: double width, a second screen on its stage. */
   featured?: { second: string; label: string };
 };
@@ -46,6 +48,7 @@ const PHONES: Record<string, string> = {
   "truwest-company-page": "/assets/projects/mobile/truwest-company-page.webp",
   "roy-and-co-website": "/assets/projects/mobile/roy-and-co-website.webp",
   chriskennelsite: "/assets/projects/mobile/chriskennelsite.webp",
+  "microgreens-site": "/assets/projects/mobile/microgreens-site.webp",
 };
 
 const host = (href: string) => {
@@ -103,6 +106,7 @@ const ENTRIES: Entry[] = [
     href: `/projects/${p.slug}`,
     internal: true,
     cta: "Case study",
+    live: p.live,
   })),
   ...otherWork
     .filter((w) => w.preview && w.id !== "job-tracker-and-email-tracker" && w.id !== "gym-crm")
@@ -124,10 +128,10 @@ const ENTRIES: Entry[] = [
     description: "Runs a job hunt on its own: scores listings from 54 platforms, tracks the inbox and tailors the résumé, truthfully.",
     kind: "product",
     discipline: "AI agent",
-    image: "/assets/projects/job-tracker-full.png",
-    href: "https://github.com/rishav00roy-web/JOB-TRACKER-AND-EMAIL-TRACKER",
+    image: "/assets/projects/job-tracker-board.webp",
+    href: "https://job-tracker-and-email-tracker-web-five.vercel.app",
     internal: false,
-    cta: "Read the code",
+    cta: "Try it live",
   },
   ...otherWork
     .filter((w) => w.id === "gym-crm")
@@ -371,6 +375,11 @@ export default function Showcase() {
                   <div className="mt-auto flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-ink/10 pt-5 font-mono text-sm">
                     <span className="text-ink/55">{e.discipline}</span>
                     {!e.internal && host(e.href) && <span className="hidden text-ink/55 sm:inline">{host(e.href)}</span>}
+                    {e.internal && e.live && (
+                      <a href={e.live} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-ink/70 underline decoration-ink/25 underline-offset-4 hover:text-ink">
+                        {host(e.live)}
+                      </a>
+                    )}
                     <Action e={e} className="inline-flex min-h-11 items-center gap-2 text-rust hover:opacity-80">
                       {e.cta} <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
                     </Action>
