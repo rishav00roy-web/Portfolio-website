@@ -231,11 +231,11 @@ export default function CommandMenu() {
         <button
           onClick={() => setIsOpen(true)}
           data-command-menu-trigger
-          className="fixed bottom-6 left-6 z-[9999] pointer-events-auto flex min-h-11 items-center gap-2 px-4 py-2.5 rounded-full border border-white/10 bg-[#0f0f0f]/90 backdrop-blur-md text-white/70 hover:text-white hover:border-white/30 hover:bg-white/5 transition-all font-mono text-[10px] sm:text-xs uppercase tracking-widest shadow-2xl focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 cursor-pointer"
+          className="fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] left-6 z-50 pointer-events-auto flex min-h-11 items-center gap-2 px-4 py-2.5 rounded-full border border-white/10 bg-[#0f0f0f]/90 backdrop-blur-md text-white/70 hover:text-white hover:border-white/30 hover:bg-white/5 transition-colors font-mono text-sm uppercase tracking-widest shadow-2xl focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 cursor-pointer"
         >
           <Search className="w-3.5 h-3.5" aria-hidden="true" />
           <span>Menu</span>
-          <span className="hidden sm:inline border border-white/15 px-1.5 py-0.5 rounded text-[9px] bg-white/5">
+          <span className="hidden sm:inline border border-white/15 px-1.5 py-0.5 rounded text-xs bg-white/5">
             ⌘K
           </span>
         </button>
@@ -279,7 +279,7 @@ export default function CommandMenu() {
                 />
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="text-xs uppercase tracking-wider text-white/50 hover:text-white/60 transition-colors font-mono px-2 py-1 border border-white/10 rounded"
+                  className="text-sm uppercase tracking-wider text-white/50 hover:text-white/60 transition-colors font-mono px-2 py-1 border border-white/10 rounded"
                 >
                   ESC
                 </button>
@@ -293,7 +293,7 @@ export default function CommandMenu() {
                 aria-label="Commands"
               >
                 {filteredItems.length === 0 ? (
-                  <div className="px-6 py-10 text-center text-white/50 font-mono text-xs uppercase tracking-wider">
+                  <div className="px-6 py-10 text-center text-white/50 font-mono text-sm uppercase tracking-wider">
                     No commands or matching sections found
                   </div>
                 ) : (
@@ -305,7 +305,7 @@ export default function CommandMenu() {
                     }, {} as Record<string, typeof items>)
                   ).map(([category, catItems]) => (
                     <div key={category} className="py-2">
-                      <div className="px-4 py-1 text-[9px] font-mono uppercase tracking-[0.2em] text-white/50 font-bold">
+                      <div className="px-4 py-1 text-xs font-mono uppercase tracking-[0.2em] text-white/50 font-bold">
                         {category}
                       </div>
                       {catItems.map((item) => {
@@ -331,12 +331,12 @@ export default function CommandMenu() {
                               <span className={isSelected ? "text-background" : "text-white/55"}>
                                 {item.icon}
                               </span>
-                              <span className="text-xs sm:text-sm truncate">
+                              <span className="text-sm sm:text-base truncate">
                                 {item.label}
                               </span>
                             </div>
                             {isSelected && (
-                              <span className="flex items-center gap-1 font-mono text-[9px] uppercase tracking-wider text-background/60 font-bold">
+                              <span className="flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-background/60 font-bold">
                                 <span>Select</span>
                                 <CornerDownLeft className="w-3 h-3" />
                               </span>
@@ -350,7 +350,7 @@ export default function CommandMenu() {
               </div>
 
               {/* Bottom status bar */}
-              <div className="flex items-center justify-between px-4 py-2.5 bg-black/40 border-t border-white/5 font-mono text-[9px] uppercase tracking-wider text-white/50">
+              <div className="flex items-center justify-between px-4 py-2.5 bg-black/40 border-t border-white/5 font-mono text-xs uppercase tracking-wider text-white/50">
                 <div className="flex gap-4">
                   <span>↑↓ Navigate</span>
                   <span>Enter Select</span>

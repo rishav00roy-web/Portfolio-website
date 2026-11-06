@@ -34,7 +34,7 @@ export default function AtelierApp() {
   }, [prefersReduced]);
 
   const content = (
-    <main id="main" className={`studio ${studioFont.variable} relative min-h-screen`}>
+    <main id="main" className={`studio ${studioFont.variable} relative min-h-dvh`}>
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-accent focus:px-5 focus:py-3 focus:text-background">
         Skip to content
       </a>

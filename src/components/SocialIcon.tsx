@@ -99,7 +99,7 @@ export default function SocialIcon({
         {/* Profile row */}
         <div className="flex items-center gap-2.5 mb-2">
           <div
-            className="w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold text-black flex-shrink-0"
+            className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-black flex-shrink-0"
             style={{ backgroundColor: accentColor }}
           >
             {initials}
@@ -108,7 +108,7 @@ export default function SocialIcon({
             <span className="text-white text-sm font-medium truncate">
               {label}
             </span>
-            <span className="text-white/60 text-xs font-mono truncate">
+            <span className="text-white/60 text-sm font-mono truncate">
               {username}
             </span>
           </div>

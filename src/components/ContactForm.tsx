@@ -96,6 +96,8 @@ export default function ContactForm() {
             </label>
             <input
               id="form-name"
+              name="name"
+              autoComplete="name"
               aria-invalid={errors.name ? true : undefined}
               aria-describedby={errors.name ? "form-name-error" : undefined}
               aria-required="true"
@@ -107,12 +109,12 @@ export default function ContactForm() {
               }}
               className={`w-full bg-surface-2 border ${
                 errors.name ? "border-rose-500/50 focus:border-rose-500" : "border-white/45 focus:border-accent"
-              } rounded-xl px-4 py-3 text-white outline-none transition-colors text-base sm:text-sm font-sans`}
+              } rounded-xl px-4 py-3 text-white outline-none transition-colors text-base font-sans`}
               placeholder="e.g. Jane Doe"
             />
             {errors.name && (
-              <span id="form-name-error" role="alert" className="flex items-center gap-1.5 text-rose-500 text-[10px] font-mono mt-1">
-                <AlertTriangle className="w-3 h-3" />
+              <span id="form-name-error" role="alert" className="flex items-center gap-1.5 text-rose-400 text-sm mt-1.5">
+                <AlertTriangle className="size-4 shrink-0" aria-hidden="true" />
                 <span>{errors.name}</span>
               </span>
             )}
@@ -125,6 +127,9 @@ export default function ContactForm() {
             </label>
             <input
               id="form-email"
+              name="email"
+              autoComplete="email"
+              spellCheck={false}
               aria-invalid={errors.email ? true : undefined}
               aria-describedby={errors.email ? "form-email-error" : undefined}
               aria-required="true"
@@ -136,12 +141,12 @@ export default function ContactForm() {
               }}
               className={`w-full bg-surface-2 border ${
                 errors.email ? "border-rose-500/50 focus:border-rose-500" : "border-white/45 focus:border-accent"
-              } rounded-xl px-4 py-3 text-white outline-none transition-colors text-base sm:text-sm font-sans`}
+              } rounded-xl px-4 py-3 text-white outline-none transition-colors text-base font-sans`}
               placeholder="jane@company.com"
             />
             {errors.email && (
-              <span id="form-email-error" role="alert" className="flex items-center gap-1.5 text-rose-500 text-[10px] font-mono mt-1">
-                <AlertTriangle className="w-3 h-3" />
+              <span id="form-email-error" role="alert" className="flex items-center gap-1.5 text-rose-400 text-sm mt-1.5">
+                <AlertTriangle className="size-4 shrink-0" aria-hidden="true" />
                 <span>{errors.email}</span>
               </span>
             )}
@@ -154,9 +159,10 @@ export default function ContactForm() {
             </label>
             <select
               id="form-type"
+              name="type"
               value={formData.type}
               onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-              className="w-full bg-surface-2 border border-white/45 rounded-xl px-4 py-3 text-white outline-none focus:border-accent transition-colors text-base sm:text-sm font-sans"
+              className="w-full bg-surface-2 border border-white/45 rounded-xl px-4 py-3 text-white outline-none focus:border-accent transition-colors text-base font-sans"
             >
               <option value="contract">Freelance Contract / Project</option>
               <option value="recruit">Full-time Recruitment Opportunity</option>
@@ -172,6 +178,7 @@ export default function ContactForm() {
             </label>
             <textarea
               id="form-message"
+              name="message"
               aria-invalid={errors.message ? true : undefined}
               aria-describedby={errors.message ? "form-message-error" : undefined}
               aria-required="true"
@@ -183,12 +190,12 @@ export default function ContactForm() {
               rows={4}
               className={`w-full bg-surface-2 border ${
                 errors.message ? "border-rose-500/50 focus:border-rose-500" : "border-white/45 focus:border-accent"
-              } rounded-xl px-4 py-3 text-white outline-none transition-colors text-base sm:text-sm font-sans resize-none`}
-              placeholder="Outline your project scope or job description..."
+              } rounded-xl px-4 py-3 text-white outline-none transition-colors text-base font-sans resize-none`}
+              placeholder="Outline your project scope or job description…"
             />
             {errors.message && (
-              <span id="form-message-error" role="alert" className="flex items-center gap-1.5 text-rose-500 text-[10px] font-mono mt-1">
-                <AlertTriangle className="w-3 h-3" />
+              <span id="form-message-error" role="alert" className="flex items-center gap-1.5 text-rose-400 text-sm mt-1.5">
+                <AlertTriangle className="size-4 shrink-0" aria-hidden="true" />
                 <span>{errors.message}</span>
               </span>
             )}

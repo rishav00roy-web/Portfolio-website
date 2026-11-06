@@ -77,7 +77,7 @@ export default function StudioHero() {
                 <span className="h-2 w-2 rounded-full bg-ink/25" />
                 <span className="h-2 w-2 rounded-full bg-ink/25" />
                 <span className="h-2 w-2 rounded-full bg-ink/25" />
-                <span className="ml-3 hidden truncate whitespace-nowrap rounded-full bg-ink/[0.06] px-3 py-0.5 font-mono text-[11px] text-ink/55 sm:inline">pheonix-ashy.vercel.app</span>
+                <span className="ml-3 hidden truncate whitespace-nowrap rounded-full bg-ink/[0.06] px-3 py-0.5 font-mono text-xs text-ink/55 sm:inline">pheonix-ashy.vercel.app</span>
               </div>
               <div className="relative aspect-[16/10]">
                 <Image src="/assets/projects/shots/desktop/pheonix.webp" alt="" fill priority sizes="(max-width: 1023px) 80vw, 36vw" className="object-cover object-top" />

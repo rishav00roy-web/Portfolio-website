@@ -74,6 +74,8 @@ export default function ChatBot() {
   const isLoading = status === "submitted" || status === "streaming";
   const endRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const launcherRef = useRef<HTMLButtonElement>(null);
+  const wasOpen = useRef(false);
 
   // The command-menu trigger is fixed bottom-left. On phones the chat panel
   // spans nearly the full width, so publish open state and let CSS hide it.
@@ -87,7 +89,10 @@ export default function ChatBot() {
   }, [messages, isLoading]);
 
   useEffect(() => {
+    // Focus the message box on open; hand focus back to the launcher on close.
     if (isOpen) inputRef.current?.focus();
+    else if (wasOpen.current) launcherRef.current?.focus();
+    wasOpen.current = isOpen;
   }, [isOpen]);
 
   const send = (text: string) => {
@@ -100,10 +105,13 @@ export default function ChatBot() {
     <div style={THEME[site] as React.CSSProperties}>
       {/* Launcher: still, solid, no looping animation */}
       <button
+        ref={launcherRef}
         type="button"
         onClick={() => setIsOpen(true)}
         aria-label="Open Psunk AI Chat"
-        className={`chat-launcher fixed bottom-6 right-6 z-50 grid size-14 place-items-center rounded-full bg-[var(--c-launcher)] text-[var(--c-launcher-ink)] shadow-[0_8px_20px_-6px_rgba(0,0,0,0.45)] transition-[transform,opacity] duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-accent)] focus-visible:ring-offset-2 ${
+        aria-expanded={isOpen}
+        tabIndex={isOpen ? -1 : 0}
+        className={`chat-launcher fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] right-6 z-50 grid size-14 place-items-center rounded-full bg-[var(--c-launcher)] text-[var(--c-launcher-ink)] shadow-[0_8px_20px_-6px_rgba(0,0,0,0.45)] transition-[transform,opacity] duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-accent)] focus-visible:ring-offset-2 ${
           isOpen ? "pointer-events-none scale-75 opacity-0" : ""
         }`}
       >
@@ -120,7 +128,7 @@ export default function ChatBot() {
             exit={reduce ? { opacity: 0 } : { opacity: 0, y: 12 }}
             transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
             onKeyDown={(e) => e.key === "Escape" && setIsOpen(false)}
-            className="fixed bottom-6 left-4 right-4 z-50 flex h-[560px] max-h-[82vh] flex-col overflow-hidden rounded-3xl border border-[var(--c-line)] bg-[var(--c-panel)] text-[var(--c-ink)] shadow-[0_24px_48px_-16px_rgba(0,0,0,0.45)] sm:left-auto sm:right-6 sm:w-[400px]"
+            className="fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] left-4 right-4 z-50 flex h-[560px] max-h-[82vh] flex-col overflow-hidden rounded-3xl border border-[var(--c-line)] bg-[var(--c-panel)] text-[var(--c-ink)] shadow-[0_24px_48px_-16px_rgba(0,0,0,0.45)] sm:left-auto sm:right-6 sm:w-[400px]"
           >
             {/* Header */}
             <header className="flex items-center justify-between gap-3 bg-[var(--c-head)] px-5 py-4 text-[var(--c-head-ink)]">

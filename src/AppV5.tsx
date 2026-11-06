@@ -49,7 +49,7 @@ export default function AppV5({
   }, [prefersReduced]);
 
   const content = (
-    <main id="main" className={`relative min-h-screen text-white ${journal ? "palette-ivory" : ""}`}>
+    <main id="main" className={`relative min-h-dvh text-white ${journal ? "palette-ivory" : ""}`}>
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-accent focus:px-5 focus:py-3 focus:text-background">
         Skip to content
       </a>

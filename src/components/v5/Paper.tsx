@@ -5,7 +5,6 @@ import Image from "next/image";
 import { Download } from "lucide-react";
 import ContactForm from "../ContactForm";
 import SocialRow from "./SocialRow";
-import { Doodle } from "../studio/Organic";
 import { bio, certificates, education, experience, languages, PROFILE, skills } from "@/lib/profile";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
@@ -195,25 +194,19 @@ export function PaperContact({ studio = false }: { studio?: boolean }) {
       }`}
     >
       <div className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-32 sm:pt-44 pb-10">
-        {/* Portfolio: details left, form right on large screens. Studio stays centred. */}
-        <div className={studio ? "" : "lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-16 xl:gap-24"}>
-        <div className={`relative text-center ${studio ? "" : "lg:text-left"}`}>
-          {studio && (
-            <>
-              <Doodle kind="pencil" className="left-[6%] top-4 hidden w-32 -rotate-6 lg:block" />
-              <Doodle kind="phone" className="right-[8%] top-10 hidden w-28 rotate-6 lg:block" />
-            </>
-          )}
+        {/* Details left, form right on large screens; stacked and centred on phones. */}
+        <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-16 xl:gap-24">
+        <div className="relative text-center lg:text-left">
           {studio ? (
             <>
               <h2 data-rise className="font-display text-[11vw] sm:text-7xl leading-[0.95]">
                 Start a project<span className="text-accent">.</span>
               </h2>
               {/* The AS mark's swash, underlining the invitation */}
-              <svg data-rise aria-hidden="true" viewBox="0 0 420 40" fill="none" className="mx-auto mt-3 h-auto w-64 sm:w-80">
+              <svg data-rise aria-hidden="true" viewBox="0 0 420 40" fill="none" className="mx-auto mt-3 h-auto w-64 sm:w-80 lg:mx-0">
                 <path d="M4 26 C 70 6, 130 38, 210 20 S 340 6, 416 18" style={{ stroke: "rgba(var(--s-accent-rgb), 0.75)" }} strokeWidth="2" strokeLinecap="round" />
               </svg>
-              <p data-rise className="mx-auto mt-5 max-w-lg text-lg leading-relaxed text-white/65">
+              <p data-rise className="mx-auto mt-5 max-w-lg text-lg leading-relaxed text-white/65 lg:mx-0">
                 Tell us what your business needs. You&apos;ll get a written, fixed-scope quote before any work starts.
               </p>
             </>
@@ -242,11 +235,11 @@ export function PaperContact({ studio = false }: { studio?: boolean }) {
           </p>
 
           <div data-rise className="mt-14">
-            <SocialRow className={studio ? "" : "lg:justify-start"} />
+            <SocialRow className="lg:justify-start" />
           </div>
         </div>
 
-        <div data-rise className={`mx-auto mt-20 max-w-2xl ${studio ? "" : "lg:mt-0 lg:w-full"}`}>
+        <div data-rise className="mx-auto mt-20 max-w-2xl lg:mt-0 lg:w-full">
           <ContactForm />
         </div>
         </div>
