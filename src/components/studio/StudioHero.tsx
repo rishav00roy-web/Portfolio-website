@@ -14,13 +14,6 @@ import { gsap, useGSAP } from "@/lib/gsap";
  * scroll away (transform only).
  */
 
-const RECENT = [
-  ["Pheonix", "https://pheonix-ashy.vercel.app"],
-  ["Tea Country Holidays", "/projects/tea-country-holidays"],
-  ["IQ Iron Fitness", "/projects/iq-iron-fitness"],
-  ["Clash Bazar", "/projects/clash-bazar"],
-] as const;
-
 export default function StudioHero() {
   const root = useRef<HTMLElement>(null);
 
@@ -71,18 +64,6 @@ export default function StudioHero() {
               See the work
             </a>
           </div>
-          {/* Recent clients, linking straight to the work */}
-          <p data-h-copy className="mt-12 max-w-lg text-base leading-relaxed text-ink/55">
-            Recent work for{" "}
-            {RECENT.map(([name, href], i) => (
-              <span key={name}>
-                <a href={href} className="text-ink/85 underline decoration-ink/25 underline-offset-4 transition-colors hover:text-rust hover:decoration-rust">
-                  {name}
-                </a>
-                {i < RECENT.length - 2 ? ", " : i === RECENT.length - 2 ? " and " : "."}
-              </span>
-            ))}
-          </p>
         </div>
 
         {/* The stage */}
