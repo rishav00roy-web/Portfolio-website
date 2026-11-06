@@ -40,7 +40,7 @@ export default function StudioHero() {
           <h1 id="studio-title" className="font-display text-[17vw] leading-[0.86] sm:text-[8rem] xl:text-[9.5rem]">
             <span className="block overflow-hidden pb-[0.06em]">
               <span data-h-line className="block">Atelier</span>
-            </span>
+            </span>{" "}
             <span className="block overflow-hidden pb-[0.06em]">
               <span data-h-line className="block">
                 Systems<span className="text-rust">.</span>
