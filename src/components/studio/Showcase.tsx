@@ -4,7 +4,8 @@ import { useMemo, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Bot, Globe, HeartHandshake, LayoutDashboard, LayoutGrid, MonitorSmartphone, Plug, Rows3, Search, Star } from "lucide-react";
-import { SupportStage, InvoiceStage } from "../v5/AIStage";
+import { SupportStage } from "../v5/AIStage";
+import InvoicePrinterDemo from "./InvoicePrinterDemo";
 import StudioHero from "./StudioHero";
 import { Doodle, ProcessPath, Swash } from "./Organic";
 import { SERVICES, PROCESS } from "@/lib/studio";
@@ -161,7 +162,7 @@ function Stage({ e }: { e: Entry }) {
       </svg>
       {e.stage ? (
         <div className="relative p-4 sm:p-8">
-          <div className="mx-auto max-w-xl">{e.stage === "support" ? <SupportStage /> : <InvoiceStage />}</div>
+          <div className="mx-auto max-w-xl">{e.stage === "support" ? <SupportStage /> : <InvoicePrinterDemo />}</div>
         </div>
       ) : e.featured ? (
         <div className="relative px-5 pt-8 pb-10 sm:px-10 sm:pt-12 sm:pb-14">
