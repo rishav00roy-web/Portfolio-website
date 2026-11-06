@@ -14,6 +14,7 @@ export type ChatSite = "portfolio" | "atelier";
 
 /** Products and builds shown on the studio page that are not in the project data. */
 const STUDIO_HIGHLIGHTS = [
+  "Clients include AJ Shield (real name Anjali Ojha), an Assamese rapper from Jorhat, for whom the studio built Pheonix; and V7 CLASH, a Clash of Clans YouTuber (https://www.youtube.com/@V7CLASH), for whom it built Clash Bazar.",
   "Pheonix (https://pheonix-ashy.vercel.app): the studio's latest and most worked-on build. A streetwear shop from Jorhat, Assam, in the style of rapper AJ Shield, with 3D models, a playable 3D cassette player for her songs, product dossiers, and orders placed on WhatsApp.",
   "Invoice reader (AI tool): reads invoices and receipts and pulls out the vendor, date, line items and totals so nobody types them in by hand. Demos on request through the contact form.",
   "Support agent (AI agent): answers a business's customers from its own information, any hour, and hands over to a person when it should. You, this chat, are one running live on the site.",

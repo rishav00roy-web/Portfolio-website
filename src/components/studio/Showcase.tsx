@@ -7,6 +7,7 @@ import { ArrowRight, Bot, Globe, HeartHandshake, LayoutDashboard, LayoutGrid, Mo
 import { SupportStage } from "../v5/AIStage";
 import { SkeletonImage } from "../Skeleton";
 import InvoicePrinterDemo from "./InvoicePrinterDemo";
+import Clients from "./Clients";
 import StudioHero from "./StudioHero";
 import { Doodle, ProcessPath, Swash } from "./Organic";
 import { SERVICES, PROCESS } from "@/lib/studio";
@@ -75,7 +76,7 @@ const COPY: Record<string, { title?: string; description: string }> = {
     description: "A membership system for a gym: billing, salary slips and a daily dashboard, built to run well on the owner's older laptop and phone.",
   },
   "clash-bazar": {
-    description: "A shop for a gaming YouTuber with over 12K subscribers. Stripe and PayPal payments are held until the order is done and a 7-day window has passed.",
+    description: "A store for the Clash of Clans YouTuber V7 CLASH. Stripe and PayPal payments are held until the order is done and a 7-day window has passed.",
   },
   "microgreens-site": {
     title: "Infinity Greens",
@@ -469,6 +470,8 @@ export default function Showcase() {
           </ol>
         )}
       </section>
+
+      <Clients />
 
       <div className="pt-24 sm:pt-36">
         <Swash />
