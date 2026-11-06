@@ -257,6 +257,11 @@ export function PaperContact({ studio = false }: { studio?: boolean }) {
               <Image src="/brand/atelier-monogram.webp" alt="" width={357} height={292} className="h-auto w-12" />
               <p className="mt-4 text-lg text-white/90">Atelier Systems</p>
               <p className="mt-1 max-w-xs leading-relaxed text-white/60">Websites, automation and AI products for growing businesses.</p>
+              {/* Quiet, like a note in the margin */}
+              <p className="mt-6 max-w-xs text-base italic leading-relaxed text-white/45">
+                &ldquo;Do not despise these small beginnings.&rdquo;
+                <span className="mt-1 block not-italic">Zechariah 4:10</span>
+              </p>
             </div>
             <div>
               <p className="text-sm text-white/55">Studio</p>
