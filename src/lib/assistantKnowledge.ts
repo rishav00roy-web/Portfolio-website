@@ -26,7 +26,7 @@ const line = (s: string) => `- ${s}`;
 
 function profileBlock() {
   return [
-    `Name: ${PROFILE.name}. Role: ${PROFILE.role}. Based in ${PROFILE.location} (from ${PROFILE.hometown}).`,
+    `Name: ${PROFILE.name}. Role: ${PROFILE.role}. Based in ${PROFILE.location}, his hometown.`,
     `Tagline: ${PROFILE.tagline}`,
     `Story: ${bio.join(" ")}`,
     "Experience:",

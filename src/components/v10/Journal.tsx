@@ -98,7 +98,7 @@ export default function Journal() {
             </div>
             <dl data-rise className="mt-12 grid gap-x-8 gap-y-3 border-t border-ink/10 pt-8 text-lg leading-relaxed sm:grid-cols-[9.5rem_minmax(0,1fr)]">
               <dt className="text-ink/55">Based in</dt>
-              <dd className="text-ink/85">{PROFILE.location}, from {PROFILE.hometown}</dd>
+              <dd className="text-ink/85">{PROFILE.location}</dd>
               <dt className="text-ink/55">Runs</dt>
               <dd className="text-ink/85">
                 <a href="/atelier" className="underline decoration-ink/25 underline-offset-4 hover:text-rust hover:decoration-rust">Atelier Systems</a>, my studio

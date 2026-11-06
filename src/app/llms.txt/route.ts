@@ -27,7 +27,7 @@ export function GET() {
 
   const body = `# Rishav Roy
 
-> Operations and automation specialist in Kolkata, India. Six years running HR, procurement, logistics, and compliance alongside building production web software and local-first automation tools. Every system is engineered so a non-technical owner can run operations without ongoing developer dependency.
+> Operations and automation specialist in Jorhat, Assam, India. Six years running HR, procurement, logistics, and compliance alongside building production web software and local-first automation tools. Every system is engineered so a non-technical owner can run operations without ongoing developer dependency.
 
 ${categoriesMarkdown}
 

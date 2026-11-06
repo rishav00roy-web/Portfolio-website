@@ -41,7 +41,7 @@ export const FAQ = [
   },
   {
     q: "Where is the studio based?",
-    a: "Kolkata, India. Rishav Roy runs the studio and works with clients remotely.",
+    a: "Jorhat, Assam, in India. Rishav Roy runs the studio and works with clients across India and abroad, remotely.",
   },
 ];
 

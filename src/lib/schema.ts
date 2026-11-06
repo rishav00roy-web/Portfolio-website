@@ -30,8 +30,8 @@ export function personSchema() {
     telephone: "+91-60019-14771",
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Kolkata",
-      addressRegion: "West Bengal",
+      addressLocality: "Jorhat",
+      addressRegion: "Assam",
       addressCountry: "IN",
     },
     homeLocation: { "@type": "Place", name: PROFILE.hometown },
@@ -41,7 +41,7 @@ export function personSchema() {
       name: PROFILE.role,
       description:
         "Building commercial-grade local-first CRMs, enterprise FOIA workflows, and full-stack web applications.",
-      occupationLocation: { "@type": "City", name: "Kolkata" },
+      occupationLocation: { "@type": "City", name: "Jorhat" },
     },
     worksFor: { "@type": "Organization", name: "Tea Country Holidays" },
     knowsLanguage: languages.map((l) => (l.name === "Bangla" ? "Bengali" : l.name)),
@@ -156,11 +156,12 @@ export function studioSchema(services: { name: string; detail: string }[]) {
     founder: { "@id": PERSON_ID },
     email: `mailto:${PROFILE.email}`,
     telephone: "+91-60019-14771",
-    address: { "@type": "PostalAddress", addressLocality: "Kolkata", addressRegion: "West Bengal", addressCountry: "IN" },
-    // Local first (for "developer near me" searches in Kolkata), then everywhere else.
+    address: { "@type": "PostalAddress", addressLocality: "Jorhat", addressRegion: "Assam", addressCountry: "IN" },
+    // Local first (for "developer near me" searches in Jorhat and Assam), then everywhere else.
+    // Add Chennai here when Rishav moves.
     areaServed: [
-      { "@type": "City", name: "Kolkata" },
-      { "@type": "State", name: "West Bengal" },
+      { "@type": "City", name: "Jorhat" },
+      { "@type": "State", name: "Assam" },
       { "@type": "Country", name: "India" },
       "Worldwide",
     ],

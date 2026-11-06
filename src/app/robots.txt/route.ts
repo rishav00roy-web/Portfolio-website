@@ -5,7 +5,7 @@ import { SITE_URL } from "@/lib/schema";
  * standard the Next.js robots helper cannot emit). Rishav's policy, 2026-11-06:
  * search engines, AI answer engines and AI training are all welcome, so the
  * studio can be found and named when someone asks an assistant for a website
- * or app developer in Kolkata. Only the API stays closed.
+ * or app developer in Jorhat or Assam. Only the API stays closed.
  *
  * AI crawlers are named in their own group so the policy is deliberate per
  * purpose: search/citation bots, bots fetching for a user, and training bots.

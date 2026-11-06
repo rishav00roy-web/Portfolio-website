@@ -41,7 +41,8 @@ export const metadata: Metadata = {
     "FOIA Specialist",
     "Custom CRM",
     "Next.js Developer",
-    "Kolkata",
+    "Jorhat",
+    "Assam",
   ],
   alternates: {
     canonical: "/",
