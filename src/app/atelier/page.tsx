@@ -4,7 +4,7 @@ import { faqSchema, jsonLd, studioSchema } from "@/lib/schema";
 import { FAQ, SERVICES } from "@/lib/studio";
 
 const DESCRIPTION =
-  "A Jorhat, Assam studio building websites, web apps, automations and AI tools for growing businesses. Run by Rishav Roy, working across India.";
+  "A Jorhat, Assam studio building websites, web apps, automations and AI tools for growing businesses across India. Run by Rishav Roy.";
 
 // Browser chrome matches the studio's ivory, not the portfolio's dusk.
 export const viewport: Viewport = { themeColor: "#f3eee8" };
