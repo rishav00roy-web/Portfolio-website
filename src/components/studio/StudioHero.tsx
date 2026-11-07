@@ -80,7 +80,7 @@ export default function StudioHero() {
                 <span className="ml-3 hidden truncate whitespace-nowrap rounded-full bg-ink/[0.06] px-3 py-0.5 font-mono text-xs text-ink/55 sm:inline">pheonix-ashy.vercel.app</span>
               </div>
               <div className="relative aspect-[16/10]">
-                <Image src="/assets/projects/shots/desktop/pheonix.webp" alt="" fill priority sizes="(max-width: 1023px) 80vw, 36vw" className="object-cover object-top" />
+                <Image src="/assets/projects/shots/desktop/pheonix.webp" alt="Pheonix website on a laptop, built by Atelier Systems" fill priority sizes="(max-width: 1023px) 80vw, 36vw" className="object-cover object-top" />
               </div>
             </div>
           </div>
@@ -89,7 +89,7 @@ export default function StudioHero() {
           <div data-h-device className="absolute right-[4%] top-[34%] w-[25%]">
             <div data-h-phone className="rotate-[3deg] overflow-hidden rounded-[1.6rem] border-4 border-[var(--s-bezel)] bg-paper shadow-[0_16px_32px_-12px_rgba(0,0,0,0.55)]">
               <div className="relative aspect-[390/844]">
-                <Image src="/assets/projects/shots/mobile/pheonix.webp" alt="" fill sizes="(max-width: 1023px) 25vw, 12vw" className="object-cover object-top" />
+                <Image src="/assets/projects/shots/mobile/pheonix.webp" alt="Pheonix website on a phone" fill sizes="(max-width: 1023px) 25vw, 12vw" className="object-cover object-top" />
               </div>
             </div>
           </div>

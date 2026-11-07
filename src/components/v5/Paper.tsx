@@ -101,7 +101,7 @@ export function PaperContact({ studio = false }: { studio?: boolean }) {
         {studio ? (
           <div className="mt-24 grid gap-10 border-t border-white/10 pt-12 text-base sm:grid-cols-2 lg:grid-cols-[minmax(0,2fr)_repeat(3,minmax(0,1fr))]">
             <div>
-              <Image src="/brand/atelier-monogram.webp" alt="" width={357} height={292} className="h-auto w-12" />
+              <Image src="/brand/atelier-monogram.webp" alt="Atelier Systems logo" width={357} height={292} className="h-auto w-12" />
               <p className="mt-4 text-lg text-white/90">Atelier Systems</p>
               <p className="mt-1 max-w-xs leading-relaxed text-white/60">Websites, automation and AI products for growing businesses.</p>
               {/* Quiet, like a note in the margin */}

@@ -42,7 +42,7 @@ export default function AtelierApp() {
       <div className="relative z-20 bg-paper text-ink">
         <header className="sticky top-4 z-40 mx-auto flex w-fit max-w-[calc(100%-2rem)] items-center gap-1 rounded-full border border-ink/10 bg-paper/95 py-1.5 pl-4 pr-1.5 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.8)] sm:gap-3">
           <Link href="/atelier" aria-label="Atelier Systems, home" className="mr-2 flex items-center gap-2.5">
-            <Image src="/brand/atelier-monogram.webp" alt="" width={357} height={292} className="h-auto w-8" priority />
+            <Image src="/brand/atelier-monogram.webp" alt="Atelier Systems logo" width={357} height={292} className="h-auto w-8" priority />
             <span className="hidden whitespace-nowrap text-sm font-medium tracking-[0.14em] lg:inline">ATELIER SYSTEMS</span>
           </Link>
           <nav aria-label="Studio" className="flex items-center gap-1 text-base">

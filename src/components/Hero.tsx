@@ -76,7 +76,7 @@ export default function Hero() {
       <section className="sticky top-0 h-[100dvh] w-full overflow-hidden text-white z-10">
         {/* Plate 1: sky */}
         <div data-hero-plate className="absolute inset-0 z-0 will-change-transform">
-          <Image src="/assets/hero-sky-dusk.webp" alt="" fill priority sizes="100vw" className="object-cover" style={{ objectPosition: PLATE_POSITION }} />
+          <Image src="/assets/hero-sky-dusk.webp" alt="Dusk sky over a hill ridge" fill priority sizes="100vw" className="object-cover" style={{ objectPosition: PLATE_POSITION }} />
         </div>
 
         {/* Sun line glow behind the name */}
@@ -97,7 +97,7 @@ export default function Hero() {
 
         {/* Plate 2: the ridge, cut from the same photo */}
         <div data-hero-plate aria-hidden="true" className="absolute inset-0 z-[3] pointer-events-none will-change-transform">
-          <Image src="/assets/hero-ridge-dusk.webp" alt="" fill priority sizes="100vw" className="object-cover" style={{ objectPosition: PLATE_POSITION }} />
+          <Image src="/assets/hero-ridge-dusk.webp" alt="Hill ridge at dusk" fill priority sizes="100vw" className="object-cover" style={{ objectPosition: PLATE_POSITION }} />
         </div>
 
         {/* "Roy", signed on the mountain */}

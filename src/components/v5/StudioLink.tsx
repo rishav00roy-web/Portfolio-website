@@ -40,7 +40,7 @@ export default function StudioLink({ href = "/atelier" }: { href?: string }) {
         <div className="mx-auto grid max-w-[1440px] gap-14 px-6 py-12 sm:px-12 sm:py-16 xl:px-20 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:items-end lg:gap-20">
           <div className="min-w-0">
             <p className="flex items-center gap-3 text-lg text-[var(--s-ink)]/70">
-              <Image src="/brand/atelier-monogram.webp" alt="" width={357} height={292} className="h-auto w-10" />
+              <Image src="/brand/atelier-monogram.webp" alt="Atelier Systems logo" width={357} height={292} className="h-auto w-10" />
               Where my client work lives
             </p>
             <h2 id="studio-link-title" className="mt-6 font-display text-6xl leading-[0.9] sm:text-7xl xl:text-8xl">

@@ -449,7 +449,7 @@ export default function Showcase() {
               <li key={e.key} data-rise className="group grid grid-cols-[3rem_minmax(0,1fr)] items-center gap-4 border-b border-ink/10 py-5 sm:grid-cols-[3rem_9rem_minmax(0,1fr)_auto] sm:gap-8">
                 <span className="text-base tabular-nums text-rust">{String(i + 1).padStart(2, "0")}</span>
                 <span className="relative hidden aspect-[16/10] overflow-hidden rounded-md border border-ink/10 bg-paper-2 sm:block">
-                  {e.image && <Image src={e.image} alt="" fill sizes="9rem" className="object-cover object-top" />}
+                  {e.image && <Image src={e.image} alt={`${e.title} website screenshot`} fill sizes="9rem" className="object-cover object-top" />}
                 </span>
                 <span className="min-w-0">
                   <span className="block text-2xl font-medium">{e.title}</span>
