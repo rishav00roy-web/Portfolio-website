@@ -104,7 +104,7 @@ export default function Hero() {
         <p
           data-hero-signature
           aria-hidden="true"
-          className="absolute z-[4] -m-8 p-8 right-[8%] lg:right-[17%] top-[21%] sm:top-[28%] lg:top-[34%] font-coffekan text-[15vw] lg:text-[8vw] leading-none text-accent -rotate-6 pointer-events-none select-none will-change-[transform,opacity] [text-shadow:0_4px_24px_rgba(0,0,0,0.6)]"
+          className="absolute z-[4] -m-8 p-8 right-[8%] lg:right-[17%] top-[21%] sm:top-[28%] lg:top-[34%] font-hero-name text-[15vw] lg:text-[8vw] leading-none text-accent -rotate-6 pointer-events-none select-none will-change-[transform,opacity] [text-shadow:0_4px_24px_rgba(0,0,0,0.6)]"
         >
           Roy
         </p>
