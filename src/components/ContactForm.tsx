@@ -64,18 +64,18 @@ export default function ContactForm() {
 
   return (
     <div className="w-full max-w-xl bg-surface border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl relative">
-      <h3 className="font-display text-3xl sm:text-4xl uppercase tracking-[-0.01em] text-white mb-2">
-        Send a Message
+      <h3 className="font-display text-3xl sm:text-4xl tracking-[-0.01em] text-white mb-2">
+        Send a message
       </h3>
-      <p className="text-white/50 text-xs sm:text-sm font-sans mb-8">
+      <p className="text-white/60 text-sm sm:text-base font-sans mb-8">
         A project, a role or a quick question: write it here and it comes straight to my WhatsApp.
       </p>
 
       {status === "success" ? (
         <div className="py-10 flex flex-col items-center justify-center text-center space-y-4">
           <CheckCircle2 className="w-16 h-16 text-emerald-400" />
-          <h4 className="text-2xl text-white uppercase font-display">
-            WhatsApp Opened!
+          <h4 className="text-2xl text-white font-display">
+            WhatsApp opened
           </h4>
           <p className="text-white/60 text-sm max-w-sm leading-relaxed font-sans">
             Your message has been pre-filled in WhatsApp. Please tap <strong>Send</strong> in the WhatsApp window to complete delivery.

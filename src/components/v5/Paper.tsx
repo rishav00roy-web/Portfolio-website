@@ -49,7 +49,7 @@ export function PaperContact({ studio = false }: { studio?: boolean }) {
     >
       <div className="mx-auto max-w-[1440px] px-6 sm:px-12 xl:px-20 pt-32 sm:pt-44 pb-10">
         {/* Details left, form right on large screens; stacked and centred on phones. */}
-        <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-16 xl:gap-24">
+        <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start lg:gap-16 xl:gap-24">
         <div className="relative text-center lg:text-left">
           {studio ? (
             <>
@@ -67,7 +67,7 @@ export function PaperContact({ studio = false }: { studio?: boolean }) {
           ) : (
             <>
               <h2 data-rise className="font-display uppercase text-[13vw] sm:text-7xl xl:text-8xl leading-[0.86] tracking-[-0.02em]">
-                Let&apos;s build
+                Let&apos;s build{" "}
                 <br />
                 something
               </h2>

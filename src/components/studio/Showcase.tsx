@@ -421,10 +421,10 @@ export default function Showcase() {
                 <div className="flex flex-1 flex-col px-2 pt-6 pb-2">
                   <h3 className="text-3xl font-medium tracking-[-0.01em]">{e.title}</h3>
                   <p className="mt-3 mb-6 font-mono text-base leading-relaxed text-ink/65 line-clamp-3">{e.description}</p>
-                  <div className="mt-auto flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-ink/10 pt-5 font-mono text-sm">
-                    <span className="text-ink/55">{e.discipline}</span>
-                    {!e.internal && host(e.href) && <span className="hidden text-ink/55 sm:inline">{host(e.href)}</span>}
-                    <Action e={e} className="inline-flex min-h-11 items-center gap-2 text-rust hover:opacity-80">
+                  <div className="mt-auto flex items-center justify-between gap-x-6 border-t border-ink/10 pt-5 font-mono text-sm">
+                    <span className="shrink-0 text-ink/55">{e.discipline}</span>
+                    {!e.internal && host(e.href) && <span className="hidden min-w-0 flex-1 truncate text-center text-ink/55 sm:inline">{host(e.href)}</span>}
+                    <Action e={e} className="inline-flex min-h-11 shrink-0 items-center gap-2 text-rust hover:opacity-80">
                       {e.cta} <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
                     </Action>
                   </div>

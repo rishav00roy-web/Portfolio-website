@@ -2,7 +2,9 @@
 
 import { CircleCheck, LoaderCircle } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { type ComponentPropsWithoutRef, createContext, type ReactNode, useContext } from "react";
+import { type ComponentPropsWithoutRef, createContext, type ReactNode, useContext, useSyncExternalStore } from "react";
+
+const noopSubscribe = () => () => {};
 import { cn } from "@/lib/utils";
 
 /*
@@ -111,7 +113,10 @@ function ReceiptPrinterRoot({
   stage,
   ...props
 }: ReceiptPrinterRootProps) {
-  const shouldReduceMotion = useReducedMotion();
+  // Read the motion preference only after hydration so server and client markup match.
+  const prefersReduced = useReducedMotion();
+  const hydrated = useSyncExternalStore(noopSubscribe, () => true, () => false);
+  const shouldReduceMotion = hydrated && !!prefersReduced;
   const context = { animate, feedMotion, shouldMove: animate && !shouldReduceMotion, stage };
 
   return (

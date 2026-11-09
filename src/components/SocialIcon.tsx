@@ -147,7 +147,7 @@ export default function SocialIcon({
       </a>
 
       {/* Label below icon (visible on touch) */}
-      <span className="mt-1.5 text-xs text-white/60 sm:hidden">
+      <span className="mt-1.5 text-sm text-white/70 sm:hidden">
         {label}
       </span>
     </div>

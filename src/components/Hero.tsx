@@ -62,7 +62,7 @@ export default function Hero() {
           .to("[data-hero-signature]", { opacity: 0, y: 40, duration: 0.35 }, 0)
           .to("[data-hero-sun]", { opacity: 0.15, duration: 0.7 }, 0)
           .to("[data-hero-chrome]", { opacity: 0, y: -32, duration: 0.28 }, 0)
-          .to("[data-hero-dusk]", { opacity: 1, duration: 0.55 }, 0.45);
+          .to("[data-hero-dusk]", { opacity: 0.72, duration: 0.55 }, 0.45);
 
         return () => split.revert();
       });
@@ -72,7 +72,7 @@ export default function Hero() {
   );
 
   return (
-    <div id="hero" ref={outerRef} className="relative h-[200dvh] bg-transparent">
+    <div id="hero" ref={outerRef} className="relative h-[170dvh] bg-transparent">
       <section className="sticky top-0 h-[100dvh] w-full overflow-hidden text-white z-10">
         {/* Plate 1: sky */}
         <div data-hero-plate className="absolute inset-0 z-0 will-change-transform">
