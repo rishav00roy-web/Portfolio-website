@@ -89,7 +89,7 @@ export default function Hero() {
         >
           <h1 className="sr-only font-display">Rishav Roy, Operations &amp; Automation Specialist</h1>
           <p aria-hidden="true" className="font-display uppercase text-center leading-[0.78] tracking-[-0.02em]">
-            <span data-hero-name className="block text-[24vw] lg:text-[17.5vw] text-[#fbf3e6] [text-shadow:0_8px_40px_rgba(224,121,31,0.35)]">
+            <span data-hero-name className="font-hero-name block text-[24vw] lg:text-[17.5vw] text-[#fbf3e6] [text-shadow:0_8px_40px_rgba(224,121,31,0.35)]">
               Rishav
             </span>
           </p>
@@ -118,7 +118,7 @@ export default function Hero() {
           <div className="mx-auto grid max-w-[1440px] gap-8 px-6 sm:px-12 xl:px-20 pb-24 sm:pb-16 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
             <div className="min-w-0">
               {/* LCP text: visible from the first frame, it only slides. */}
-              <p data-hero-line className="max-w-2xl text-xl sm:text-2xl xl:text-3xl font-medium leading-[1.2] tracking-[-0.015em] text-white text-balance">
+              <p data-hero-line className="max-w-2xl font-display text-xl sm:text-2xl xl:text-3xl font-medium leading-[1.2] tracking-[-0.015em] text-white text-balance">
                 Ex-ops guy who got tired of manual work. Now I build tools so nobody else has to.
               </p>
             </div>

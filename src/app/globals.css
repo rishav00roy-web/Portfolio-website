@@ -35,6 +35,16 @@
   font-display: swap;
 }
 
+/* Hero name only: Melodrama Bold, a high-contrast display serif (Fontshare, same FFL). */
+@font-face {
+  font-family: 'Melodrama';
+  src: url('/fonts/Melodrama-Bold.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+.font-hero-name { font-family: 'Melodrama', Georgia, serif; font-weight: 700; }
+
 @font-face {
   font-family: 'Supreme';
   src: url('/fonts/Supreme-Variable.woff2') format('woff2');
